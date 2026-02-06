@@ -1,0 +1,39 @@
+name: Deploy Frontend (Next.js)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Frontend via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -euo pipefail
+
+            export NVM_DIR="$HOME/.nvm"
+            . "$NVM_DIR/nvm.sh"
+            nvm use 22
+
+            cd "${{ secrets.APP_PATH }}"
+
+            git fetch --all --prune
+            git reset --hard origin/main
+
+            npm ci
+            npm run build
+
+            if ! command -v pm2 >/dev/null 2>&1; then
+              npm i -g pm2
+            fi
+
+            pm2 reload "next-app-frontend" || pm2 restart "next-app-frontend"
+            pm2 save || true
