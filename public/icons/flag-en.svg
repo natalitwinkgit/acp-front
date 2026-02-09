@@ -1,0 +1,35 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="16" cy="16" r="15.5" stroke="#FCFBF4"/>
+<g clip-path="url(#clip0_284_1111)">
+<rect x="4" y="4" width="24" height="24" rx="12" fill="white"/>
+<g clip-path="url(#clip1_284_1111)">
+<mask id="mask0_284_1111" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-24" y="-4" width="80" height="40">
+<path d="M-24 -4V36H56V-4H-24Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_284_1111)">
+<path d="M-24 -4V36H56V-4H-24Z" fill="#012169"/>
+<path d="M-24 -4L56 36L-24 -4ZM56 -4L-24 36L56 -4Z" fill="#1B242E"/>
+<path d="M-24 -4L56 36M56 -4L-24 36" stroke="white" stroke-width="5"/>
+<mask id="mask1_284_1111" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-24" y="-4" width="80" height="40">
+<path d="M16 16H56V36L16 16ZM16 16V36H-24L16 16ZM16 16H-24V-4L16 16ZM16 16V-4H56L16 16Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_284_1111)">
+<path d="M-24 -4L56 36L-24 -4ZM56 -4L-24 36L56 -4Z" fill="#1B242E"/>
+<path d="M-24 -4L56 36M56 -4L-24 36" stroke="#C8102E" stroke-width="3.33333"/>
+</g>
+<path d="M16 -4V36V-4ZM-24 16H56H-24Z" fill="#1B242E"/>
+<path d="M16 -4V36M-24 16H56" stroke="white" stroke-width="8.33333"/>
+<path d="M16 -4V36V-4ZM-24 16H56H-24Z" fill="#1B242E"/>
+<path d="M16 -4V36M-24 16H56" stroke="#C8102E" stroke-width="5"/>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_284_1111">
+<rect x="4" y="4" width="24" height="24" rx="12" fill="white"/>
+</clipPath>
+<clipPath id="clip1_284_1111">
+<rect width="80" height="40" fill="white" transform="translate(-24 -4)"/>
+</clipPath>
+</defs>
+</svg>
