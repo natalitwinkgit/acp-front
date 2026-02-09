@@ -1,8 +1,6 @@
 // app/page.tsx
-export default function Home() {
-  return (
-    <main>
-      {/* TODO: контент головної */}
-    </main>
-  );
+import HomePage from "./home/page";
+
+export default function Page() {
+  return <HomePage />;
 }
