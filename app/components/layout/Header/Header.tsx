@@ -2,34 +2,56 @@
 
 import styles from "./Header.module.css";
 
+const menu = [
+  { label: "Головна", href: "/" },
+  { label: "Напрямки", href: "/routes" },
+  { label: "Розклад", href: "/schedule" },
+  { label: "Послуги", href: "/services" },
+  { label: "Про компанію", href: "/about" },
+];
+
 export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div className={styles.logoWrap}>
-          <img className={styles.logo} src="/logo-sprinter.svg" alt="Sprinter" />
-        </div>
+        {/* Left: logo */}
+        <a className={styles.logoWrap} href="/" aria-label="На головну">
+          <img
+            className={styles.logo}
+            src="/logo-sprinter.svg"
+            alt="Автолюкс Черкаси-Плюс"
+          />
+        </a>
 
-        <nav className={styles.menu} aria-label="Header menu">
-          <a className={styles.menuItem} href="/">Головна</a>
-          <a className={styles.menuItem} href="/services">Послуги</a>
-          <a className={styles.menuItem} href="/about">Про нас</a>
-          <a className={styles.menuItem} href="/contacts">Контакти</a>
+        {/* Center: menu */}
+        <nav className={styles.menu} aria-label="Головне меню">
+          {menu.map((item) => (
+            <a key={item.href} className={styles.menuItem} href={item.href}>
+              {item.label}
+            </a>
+          ))}
         </nav>
 
-        <div className={styles.right}>
-          <button className={styles.avatar} aria-label="User profile">
-            <img src="/icons/avatar.svg" alt="" width={32} height={32} />
-          </button>
+        {/* Right: profile + phone + numbers */}
+   <div className={styles.right}>
+  <button className={styles.avatarBtn} aria-label="Профіль">
+    <img className={styles.avatarIcon} src="/icons/avatar.svg" alt="" />
+  </button>
 
-          <div className={styles.phoneWrap}>
-            <img src="/icons/phone.svg" alt="" width={24} height={24} />
-            <div className={styles.phoneCol}>
-              <a className={styles.phone} href="tel:+380632254518">+38063 225 45 18</a>
-              <a className={styles.phone} href="tel:+380632254518">+38063 225 45 18</a>
-            </div>
-          </div>
-        </div>
+  <div className={styles.phoneWrap}>
+    <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" />
+
+    <div className={styles.phoneCol}>
+      <div className={styles.phoneRow}>
+        <a className={styles.phone} href="tel:+380632254518">+38063 225 45 18</a>
+      </div>
+      <div className={styles.phoneRow}>
+        <a className={styles.phone} href="tel:+380632254518">+38063 225 45 18</a>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </header>
   );
