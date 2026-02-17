@@ -3,29 +3,45 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+
 import styles from "../auth.module.css";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 
+type LoginFormData = {
+  login: string;
+  password: string;
+};
+
 export default function LoginPage() {
   const router = useRouter();
+
   const [showPass, setShowPass] = useState(false);
-  
-  
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-  
-  const [formData, setFormData] = useState({ login: "", password: "" });
+  const [formData, setFormData] = useState<LoginFormData>({ login: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setError("");
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (error) setError("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!API_URL) {
+      setError("Не налаштовано NEXT_PUBLIC_API_URL (env).");
+      return;
+    }
+
     setIsLoading(true);
     setError("");
 
@@ -36,17 +52,17 @@ export default function LoginPage() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({} as any));
 
       if (!res.ok) {
-        throw new Error(data.message || "Невірний логін або пароль");
+        throw new Error(data?.message || "Невірний логін або пароль");
       }
 
-      if (data.token) localStorage.setItem("token", data.token);
-      router.push("/profile");
+      if (data?.token) localStorage.setItem("token", data.token);
 
+      router.push("/profile");
     } catch (err: any) {
-      setError(err.message);
+      setError(err?.message || "Сталася помилка. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
     }
@@ -54,12 +70,17 @@ export default function LoginPage() {
 
   return (
     <div className={styles.shell}>
+      {/* LEFT */}
       <div className={styles.left}>
         <div className={styles.formWrap}>
           <h1 className={styles.title}>Особистий кабінет</h1>
 
           <form className={styles.blockLogin} onSubmit={handleSubmit}>
-            {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+            {error && (
+              <div style={{ color: "red", marginBottom: "10px" }}>
+                {error}
+              </div>
+            )}
 
             <label className={styles.field}>
               <span className={styles.label}>Email або номер телефону +380…</span>
@@ -75,6 +96,7 @@ export default function LoginPage() {
 
             <div className={styles.field}>
               <span className={styles.label}>Пароль</span>
+
               <div className={styles.inputWithIcon}>
                 <input
                   className={styles.inputInner}
@@ -84,50 +106,73 @@ export default function LoginPage() {
                   onChange={handleChange}
                   required
                 />
+
                 <button
                   type="button"
                   className={styles.iconBtn}
                   onClick={() => setShowPass((v) => !v)}
+                  aria-label={showPass ? "Сховати пароль" : "Показати пароль"}
                 >
                   <img
                     className={styles.icon24}
                     src={showPass ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
                     alt=""
+                    aria-hidden="true"
                   />
                 </button>
               </div>
             </div>
 
-           <div className={styles.rowBetween}>
-  <label className={styles.remember}>
-    <input className={styles.rememberInput} type="checkbox" />
-    <span className={styles.checkboxUi} aria-hidden="true" />
-    <span className={styles.rememberText}>Запам’ятати</span>
-  </label>
+            <div className={styles.rowBetween}>
+              <label className={styles.remember}>
+                <input className={styles.rememberInput} type="checkbox" />
+                <span className={styles.checkboxUi} aria-hidden="true" />
+                <span className={styles.rememberText}>Запам’ятати</span>
+              </label>
 
-  <Link className={styles.forgot} href="/forgot-password">
-    Забули пароль?
-  </Link>
-</div>
+              <Link className={styles.forgot} href="/forgot-password">
+                Забули пароль?
+              </Link>
+            </div>
 
             <div className={styles.socialRow}>
-              <button className={styles.socialBtn} type="button"><img src="/icons/icons8-google.svg" alt="" className={styles.icon24} /></button>
-              <button className={styles.socialBtn} type="button"><img src="/icons/icons8-apple.svg" alt="" className={styles.icon24} /></button>
+              <button className={styles.socialBtn} type="button" aria-label="Увійти через Google">
+                <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
+              </button>
+              <button className={styles.socialBtn} type="button" aria-label="Увійти через Apple">
+                <img src="/icons/icons8-apple.svg" alt="" className={styles.icon24} />
+              </button>
             </div>
 
             <div className={styles.buttonContainer}>
-              <Button text={isLoading ? "Вхід..." : "Увійти"} variant="primary" type="submit" disabled={isLoading} />
-              <Button text="Зареєструватись" variant="secondary" type="button" onClick={() => router.replace("/register")} />
+              {/* FIX: Button пропси вимагають onClick, навіть для submit */}
+              <Button
+                text={isLoading ? "Вхід..." : "Увійти"}
+                variant="primary"
+                type="submit"
+                disabled={isLoading}
+                onClick={() => {}}
+              />
+
+              <Button
+                text="Зареєструватись"
+                variant="secondary"
+                type="button"
+                onClick={() => router.replace("/register")}
+              />
             </div>
           </form>
         </div>
       </div>
 
-      <div className={styles.right} style={{ backgroundImage: "url('/(auth)/login/login-bus.png')" }}>
+      {/* RIGHT */}
+      <div
+        className={styles.right}
+        style={{ backgroundImage: "url('/(auth)/login/login-bus.png')" }}
+      >
         <ModalCloseButton className={styles.close} ariaLabel="Close" />
-        
+
         <div className={styles.brand}>
-          {}
           <img src="/icons/Text.svg" alt="АВТОЛЮКС" className={styles.brandLogo} />
           <div className={styles.brandDesc}>Подорожуйте безпечно і з комфотом</div>
         </div>
