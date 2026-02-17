@@ -1,3 +1,3 @@
 export { I18nProvider, useI18n } from "./I18nProvider";
 export type { Lang } from "./I18nProvider";
-export { T, useT } from "./t";
+export { useT } from "./t";
