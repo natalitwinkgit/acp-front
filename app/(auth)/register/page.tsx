@@ -2,35 +2,50 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import styles from "../auth.module.css";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 
+type RegisterFormData = {
+  phone: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 export default function RegisterPage() {
   const router = useRouter();
+
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
 
-  
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<RegisterFormData>({
     phone: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setError("");
+    if (error) setError("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!API_URL) {
+      setError("Не налаштовано NEXT_PUBLIC_API_URL (env).");
+      return;
+    }
+
     setIsLoading(true);
     setError("");
 
@@ -51,15 +66,15 @@ export default function RegisterPage() {
         }),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({} as any));
 
       if (!res.ok) {
-        throw new Error(data.message || "Помилка реєстрації");
+        throw new Error(data?.message || "Помилка реєстрації");
       }
 
-      router.push("/login");
+      router.replace("/login");
     } catch (err: any) {
-      setError(err.message);
+      setError(err?.message || "Сталася помилка. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
     }
@@ -67,12 +82,15 @@ export default function RegisterPage() {
 
   return (
     <div className={styles.shell}>
+      {/* LEFT */}
       <div className={styles.left}>
         <div className={styles.formWrapRegister}>
           <h1 className={styles.title}>Реєстрація</h1>
 
           <form className={styles.blockRegister} onSubmit={handleSubmit}>
-            {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+            {error && (
+              <div style={{ color: "red", marginBottom: 10 }}>{error}</div>
+            )}
 
             <label className={styles.field}>
               <span className={styles.label}>Введіть номер телефону +380…</span>
@@ -101,6 +119,7 @@ export default function RegisterPage() {
 
             <div className={styles.field}>
               <span className={styles.label}>Пароль</span>
+
               <div className={styles.inputWithIcon}>
                 <input
                   className={styles.inputInner}
@@ -110,15 +129,18 @@ export default function RegisterPage() {
                   onChange={handleChange}
                   required
                 />
+
                 <button
                   type="button"
                   className={styles.iconBtn}
                   onClick={() => setShowPass((v) => !v)}
+                  aria-label={showPass ? "Сховати пароль" : "Показати пароль"}
                 >
                   <img
                     className={styles.icon24}
                     src={showPass ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
                     alt=""
+                    aria-hidden="true"
                   />
                 </button>
               </div>
@@ -127,6 +149,7 @@ export default function RegisterPage() {
             <div className={styles.passwordBlock}>
               <div className={styles.field}>
                 <span className={styles.label}>Підтвердіть пароль</span>
+
                 <div className={styles.inputWithIcon}>
                   <input
                     className={styles.inputInner}
@@ -136,53 +159,82 @@ export default function RegisterPage() {
                     onChange={handleChange}
                     required
                   />
+
                   <button
                     type="button"
                     className={styles.iconBtn}
                     onClick={() => setShowPass2((v) => !v)}
+                    aria-label={showPass2 ? "Сховати пароль" : "Показати пароль"}
                   >
                     <img
                       className={styles.icon24}
                       src={showPass2 ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
                       alt=""
+                      aria-hidden="true"
                     />
                   </button>
                 </div>
               </div>
+
               <div className={styles.hint}>
-                Пароль повинен містити не меньше 8 символів...
+                Пароль повинен містити не менше 8 символів...
               </div>
             </div>
 
             <div className={styles.socialRowRegister}>
-              <button className={styles.socialBtn} type="button"><img src="/icons/icons8-google.svg" alt="" className={styles.icon24} /></button>
-              <button className={styles.socialBtn} type="button"><img src="/icons/icons8-apple.svg" alt="" className={styles.icon24} /></button>
+              <button className={styles.socialBtn} type="button" aria-label="Увійти через Google">
+                <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
+              </button>
+              <button className={styles.socialBtn} type="button" aria-label="Увійти через Apple">
+                <img src="/icons/icons8-apple.svg" alt="" className={styles.icon24} />
+              </button>
             </div>
 
             <div className={styles.buttonRegister}>
-              <Button text={isLoading ? "Завантаження..." : "Зареєструватись"} variant="primary" type="submit" disabled={isLoading} />
+              {/* щоб TypeScript не падав, onClick обов'язковий по типах */}
+              <Button
+                text={isLoading ? "Завантаження..." : "Зареєструватись"}
+                variant="primary"
+                type="submit"
+                disabled={isLoading}
+                onClick={() => {}}
+              />
             </div>
 
-            <button className={styles.underLink} type="button" onClick={() => router.replace("/login")}>
+            <button
+              className={styles.underLink}
+              type="button"
+              onClick={() => router.replace("/login")}
+            >
               У мене вже є акаунт
             </button>
           </form>
         </div>
       </div>
 
-      <div className={styles.right} style={{ backgroundImage: "url('/(auth)/register/register-bus.jpg')" }}>
+      {/* RIGHT */}
+      <div
+        className={styles.right}
+        style={{ backgroundImage: "url('/(auth)/register/register-bus.jpg')" }}
+      >
         <ModalCloseButton className={styles.close} ariaLabel="Close" />
-        
+
         <div className={styles.brandRegister}>
-          {}
           <img src="/icons/Text.svg" alt="АВТОЛЮКС" className={styles.brandLogo} />
           <div className={styles.brandDesc}>Подорожуйте безпечно і з комфотом</div>
         </div>
 
         <div className={`${styles.textBlock} ${styles.textRegister}`}>
-          <p className={styles.textLineRegister}>Гнучке керування квитками: Ви можете безкоштовно забронювати місце на потрібний рейс або здійснити миттєву купівлю онлайн</p>
-          <p className={styles.textLineRegister}>Актуальний час відправлення завжди доступний онлайн у пару кліків</p>
-          <p className={styles.textLineRegister}>Зареєструйтесь і плануйте подорож за хвилину</p>
+          <p className={styles.textLineRegister}>
+            Гнучке керування квитками: Ви можете безкоштовно забронювати місце на потрібний
+            рейс або здійснити миттєву купівлю онлайн
+          </p>
+          <p className={styles.textLineRegister}>
+            Актуальний час відправлення завжди доступний онлайн у пару кліків
+          </p>
+          <p className={styles.textLineRegister}>
+            Зареєструйтесь і плануйте подорож за хвилину
+          </p>
         </div>
       </div>
     </div>

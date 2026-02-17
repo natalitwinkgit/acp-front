@@ -26,11 +26,7 @@ export default function LoginPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (error) setError("");
   };
 
@@ -76,11 +72,7 @@ export default function LoginPage() {
           <h1 className={styles.title}>Особистий кабінет</h1>
 
           <form className={styles.blockLogin} onSubmit={handleSubmit}>
-            {error && (
-              <div style={{ color: "red", marginBottom: "10px" }}>
-                {error}
-              </div>
-            )}
+            {error && <div style={{ color: "red", marginBottom: 10 }}>{error}</div>}
 
             <label className={styles.field}>
               <span className={styles.label}>Email або номер телефону +380…</span>
@@ -145,7 +137,7 @@ export default function LoginPage() {
             </div>
 
             <div className={styles.buttonContainer}>
-              {/* FIX: Button пропси вимагають onClick, навіть для submit */}
+              {/* щоб TypeScript не падав, onClick обов'язковий по типах */}
               <Button
                 text={isLoading ? "Вхід..." : "Увійти"}
                 variant="primary"
