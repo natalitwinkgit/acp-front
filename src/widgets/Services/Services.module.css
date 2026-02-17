@@ -1,0 +1,168 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 100px;
+  gap: 32px;
+  box-sizing: border-box;
+
+  --Blue100: #d8e1e8;
+  --Blue200: #bfc7d2;
+  --ShadowHover: #a2aebd;
+  --gray-blue: #6581a9;
+  --light-bg: #f7f6ef;
+}
+
+.title {
+  width: 1240px;
+  height: 35px;
+
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 124%;
+  text-align: center;
+
+  color: #40536c;
+}
+
+.grid {
+  width: 1240px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  justify-content: space-between; 
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+
+.inView .card {
+  animation: cardIn 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.card {
+  width: 397px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+
+  padding: 20px;
+  box-sizing: border-box;
+
+  background: var(--light-bg, #f7f6ef);
+  box-shadow: 0px 4px 4px var(--Blue200);
+  border-radius: 12px;
+  border: 1px solid transparent;
+
+  
+  --mx: 0px;
+  --my: 0px;
+
+  transform: translate3d(0, 0, 0);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card.isHover {
+  transform: translate3d(var(--mx), var(--my), 0);
+  box-shadow: 4px 0px 4px var(--ShadowHover), 0px 4px 4px var(--ShadowHover);
+  border-color: var(--gray-blue, #6581a9);
+}
+
+
+.iconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  background: #cdd3dc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: none;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+
+.textCol {
+  width: 281px; 
+  height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  min-width: 0; 
+}
+
+.cardTitle {
+  width: 100%;
+  text-align: left;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  color: #4c6381;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardDesc {
+  width: 100%;
+  text-align: left;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #1b242e;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .inView .card {
+    animation: none;
+  }
+  .card {
+    transition: none;
+  }
+  .card.isHover {
+    transform: none;
+  }
+}

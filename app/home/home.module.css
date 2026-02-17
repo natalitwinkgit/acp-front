@@ -12,18 +12,17 @@
   box-sizing: border-box;
 }
 
-/* ВАЖЛИВО: тут робимо центр як на макеті */
+
 .content {
   display: flex;
   flex-direction: column;
-  align-items: center;   /* центрує прапори */
-  text-align: center;    /* центрує текст */
+  align-items: center;   
+  text-align: center;    
   gap: 16px;
 }
 
 .title {
   margin: 0;
-  font-family: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   font-weight: 700;
   font-size: 40px;
   line-height: 48px;

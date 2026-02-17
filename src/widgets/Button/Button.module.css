@@ -1,0 +1,77 @@
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 12px 24px;
+  gap: 10px;
+
+  width: 360px;
+  min-width: 145px;
+  height: 46px;
+
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  text-align: center;
+
+  
+  box-shadow:
+    0 8px 18px rgba(27, 36, 46, 0.18),     
+    inset 0 1px 0 rgba(255, 255, 255, 0.18); 
+}
+
+.fullWidth {
+  width: 100%;
+  align-self: stretch;
+}
+
+.primary {
+  background: linear-gradient(180deg, #4C6381 0%, #283343 100%);
+  color: #FFFEFB;
+}
+
+.secondary {
+  background: linear-gradient(180deg, #CDD3DC 0%, #A2AEBD 100%);
+  color: #283343;
+
+  
+  box-shadow:
+    0 6px 14px rgba(27, 36, 46, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 6px 14px rgba(27, 36, 46, 0.14),
+    inset 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.text {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  display: none;
+  width: 24px;
+  height: 24px;
+}
+
+.iconVisible {
+  display: block;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
