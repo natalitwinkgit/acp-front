@@ -180,7 +180,7 @@ export default function RegisterPage() {
         </div>
 
         <div className={`${styles.textBlock} ${styles.textRegister}`}>
-          <p className={styles.textLineRegister}>ГГнучке керування квитками: Ви можете безкоштовно забронювати місце на потрібний рейс або здійснити миттєву купівлю онлайн</p>
+          <p className={styles.textLineRegister}>Гнучке керування квитками: Ви можете безкоштовно забронювати місце на потрібний рейс або здійснити миттєву купівлю онлайн</p>
           <p className={styles.textLineRegister}>Актуальний час відправлення завжди доступний онлайн у пару кліків</p>
           <p className={styles.textLineRegister}>Зареєструйтесь і плануйте подорож за хвилину</p>
         </div>
