@@ -1,0 +1,102 @@
+.section {
+  width: 1240px;
+  margin: 0 auto;
+}
+
+.title {
+  width: 1240px;
+  height: 35px;
+  margin: 0 0 16px;
+
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 124%;
+  text-align: center;
+  color: #40536c;
+}
+
+
+.grid {
+  width: 1240px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 120px; 
+  gap: 24px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #e5e9ef;
+  text-decoration: none;
+}
+
+.featured {
+  grid-column: span 2;
+  grid-row: span 2; 
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+
+  max-width: calc(100% - 24px);
+  padding: 6px 10px;
+  border-radius: 10px;
+
+  background: rgba(27, 36, 46, 0.7);
+  backdrop-filter: blur(2px);
+
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: #fffefb;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+@media (max-width: 1300px) {
+  .section,
+  .title,
+  .grid {
+    width: 100%;
+  }
+  .section {
+    padding: 0 24px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+  }
+  .featured {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .featured {
+    grid-column: span 1;
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "menu.home": "Home",
+  "menu.routes": "Routes",
+  "menu.schedule": "Schedule",
+  "menu.services": "Services",
+  "menu.about": "About the company",
+
+  "aria.home": "Go to home",
+  "header.logoAlt": "Autolux Cherkasy-Plus",
+  "header.menuAria": "Main menu",
+  "header.profileAria": "Profile",
+
+  "home.title": "Travel in comfort!",
+
+  "languageSwitcher": {
+    "ariaLabel": "Language selection",
+    "ua": "Ukrainian",
+    "en": "English",
+    "uaShort": "UA",
+    "enShort": "EN"
+  },
+
+  "bookingForm": {
+    "title": "Choose a route",
+    "route": {
+      "placeholder": "Route",
+      "options": {
+        "kyivLviv": "Kyiv — Lviv",
+        "lvivIvanoFrankivsk": "Lviv — Ivano-Frankivsk",
+        "kyivOdesa": "Kyiv — Odesa"
+      }
+    },
+    "date": { "placeholder": "Date" },
+    "time": { "placeholder": "Time" },
+    "qty": { "placeholder": "Quantity" },
+    "price": { "placeholder": "Price" },
+    "buttons": {
+      "reserve": "Reserve a ticket",
+      "buy": "Buy a ticket"
+    },
+    "calendar": {
+      "months": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "weekdays": ["Mo","Tu","We","Th","Fr","Sa","Su"]
+    }
+    
+  },
+    "benefits": {
+    "aria": "Service benefits",
+    "items": {
+      "search": "Choose a convenient time and route",
+      "ticket": "Reserve a ticket for free",
+      "pay": "Pay instantly and securely"
+    },
+    "icons": {
+      "searchAlt": "Search",
+      "ticketAlt": "Ticket",
+      "payAlt": "Payment"
+    }
+  },
+   "popularRoutes": {
+    "aria": "Popular routes",
+    "title": "Popular routes"
+  },
+  "services": {
+    "ariaLabel": "Services",
+    "title": "Services",
+    "cards": {
+      "passenger": {
+        "title": "Passenger transport across Ukraine",
+        "desc": "Comfortable and safe trips between Ukrainian cities. Modern buses and experienced drivers."
+      },
+      "groupTransfer": {
+        "title": "Group transfer",
+        "desc": "Organized transfers for groups of any size, ideal for trips and meetings."
+      },
+      "excursions": {
+        "title": "Bus rental for excursions",
+        "desc": "Comfortable and safe travel for excursions and city tours with modern buses."
+      },
+      "seaTours": {
+        "title": "Sea tours",
+        "desc": "Routes to popular seaside resorts. Your отдых starts on the road."
+      },
+      "schoolBus": {
+        "title": "School bus",
+        "desc": "Safe and organized transportation for students to excursions and events."
+      },
+      "corporate": {
+        "title": "Corporate travel",
+        "desc": "Transport service for corporate events, conferences, and team trips."
+      },
+      "wedding": {
+        "title": "Wedding bus rental",
+        "desc": "Elegant transport for wedding guests. Comfort and punctuality on your special day."
+      },
+      "pilgrimage": {
+        "title": "Pilgrimage and religious tours",
+        "desc": "Trips to sacred and religious places with respect for your needs."
+      },
+      "mourning": {
+        "title": "Mourning transport rental",
+        "desc": "Delicate and reliable transportation support for farewell ceremonies."
+      }
+    }
+  },
+   "about": {
+    "ariaLabel": "About the company",
+    "title": "About the company",
+    "stats": {
+      "years": { "label": "Years of experience" },
+      "passengers": { "label": "Passengers transported" },
+      "km": { "label": "Kilometers covered" }
+    },
+    "text": {
+      "one": "\"Autolux-Cherkasy-Plus\" LLC has been successfully operating in the passenger bus transportation market for many years. We are a key hub that connects thousands of people, cities, and routes every day.",
+      "two": "From a small start to a strong fleet — our experience works for your comfort. We ensure technical reliability of every vehicle and high service quality.",
+      "three": "Our mission is to provide residents and guests with affordable, reliable, and stable bus connections. We want every passenger to feel respected and safe.",
+      "four": "Our drivers stand out for strong technical knowledge, excellent understanding of Ukraine’s roads, and proven accident-free experience."
+    }
+  },
+  "footer": {
+    "ariaLabel": "Контакти",
+    "workTime": "Працюємо з 5:30 до 19:30",
+    "addressLine1": "вул. Митницька, 7/2",
+    "addressLine2": "(пл. Дружба Народів)",
+    "email": "Email",
+    "mapTitle": "Карта: вул. Митницька, 7, Черкаси",
+    "copy": "© 2026 Автолюкс Черкаси-Плюс. Всі права захищені."
+  }
+  
+}

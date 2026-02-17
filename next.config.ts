@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  turbopack: {
+    // Specify the turbopack root to avoid issues with Cyrillic paths
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;
