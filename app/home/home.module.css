@@ -21,10 +21,20 @@
   gap: 16px;
 }
 
+.pageLanguage {
+  display: none;
+}
+
 .title {
   margin: 0;
   font-weight: 700;
   font-size: 40px;
   line-height: 48px;
   color: #1b242e;
+}
+
+@media (min-width: 769px) {
+  .pageLanguage {
+    display: flex;
+  }
 }

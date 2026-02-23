@@ -217,6 +217,19 @@
   pointer-events: none; 
 }
 
+.calendarIcon {
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  gap: 10px;
+  border-radius: 24px;
+  transition: background-color 0.2s ease;
+}
+
+.calendarIconActive {
+  background: rgba(76, 99, 129, 0.18);
+}
+
 
 
 .btnSecondary {

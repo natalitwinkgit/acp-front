@@ -1,6 +1,5 @@
-
-import HomePage from "./home/page";
+import HomePageContent from "./home/HomePageContent";
 
 export default function Page() {
-  return <HomePage />;
+  return <HomePageContent />;
 }

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
-import RegisterPage from "@/app/(auth)/register/page";
+import RegisterPageContent from "@/app/(auth)/register/RegisterPageContent";
 
 export default function RegisterModalRoute() {
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function RegisterModalRoute() {
       aria-modal="true"
     >
       <div className={styles.wrap} onClick={(e) => e.stopPropagation()}>
-        <RegisterPage />
+        <RegisterPageContent />
       </div>
     </div>
   );

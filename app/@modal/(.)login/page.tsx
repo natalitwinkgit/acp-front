@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
-import LoginPage from "@/app/(auth)/login/page";
+import LoginPageContent from "@/app/(auth)/login/LoginPageContent";
 
 export default function LoginModalRoute() {
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function LoginModalRoute() {
       aria-modal="true"
     >
       <div className={styles.wrap} onClick={(e) => e.stopPropagation()}>
-        <LoginPage />
+        <LoginPageContent />
       </div>
     </div>
   );

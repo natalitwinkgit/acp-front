@@ -48,7 +48,12 @@ export default function BookingForm() {
           >
             <span className={styles.dateValue}>{dateText || t("bookingForm.date.placeholder")}</span>
 
-            <span className={styles.iconRight} aria-hidden="true">
+            <span
+              className={`${styles.iconRight} ${styles.calendarIcon} ${
+                openCal ? styles.calendarIconActive : ""
+              }`}
+              aria-hidden="true"
+            >
               <img src="/icons/calendar.svg" alt="" />
             </span>
           </button>
