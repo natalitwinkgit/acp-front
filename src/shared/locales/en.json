@@ -1,9 +1,9 @@
 {
   "menu.home": "Home",
   "menu.routes": "Routes",
-  "menu.schedule": "Schedule",
-  "menu.services": "Services",
   "menu.about": "About the company",
+  "menu.cafe": "Cafe",
+  "menu.contacts": "Contacts",
 
   "aria.home": "Go to home",
   "header.logoAlt": "Autolux Cherkasy-Plus",

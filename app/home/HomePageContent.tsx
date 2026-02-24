@@ -44,7 +44,7 @@ export default function HomePageContent() {
             </div>
           )}
 
-          <section id="home">
+          <section id="home" className={styles.homeSection}>
             <h1 className={styles.title}>{t("home.title")}</h1>
             <BookingHero />
           </section>

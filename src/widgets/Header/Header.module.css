@@ -1,3 +1,5 @@
+/* Header.module.css */
+
 .header {
   box-sizing: border-box;
   width: 100%;
@@ -10,6 +12,11 @@
   position: sticky;
   top: 0;
   z-index: 20;
+}
+
+/* ✅ НОВЕ: прибираємо тінь у хедера, коли меню відкрите */
+.headerNoShadow {
+  box-shadow: none;
 }
 
 .container {
@@ -81,7 +88,7 @@
   background-image: linear-gradient(#4c6381, #4c6381);
   background-repeat: no-repeat;
   background-size: calc(100% - 4px) 2px;
-  background-position: center calc(100% - 8px); /* підняли підкреслення */
+  background-position: center calc(100% - 8px);
 }
 
 .right {
@@ -103,69 +110,8 @@
   height: 64px;
 }
 
-.loginBtn {
-  width: 65px;
-  height: 39px;
-  padding: 8px 16px;
-  gap: 10px;
-  border: 0;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #cdd3dc 0%, #a2aebd 100%);
-  color: #283343;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 144%;
-  text-align: center;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.loginBtn:hover,
-.loginBtn:focus-visible {
-  opacity: 0.9;
-}
-
-.avatarBtn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  padding: 6px;
-  gap: 10px;
-
-  width: 44px;
-  height: 44px;
-
-  background: var(--Light-blue, #d8e5f5);
-  border-radius: 24px;
-  transition: background-color 0.2s ease;
-
-  border: 0;
-  cursor: pointer;
-
+.authControl {
   flex: none;
-}
-
-.avatarBtn:hover,
-.avatarBtn:focus-visible,
-.avatarBtnActive {
-  background: var(--Blue-500, #4c6381);
-}
-
-.avatarIcon {
-  width: 32px;
-  height: 32px;
-  display: block;
-  transition: filter 0.2s ease;
-}
-
-.avatarBtn:hover .avatarIcon,
-.avatarBtn:focus-visible .avatarIcon,
-.avatarBtnActive .avatarIcon {
-  filter: brightness(0) saturate(100%) invert(90%) sepia(18%) saturate(388%)
-    hue-rotate(176deg) brightness(101%) contrast(94%);
 }
 
 .phoneWrap {
@@ -225,10 +171,12 @@
 
   color: #1b242e;
   text-decoration: none;
+  transition: color 300ms ease-out;
 }
 
-.phone:hover {
-  text-decoration: underline;
+.phone:hover,
+.phone:focus-visible {
+  color: #4c6381;
 }
 
 .mobileMenuBtn {
@@ -316,6 +264,11 @@
   text-decoration: none;
 }
 
+.mobileMenuItem:hover,
+.mobileMenuItem:focus-visible {
+  color: #4c6381;
+}
+
 .mobileMenuItemActive {
   box-sizing: border-box;
   width: fit-content;
@@ -325,16 +278,10 @@
   gap: 10px;
   border-radius: 0;
   color: #4c6381;
-
   background-image: linear-gradient(#4c6381, #4c6381);
   background-repeat: no-repeat;
   background-size: calc(100% - 4px) 2px;
-  background-position: center calc(100% - 8px); /* підняли підкреслення */
-}
-
-.mobileMenuItem:hover,
-.mobileMenuItem:focus-visible {
-  color: #4c6381;
+  background-position: center calc(100% - 8px);
 }
 
 @media (max-width: 768px) {
@@ -379,8 +326,7 @@
     order: 0;
   }
 
-  .loginBtn,
-  .avatarBtn {
+  .authControl {
     order: 1;
   }
 
@@ -390,28 +336,57 @@
 
   .mobileMenuPanel {
     position: absolute;
-    top: 99px;
-    left: 0;
+    top: 100px; /* ✅ було 99.5px */
     right: 0;
     z-index: 30;
 
-    width: 100%;
-    height: auto;
+    width: 335px;
+    height: 259px;
+
+    padding: 20px 40px;
     box-sizing: border-box;
-    padding: 16px 24px 20px;
 
     display: none;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 
     background: #fcfbf4;
-    box-shadow: 0px 2px 4px #6581a9;
-    border-radius: 0;
+
+    /* ✅ прибрали нижню тінь, щоб не було “смуги” під хедером */
+    box-shadow: -2px 0px 4px #6581a9;
+
+    border-radius: 0px 0px 0px 12px;
   }
 
   .mobileMenuPanelOpen {
     display: flex;
+  }
+
+  .mobileMenuItem {
+    width: 255px;
+    height: 31px;
+    padding: 4px 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 144%;
+
+    color: #1b242e;
+    text-decoration: none;
+  }
+
+  .mobileMenuItemActive {
+    color: #4c6381;
+    background-image: linear-gradient(#4c6381, #4c6381);
+    background-repeat: no-repeat;
+    background-size: calc(100% - 16px) 2px;
+    background-position: center bottom;
   }
 }

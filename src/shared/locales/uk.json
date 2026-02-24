@@ -1,9 +1,9 @@
 {
   "menu.home": "Головна",
   "menu.routes": "Напрямки",
-  "menu.schedule": "Розклад",
-  "menu.services": "Послуги",
   "menu.about": "Про компанію",
+  "menu.cafe": "Кафе",
+  "menu.contacts": "Контакти",
 
   "aria.home": "На головну",
   "header.logoAlt": "Автолюкс Черкаси-Плюс",

@@ -2,17 +2,17 @@
 
 import styles from "./Header.module.css";
 import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
+import HeaderAuthControl from "./HeaderAuthControl";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { MouseEvent, useEffect, useState, useSyncExternalStore } from "react";
 
-
 const menu = [
-  { key: "menu.home", href: "#home" },         
-  { key: "menu.routes", href: "#routes" },     
-  { key: "menu.schedule", href: "#schedule" }, 
-  { key: "menu.services", href: "#services" }, 
-  { key: "menu.about", href: "#about" },       
+  { key: "menu.home", href: "#home" },
+  { key: "menu.routes", href: "#routes" },
+  { key: "menu.about", href: "#about" },
+  { key: "menu.cafe", href: "#services" },
+  { key: "menu.contacts", href: "#contacts" },
 ];
 
 const phones = [
@@ -51,8 +51,10 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const isAuthorized = useSyncExternalStore(subscribeToAuthStatus, getAuthStatusSnapshot, () => false);
   const isAvatarActive = pathname === "/login";
+
   const [activeMenuHref, setActiveMenuHref] = useState("#home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -97,26 +99,20 @@ export default function Header() {
     router.push("/profile");
   };
 
-  
   const handleScroll = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault(); 
+    e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    
     if (pathname !== "/") {
       router.push(`/${href}`);
       return;
     }
 
-    
     const targetId = href.replace("#", "");
     const elem = document.getElementById(targetId);
 
     if (elem) {
-      elem.scrollIntoView({
-        behavior: "smooth",
-        block: "start", 
-      });
+      elem.scrollIntoView({ behavior: "smooth", block: "start" });
 
       if (window.location.hash !== href) {
         window.history.replaceState(null, "", href);
@@ -125,12 +121,11 @@ export default function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isMobileMenuOpen ? styles.headerNoShadow : ""}`}>
       <div className={styles.container}>
-        {}
-        <a 
-          className={styles.logoWrap} 
-          href="#home" 
+        <a
+          className={styles.logoWrap}
+          href="#home"
           onClick={(e) => {
             setActiveMenuHref("#home");
             handleScroll(e, "#home");
@@ -145,9 +140,7 @@ export default function Header() {
             <a
               key={item.key}
               aria-current={activeMenuHref === item.href ? "page" : undefined}
-              className={`${styles.menuItem} ${
-                activeMenuHref === item.href ? styles.menuItemActive : ""
-              }`}
+              className={`${styles.menuItem} ${activeMenuHref === item.href ? styles.menuItemActive : ""}`}
               href={item.href}
               onClick={(e) => {
                 setActiveMenuHref(item.href);
@@ -164,20 +157,15 @@ export default function Header() {
         </div>
 
         <div className={`${styles.right} ${isAuthorized ? styles.rightAuthorized : styles.rightUnauthorized}`}>
-          {isAuthorized ? (
-            <button
-              className={`${styles.avatarBtn} ${isAvatarActive ? styles.avatarBtnActive : ""}`}
-              aria-label={t("header.profileAria")}
-              type="button"
-              onClick={handleAvatarClick}
-            >
-              <img className={styles.avatarIcon} src="/icons/avatar.svg" alt="" />
-            </button>
-          ) : (
-            <button className={styles.loginBtn} type="button" onClick={openLoginModal}>
-              {t("header.login")}
-            </button>
-          )}
+          <HeaderAuthControl
+            className={styles.authControl}
+            isAuthorized={isAuthorized}
+            isAvatarActive={isAvatarActive}
+            loginLabel={t("header.login")}
+            profileAriaLabel={t("header.profileAria")}
+            onLoginClick={openLoginModal}
+            onAvatarClick={handleAvatarClick}
+          />
 
           <div className={styles.phoneWrap}>
             <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" />
@@ -201,9 +189,10 @@ export default function Header() {
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
           >
             {isMobileMenuOpen ? (
-              <span className={styles.mobileCloseIcon} aria-hidden="true" />
+              <span key="icon-close" className={styles.mobileCloseIcon} aria-hidden="true" />
             ) : (
               <img
+                key="icon-menu"
                 className={styles.mobileMenuIcon}
                 src="/icons/Header/Vector%20(Stroke).png"
                 alt=""
@@ -220,9 +209,8 @@ export default function Header() {
           {menu.map((item) => (
             <a
               key={`mobile-${item.key}`}
-              className={`${styles.mobileMenuItem} ${
-                activeMenuHref === item.href ? styles.mobileMenuItemActive : ""
-              }`}
+              aria-current={activeMenuHref === item.href ? "page" : undefined}
+              className={`${styles.mobileMenuItem} ${activeMenuHref === item.href ? styles.mobileMenuItemActive : ""}`}
               href={item.href}
               onClick={(e) => {
                 setActiveMenuHref(item.href);

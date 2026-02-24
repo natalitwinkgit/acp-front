@@ -269,3 +269,46 @@
   border-color: #40536c;
   box-shadow: 0 0 0 2px rgba(76, 99, 129, 0.18);
 }
+
+@media (max-width: 768px) {
+  .card {
+    width: 424px;
+    height: 438px;
+    padding: 20px;
+    gap: 16px;
+    background: rgba(247, 246, 239, 0.5);
+    border: 0;
+    border-radius: 12px;
+  }
+
+  .cardTitle {
+    width: 384px;
+    height: 24px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 132%;
+    color: #4c6381;
+  }
+
+  .form {
+    width: 384px;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .control,
+  .dateWrap,
+  .controlWithIconBtn,
+  .btnSecondary {
+    width: 384px;
+  }
+
+  .row2 {
+    width: 384px;
+  }
+
+  .controlHalf,
+  .controlWithIconHalf {
+    width: 184px;
+  }
+}

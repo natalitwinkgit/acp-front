@@ -1,0 +1,71 @@
+.authControl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.loginBtn {
+  width: 65px;
+  height: 40px;
+  padding: 8px 16px;
+  gap: 10px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #cdd3dc 0%, #a2aebd 100%);
+
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  color: #283343;
+  text-align: center;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.loginBtn:hover,
+.loginBtn:focus-visible {
+  opacity: 0.9;
+}
+
+.avatarBtn {
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  border: 0;
+  border-radius: 24px;
+  background: var(--Light-blue, #d8e5f5);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.avatarBtn:hover,
+.avatarBtn:focus-visible,
+.avatarBtnActive {
+  background: var(--Blue-500, #4c6381);
+}
+
+.avatarIcon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  transition: filter 0.2s ease;
+}
+
+.avatarBtn:hover .avatarIcon,
+.avatarBtn:focus-visible .avatarIcon,
+.avatarBtnActive .avatarIcon {
+  filter: brightness(0) saturate(100%) invert(90%) sepia(18%) saturate(388%)
+    hue-rotate(176deg) brightness(101%) contrast(94%);
+}
