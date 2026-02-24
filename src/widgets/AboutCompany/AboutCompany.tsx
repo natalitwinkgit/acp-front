@@ -4,49 +4,72 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./AboutCompany.module.css";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 
+type StatKey = "years" | "passengers" | "km";
+
 type Stat = {
-  key: "years" | "passengers" | "km";
-  value: number;
+  key: StatKey;
+
+  // option A: value + step (uniform list)
+  value?: number;
   step?: number;
+
+  // option B: explicit list (non-uniform like km column)
+  values?: number[];
+
+  // timing
+  delayMs?: number;      // start delay (After delay)
+  durationMs?: number;   // 0 => Instant, >0 => step-by-step
+  stepDelayMs?: number;  // delay between rows
+  targetIndex?: number;  // where to stop (0-based)
 };
 
+const ROW_HEIGHT = 47;
 
-function easeOutCubic(t: number) {
-  return 1 - Math.pow(1 - t, 3);
-}
-
-
-function formatDisplay(value: number, kind: Stat["key"]) {
-  if (kind === "years") return String(Math.max(0, Math.round(value))).padStart(2, "0");
-  const v = Math.max(0, Math.round(value));
+function formatValue(v: number, kind: StatKey) {
+  if (kind === "years") return String(v).padStart(2, "0");
   return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-function toChars(str: string) {
-  return str.split("");
+function buildNumbers(stat: Stat) {
+  if (stat.values && stat.values.length) return stat.values;
+
+  const to = Math.max(0, Math.floor(stat.value ?? 0));
+  const step = Math.max(1, Math.floor(stat.step ?? 1));
+
+  const arr: number[] = [];
+  for (let x = step; x <= to; x += step) arr.push(x);
+
+  if (arr.length === 0) arr.push(to);
+  if (arr[arr.length - 1] !== to) arr.push(to);
+
+  return arr;
 }
 
-
-const DIGIT_HEIGHT = 47;
-
-function Odometer({
-  value,
+function OdometerList({
   kind,
-  step = 1,
-  durationMs = 1500,
+  stat,
   startOnView = true,
 }: {
-  value: number;
-  kind: Stat["key"];
-  step?: number;
-  durationMs?: number;
+  kind: StatKey;
+  stat: Stat;
   startOnView?: boolean;
 }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const rafRef = useRef<number | null>(null);
+  const timeoutRef = useRef<number | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   const [started, setStarted] = useState(!startOnView);
-  const [current, setCurrent] = useState(0);
+  const [index, setIndex] = useState(0);
+
+  const numbers = useMemo(() => buildNumbers(stat), [stat]);
+  const items = useMemo(() => numbers.map((n) => formatValue(n, kind)), [numbers, kind]);
+
+  const lastIndex = Math.max(0, items.length - 1);
+
+  const delayMs = stat.delayMs ?? 800;            // default per your figma
+  const durationMs = stat.durationMs ?? 1;        // default: step-by-step
+  const stepDelayMs = Math.max(1, stat.stepDelayMs ?? 70);
+  const targetIndex = Math.min(lastIndex, Math.max(0, stat.targetIndex ?? lastIndex));
 
   useEffect(() => {
     if (!startOnView) return;
@@ -62,82 +85,65 @@ function Odometer({
       },
       { threshold: 0.3 }
     );
+
     io.observe(el);
     return () => io.disconnect();
   }, [startOnView]);
 
   useEffect(() => {
     if (!started) return;
-    const from = 0;
-    const to = value;
-    const t0 = performance.now();
 
-    const tick = (now: number) => {
-      const elapsed = now - t0;
-      const t = Math.min(1, elapsed / durationMs);
-      
-      if (step > 1) {
-        // Discrete stepping: calculate which step we're on
-        const totalSteps = Math.ceil(to / step);
-        const stepDelay = durationMs / totalSteps;
-        const currentStep = Math.floor(elapsed / stepDelay);
-        let animatedValue = Math.min(currentStep * step, to);
-        setCurrent(animatedValue);
-      } else {
-        // Smooth animation
-        const k = easeOutCubic(t);
-        let animatedValue = from + (to - from) * k;
-        setCurrent(animatedValue);
+    if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+
+    // start at first row
+    setIndex(0);
+
+    timeoutRef.current = window.setTimeout(() => {
+      // Instant jump
+      if (durationMs === 0) {
+        setIndex(targetIndex);
+        return;
       }
 
-      if (t < 1) {
-        rafRef.current = requestAnimationFrame(tick);
-      } else {
-        setCurrent(to); 
-      }
-    };
+      // Step-by-step to targetIndex with delay between rows
+      intervalRef.current = window.setInterval(() => {
+        setIndex((prev) => {
+          if (prev >= targetIndex) {
+            if (intervalRef.current) window.clearInterval(intervalRef.current);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, stepDelayMs);
+    }, Math.max(0, delayMs));
 
-    rafRef.current = requestAnimationFrame(tick);
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+      if (intervalRef.current) window.clearInterval(intervalRef.current);
     };
-  }, [started, value, durationMs, step]);
+  }, [started, delayMs, durationMs, stepDelayMs, targetIndex]);
 
-  const displayStr = useMemo(() => formatDisplay(current, kind), [current, kind]);
-  const chars = useMemo(() => toChars(displayStr), [displayStr]);
+  const displayStr = items[index] ?? "";
 
   return (
-    <div 
-      ref={rootRef} 
-      className={styles.odometer} 
+    <div
+      ref={rootRef}
+      className={styles.odometerList}
       aria-label={displayStr}
-      style={{ height: `${DIGIT_HEIGHT}px` }}
+      style={{ height: `${ROW_HEIGHT}px` }}
     >
-      {chars.map((ch, idx) => {
-        
-        if (ch === " ") {
-          return <span key={`sp-${idx}`} className={styles.space} aria-hidden="true" />;
-        }
-
-        
-        const digit = ch >= "0" && ch <= "9" ? Number(ch) : 0;
-
-        return (
-          <span key={`d-${idx}`} className={styles.digitCol} aria-hidden="true">
-            <span
-              className={styles.digitStack}
-              
-              style={{ transform: `translateY(-${digit * DIGIT_HEIGHT}px)` }}
-            >
-              {Array.from({ length: 10 }).map((_, n) => (
-                <span key={n} className={styles.digit}>
-                  {n}
-                </span>
-              ))}
-            </span>
-          </span>
-        );
-      })}
+      <div
+        className={styles.odometerTrack}
+        style={{ transform: `translateY(-${index * ROW_HEIGHT}px)` }}
+        aria-hidden="true"
+      >
+        {items.map((txt, i) => (
+          <div key={i} className={styles.odometerRow}>
+            {txt}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -145,13 +151,30 @@ function Odometer({
 export default function AboutCompany() {
   const { t } = useI18n();
 
-  const stats: Stat[] = [
-    { key: "years", value: 26, step: 1 },
-    { key: "passengers", value: 39000, step: 1000 },
-    { key: "km", value: 600000, step: 1000 },
+  // non-uniform km list from your screenshot
+  const kmValues = [
+    1000, 2550, 5100, 8765, 12345, 22000, 35890, 44444, 49999, 50001,
+    68200, 75500, 91000, 100000, 115300, 123456, 150000, 179520, 198000,
+    200200, 225000, 248700, 275000, 300000, 314159, 333333, 369800,
+    390500, 405000, 420100, 450555, 487600, 500000, 515200, 543210,
+    575000, 589999, 595500, 600000,
   ];
 
-  
+  // FULL FIGMA-LIKE SETTINGS:
+  // After delay: 800ms
+  // Animate: step-by-step
+  // Delay between numbers (rows): 70ms (tune this)
+  const stats: Stat[] = [
+    // years: 01..26 => last index 25
+    { key: "years", value: 26, step: 1, delayMs: 800, durationMs: 1, stepDelayMs: 70, targetIndex: 25 },
+
+    // passengers: 1 000..39 000 => 39 rows => last index 38
+    { key: "passengers", value: 39000, step: 1000, delayMs: 800, durationMs: 1, stepDelayMs: 70, targetIndex: 38 },
+
+    // km: 39 rows => last index 38
+    { key: "km", values: kmValues, delayMs: 800, durationMs: 1, stepDelayMs: 70, targetIndex: 38 },
+  ];
+
   const textKeys = ["one", "two", "three", "four"] as const;
 
   return (
@@ -159,19 +182,15 @@ export default function AboutCompany() {
       <h2 className={styles.title}>{t("about.title")}</h2>
 
       <div className={styles.container}>
-        {}
         <div className={styles.statsBar}>
           {stats.map((s) => (
             <article key={s.key} className={styles.statCard}>
-              <Odometer value={s.value} kind={s.key} step={s.step || 1} />
-              <div className={styles.statLabel}>
-                {t(`about.stats.${s.key}.label`)}
-              </div>
+              <OdometerList kind={s.key} stat={s} />
+              <div className={styles.statLabel}>{t(`about.stats.${s.key}.label`)}</div>
             </article>
           ))}
         </div>
 
-        {}
         <div className={styles.textGrid}>
           {textKeys.map((k) => (
             <div key={k} className={styles.textCard}>

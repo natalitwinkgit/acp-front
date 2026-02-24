@@ -192,4 +192,26 @@
   .text {
     width: 100%;
   }
+}.odometerList {
+  position: relative;
+  width: 156px;     /* як у Figma */
+  overflow: hidden;
+}
+
+.odometerTrack {
+  will-change: transform;
+}
+
+.odometerRow {
+  height: 47px;     /* як у Figma */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 47px;
+  color: #68aec9;
 }

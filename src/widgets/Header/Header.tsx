@@ -144,6 +144,7 @@ export default function Header() {
           {menu.map((item) => (
             <a
               key={item.key}
+              aria-current={activeMenuHref === item.href ? "page" : undefined}
               className={`${styles.menuItem} ${
                 activeMenuHref === item.href ? styles.menuItemActive : ""
               }`}
