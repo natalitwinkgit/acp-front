@@ -1,0 +1,184 @@
+.section {
+  width: 1440px;
+  height: 912px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.title {
+  width: 1240px;
+  height: 35px;
+  margin: 0;
+
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 124%;
+  text-align: center;
+  color: #40536c;
+}
+
+/* ✅ Figma-like: 3 columns, 2 rows, gap 24, centered inside 1440 */
+.grid {
+  width: 1440px;          /* Figma frame width */
+  height: 304px;          /* 140 + 24 + 140 */
+
+  display: grid;
+  grid-template-columns: repeat(3, 397px);
+  grid-auto-rows: 140px;
+  gap: 24px;
+
+  justify-content: center; /* центрує сітку в 1440 */
+  align-content: start;    /* без вертикального “центрування” */
+
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.card {
+  width: 397px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  gap: 16px;
+  box-sizing: border-box;
+
+  background: #f7f6ef;
+  box-shadow: 0px 4px 4px #bfc7d2;
+  border-radius: 12px; /* Radius/Radius */
+}
+
+.card:hover,
+.card:focus-visible {
+  background: var(--light-bg, #f7f6ef);
+  box-shadow:
+    4px 0px 4px 0px var(--Blue200, #bfc7d2),
+    0px 4px 4px 0px var(--Blue200, #bfc7d2);
+}
+
+.iconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  background: #cdd3dc;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+.textCol {
+  width: 281px;
+  height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cardTitle {
+  width: 281px;
+  min-height: 23px;
+
+  display: flex;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  color: #4c6381;
+  text-align: left;
+}
+
+.cardDesc {
+  width: 281px;
+
+  display: flex;
+  align-items: center;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #1b242e;
+  text-align: left;
+}
+
+/* ✅ Responsive */
+@media (max-width: 1439px) {
+  .section {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 24px;
+  }
+
+  .title {
+    width: 100%;
+  }
+
+  .grid {
+    width: 100%;
+    height: auto;
+
+    grid-template-columns: repeat(3, minmax(0, 397px));
+    grid-auto-rows: auto;
+    justify-content: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 397px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 397px));
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: 0 16px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 397px);
+  }
+}
+
+@media (max-width: 520px) {
+  .card {
+    height: auto;
+    min-height: 140px;
+  }
+
+  .textCol {
+    width: calc(100% - 76px);
+    height: auto;
+  }
+
+  .cardTitle,
+  .cardDesc {
+    width: 100%;
+  }
+}

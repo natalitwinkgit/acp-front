@@ -7,9 +7,7 @@ import { useSyncExternalStore } from "react";
 import BookingHero from "@/src/widgets/BookingHero/BookingHero";
 import BenefitsWidget from "@/src/widgets/BenefitsWidget/BenefitsWidget";
 import PopularRoutes from "@/src/widgets/PopularRoutes/PopularRoutes";
-import ScheduleTable from "@/src/widgets/ScheduleTable/ScheduleTable";
-import Services from "@/src/widgets/Services/Services";
-import AboutCompany from "@/src/widgets/AboutCompany/AboutCompany";
+import About from "@/src/widgets/About/About";
 
 function getDesktopSnapshot() {
   if (typeof window === "undefined") return false;
@@ -44,27 +42,21 @@ export default function HomePageContent() {
             </div>
           )}
 
-          <section id="home" className={styles.homeSection}>
-            <h1 className={styles.title}>{t("home.title")}</h1>
-            <BookingHero />
-          </section>
+          <div className={styles.mainScreenBlock}>
+            <section id="home" className={styles.homeSection}>
+              <h1 className={styles.title}>{t("home.title")}</h1>
+              <BookingHero />
+            </section>
 
-          <BenefitsWidget />
+            <BenefitsWidget />
+          </div>
 
           <section id="routes">
             <PopularRoutes />
           </section>
 
-          <section id="schedule">
-            <ScheduleTable />
-          </section>
-
-          <section id="services">
-            <Services />
-          </section>
-
           <section id="about">
-            <AboutCompany />
+            <About />
           </section>
         </div>
       </div>

@@ -1,0 +1,168 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.title {
+  width: 100%;
+  height: 35px;
+  font-family: Roboto, system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 124%;
+  text-align: center;
+  color: #40536c;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+/* Фонова синя плашка на 1440, контент строго 1239 як у Figma */
+.statsBar {
+  width: 100%;  background: #4c6381;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px 0; /* ВАЖЛИВО: без 100px, щоб не було 1240px внутрішньої ширини */
+  box-sizing: border-box;
+}
+
+.statsInner {
+  width: 1239px; /* 397*3 + 24*2 = 1239 */
+  display: flex;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.statCard {
+  width: 397px;
+  height: 149px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.statLabel {
+  width: 100%;
+  height: 30px;
+
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 124%;
+  text-align: center;
+
+  color: #fffefb;
+}
+
+/* Текстовий блок як Auto Layout: 2 колонки, gap 24 */
+.textGrid {
+  width: 1238px; /* 607 + 607 + 24 = 1238 (без 0.5px округлень) */
+  display: grid;
+  grid-template-columns: repeat(2, 607px);
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.textCard {
+  width: 607px;
+  min-height: 128px;
+
+  background: #ecefee;
+  border-left: 6px solid #68aec9;
+  border-radius: 0 12px 12px 0;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding: 16px 10px 16px 20px;
+  box-sizing: border-box;
+}
+
+.text {
+  width: 100%;
+  margin: 0;
+  text-align: left;
+
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 132%;
+  color: #1b242e;
+}
+
+@media (max-width: 1300px) {
+  .container {
+    width: 100%;
+  }
+
+  .statsBar {
+    width: 100%;
+    padding: 24px 0;
+  }
+
+  .statsInner {
+    width: 100%;
+    max-width: 1239px;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .textGrid {
+    width: 100%;
+    max-width: 1238px;
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+
+  .textCard {
+    width: 100%;
+  }
+}
+
+/* твої степпери лишив як є */
+.stepperViewport {
+  position: relative;
+  width: 156px;
+  overflow: hidden;
+}
+
+.stepperTrack {
+  will-change: transform;
+}
+
+.stepperRow {
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 47px;
+  color: #68aec9;
+} 

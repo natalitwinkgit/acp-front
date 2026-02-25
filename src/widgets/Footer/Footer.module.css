@@ -1,16 +1,21 @@
 /* Footer.module.css */
 .footer {
   width: 100%;
+  max-width: 1440px;
+  height: 657px;
+  margin: 0 auto;
   background: #4c6381;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  padding: 0;
+  gap: 16px;
+  padding: 16px 100px;
   box-sizing: border-box;
 }
 
 .container {
   width: 1240px;
-  height: 556px;
+  height: 625px;
   padding: 0;
   box-sizing: border-box;
 
@@ -130,6 +135,12 @@
 
 /* щоб не було горизонтального скролу на менших екранах */
 @media (max-width: 1280px) {
+  .footer {
+    max-width: none;
+    height: auto;
+    padding: 16px 24px;
+  }
+
   .container,
   .contacts,
   .mapWrap,
@@ -139,7 +150,8 @@
   }
 
   .container {
-    padding: 0 24px;
+    height: auto;
+    padding: 0;
   }
 }
 

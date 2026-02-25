@@ -21,6 +21,21 @@
   gap: 16px;
 }
 
+.mainScreenBlock {
+  width: 100vw;
+  max-width: 1440px;
+  height: 886px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
 .homeSection {
   width: 100%;
   display: flex;
@@ -57,6 +72,15 @@
   }
 
   .content {
+    gap: 0;
+  }
+
+  .mainScreenBlock {
+    width: 100%;
+    max-width: 768px;
+    height: auto;
+    margin: 0;
+    padding-top: 0;
     gap: 0;
   }
 

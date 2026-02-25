@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
 import LoginPageContent from "@/app/(auth)/login/LoginPageContent";
@@ -8,11 +8,11 @@ import LoginPageContent from "@/app/(auth)/login/LoginPageContent";
 export default function LoginModalRoute() {
   const router = useRouter();
 
-  const close = () => {
+  const close = useCallback(() => {
     const background = sessionStorage.getItem("auth:background");
     sessionStorage.removeItem("auth:background");
-    router.back();
-  };
+    router.replace(background || "/");
+  }, [router]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -46,12 +46,12 @@ export default function LoginModalRoute() {
       // Повертаємо до збереженої позиції після видалення стилів
       if (savedScrollY) {
         requestAnimationFrame(() => {
-          window.scrollTo(0, parseInt(savedScrollY));
+          window.scrollTo(0, parseInt(savedScrollY, 10));
           sessionStorage.removeItem("scroll:position");
         });
       }
     };
-  }, []);
+  }, [close]);
 
   return (
     <div 

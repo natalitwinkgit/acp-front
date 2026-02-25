@@ -10,7 +10,7 @@ export default function ModalCloseButton({ className, ariaLabel = "Close" }: Pro
   const close = () => {
     const background = sessionStorage.getItem("auth:background");
     sessionStorage.removeItem("auth:background");
-    router.back();
+    router.replace(background || "/");
   };
 
   return (

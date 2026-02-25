@@ -104,9 +104,35 @@
       }
     }
   },
-   "about": {
+  "about": {
     "ariaLabel": "About the company",
     "title": "About the company",
+    "cards": {
+      "passenger": {
+        "title": "Flexible booking",
+        "desc": "You can reserve a seat for the needed trip on the website for free."
+      },
+      "groupTransfer": {
+        "title": "Online purchase",
+        "desc": "Instant ticket checkout without queues at the ticket office."
+      },
+      "excursions": {
+        "title": "Accurate schedule",
+        "desc": "Up-to-date timetable with departures every hour, making trip planning easy."
+      },
+      "seaTours": {
+        "title": "Lounge area",
+        "desc": "Wait for your trip in a modern lounge where you can relax with a cup of fragrant coffee."
+      },
+      "schoolBus": {
+        "title": "Personal account",
+        "desc": "Your full trip history is stored in one place on the website."
+      },
+      "corporate": {
+        "title": "Infrastructure",
+        "desc": "Convenient central location with access to all nearby infrastructure."
+      }
+    },
     "stats": {
       "years": { "label": "Years of experience" },
       "passengers": { "label": "Passengers transported" },

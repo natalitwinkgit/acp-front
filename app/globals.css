@@ -1,17 +1,33 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  position: relative;
-  overflow-x: clip;
+  width: 100%;
   font-family: var(--font-roboto), sans-serif;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  background: #fcfbf4;
 }
 
 body {
+  overflow-x: hidden;
+}
+
+/* Загальний контейнер сторінки (обмеження 1440) */
+.pageContainer {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  background: #fcfbf4;
+}
+
+/* ГОЛОВНЕ: системний відступ між секціями + відступ перед футером */
+.pageMain {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;          /* відступ між секціями (як у макеті) */
+  padding-bottom: 40px; /* відступ між останнім блоком і футером */
 }

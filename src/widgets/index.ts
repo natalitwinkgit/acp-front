@@ -12,6 +12,5 @@ export { default as BenefitsWidget } from './BenefitsWidget/BenefitsWidget';
 export { default as MiniCalendar } from './MiniCalendar/MiniCalendar';
 export { default as ModalCloseButton } from './ModalCloseButton/ModalCloseButton';
 export { default as PopularRoutes } from './PopularRoutes/PopularRoutes';
-export { default as ScheduleTable } from './ScheduleTable/ScheduleTable';
-export { default as Services } from './Services/Services';
-export { default as AboutCompany } from './AboutCompany/AboutCompany';
+export { default as Services } from './About/About';
+export { default as AboutCompany } from './About/StatStepperCore/StatStepperCore';
