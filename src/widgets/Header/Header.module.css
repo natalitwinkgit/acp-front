@@ -1,36 +1,38 @@
 /* Header.module.css */
 
 .header {
-  box-sizing: border-box;
   width: 100%;
   height: 100px;
 
-  background: #f7f6f2;
-  border-bottom: 1px solid var(--Blue-400, #697c95);
-  box-shadow: 0px 2px 4px 0px var(--gray-blue, #6581a9);
+  background: #FCFBF4;
+  border-bottom: 1px solid #697C95;
+  box-shadow: 0px 2px 4px rgba(101, 129, 169, 0.55);
 
   position: sticky;
   top: 0;
   z-index: 20;
 }
 
-/* ✅ НОВЕ: прибираємо тінь у хедера, коли меню відкрите */
 .headerNoShadow {
   box-shadow: none;
 }
 
 .container {
-  box-sizing: border-box;
-  position: relative;
-
-  width: 1440px;
+  width: 100%;
   height: 100px;
+
+  max-width: var(--layout-max-width);
   margin: 0 auto;
-  padding: 16px 100px;
+  padding: 16px var(--layout-padding-x);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  box-sizing: border-box;
+  position: relative;
+
+  min-width: 0;
 }
 
 .logoWrap {
@@ -48,11 +50,12 @@
 }
 
 .menu {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 20px;     /* макет */
+  flex: 1;
+  min-width: 0;
 }
 
 .mobileLang {
@@ -60,22 +63,22 @@
 }
 
 .menuItem {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  height: 44px;
+  height: 31px;  /* макет */
   padding: 4px 8px;
+  gap: 10px;
 
   font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
 
-  color: #1b242e;
+  color: #1B242E;
   text-decoration: none;
-  transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .menuItem:hover,
@@ -88,43 +91,33 @@
   background-image: linear-gradient(#4c6381, #4c6381);
   background-repeat: no-repeat;
   background-size: calc(100% - 4px) 2px;
-  background-position: center calc(100% - 8px);
+  background-position: center calc(100% - 2px);
 }
 
 .right {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  padding: 0;
-  gap: 40px;
-  flex: none;
+  gap: 32px; /* макет */
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
-.rightAuthorized {
-  width: 234px;
-  height: 44px;
-}
-
+/* ❗ прибрали фіксовані width/height (вони ламають spacing) */
+.rightAuthorized,
 .rightUnauthorized {
-  width: 255px;
-  height: 64px;
+  width: auto;
+  height: auto;
 }
 
 .authControl {
-  flex: none;
+  flex: 0 0 auto;
 }
 
 .phoneWrap {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  padding: 0;
   gap: 13px;
-
-  width: 150px;
-  height: 64px;
-
-  flex: none;
+  flex: 0 0 auto;
 }
 
 .phoneIcon {
@@ -136,42 +129,23 @@
 .phoneCol {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
   gap: 2px;
-
-  width: 113px;
-  height: 64px;
 }
 
 .phoneRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0;
-  gap: 10px;
-
-  width: 113px;
   height: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .phone {
-  width: 113px;
-  height: 20px;
-
   font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 144%;
-
-  display: flex;
-  align-items: center;
-
-  color: #1b242e;
+  color: #1B242E;
   text-decoration: none;
-  transition: color 300ms ease-out;
+  white-space: nowrap;
 }
 
 .phone:hover,
@@ -179,18 +153,11 @@
   color: #4c6381;
 }
 
-.mobileMenuBtn {
-  display: none;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 0;
+.mobileMenuBtn { display: none; }
+.mobileMenuPanel { display: none; }
+
+.mobileMenuBtnOpen {
   background: transparent;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: none;
-  animation-duration: 0ms;
 }
 
 .mobileMenuIcon {
@@ -198,12 +165,6 @@
   height: 24px;
   display: block;
   object-fit: contain;
-  transition: none;
-  animation-duration: 0ms;
-}
-
-.mobileMenuBtnOpen {
-  background: transparent;
 }
 
 .mobileCloseIcon {
@@ -211,8 +172,6 @@
   width: 24px;
   height: 24px;
   display: block;
-  transition: none;
-  animation-duration: 0ms;
 }
 
 .mobileCloseIcon::before,
@@ -223,7 +182,7 @@
   right: 3px;
   top: 11px;
   height: 2px;
-  background: #1b242e;
+  background: #1B242E;
   border-radius: 2px;
 }
 
@@ -235,134 +194,172 @@
   transform: rotate(-45deg);
 }
 
-.mobileMenuPanel {
-  display: none;
-  transition: none;
-  animation-duration: 0ms;
-}
-
-.mobileMenuItem {
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 8px;
-  gap: 10px;
-
-  width: fit-content;
-  min-width: 47px;
-  height: 44px;
-  border-radius: 0;
-
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 144%;
-  color: #1b242e;
-  text-decoration: none;
-}
-
-.mobileMenuItem:hover,
-.mobileMenuItem:focus-visible {
-  color: #4c6381;
-}
-
-.mobileMenuItemActive {
-  box-sizing: border-box;
-  width: fit-content;
-  min-width: 47px;
-  height: 44px;
-  padding: 4px 8px;
-  gap: 10px;
-  border-radius: 0;
-  color: #4c6381;
-  background-image: linear-gradient(#4c6381, #4c6381);
-  background-repeat: no-repeat;
-  background-size: calc(100% - 4px) 2px;
-  background-position: center calc(100% - 8px);
-}
-
-@media (max-width: 768px) {
+/* 1920 desktop state (pixel-perfect to design spec) */
+@media (min-width: 1920px) {
   .header {
-    background: #fcfbf4;
+    box-sizing: border-box;
+    height: 100px;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #FCFBF4;
+    border-bottom: 1px solid #697C95;
+    box-shadow: 0px 2px 4px #6581A9;
   }
 
   .container {
-    width: 768px;
-    max-width: 100%;
+    max-width: 1920px;
     height: 100px;
-    padding: 16px 24px;
+    padding: 16px 256px;
+    gap: 244px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logoWrap {
+    margin: 0 auto;
+    width: 192px;
+    height: 50px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+
+  .logo {
+    width: 192px;
+    height: 50px;
   }
 
   .menu {
-    display: none;
+    margin: 0 auto;
+    width: 518px;
+    height: 31px;
+    padding: 0;
+    gap: 20px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
   }
+
+  .menuItem {
+    height: 31px;
+    padding: 4px 8px;
+    gap: 10px;
+    flex: none;
+    flex-grow: 0;
+  }
+
+  .menuItem:nth-child(1) { width: 78px; }
+  .menuItem:nth-child(2) { width: 93px; }
+  .menuItem:nth-child(3) { width: 124px; }
+  .menuItem:nth-child(4) { width: 56px; }
+  .menuItem:nth-child(5) { width: 87px; }
+
+  .right {
+    margin: 0 auto;
+    width: 247px;
+    height: 64px;
+    padding: 0;
+    gap: 32px;
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+  }
+
+  .rightUnauthorized {
+    width: 247px;
+    height: 64px;
+  }
+
+  .authControl {
+    width: 65px;
+    height: 40px;
+    flex: none;
+    flex-grow: 0;
+  }
+
+  .phoneWrap {
+    width: 150px;
+    height: 64px;
+    padding: 0;
+    gap: 13px;
+    flex: none;
+    flex-grow: 0;
+  }
+
+  .phoneCol {
+    width: 113px;
+    height: 64px;
+    padding: 0;
+    gap: 2px;
+    flex: none;
+    flex-grow: 0;
+  }
+
+  .phoneRow {
+    width: 113px;
+    height: 20px;
+    padding: 0;
+    gap: 10px;
+    flex: none;
+    flex-grow: 0;
+  }
+
+  .phone {
+    width: 113px;
+    height: 20px;
+    flex: none;
+    flex-grow: 0;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .menu { display: none; }
 
   .mobileLang {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: none;
   }
 
-  .right {
-    gap: 28px;
-  }
-
-  .rightUnauthorized {
-    width: 311px;
-    height: 64px;
-  }
-
-  .rightAuthorized {
-    width: auto;
-    height: 64px;
-  }
+  .right { gap: 28px; }
 
   .mobileMenuBtn {
     display: inline-flex;
-    order: 0;
-  }
-
-  .authControl {
-    order: 1;
-  }
-
-  .phoneWrap {
-    order: 2;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 
   .mobileMenuPanel {
     position: absolute;
-    top: 100px; /* ✅ було 99.5px */
+    top: 100px;
     right: 0;
     z-index: 30;
 
     width: 335px;
-    height: 259px;
-
     padding: 20px 40px;
     box-sizing: border-box;
 
     display: none;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 16px;
 
-    background: #fcfbf4;
-
-    /* ✅ прибрали нижню тінь, щоб не було “смуги” під хедером */
-    box-shadow: -2px 0px 4px #6581a9;
-
-    border-radius: 0px 0px 0px 12px;
+    background: #FCFBF4;
+    box-shadow: -2px 0px 10px rgba(101, 129, 169, 0.35);
+    border-radius: 0 0 0 12px;
   }
 
-  .mobileMenuPanelOpen {
-    display: flex;
-  }
+  .mobileMenuPanelOpen { display: flex; }
 
   .mobileMenuItem {
     width: 255px;
@@ -378,7 +375,7 @@
     font-size: 16px;
     line-height: 144%;
 
-    color: #1b242e;
+    color: #1B242E;
     text-decoration: none;
   }
 

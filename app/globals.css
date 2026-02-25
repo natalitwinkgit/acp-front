@@ -1,9 +1,33 @@
-*, *::before, *::after {
-  box-sizing: border-box;
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  /* Global responsive states: 1920 / 1440 / 768 / 393 */
+  --layout-max-width: 1920px;
+  --layout-padding-x: 256px;
 }
 
-html,
-body {
+@media (max-width: 1919px) {
+  :root {
+    --layout-max-width: 1440px;
+    --layout-padding-x: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --layout-max-width: 768px;
+    --layout-padding-x: 24px;
+  }
+}
+
+@media (max-width: 393px) {
+  :root {
+    --layout-max-width: 393px;
+    --layout-padding-x: 16px;
+  }
+}
+
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -13,21 +37,5 @@ body {
   background: #fcfbf4;
 }
 
-body {
-  overflow-x: hidden;
-}
-
-/* Загальний контейнер сторінки (обмеження 1440) */
-.pageContainer {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-/* ГОЛОВНЕ: системний відступ між секціями + відступ перед футером */
-.pageMain {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;          /* відступ між секціями (як у макеті) */
-  padding-bottom: 40px; /* відступ між останнім блоком і футером */
-}
+/* ВАЖЛИВО: clip краще ніж hidden (не “ріже” тіні як hidden інколи) */
+body { overflow-x: clip; }

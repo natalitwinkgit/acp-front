@@ -1,7 +1,9 @@
 .card {
   box-sizing: border-box;
-  width: 608px;
+  width: 100%;
+  max-width: 608px;
   height: 532px;
+  min-width: 0;
 
   display: flex;
   flex-direction: column;
@@ -39,7 +41,7 @@
 
 .control {
   box-sizing: border-box;
-  width: 448px;
+  width: 100%;
   height: 46px;
   display: flex;
   align-items: center;
@@ -60,7 +62,8 @@
 
 .controlHalf {
   box-sizing: border-box;
-  width: 216px; 
+  width: calc((100% - 16px) / 2);
+  min-width: 0;
   height: 46px;
   display: flex;
   align-items: center;
@@ -80,7 +83,7 @@
 
 
 .row2 {
-  width: 448px;
+  width: 100%;
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -88,13 +91,13 @@
 }
 .dateWrap {
   position: relative;
-  width: 448px;
+  width: 100%;
 }
 
 
 .controlWithIconBtn {
   box-sizing: border-box;
-  width: 448px;
+  width: 100%;
   height: 48px;
 
   display: flex;
@@ -155,7 +158,7 @@
 
 .controlWithIcon {
   box-sizing: border-box;
-  width: 448px;
+  width: 100%;
   height: 48px; 
   display: flex;
   justify-content: space-between;
@@ -169,7 +172,8 @@
 
 .controlWithIconHalf {
   box-sizing: border-box;
-  width: 216px;
+  width: calc((100% - 16px) / 2);
+  min-width: 0;
   height: 46px;
   display: flex;
   justify-content: space-between;
@@ -233,7 +237,7 @@
 
 
 .btnSecondary {
-  width: 448px;
+  width: 100%;
   height: 46px;
   display: flex;
   justify-content: center;
@@ -272,7 +276,7 @@
 
 @media (max-width: 768px) {
   .card {
-    width: 424px;
+    width: min(424px, 100%);
     height: 438px;
     padding: 20px;
     gap: 16px;
@@ -282,7 +286,7 @@
   }
 
   .cardTitle {
-    width: 384px;
+    width: 100%;
     height: 24px;
     font-weight: 400;
     font-size: 18px;
@@ -291,7 +295,7 @@
   }
 
   .form {
-    width: 384px;
+    width: 100%;
     align-items: center;
     gap: 16px;
   }
@@ -300,15 +304,15 @@
   .dateWrap,
   .controlWithIconBtn,
   .btnSecondary {
-    width: 384px;
+    width: 100%;
   }
 
   .row2 {
-    width: 384px;
+    width: 100%;
   }
 
   .controlHalf,
   .controlWithIconHalf {
-    width: 184px;
+    width: calc((100% - 16px) / 2);
   }
 }

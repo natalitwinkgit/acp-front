@@ -5,10 +5,10 @@
 }
 
 .container {
-  max-width: 1440px;
+  max-width: var(--layout-max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 0 100px;
+  padding: 0 var(--layout-padding-x);
   box-sizing: border-box;
 }
 
@@ -23,7 +23,7 @@
 
 .mainScreenBlock {
   width: 100vw;
-  max-width: 1440px;
+  max-width: var(--layout-max-width);
   height: 886px;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
@@ -49,10 +49,13 @@
 
 .title {
   margin: 0;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 48px;
-  color: #1b242e;
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: 0;
+  text-align: center;
+  color: var(--Blue-600, #40536c);
 }
 
 @media (min-width: 769px) {
@@ -67,7 +70,7 @@
   }
 
   .container {
-    max-width: 768px;
+    max-width: var(--layout-max-width);
     padding: 0;
   }
 
@@ -77,7 +80,7 @@
 
   .mainScreenBlock {
     width: 100%;
-    max-width: 768px;
+    max-width: var(--layout-max-width);
     height: auto;
     margin: 0;
     padding-top: 0;
@@ -85,17 +88,18 @@
   }
 
   .homeSection {
-    max-width: 768px;
+    max-width: var(--layout-max-width);
     padding: 16px 0 0;
     gap: 0;
   }
 
   .title {
     width: 100%;
-    height: 30px;
     font-weight: 500;
-    font-size: 24px;
-    line-height: 124%;
-    color: #40536c;
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: 0;
+    text-align: center;
+    color: var(--Blue-600, #40536c);
   }
 }

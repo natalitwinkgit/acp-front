@@ -112,6 +112,46 @@
   color: #1b242e;
 }
 
+@media (min-width: 1920px) {
+  .section {
+    width: 1920px;
+    gap: 32px;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1920px;
+    gap: 32px;
+  }
+
+  .statsInner {
+    width: 1408px;
+    gap: 24px;
+  }
+
+  .statCard {
+    width: 453.33px;
+    height: 149px;
+    padding: 24px;
+    gap: 24px;
+    flex: none;
+    flex-grow: 1;
+  }
+
+  .statLabel {
+    width: 405.33px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-self: stretch;
+    flex-grow: 0;
+  }
+}
+
 @media (max-width: 1300px) {
   .container {
     width: 100%;
