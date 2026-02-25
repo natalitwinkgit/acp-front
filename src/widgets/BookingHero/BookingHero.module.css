@@ -1,36 +1,42 @@
 .section {
   width: 100%;
   background: #fcfbf4;
-  padding: 24px 0;
+  padding-top: 20px; /* Figma: padding-top 20 */
+  padding-bottom: 0;
 }
 
-.inner {
+/* Main screen block: 1440, gap 32 (між секціями сторінки краще через pageMain gap, але тут теж можна) */
+.mainBlock {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px; /* Figma: 1440 */
   margin: 0 auto;
-  padding: 0 16px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Figma: gap 32 */
+}
+
+/* Form block: 1240 x 532, gap 24 */
+.formBlock {
+  width: 100%;
+  max-width: 1240px; /* Figma: 1240 */
+  height: 532px;     /* Figma: 532 */
+  margin: 0 auto;
+
+  display: flex;
+  align-items: stretch;
+  gap: 24px;         /* Figma: gap 24 */
+  min-width: 0;
   box-sizing: border-box;
 }
 
-.block {
-  width: 100%;
-  height: 532px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 24px;
-
-  min-width: 0;
-}
-
+/* права колонка (картинка) */
 .imageWrap {
-  width: 608px;
+  width: 608px;     /* 1240 = 608 + 608 + 24 */
   height: 532px;
-
   border-radius: 12px;
   overflow: hidden;
-
   flex: none;
 }
 
@@ -41,44 +47,33 @@
   display: block;
 }
 
-.block > :first-child {
-  min-width: 0;
-}
-
-@media (max-width: 1280px) {
-  .section {
-    padding: 24px 0;
-  }
-  .block {
+/* адаптив: коли вже не влазить 1240 */
+@media (max-width: 1240px) {
+  .formBlock {
     height: auto;
-    align-items: center;
+    flex-direction: column;
   }
 
   .imageWrap {
-    width: min(608px, 100%);
+    width: 100%;
     height: 380px;
   }
 }
 
 @media (max-width: 980px) {
-  .block {
-    flex-direction: column;
-    gap: 24px;
-  }
-
   .imageWrap {
-    width: 100%;
     height: 320px;
   }
 }
 
+/* мобільний макет з накладанням */
 @media (max-width: 768px) {
   .section {
-    padding: 0;
+    padding-top: 0;
     background: transparent;
   }
 
-  .block {
+  .formBlock {
     position: relative;
     width: 100%;
     max-width: 768px;
@@ -95,7 +90,8 @@
     border-radius: 0;
   }
 
-  .block > :first-child {
+  /* перший елемент у formBlock — BookingForm */
+  .formBlock > :first-child {
     position: absolute;
     top: 20px;
     left: 50%;
