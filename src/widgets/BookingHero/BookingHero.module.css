@@ -25,7 +25,7 @@
   margin: 0 auto;
 
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 24px;         /* Figma: gap 24 */
   min-width: 0;
   box-sizing: border-box;
@@ -52,6 +52,24 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+@media (min-width: 1920px) {
+  .formBlock {
+    width: 1408px;
+    max-width: 1408px;
+    height: 604px;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .imageWrap {
+    width: 688px;
+    max-width: 688px;
+    height: 604px;
+    flex: 0 0 688px;
+    border-radius: 12px;
+  }
 }
 
 /* адаптив: коли вже не влазить 1240 */

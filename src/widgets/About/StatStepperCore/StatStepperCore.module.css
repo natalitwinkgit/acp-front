@@ -1,5 +1,6 @@
 .section {
   width: 100%;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +21,7 @@
 
 .container {
   width: 100%;
-  max-width: 1440px;
+  max-width: 1920px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -31,7 +32,9 @@
 
 /* Фонова синя плашка на 1440, контент строго 1239 як у Figma */
 .statsBar {
-  width: 100%;  background: #4c6381;
+  width: 100%;
+  align-self: stretch;
+  background: #4c6381;
 
   display: flex;
   justify-content: center;
@@ -42,8 +45,10 @@
 }
 
 .statsInner {
-  width: 1239px; /* 397*3 + 24*2 = 1239 */
+  width: min(1239px, 100%); /* 397*3 + 24*2 = 1239 */
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 24px;
   box-sizing: border-box;
 }
@@ -114,7 +119,8 @@
 
 @media (min-width: 1920px) {
   .section {
-    width: 1920px;
+    width: 100%;
+    max-width: none;
     gap: 32px;
     opacity: 1;
     transform: rotate(0deg);
@@ -122,12 +128,24 @@
 
   .container {
     width: 100%;
-    max-width: 1920px;
+    max-width: none;
     gap: 32px;
   }
 
+  .statsBar {
+    width: 100vw;
+    max-width: none;
+    height: 197px;
+    padding: 24px max(256px, calc((100vw - 1408px) / 2));
+    gap: 24px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    align-self: center;
+  }
+
   .statsInner {
-    width: 1408px;
+    width: 100%;
+    max-width: 1408px;
     gap: 24px;
   }
 
@@ -185,8 +203,19 @@
 /* твої степпери лишив як є */
 .stepperViewport {
   position: relative;
-  width: 156px;
   overflow: hidden;
+}
+
+.stepperViewportYears {
+  width: 156px;
+}
+
+.stepperViewportPassengers {
+  width: 220px;
+}
+
+.stepperViewportKm {
+  width: 220px;
 }
 
 .stepperTrack {
@@ -199,6 +228,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  white-space: nowrap;
 
   font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   font-weight: 800;

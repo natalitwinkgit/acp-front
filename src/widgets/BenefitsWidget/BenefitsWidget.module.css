@@ -22,6 +22,16 @@
   gap: 24px;
 }
 
+@media (min-width: 1920px) {
+  .inner {
+    width: 100%;
+    max-width: none;
+    height: 197px;
+    padding: 24px max(256px, calc((100vw - 1408px) / 2));
+    gap: 24px;
+  }
+}
+
 
 .card {
   width: 397px;

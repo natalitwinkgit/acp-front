@@ -45,28 +45,48 @@ export default function MiniCalendar({
 
   const [cursor, setCursor] = useState<Date>(() => value ?? new Date());
 
-  const title = useMemo(() => {
-    return `${locMonths[cursor.getMonth()]} ${cursor.getFullYear()}`;
-  }, [cursor, locMonths]);
+  const monthTitle = useMemo(() => locMonths[cursor.getMonth()], [cursor, locMonths]);
+  const yearTitle = useMemo(() => String(cursor.getFullYear()), [cursor]);
 
   const days = useMemo(() => {
-    const s = startOfMonth(cursor);
-    const e = endOfMonth(cursor);
+    const start = startOfMonth(cursor);
+    const end = endOfMonth(cursor);
 
-    const padStart = mondayIndex(s.getDay());
-    const total = padStart + e.getDate();
+    const padStart = mondayIndex(start.getDay());
+    const daysInCurrentMonth = end.getDate();
+    const prevMonthEnd = endOfMonth(new Date(cursor.getFullYear(), cursor.getMonth() - 1, 1));
 
-    const cells: Array<{ date: Date | null; label: number | null }> = [];
+    const cells: Array<{
+      date: Date;
+      label: number;
+      inCurrentMonth: boolean;
+    }> = [];
 
-    for (let i = 0; i < padStart; i++) cells.push({ date: null, label: null });
-
-    for (let d = 1; d <= e.getDate(); d++) {
-      cells.push({ date: new Date(cursor.getFullYear(), cursor.getMonth(), d), label: d });
+    for (let i = padStart; i > 0; i--) {
+      const day = prevMonthEnd.getDate() - i + 1;
+      cells.push({
+        date: new Date(cursor.getFullYear(), cursor.getMonth() - 1, day),
+        label: day,
+        inCurrentMonth: false,
+      });
     }
 
-    // pad to full weeks
-    const padEnd = (7 - (total % 7)) % 7;
-    for (let i = 0; i < padEnd; i++) cells.push({ date: null, label: null });
+    for (let day = 1; day <= daysInCurrentMonth; day++) {
+      cells.push({
+        date: new Date(cursor.getFullYear(), cursor.getMonth(), day),
+        label: day,
+        inCurrentMonth: true,
+      });
+    }
+
+    const fillNext = 42 - cells.length;
+    for (let day = 1; day <= fillNext; day++) {
+      cells.push({
+        date: new Date(cursor.getFullYear(), cursor.getMonth() + 1, day),
+        label: day,
+        inCurrentMonth: false,
+      });
+    }
 
     return cells;
   }, [cursor]);
@@ -90,7 +110,10 @@ export default function MiniCalendar({
           ‹
         </button>
 
-        <div className={styles.title}>{title}</div>
+        <div className={styles.title}>
+          <span className={styles.titlePart}>{monthTitle}</span>
+          <span className={styles.titlePart}>{yearTitle}</span>
+        </div>
 
         <button
           type="button"
@@ -116,19 +139,21 @@ export default function MiniCalendar({
 
       <div className={styles.grid}>
         {days.map((cell, idx) => {
-          if (!cell.date) {
-            return <div key={idx} className={styles.cellEmpty} />;
-          }
-
           const isSelected = selected ? isSameDay(cell.date, selected) : false;
+          const isWeekend = idx % 7 === 5 || idx % 7 === 6;
 
           return (
             <button
               key={idx}
               type="button"
-              className={`${styles.cell} ${isSelected ? styles.selected : ""}`}
+              className={[
+                styles.cell,
+                !cell.inCurrentMonth ? styles.cellMuted : "",
+                isWeekend ? styles.cellWeekend : "",
+                isSelected ? styles.selected : "",
+              ].join(" ")}
               onClick={() => {
-                onChange(cell.date!);
+                onChange(cell.date);
                 onClose();
               }}
             >

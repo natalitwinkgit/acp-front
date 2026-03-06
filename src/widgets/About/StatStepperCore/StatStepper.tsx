@@ -112,10 +112,17 @@ export default function StatStepper({ metricKey, stat, startOnView = true }: Sta
 
   const currentLabel = labels[index] ?? "";
 
+  const viewportClassName =
+    metricKey === "years"
+      ? styles.stepperViewportYears
+      : metricKey === "passengers"
+      ? styles.stepperViewportPassengers
+      : styles.stepperViewportKm;
+
   return (
     <div
       ref={rootRef}
-      className={styles.stepperViewport}
+      className={`${styles.stepperViewport} ${viewportClassName}`}
       aria-label={currentLabel}
       style={{ height: `${STEPPER_ROW_HEIGHT}px` }}
     >

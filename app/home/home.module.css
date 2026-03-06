@@ -36,6 +36,18 @@
   box-sizing: border-box;
 }
 
+@media (min-width: 1920px) {
+  .mainScreenBlock {
+    width: 1920px;
+    height: 958px;
+  }
+
+  .title {
+    width: 1920px;
+    min-height: 38px;
+  }
+}
+
 .homeSection {
   width: 100%;
   display: flex;

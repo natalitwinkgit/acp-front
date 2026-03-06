@@ -1,4 +1,6 @@
 .card {
+  --booking-btn-width: 448px;
+
   box-sizing: border-box;
   width: 100%;
   max-width: 608px;
@@ -7,6 +9,7 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 40px 80px;
   gap: 24px;
@@ -14,21 +17,32 @@
   background: #F7F6EF;
   border: 1px solid #4c6381;
   border-radius: 12px;
-  flex: none;
+  flex: 1 1 0;
 }
 
 .cardTitle {
-  width: 100%;
+  width: min(488px, 100%);
   height: 30px;
   font-family: Roboto, system-ui, -apple-system, sans-serif;
   font-weight: 400;
   font-size: 24px;
   line-height: 124%;
+  letter-spacing: 0;
   text-align: center;
-  color: #40536c;
+  color: var(--Blue-900, #1b242e);
 }
 
 .form {
+  width: 100%;
+  max-width: 488px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.inputBlock {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -115,6 +129,9 @@
 }
 
 .dateValue {
+  margin: 0;
+  min-width: 37px;
+  height: 23px;
   font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -222,45 +239,42 @@
 }
 
 .calendarIcon {
-  width: 44px;
-  height: 44px;
-  padding: 6px;
-  gap: 10px;
-  border-radius: 24px;
-  transition: background-color 0.2s ease;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  gap: 0;
+  border-radius: 0;
+}
+
+.calendarIcon img {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .calendarIconActive {
-  background: rgba(76, 99, 129, 0.18);
+  background: transparent;
 }
 
 
 
-.btnSecondary {
-  width: 100%;
+.primaryBtnWrap {
+  width: min(var(--booking-btn-width), 100%);
   height: 46px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 12px 24px;
-  gap: 10px;
-  
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  
-  
-  background: linear-gradient(180deg, #cdd3dc 0%, #a2aebd 100%);
-  
-  font-family: Roboto, system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 144%;
-  color: #283343;
+  align-self: stretch;
 }
 
-.btnSecondary:hover {
-  opacity: 0.9;
+.primaryBtnWrap > :global(button) {
+  width: 100%;
+  height: 46px;
+  padding: 12px 24px;
+  gap: 10px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #4c6381 0%, #283343 100%);
+  color: #fffefb;
+  box-shadow: none;
 }
 
 
@@ -274,12 +288,53 @@
   box-shadow: 0 0 0 2px rgba(76, 99, 129, 0.18);
 }
 
+@media (min-width: 1920px) {
+  .card {
+    --booking-btn-width: 488px;
+
+    width: 688px;
+    max-width: 688px;
+    height: 604px;
+    padding: 40px 100px;
+    gap: 48px;
+    border-radius: 12px;
+    flex: 0 0 688px;
+    align-self: stretch;
+    flex-grow: 1;
+  }
+
+  .cardTitle {
+    width: 488px;
+    color: #1b242e;
+  }
+
+  .form {
+    width: 488px;
+    max-width: 488px;
+  }
+
+  .inputBlock {
+    width: 488px;
+    height: 282px;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .primaryBtnWrap {
+    width: 488px;
+    min-width: 488px;
+  }
+}
+
 @media (max-width: 768px) {
   .card {
+    --booking-btn-width: 384px;
+
     width: min(424px, 100%);
     height: 438px;
     padding: 20px;
     gap: 16px;
+    justify-content: flex-start;
     background: rgba(247, 246, 239, 0.5);
     border: 0;
     border-radius: 12px;
@@ -296,6 +351,11 @@
 
   .form {
     width: 100%;
+    max-width: 100%;
+  }
+
+  .inputBlock {
+    width: 100%;
     align-items: center;
     gap: 16px;
   }
@@ -303,7 +363,7 @@
   .control,
   .dateWrap,
   .controlWithIconBtn,
-  .btnSecondary {
+  .primaryBtnWrap {
     width: 100%;
   }
 
@@ -314,5 +374,15 @@
   .controlHalf,
   .controlWithIconHalf {
     width: calc((100% - 16px) / 2);
+  }
+}
+
+@media (max-width: 393px) {
+  .card {
+    --booking-btn-width: 290px;
+  }
+
+  .primaryBtnWrap {
+    width: min(var(--booking-btn-width), 100%);
   }
 }
