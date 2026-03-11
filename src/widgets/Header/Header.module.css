@@ -38,15 +38,25 @@
 .logoWrap {
   display: flex;
   align-items: center;
+  gap: 8px;
   height: 50px;
+  width: 193px;
   flex: 0 0 auto;
   text-decoration: none;
 }
 
 .logo {
-  width: 191.87px;
+  width: 94px;
   height: 50px;
   display: block;
+  flex-shrink: 0;
+}
+
+.logoText {
+  width: 91px;
+  height: 34px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .menu {
@@ -220,7 +230,7 @@
 
   .logoWrap {
     margin: 0 auto;
-    width: 192px;
+    width: 193px;
     height: 50px;
     flex: none;
     order: 0;
@@ -228,8 +238,13 @@
   }
 
   .logo {
-    width: 192px;
+    width: 94px;
     height: 50px;
+  }
+
+  .logoText {
+    width: 91px;
+    height: 34px;
   }
 
   .menu {

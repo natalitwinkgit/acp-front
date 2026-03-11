@@ -146,13 +146,14 @@
     }
   },
   "footer": {
-    "ariaLabel": "Контакти",
-    "workTime": "Працюємо з 5:30 до 19:30",
-    "addressLine1": "вул. Митницька, 7/2",
-    "addressLine2": "(пл. Дружба Народів)",
+    "ariaLabel": "Contacts",
+    "workTime": "Open from 5:00 to 19:30",
+    "addressLine1": "Mytnytska St, 7/2",
+    "addressLine2": "(Druzhba Narodiv Sq.)",
     "email": "Email",
-    "mapTitle": "Карта: вул. Митницька, 7, Черкаси",
-    "copy": "© 2026 Автолюкс Черкаси-Плюс. Всі права захищені."
+    "instagram": "Instagram",
+    "mapTitle": "Map: Mytnytska St, 7, Cherkasy",
+    "copy": "© 2026 Autolux Cherkasy-Plus. All rights reserved."
   }
   
 }

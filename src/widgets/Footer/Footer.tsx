@@ -22,7 +22,7 @@ export default function Footer() {
       <div className={styles.container}>
         <div className={styles.contacts}>
           {/* Work time */}
-          <div className={styles.contactItem}>
+          <div className={`${styles.contactItem} ${styles.timeItem}`}>
             <img
               className={styles.contactIcon}
               src="/icons/Footer/clock.svg"
@@ -36,28 +36,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Phones */}
-          <div className={styles.contactItem}>
-            <img
-              className={styles.contactIcon}
-              src="/icons/Footer/phone.svg"
-              alt=""
-              aria-hidden="true"
-              width={24}
-              height={24}
-            />
-            <div className={styles.contactTextCol}>
-              <a className={styles.contactLink} href="tel:+380674651016">
-                +38067 465 10 16
-              </a>
-              <a className={styles.contactLink} href="tel:+380966062200">
-                +38096 606 22 00
-              </a>
-            </div>
-          </div>
-
           {/* Address */}
-          <div className={styles.contactItem}>
+          <div className={`${styles.contactItem} ${styles.addressItem}`}>
             <img
               className={styles.contactIcon}
               src="/icons/Footer/map-point.svg"
@@ -74,19 +54,47 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Email */}
-          <div className={styles.contactItem}>
+          {/* Phones */}
+          <div className={`${styles.contactItem} ${styles.phoneItem}`}>
             <img
               className={styles.contactIcon}
-              src="/icons/Footer/email.svg"
+              src="/icons/Footer/phone.svg"
               alt=""
               aria-hidden="true"
               width={24}
               height={24}
             />
             <div className={styles.contactTextCol}>
-              <a className={styles.contactLink} href="mailto:info@autolux.ck.ua">
-                {t("footer.email")}
+              <a className={styles.contactLink} href="tel:+380974802428">
+                +38097 480 24 28
+              </a>
+              <a className={styles.contactLink} href="tel:+380939660940">
+                +38093 966 09 40
+              </a>
+              <a className={styles.contactLink} href="tel:+380990782021">
+                +38099 078 20 21
+              </a>
+            </div>
+          </div>
+
+          {/* Instagram */}
+          <div className={`${styles.contactItem} ${styles.instagramItem}`}>
+            <img
+              className={styles.contactIcon}
+              src="/icons/Footer/instagram.svg"
+              alt=""
+              aria-hidden="true"
+              width={24}
+              height={24}
+            />
+            <div className={styles.contactTextCol}>
+              <a
+                className={`${styles.contactLink} ${styles.instagramLink}`}
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("footer.instagram")}
               </a>
             </div>
           </div>

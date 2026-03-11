@@ -133,6 +133,7 @@ export default function Header() {
           aria-label={t("aria.home")}
         >
           <img className={styles.logo} src="/logo-sprinter.svg" alt={t("header.logoAlt")} />
+          <img className={styles.logoText} src="/Text.svg" alt="" aria-hidden="true" />
         </a>
 
         <nav className={styles.menu} aria-label={t("header.menuAria")}>

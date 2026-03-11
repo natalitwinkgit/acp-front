@@ -1,53 +1,63 @@
-/* Footer.module.css */
 .footer {
   width: 100%;
-  max-width: 1440px;
-  height: 657px;
-  margin: 0 auto;
+  min-height: 657px;
+  padding: 16px 260px;
+  box-sizing: border-box;
   background: #4c6381;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 16px;
-  padding: 16px 100px;
-  box-sizing: border-box;
 }
 
 .container {
-  width: 1240px;
-  height: 625px;
-  padding: 0;
-  box-sizing: border-box;
-
+  width: min(1400px, 100%);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
+  gap: 24px;
 }
 
 .contacts {
-  width: 1240px;
-  height: 90px;
+  width: 100%;
+  min-height: 117px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
-  padding: 0;
-  box-sizing: border-box;
   border-bottom: 1px solid #dce2e8;
 }
 
 .contactItem {
   width: 292px;
-  height: 90px;
+  min-height: 117px;
+  padding: 20px;
+  box-sizing: border-box;
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
-  padding: 20px;
-  box-sizing: border-box;
+}
+
+.timeItem {
+  order: 0;
+}
+
+.addressItem {
+  order: 1;
+}
+
+.phoneItem {
+  order: 2;
+}
+
+.instagramItem {
+  order: 3;
 }
 
 .contactIcon {
@@ -60,14 +70,15 @@
 .contactTextCol {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   align-items: flex-start;
+  gap: 4px;
 }
 
 .contactText,
 .contactLink,
 .contactTextMuted {
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto), sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
@@ -75,108 +86,123 @@
   text-decoration: none;
 }
 
-/* прибирає "риски" від дефолтного фокуса/обводок */
-.contactLink,
-.contactLink:focus,
-.contactLink:active {
-  outline: none;
-  box-shadow: none;
-}
-
-/* доступний фокус тільки з клавіатури */
-.contactLink:focus-visible {
-  outline: 2px solid rgba(255, 254, 251, 0.75);
-  outline-offset: 2px;
-  border-radius: 6px;
-}
-
-/* якщо десь підмішались псевдоелементи */
-.contactLink::before,
-.contactLink::after {
-  content: none !important;
-}
-
-.contactTextMuted {
-  opacity: 0.9;
-}
-
-.contactLink:hover {
+.instagramLink {
   text-decoration: underline;
 }
 
+.contactTextMuted {
+  opacity: 0.95;
+}
+
+.contactLink:focus-visible {
+  outline: 2px solid rgba(255, 254, 251, 0.75);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .mapWrap {
-  width: 1240px;
+  width: 100%;
   height: 450px;
   border-radius: 12px;
   overflow: hidden;
 }
 
 .map {
-  width: 1240px;
-  height: 450px;
+  width: 100%;
+  height: 100%;
   border: 0;
   display: block;
-  border-radius: 12px;
 }
 
 .copy {
-  width: 100%;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  width: 302px;
+  font-family: var(--font-roboto), sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
-  letter-spacing: 0;
   color: #fffefb;
   text-align: center;
-  vertical-align: middle;
-  padding: 0 0 20px 0;
-  box-sizing: border-box;
+  align-self: center;
 }
 
-/* щоб не було горизонтального скролу на менших екранах */
-@media (max-width: 1280px) {
+@media (max-width: 1919px) {
   .footer {
-    max-width: none;
-    height: auto;
-    padding: 16px 24px;
-  }
-
-  .container,
-  .contacts,
-  .mapWrap,
-  .map {
-    width: 100%;
-    max-width: 1240px;
+    padding: 16px 104px;
   }
 
   .container {
-    height: auto;
-    padding: 0;
+    width: min(1232px, 100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    min-height: 680px;
+    padding: 16px 28px;
+  }
+
+  .container {
+    width: min(712px, 100%);
+  }
+
+  .contacts {
+    min-height: 234px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    row-gap: 0;
+  }
+
+  .timeItem {
+    order: 0;
+  }
+
+  .phoneItem {
+    order: 1;
+  }
+
+  .addressItem {
+    order: 2;
+  }
+
+  .instagramItem {
+    order: 3;
+  }
+
+  .mapWrap {
+    height: 356px;
   }
 }
 
 @media (max-width: 640px) {
-  .container,
-  .contacts,
-  .contactItem,
-  .mapWrap,
-  .map {
+  .footer {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .container {
     width: 100%;
   }
 
   .contacts {
+    min-height: auto;
     flex-direction: column;
-    height: auto;
-    gap: 16px;
+    flex-wrap: nowrap;
+    gap: 0;
   }
 
   .contactItem {
     width: 100%;
-    height: auto;
+    min-height: auto;
+    padding: 16px 0;
     justify-content: flex-start;
   }
 
-  .map {
-    height: 320px;
+  .mapWrap {
+    height: 260px;
+  }
+
+  .copy {
+    width: 100%;
   }
 }
