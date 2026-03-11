@@ -38,7 +38,7 @@
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  background: #e5e9ef;
+  background: var(--color-surface-soft, #F4F7F7);
 }
 
 .cardLarge {
@@ -116,7 +116,7 @@
 
   max-width: calc(100% - 24px);
   border-radius: 8px;
-  background: rgba(40, 51, 67, 0.5);
+  background: var(--color-brand-overlay, #22607899);
   backdrop-filter: blur(1px);
 
   font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
@@ -124,7 +124,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 144%;
-  color: #fffefb;
+  color: var(--color-white, #FFFFFF);
   text-align: center;
 
   white-space: nowrap;
@@ -135,8 +135,8 @@
 }
 
 .card:hover .badge {
-  background: rgba(255, 254, 251, 0.5);
-  color: #1b242e;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--color-text-strong, #11313D);
 }
 
 @media (max-width: 1300px) {

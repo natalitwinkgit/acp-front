@@ -23,7 +23,7 @@
   font-size: 28px;
   line-height: 124%;
   text-align: center;
-  color: #40536c;
+  color: var(--color-brand, #226078);
 }
 
 /* ✅ Figma-like: 3 columns, 2 rows, gap 24, centered inside 1440 */
@@ -69,24 +69,24 @@
   gap: 16px;
   box-sizing: border-box;
 
-  background: #f7f6ef;
-  box-shadow: 0px 4px 4px #bfc7d2;
+  background: var(--color-surface-soft, #F4F7F7);
+  box-shadow: 0px 4px 4px rgba(123, 152, 163, 0.7);
   border-radius: 12px; /* Radius/Radius */
 }
 
 .card:hover,
 .card:focus-visible {
-  background: var(--light-bg, #f7f6ef);
+  background: var(--light-bg, #F4F7F7);
   box-shadow:
-    4px 0px 4px 0px var(--Blue200, #bfc7d2),
-    0px 4px 4px 0px var(--Blue200, #bfc7d2);
+    4px 0px 4px 0px rgba(123, 152, 163, 0.7),
+    0px 4px 4px 0px rgba(123, 152, 163, 0.7);
 }
 
 .iconWrap {
   width: 60px;
   height: 60px;
   border-radius: 999px;
-  background: #cdd3dc;
+  background: var(--color-surface-accent, #C9E4E7);
 
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
-  color: #4c6381;
+  color: var(--color-brand, #226078);
   text-align: left;
 }
 
@@ -135,7 +135,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #1b242e;
+  color: var(--color-text-strong, #11313D);
   text-align: left;
 }
 

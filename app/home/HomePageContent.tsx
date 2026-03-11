@@ -36,13 +36,13 @@ export default function HomePageContent() {
     <main className={styles.page}>
       <div className={styles.container}>
         <div className={styles.content}>
-          {isDesktop && (
-            <div className={styles.pageLanguage}>
-              <LanguageSwitcher />
-            </div>
-          )}
-
           <div className={styles.mainScreenBlock}>
+            {isDesktop && (
+              <div className={styles.pageLanguage}>
+                <LanguageSwitcher />
+              </div>
+            )}
+
             <section id="home" className={styles.homeSection}>
               <h1 className={styles.title}>{t("home.title")}</h1>
               <BookingHero />

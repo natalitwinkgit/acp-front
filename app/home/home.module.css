@@ -1,7 +1,8 @@
 .page {
   width: 100%;
-  background: #f7f6f2;
+  background: var(--bg, #FCFEFE);
   padding-top: 24px;
+  padding-bottom: 30px;
 }
 
 .container {
@@ -18,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 16px;
+  gap: 80px;
 }
 
 .mainScreenBlock {
@@ -67,7 +68,7 @@
   line-height: 120%;
   letter-spacing: 0;
   text-align: center;
-  color: var(--Blue-600, #40536c);
+  color: var(--color-brand, #226078);
 }
 
 @media (min-width: 769px) {
@@ -79,6 +80,7 @@
 @media (max-width: 768px) {
   .page {
     padding-top: 0;
+    padding-bottom: 40px;
   }
 
   .container {
@@ -112,6 +114,6 @@
     line-height: 120%;
     letter-spacing: 0;
     text-align: center;
-    color: var(--Blue-600, #40536c);
+    color: var(--color-brand, #226078);
   }
 }

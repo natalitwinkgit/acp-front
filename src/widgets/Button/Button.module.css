@@ -32,13 +32,14 @@
 }
 
 .primary {
-  background: linear-gradient(180deg, #4C6381 0%, #283343 100%);
-  color: #FFFEFB;
+  background: var(--color-accent, #EEBB3A);
+  color: var(--color-text-strong, #11313D);
 }
 
 .secondary {
-  background: linear-gradient(180deg, #CDD3DC 0%, #A2AEBD 100%);
-  color: #283343;
+  background: var(--color-surface-soft, #F4F7F7);
+  color: var(--color-text-strong, #11313D);
+  border: 1px solid var(--color-border-muted, #7B98A3);
 
   
   box-shadow:

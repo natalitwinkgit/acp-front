@@ -10,5 +10,5 @@
   font-size: 28px;
   line-height: 124%;
   letter-spacing: 0;
-  color: #40536c;
+  color: var(--color-brand, #226078);
 }

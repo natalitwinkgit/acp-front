@@ -4,6 +4,33 @@
   /* Global responsive states: 1920 / 1440 / 768 / 393 */
   --layout-max-width: 1920px;
   --layout-padding-x: 256px;
+  --color-brand: #226078;
+  --color-page-bg: #FCFEFE;
+  --color-text-strong: #11313D;
+  --color-accent: #EEBB3A;
+  --DarkSlateGray: #226078;
+  --color-brand-overlay: #22607899;
+  --color-surface-accent: #C9E4E7;
+  --color-surface-soft: #F4F7F7;
+  --color-border-muted: #7B98A3;
+  --color-accent-strong: #F0B523;
+  --color-danger: #C8102E;
+  --color-ua-blue: #005BBB;
+  --color-navy: #012169;
+  --color-ua-yellow: #FFD500;
+  --color-white: #FFFFFF;
+
+  /* Compatibility aliases for existing CSS */
+  --bg: var(--color-page-bg);
+  --Fill: var(--color-page-bg);
+  --LightSlateGray: var(--color-border-muted);
+  --Bt-GoldenRod: var(--color-accent);
+  --Blue-900: var(--color-text-strong);
+  --Blue-600: var(--color-brand);
+  --Blue-500: var(--color-brand);
+  --Blue200: var(--color-surface-accent);
+  --Light-blue: var(--color-surface-accent);
+  --light-bg: var(--color-surface-soft);
 }
 
 @media (max-width: 1919px) {
@@ -34,7 +61,7 @@ html, body {
   font-family: var(--font-roboto), sans-serif;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  background: #FCFCFF;
+  background: var(--bg, #FCFEFE);
 }
 
 /* ВАЖЛИВО: clip краще ніж hidden (не “ріже” тіні як hidden інколи) */

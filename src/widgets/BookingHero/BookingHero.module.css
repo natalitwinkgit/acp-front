@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  background: #fcfbf4;
+  background: var(--bg, #FCFEFE);
   padding-top: 20px; /* Figma: padding-top 20 */
   padding-bottom: 0;
 }

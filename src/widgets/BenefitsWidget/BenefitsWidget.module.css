@@ -3,7 +3,7 @@
   width: 100vw;
   margin-left: calc(50% - 50vw); 
   margin-right: calc(50% - 50vw);
-  background: #226078;
+  background: var(--color-brand, #226078);
 }
 
 
@@ -68,7 +68,7 @@
   font-size: 18px;
   line-height: 132%;
 
-  color: #fffefb;
+  color: var(--color-white, #FFFFFF);
 }
 
 
