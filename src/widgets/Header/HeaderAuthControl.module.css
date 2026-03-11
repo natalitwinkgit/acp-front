@@ -8,30 +8,33 @@
 .loginBtn {
   width: 65px;
   height: 40px;
+  opacity: 1;
   padding: 8px 16px;
   gap: 10px;
-  border: 0;
+  border: 2px solid var(--Bt-GoldenRod, #EEBB3A);
   border-radius: 12px;
-  background: linear-gradient(180deg, #cdd3dc 0%, #a2aebd 100%);
+  background: var(--Fill, #FCFBF4);
+  box-shadow: none;
 
   font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
-  color: #283343;
+  color: #1B242E;
   text-align: center;
+  white-space: nowrap;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: none;
 }
 
 .loginBtn:hover,
 .loginBtn:focus-visible {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .avatarBtn {

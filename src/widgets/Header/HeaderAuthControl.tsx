@@ -33,7 +33,12 @@ export default function HeaderAuthControl({
           <img className={styles.avatarIcon} src="/icons/avatar.svg" alt="" />
         </button>
       ) : (
-        <button className={styles.loginBtn} type="button" onClick={onLoginClick}>
+        <button
+          className={styles.loginBtn}
+          type="button"
+          aria-haspopup="dialog"
+          onClick={onLoginClick}
+        >
           {loginLabel}
         </button>
       )}

@@ -88,11 +88,16 @@ export default function Header() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  useEffect(() => {
+    router.prefetch("/login");
+  }, [router]);
+
   const openLoginModal = () => {
     const search = searchParams?.toString();
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
     const background = search ? `${pathname}?${search}` : pathname;
-    sessionStorage.setItem("auth:background", background);
-    router.push("/login");
+    sessionStorage.setItem("auth:background", `${background}${hash}`);
+    router.push("/login", { scroll: false });
   };
 
   const handleAvatarClick = () => {

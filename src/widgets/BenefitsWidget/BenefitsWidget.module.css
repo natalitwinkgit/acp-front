@@ -3,7 +3,7 @@
   width: 100vw;
   margin-left: calc(50% - 50vw); 
   margin-right: calc(50% - 50vw);
-  background: #4c6381;
+  background: #226078;
 }
 
 
@@ -45,7 +45,7 @@
   padding: 20px 32px;
   gap: 12px;
 
-  background: #4c6381;
+ 
   box-sizing: border-box;
 }
 
