@@ -59,7 +59,39 @@
   },
     "popularRoutes": {
     "aria": "Популярні напрямки",
-    "title": "Популярні напрямки"
+    "title": "Популярні напрямки",
+    "openRoute": "Відкрити сторінку рейсу"
+  },
+  "ticketBooking": {
+    "breadcrumbsAria": "Хлібні крихти сторінки бронювання",
+    "breadcrumbs": {
+      "home": "Головна",
+      "routes": "Напрямки",
+      "current": "Бронювання"
+    },
+    "routePrefix": "Рейс",
+    "form": {
+      "title": "Оформлення квитка",
+      "nameLabel": "Прізвище та ім'я",
+      "namePlaceholder": "Введіть ім'я та прізвище",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Введіть email",
+      "phoneLabel": "Номер телефону",
+      "phonePlaceholder": "+380",
+      "seatsLabel": "Кількість місць",
+      "note": "Заповніть дані пасажира, щоб перейти до бронювання або оплати.",
+      "pay": "Оплатити",
+      "reserve": "Забронювати"
+    },
+    "routeCard": {
+      "title": "Підсумок",
+      "passengers": "Пасажири",
+      "total": "До сплати"
+    },
+    "controls": {
+      "decreaseSeats": "Зменшити кількість місць",
+      "increaseSeats": "Збільшити кількість місць"
+    }
   },
    "services": {
     "ariaLabel": "Послуги",

@@ -1,0 +1,97 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  min-height: 56px;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.label {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 8px;
+  gap: 4px;
+  min-height: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.link,
+.current {
+  display: inline-flex;
+  align-items: center;
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  text-align: right;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.link {
+  color: #7B98A3;
+}
+
+.link:hover {
+  color: #11313D;
+}
+
+.current {
+  color: #11313D;
+}
+
+.arrow {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+.arrow::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.arrowMuted {
+  color: #7B98A3;
+}
+
+.arrowCurrent {
+  color: #11313D;
+}
+
+.row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .row {
+    min-height: 48px;
+  }
+
+  .label {
+    min-height: 48px;
+    height: 48px;
+    padding: 12px 8px;
+  }
+
+  .link,
+  .current {
+    font-size: 15px;
+  }
+}

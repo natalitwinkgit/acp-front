@@ -60,7 +60,39 @@
   },
    "popularRoutes": {
     "aria": "Popular routes",
-    "title": "Popular routes"
+    "title": "Popular routes",
+    "openRoute": "Open route page"
+  },
+  "ticketBooking": {
+    "breadcrumbsAria": "Booking page breadcrumbs",
+    "breadcrumbs": {
+      "home": "Home",
+      "routes": "Routes",
+      "current": "Booking"
+    },
+    "routePrefix": "Route",
+    "form": {
+      "title": "Ticket booking",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Enter your full name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter your email",
+      "phoneLabel": "Phone number",
+      "phonePlaceholder": "+380",
+      "seatsLabel": "Seats",
+      "note": "Fill in the passenger details to continue with booking or payment.",
+      "pay": "Pay now",
+      "reserve": "Reserve"
+    },
+    "routeCard": {
+      "title": "Summary",
+      "passengers": "Passengers",
+      "total": "Total"
+    },
+    "controls": {
+      "decreaseSeats": "Decrease seats",
+      "increaseSeats": "Increase seats"
+    }
   },
   "services": {
     "ariaLabel": "Services",

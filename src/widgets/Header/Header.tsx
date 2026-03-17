@@ -11,7 +11,7 @@ const menu = [
   { key: "menu.home", href: "#home" },
   { key: "menu.routes", href: "#routes" },
   { key: "menu.about", href: "#about" },
-  { key: "menu.cafe", href: "#services" },
+  { key: "menu.cafe", href: "/cafe" },
   { key: "menu.contacts", href: "#contacts" },
 ];
 
@@ -57,6 +57,7 @@ export default function Header() {
 
   const [activeMenuHref, setActiveMenuHref] = useState("#home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const currentMenuHref = pathname === "/cafe" ? "/cafe" : activeMenuHref;
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -70,10 +71,6 @@ export default function Header() {
     syncActiveFromHash();
     window.addEventListener("hashchange", syncActiveFromHash);
     return () => window.removeEventListener("hashchange", syncActiveFromHash);
-  }, [pathname]);
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -107,6 +104,11 @@ export default function Header() {
   const handleScroll = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+
+    if (!href.startsWith("#")) {
+      router.push(href);
+      return;
+    }
 
     if (pathname !== "/") {
       router.push(`/${href}`);
@@ -145,8 +147,8 @@ export default function Header() {
           {menu.map((item) => (
             <a
               key={item.key}
-              aria-current={activeMenuHref === item.href ? "page" : undefined}
-              className={`${styles.menuItem} ${activeMenuHref === item.href ? styles.menuItemActive : ""}`}
+              aria-current={currentMenuHref === item.href ? "page" : undefined}
+              className={`${styles.menuItem} ${currentMenuHref === item.href ? styles.menuItemActive : ""}`}
               href={item.href}
               onClick={(e) => {
                 setActiveMenuHref(item.href);
@@ -215,8 +217,8 @@ export default function Header() {
           {menu.map((item) => (
             <a
               key={`mobile-${item.key}`}
-              aria-current={activeMenuHref === item.href ? "page" : undefined}
-              className={`${styles.mobileMenuItem} ${activeMenuHref === item.href ? styles.mobileMenuItemActive : ""}`}
+              aria-current={currentMenuHref === item.href ? "page" : undefined}
+              className={`${styles.mobileMenuItem} ${currentMenuHref === item.href ? styles.mobileMenuItemActive : ""}`}
               href={item.href}
               onClick={(e) => {
                 setActiveMenuHref(item.href);

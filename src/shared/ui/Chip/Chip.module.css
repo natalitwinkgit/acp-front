@@ -1,0 +1,26 @@
+.chip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--chip-padding-y, 4px) var(--chip-padding-x, 16px);
+  min-height: var(--chip-min-height, 31px);
+  max-width: 100%;
+  border-radius: var(--chip-radius, 8px);
+  background: var(--chip-bg, var(--color-brand-overlay, #22607899));
+  backdrop-filter: var(--chip-backdrop-filter, blur(1px));
+  color: var(--chip-color, var(--color-white, #FFFFFF));
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--chip-font-size, 14px);
+  line-height: var(--chip-line-height, 144%);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
