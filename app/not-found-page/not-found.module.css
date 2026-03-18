@@ -16,6 +16,7 @@
   --not-found-page-padding-bottom: 60px;
 
   width: 100%;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   padding:
@@ -27,6 +28,7 @@
 .card {
   width: min(100%, var(--not-found-card-max-width));
   min-height: var(--not-found-card-min-height);
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,12 +180,12 @@
   }
 }
 
-@media (max-width: 393px) {
+@media (max-width: 430px) {
   .page {
-    --not-found-card-max-width: 340px;
+    --not-found-card-max-width: calc(100vw - 32px);
     --not-found-card-min-height: 583px;
-    --not-found-stack-width: 300px;
-    --not-found-figure-size: 300px;
+    --not-found-stack-width: calc(100vw - 56px);
+    --not-found-figure-size: calc(100vw - 56px);
     --not-found-content-min-height: 179px;
     --not-found-description-size: 16px;
     --not-found-description-line-height: 144%;
@@ -192,22 +194,60 @@
     --not-found-stack-gap: 24px;
 
     width: 100%;
-    max-width: 393px;
     margin: 0 auto;
     padding:
       24px
-      max(16px, calc((100% - 340px) / 2))
+      16px
       24px;
+  }
+
+  .card {
+    padding: 40px 12px;
+  }
+
+  .stack {
+    width: 100%;
+  }
+
+  .content {
+    padding: 20px 0 0;
+  }
+}
+
+@media (max-width: 393px) {
+  .page {
+    max-width: 393px;
+    --not-found-card-max-width: 340px;
+    --not-found-stack-width: 300px;
+    --not-found-figure-size: 300px;
+  }
+}
+
+@media (max-width: 375px) {
+  .page {
+    --not-found-card-min-height: 560px;
+    --not-found-stack-width: calc(100vw - 52px);
+    --not-found-figure-size: calc(100vw - 52px);
+    --not-found-content-min-height: 168px;
+    --not-found-stack-gap: 20px;
+  }
+
+  .card {
+    padding: 32px 10px;
+  }
+
+  .content {
+    gap: 20px;
   }
 }
 
 @media (max-width: 360px) {
   .page {
     --not-found-card-padding-block: 32px;
-    --not-found-card-padding-inline: 16px;
+    --not-found-card-padding-inline: 10px;
     --not-found-card-min-height: 520px;
     --not-found-stack-width: 100%;
-    --not-found-figure-size: min(260px, calc(100vw - 64px));
+    --not-found-figure-size: calc(100vw - 52px);
     --not-found-content-min-height: auto;
     --not-found-content-gap: 20px;
     --not-found-content-padding-block: 0;
