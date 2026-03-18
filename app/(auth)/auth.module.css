@@ -17,6 +17,332 @@
   background: #fcfbf4;
 }
 
+.shellLogin {
+  position: relative;
+  width: 904px;
+  height: 540px;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fcfefe;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.shellRegister {
+  position: relative;
+  width: 904px;
+  height: 642px;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fcfefe;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+}
+
+.shellLogin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 96, 120, 0.7);
+  backdrop-filter: blur(2.5px);
+  border-radius: 12px;
+}
+
+.shellRegister::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(34, 96, 120, 0.7);
+  backdrop-filter: blur(2.5px);
+  border-radius: 12px;
+}
+
+.loginContent {
+  position: absolute;
+  top: 40px;
+  left: calc(50% - 824px / 2);
+  width: 824px;
+  height: 460px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  z-index: 1;
+}
+
+.registerContent {
+  position: absolute;
+  top: 40px;
+  left: calc(50% - 824px / 2);
+  width: 824px;
+  height: 562px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  z-index: 1;
+}
+
+.loginCard {
+  width: 400px;
+  height: 460px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f4f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 400px;
+}
+
+.loginTitle {
+  width: 360px;
+  min-height: 24px;
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 132%;
+  color: #226078;
+}
+
+.loginBlock {
+  width: 360px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 16px;
+}
+
+.loginBlock .field {
+  height: 70px;
+}
+
+.loginPasswordGroup {
+  width: 360px;
+  height: 102px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.loginBlock .label {
+  height: 22px;
+  color: #226078;
+}
+
+.loginBlock .input,
+.loginBlock .inputWithIcon {
+  height: 44px;
+  background: #f4f7f7;
+  border: 1px solid #7b98a3;
+}
+
+.loginBlock .rowBetween {
+  gap: 4px;
+}
+
+.loginBlock .socialRow {
+  gap: 24px;
+}
+
+.loginBlock .socialBtn {
+  border-color: #7b98a3;
+}
+
+.loginAside {
+  width: 400px;
+  height: 460px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 0 0 400px;
+}
+
+.registerAside {
+  width: 400px;
+  height: 562px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 150px;
+  flex: 0 0 400px;
+}
+
+.loginBrand {
+  width: 286px;
+  height: 142px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 17px;
+}
+
+.registerBrand {
+  width: 286px;
+  height: 142px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 17px;
+}
+
+.loginBrandDesc {
+  width: 254px;
+  min-height: 48px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 132%;
+  color: #ffffff;
+}
+
+.registerBrandDesc {
+  width: 254px;
+  height: 48px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 132%;
+  color: #ffffff;
+}
+
+.loginTextBlock {
+  width: 400px;
+  min-height: 99px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.registerTextBlock {
+  width: 400px;
+  height: 168px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.loginTextLine {
+  width: 400px;
+  height: 23px;
+  margin: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  color: #fcfefe;
+}
+
+.registerTextLine {
+  width: 400px;
+  height: 23px;
+  margin: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  color: #fffefb;
+}
+
+.registerTextLine:first-child {
+  height: 69px;
+}
+
+.registerTextLine:nth-of-type(2) {
+  height: 46px;
+}
+
+.registerTextLine:nth-of-type(3) {
+  height: 23px;
+}
+
+.registerCard {
+  width: 400px;
+  height: 562px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: #f4f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 400px;
+}
+
+.registerTitle {
+  width: 360px;
+  min-height: 24px;
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 132%;
+  color: #40536c;
+}
+
+.registerBlock {
+  width: 360px;
+  height: 498px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 12px;
+}
+
+.registerBlock .field {
+  height: 70px;
+}
+
+.registerBlock .label {
+  height: 22px;
+  color: #226078;
+}
+
+.registerBlock .input,
+.registerBlock .inputWithIcon {
+  height: 44px;
+  background: #f4f7f7;
+  border: 1px solid #7b98a3;
+}
+
+.registerBlock .passwordBlock {
+  gap: 2px;
+}
+
+.registerBlock .hint {
+  color: #4c6381;
+}
+
+.registerBlock .socialRowRegister {
+  gap: 24px;
+}
+
+.registerBlock .socialBtn {
+  border-color: #a2aebd;
+}
+
 
 .left {
   position: absolute;
@@ -236,9 +562,9 @@
 .checkboxUi {
   width: 24px;
   height: 24px;
-  border: 1px solid #4c6381;
+  border: 1px solid #7b98a3;
   border-radius: 6px;
-  background: transparent;
+  background: #fcfefe;
   display: grid;
   place-items: center;
   box-sizing: border-box;
@@ -272,36 +598,10 @@
   line-height: 150%;
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: #344358;
+  color: #226078;
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-}
-
-.checkbox {
-  width: 24px;
-  height: 24px;
-  border: 1px solid #4c6381;
-  border-radius: 6px;
-  accent-color: #4c6381;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-}
-
-.forgot {
-  width: 89px;
-  height: 18px;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 150%;
-  text-decoration: underline;
-  color: #344358;
-  display: flex;
-  align-items: center;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
 }
 
 
@@ -468,6 +768,9 @@
 
 
 .right {
+  --auth-overlay-bg: rgba(76, 99, 129, 0.7);
+  --auth-overlay-blur: blur(2.5px);
+
   position: absolute;
   width: 550px;
   height: 606px;
@@ -486,9 +789,14 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(76, 99, 129, 0.7);
-  backdrop-filter: blur(2.5px);
+  background: var(--auth-overlay-bg);
+  backdrop-filter: var(--auth-overlay-blur);
   pointer-events: none; 
+}
+
+.rightLogin {
+  --auth-overlay-bg: #226078b2;
+  --auth-overlay-blur: blur(5px);
 }
 
 
@@ -514,6 +822,16 @@
   width: 24px;
   height: 24px;
   display: block;
+}
+
+.closeLogin {
+  top: 12px;
+  right: 12px;
+}
+
+.closeRegister {
+  top: 12px;
+  right: 12px;
 }
 
 
@@ -724,5 +1042,156 @@
 
   .textLine {
     width: 100%;
+  }
+
+  .shellLogin {
+    width: 100%;
+    height: auto;
+    min-height: 540px;
+  }
+
+  .shellRegister {
+    width: 100%;
+    height: auto;
+    min-height: 642px;
+  }
+
+  .loginContent {
+    position: relative;
+    left: auto;
+    top: auto;
+    padding: 40px 20px 24px;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .registerContent {
+    position: relative;
+    left: auto;
+    top: auto;
+    padding: 40px 20px 24px;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .loginCard,
+  .loginAside {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    flex: none;
+  }
+
+  .registerCard,
+  .registerAside {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    flex: none;
+  }
+
+  .loginAside {
+    gap: 32px;
+  }
+
+  .registerAside {
+    gap: 32px;
+  }
+
+  .loginTextBlock,
+  .loginTextLine {
+    width: 100%;
+  }
+
+  .registerTextBlock,
+  .registerTextLine {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .shellLogin {
+    min-height: auto;
+  }
+
+  .shellRegister {
+    min-height: auto;
+  }
+
+  .loginContent {
+    padding: 52px 16px 20px;
+    gap: 16px;
+  }
+
+  .registerContent {
+    padding: 52px 16px 20px;
+    gap: 16px;
+  }
+
+  .loginCard {
+    padding: 20px 16px;
+  }
+
+  .registerCard {
+    padding: 12px 16px 20px;
+  }
+
+  .loginTitle,
+  .loginBlock,
+  .loginPasswordGroup,
+  .loginBlock .field,
+  .loginBlock .rowBetween,
+  .loginBlock .socialRow,
+  .loginBlock .buttonContainer,
+  .loginBlock .input,
+  .loginBlock .inputWithIcon {
+    width: 100%;
+  }
+
+  .registerTitle,
+  .registerBlock,
+  .registerBlock .field,
+  .registerBlock .passwordBlock,
+  .registerBlock .hint,
+  .registerBlock .socialRowRegister,
+  .registerBlock .buttonRegister,
+  .registerBlock .underLink,
+  .registerBlock .input,
+  .registerBlock .inputWithIcon {
+    width: 100%;
+  }
+
+  .loginBrand {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .loginBrandDesc {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .loginTextLine {
+    height: auto;
+  }
+
+  .registerBrand {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .registerBrandDesc {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .registerTextLine {
+    height: auto;
   }
 }

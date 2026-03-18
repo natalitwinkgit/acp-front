@@ -2,14 +2,24 @@
 
 import { useRouter } from "next/navigation";
 
-type Props = { className?: string; ariaLabel?: string };
+type Props = {
+  className?: string;
+  ariaLabel?: string;
+  onClose?: () => void;
+};
 
-export default function ModalCloseButton({ className, ariaLabel = "Close" }: Props) {
+export default function ModalCloseButton({ className, ariaLabel = "Close", onClose }: Props) {
   const router = useRouter();
 
-  const close = () => {
+  const fallbackClose = () => {
     const background = sessionStorage.getItem("auth:background");
+    const hasBackground = Boolean(background);
     sessionStorage.removeItem("auth:background");
+    if (hasBackground && window.history.length > 1) {
+      router.back();
+      return;
+    }
+
     router.replace(background || "/");
   };
 
@@ -21,7 +31,12 @@ export default function ModalCloseButton({ className, ariaLabel = "Close" }: Pro
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        close();
+        if (onClose) {
+          onClose();
+          return;
+        }
+
+        fallbackClose();
       }}
     >
       <img src="/icons/close-light.svg" alt="" />

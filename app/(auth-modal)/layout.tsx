@@ -20,7 +20,10 @@ export default function AuthModalLayout({ children }: { children: React.ReactNod
         if (e.target === e.currentTarget) close();
       }}
     >
-      <div className={styles.modalWrap}>
+      <div
+        className={styles.modalWrap}
+        onMouseDown={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>

@@ -10,7 +10,13 @@ export default function LoginModalRoute() {
 
   const close = useCallback(() => {
     const background = sessionStorage.getItem("auth:background");
+    const hasBackground = Boolean(background);
     sessionStorage.removeItem("auth:background");
+    if (hasBackground && window.history.length > 1) {
+      router.back();
+      return;
+    }
+
     router.replace(background || "/");
   }, [router]);
 
@@ -56,7 +62,7 @@ export default function LoginModalRoute() {
   return (
     <div 
       className={styles.overlay} 
-      onClick={(e) => {
+      onMouseDown={(e) => {
         if (e.target === e.currentTarget) {
           close();
         }
@@ -64,8 +70,11 @@ export default function LoginModalRoute() {
       role="dialog" 
       aria-modal="true"
     >
-      <div className={styles.wrap} onClick={(e) => e.stopPropagation()}>
-        <LoginPageContent />
+      <div
+        className={styles.wrap}
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        <LoginPageContent onClose={close} />
       </div>
     </div>
   );

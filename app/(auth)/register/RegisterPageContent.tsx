@@ -14,7 +14,11 @@ type RegisterFormData = {
   confirmPassword: string;
 };
 
-export default function RegisterPageContent() {
+type RegisterPageContentProps = {
+  onClose?: () => void;
+};
+
+export default function RegisterPageContent({ onClose }: RegisterPageContentProps) {
   const router = useRouter();
 
   const [showPass, setShowPass] = useState(false);
@@ -81,13 +85,41 @@ export default function RegisterPageContent() {
   };
 
   return (
-    <div className={styles.shell}>
-      {/* LEFT */}
-      <div className={styles.left}>
-        <div className={styles.formWrapRegister}>
-          <h1 className={styles.title}>Реєстрація</h1>
+    <div
+      className={styles.shellRegister}
+      style={{ backgroundImage: "url('/(auth)/register/register-bus.jpg')" }}
+    >
+      <ModalCloseButton
+        className={`${styles.close} ${styles.closeRegister}`}
+        ariaLabel="Close"
+        onClose={onClose}
+      />
 
-          <form className={styles.blockRegister} onSubmit={handleSubmit}>
+      <div className={styles.registerContent}>
+        <div className={styles.registerAside}>
+          <div className={styles.registerBrand}>
+            <img src="/icons/Text.svg" alt="АВТОЛЮКС" className={styles.brandLogo} />
+            <div className={styles.registerBrandDesc}>Подорожуйте безпечно і з комфотом</div>
+          </div>
+
+          <div className={styles.registerTextBlock}>
+            <p className={styles.registerTextLine}>
+              Гнучке керування квитками: Ви можете безкоштовно забронювати місце на потрібний
+              рейс або здійснити миттєву купівлю онлайн.
+            </p>
+            <p className={styles.registerTextLine}>
+              Актуальний час відправлення завжди доступний онлайн у пару кліків.
+            </p>
+            <p className={styles.registerTextLine}>
+              Зареєструйтесь і плануйте подорож за хвилину.
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.registerCard}>
+          <h1 className={styles.registerTitle}>Реєстрація</h1>
+
+          <form className={styles.registerBlock} onSubmit={handleSubmit}>
             {error && (
               <div style={{ color: "red", marginBottom: 10 }}>{error}</div>
             )}
@@ -177,7 +209,8 @@ export default function RegisterPageContent() {
               </div>
 
               <div className={styles.hint}>
-                Пароль повинен містити не менше 8 символів...
+                Пароль повинен містити не меньше 8 символів, включаючи великі літери, а також
+                цифри.
               </div>
             </div>
 
@@ -209,32 +242,6 @@ export default function RegisterPageContent() {
               У мене вже є акаунт
             </button>
           </form>
-        </div>
-      </div>
-
-      {/* RIGHT */}
-      <div
-        className={styles.right}
-        style={{ backgroundImage: "url('/(auth)/register/register-bus.jpg')" }}
-      >
-        <ModalCloseButton className={styles.close} ariaLabel="Close" />
-
-        <div className={styles.brandRegister}>
-          <img src="/icons/Text.svg" alt="АВТОЛЮКС" className={styles.brandLogo} />
-          <div className={styles.brandDesc}>Подорожуйте безпечно і з комфотом</div>
-        </div>
-
-        <div className={`${styles.textBlock} ${styles.textRegister}`}>
-          <p className={styles.textLineRegister}>
-            Гнучке керування квитками: Ви можете безкоштовно забронювати місце на потрібний
-            рейс або здійснити миттєву купівлю онлайн
-          </p>
-          <p className={styles.textLineRegister}>
-            Актуальний час відправлення завжди доступний онлайн у пару кліків
-          </p>
-          <p className={styles.textLineRegister}>
-            Зареєструйтесь і плануйте подорож за хвилину
-          </p>
         </div>
       </div>
     </div>

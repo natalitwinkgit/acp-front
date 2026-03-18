@@ -10,7 +10,13 @@ export default function RegisterModalRoute() {
 
   const close = useCallback(() => {
     const background = sessionStorage.getItem("auth:background");
+    const hasBackground = Boolean(background);
     sessionStorage.removeItem("auth:background");
+    if (hasBackground && window.history.length > 1) {
+      router.back();
+      return;
+    }
+
     router.replace(background || "/");
   }, [router]);
 
@@ -56,7 +62,7 @@ export default function RegisterModalRoute() {
   return (
     <div 
       className={styles.overlay} 
-      onClick={(e) => {
+      onMouseDown={(e) => {
         if (e.target === e.currentTarget) {
           close();
         }
@@ -64,8 +70,11 @@ export default function RegisterModalRoute() {
       role="dialog" 
       aria-modal="true"
     >
-      <div className={styles.wrap} onClick={(e) => e.stopPropagation()}>
-        <RegisterPageContent />
+      <div
+        className={styles.wrap}
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        <RegisterPageContent onClose={close} />
       </div>
     </div>
   );

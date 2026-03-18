@@ -19,11 +19,7 @@
   font-size: 16px;
   line-height: 144%;
   text-align: center;
-
-  
-  box-shadow:
-    0 8px 18px rgba(27, 36, 46, 0.18),     
-    inset 0 1px 0 rgba(255, 255, 255, 0.18); 
+  box-shadow: none;
 }
 
 .fullWidth {
@@ -39,19 +35,13 @@
 .secondary {
   background: var(--color-surface-soft, #F4F7F7);
   color: var(--color-text-strong, #11313D);
-  border: 1px solid var(--color-border-muted, #7B98A3);
-
-  
-  box-shadow:
-    0 6px 14px rgba(27, 36, 46, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  border: 2px solid var(--color-accent, #EEBB3A);
+  box-shadow: none;
 }
 
 .button:active {
   transform: translateY(1px);
-  box-shadow:
-    0 6px 14px rgba(27, 36, 46, 0.14),
-    inset 0 2px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
 }
 
 .text {
