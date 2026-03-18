@@ -67,7 +67,7 @@
     "breadcrumbs": {
       "home": "Головна",
       "routes": "Напрямки",
-      "current": "Бронювання"
+      "current": "Бронювання/Оплата"
     },
     "routePrefix": "Рейс",
     "form": {

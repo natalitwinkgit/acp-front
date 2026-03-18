@@ -68,7 +68,7 @@
     "breadcrumbs": {
       "home": "Home",
       "routes": "Routes",
-      "current": "Booking"
+      "current": "Booking/Payment"
     },
     "routePrefix": "Route",
     "form": {
