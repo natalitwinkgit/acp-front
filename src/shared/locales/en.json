@@ -177,6 +177,12 @@
       "four": "Our drivers stand out for strong technical knowledge, excellent understanding of Ukraine’s roads, and proven accident-free experience."
     }
   },
+  "notFound": {
+    "title": "404",
+    "description": "Something went wrong.\nRefresh the page or return to the home page",
+    "button": "Go home",
+    "imageAlt": "Illustration for the 404 page"
+  },
   "footer": {
     "ariaLabel": "Contacts",
     "workTime": "Open from 5:00 to 19:30",
