@@ -107,7 +107,7 @@
 .right {
   display: flex;
   align-items: center;
-  gap: 32px; /* макет */
+  gap: 40px;
   flex: 0 0 auto;
   min-width: 0;
 }
@@ -334,13 +334,29 @@
 @media (max-width: 768px) {
   .menu { display: none; }
 
-  .mobileLang {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .header {
+    height: 82px;
   }
 
+  .container {
+    height: 82px;
+    padding: 16px 24px;
+  }
+
+  .mobileLang { display: none; }
+
   .right { gap: 28px; }
+
+  .phoneWrap {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .phoneCol {
+    display: none;
+  }
 
   .mobileMenuBtn {
     display: inline-flex;
@@ -356,11 +372,11 @@
 
   .mobileMenuPanel {
     position: absolute;
-    top: 100px;
+    top: 81px;
     right: 0;
     z-index: 30;
 
-    width: 335px;
+    width: 240px;
     padding: 20px 40px;
     box-sizing: border-box;
 
@@ -377,15 +393,15 @@
   .mobileMenuPanelOpen { display: flex; }
 
   .mobileMenuItem {
-    width: 255px;
-    height: 44px;
+    width: 160px;
+    height: 40px;
     padding: 4px 8px;
     box-sizing: border-box;
     border-bottom: 2px solid transparent;
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
     font-weight: 500;
@@ -400,5 +416,179 @@
   .mobileMenuItemActive {
     color: var(--color-brand, #226078);
     border-bottom: 2px solid var(--DarkSlateGray, #226078);
+  }
+}
+
+@media (max-width: 430px) {
+  .header {
+    height: 56px;
+  }
+
+  .container {
+    height: 56px;
+    padding: 8px clamp(12px, 4vw, 20px);
+  }
+
+  .logoWrap {
+    width: auto;
+    height: 32px;
+    gap: 4px;
+  }
+
+  .logo {
+    width: auto;
+    height: 32px;
+  }
+
+  .logoText {
+    width: auto;
+    height: 22px;
+  }
+
+  .mobileLang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .mobileLang :global(.language-switcher) {
+    width: 60px;
+    height: 24px;
+  }
+
+  .mobileLang :global(.language-switcher__ring) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobileLang :global(.language-switcher.is-en .language-switcher__ring) {
+    transform: translateX(36px);
+  }
+
+  .mobileLang :global(.language-switcher__btn) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobileLang :global(.language-switcher__btn--en) {
+    left: 36px;
+  }
+
+  .mobileLang :global(.language-switcher__img) {
+    left: 3px;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobileLang :global(.language-switcher__img--en) {
+    transform: scale(1.15);
+  }
+
+  .right {
+    gap: 8px;
+  }
+
+  .phoneWrap {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .phoneIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobileMenuBtn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mobileMenuIcon,
+  .mobileCloseIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobileCloseIcon::before,
+  .mobileCloseIcon::after {
+    left: 2px;
+    right: 2px;
+    top: 11px;
+  }
+
+  .mobileMenuPanel {
+    top: 55px;
+    width: 156px;
+    padding: 8px 16px;
+    gap: 4px;
+  }
+
+  .mobileMenuItem {
+    width: 124px;
+    height: 40px;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-inline: 12px;
+  }
+
+  .logoWrap {
+    height: 28px;
+    gap: 3px;
+  }
+
+  .logo {
+    height: 28px;
+  }
+
+  .logoText {
+    height: 18px;
+  }
+
+  .mobileLang :global(.language-switcher) {
+    width: 52px;
+    height: 20px;
+  }
+
+  .mobileLang :global(.language-switcher__ring) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobileLang :global(.language-switcher.is-en .language-switcher__ring) {
+    transform: translateX(32px);
+  }
+
+  .mobileLang :global(.language-switcher__btn) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobileLang :global(.language-switcher__btn--en) {
+    left: 32px;
+  }
+
+  .mobileLang :global(.language-switcher__img) {
+    left: 2px;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .right {
+    gap: 4px;
+  }
+
+  .phoneWrap,
+  .mobileMenuBtn {
+    width: 32px;
+    height: 32px;
   }
 }

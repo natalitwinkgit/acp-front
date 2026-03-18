@@ -30,7 +30,11 @@ export default function HeaderAuthControl({
           type="button"
           onClick={onAvatarClick}
         >
-          <img className={styles.avatarIcon} src="/icons/avatar.svg" alt="" />
+          <img
+            className={styles.avatarIcon}
+            src="/icons/Header/user/avatar_login.svg"
+            alt=""
+          />
         </button>
       ) : (
         <button

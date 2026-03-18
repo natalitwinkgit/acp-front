@@ -1,0 +1,176 @@
+.page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 0 64px;
+  background: var(--color-page-bg, #FCFEFE);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-padding-x);
+  box-sizing: border-box;
+}
+
+.tabsBar {
+  width: 100%;
+  min-height: 56px;
+  background: var(--color-brand, #226078);
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabsBar::-webkit-scrollbar {
+  display: none;
+}
+
+.tabsRow {
+  width: 100%;
+  min-width: max-content;
+  min-height: 56px;
+  display: flex;
+  align-items: stretch;
+}
+
+.tabLink {
+  text-decoration: none;
+}
+
+.tabChip {
+  height: 56px;
+  min-height: 56px;
+  border-radius: 0;
+  padding: 0 20px;
+  font-size: 18px;
+  line-height: 132%;
+  --chip-backdrop-filter: none;
+}
+
+.tabChipMuted {
+  background: transparent;
+  color: var(--color-white, #FFFFFF);
+}
+
+.tabChipActive {
+  background: rgba(201, 228, 231, 0.18);
+  color: var(--color-white, #FFFFFF);
+}
+
+.card {
+  margin: 24px auto 0;
+  width: min(100%, 980px);
+  padding: 32px;
+  border-radius: 20px;
+  background: var(--color-surface-soft, #F4F7F7);
+  box-shadow: 0 4px 14px rgba(123, 152, 163, 0.24);
+}
+
+.title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 124%;
+  color: var(--color-brand, #226078);
+}
+
+.description {
+  margin: 16px 0 0;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 144%;
+  color: #4C6381;
+}
+
+.infoGrid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  border: 1px solid rgba(123, 152, 163, 0.5);
+  border-radius: 12px;
+  background: var(--color-white, #FFFFFF);
+}
+
+.infoLabel {
+  font-size: 14px;
+  line-height: 144%;
+  color: #4C6381;
+}
+
+.infoValue {
+  font-size: 16px;
+  line-height: 144%;
+  color: var(--color-text-strong, #11313D);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 8px 0 40px;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .tabChip {
+    padding: 0 16px;
+    font-size: 16px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .tabsBar {
+    min-height: 48px;
+  }
+
+  .tabsRow {
+    min-height: 48px;
+  }
+
+  .tabChip {
+    height: 48px;
+    min-height: 48px;
+    padding: 0 14px;
+    font-size: 15px;
+  }
+
+  .card {
+    margin-top: 20px;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+}
