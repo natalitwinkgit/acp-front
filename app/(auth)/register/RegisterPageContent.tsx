@@ -44,19 +44,34 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setIsLoading(true);
     setError("");
+
+    const email = formData.email.trim();
+    const phone = formData.phone.trim();
 
     if (formData.password !== formData.confirmPassword) {
       setError("Паролі не співпадають");
-      setIsLoading(false);
       return;
     }
 
+    if (!phone) {
+      setError("Введіть номер телефону");
+      return;
+    }
+
+    if (!/^\+380\d{9}$/.test(phone)) {
+      setError("Телефон має бути у форматі +380XXXXXXXXX");
+      return;
+    }
+
+    setIsLoading(true);
+
     try {
       await register({
-        email: formData.email,
+        email,
         password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        phone,
       });
 
       router.replace("/login");
@@ -108,14 +123,18 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
             )}
 
             <label className={styles.field}>
-              <span className={styles.label}>Номер телефону (необов’язково, можна додати пізніше)</span>
+              <span className={styles.label}>Номер телефону</span>
               <input
                 className={styles.input}
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+380..."
+                placeholder="+380991234567"
+                autoComplete="tel"
+                inputMode="tel"
+                pattern="^\+380\d{9}$"
+                required
               />
             </label>
 
@@ -127,6 +146,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="email"
                 required
               />
             </label>
@@ -141,6 +161,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   required
                 />
 
@@ -171,6 +192,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    autoComplete="new-password"
                     required
                   />
 

@@ -4,6 +4,8 @@ import { clearAccessToken } from "./session";
 export type RegisterPayload = {
   email: string;
   password: string;
+  confirmPassword: string;
+  phone: string;
   name?: string;
 };
 
