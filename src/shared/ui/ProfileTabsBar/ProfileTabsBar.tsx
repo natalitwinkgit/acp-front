@@ -88,7 +88,7 @@ export default function ProfileTabsBar({
             onClick={handleLogout}
           >
             <Image
-              src="/icons/account/exit-icon.svg"
+              src="/icons/account/exit-icon-v2.svg"
               alt=""
               className={styles.exitIcon}
               width={24}
