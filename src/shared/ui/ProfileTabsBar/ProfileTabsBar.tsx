@@ -36,6 +36,8 @@ export default function ProfileTabsBar({
   const handleLogout = async () => {
     try {
       await logout();
+    } catch (error) {
+      console.error("Logout request failed", error);
     } finally {
       if (typeof window !== "undefined") {
         window.sessionStorage.removeItem("auth:background");
