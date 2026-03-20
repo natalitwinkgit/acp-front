@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 import styles from "./SurfacePanel.module.css";
 
 type SurfacePanelProps = HTMLAttributes<HTMLDivElement> & {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export default function SurfacePanel({
