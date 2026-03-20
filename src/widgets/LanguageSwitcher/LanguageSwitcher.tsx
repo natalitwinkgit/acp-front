@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import "./LanguageSwitcher.css";
 import { useI18n, type Lang } from "@/src/shared/i18n/I18nProvider";
 
 export default function LanguageSwitcher() {
   const { lang, setLang } = useI18n();
-
-  
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => setHydrated(true), []);
-
-  
-  const effectiveLang: Lang = hydrated ? lang : "UA";
+  const effectiveLang: Lang = lang;
   const isEn = effectiveLang === "EN";
 
   const switchTo = (next: Lang) => {

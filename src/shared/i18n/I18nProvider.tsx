@@ -5,19 +5,34 @@ import uk from "@/src/shared/locales/uk.json";
 import en from "@/src/shared/locales/en.json";
 
 export type Lang = "UA" | "EN";
-type Messages = Record<string, any>;
+export type MessageValue =
+  | string
+  | number
+  | boolean
+  | null
+  | MessageValue[]
+  | { [key: string]: MessageValue };
+
+type Messages = Record<string, MessageValue>;
 
 type I18nCtx = {
   lang: Lang;
   setLang: (next: Lang) => void;
   t: (key: string) => string;
-  raw: (key: string) => any;
+  raw: (key: string) => MessageValue | undefined;
 };
 
 const I18nContext = createContext<I18nCtx | null>(null);
 
-function getNested(obj: any, path: string) {
-  return path.split(".").reduce((acc, part) => (acc == null ? undefined : acc[part]), obj);
+function isMessageRecord(value: MessageValue | undefined): value is Record<string, MessageValue> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function getNested(obj: MessageValue | undefined, path: string): MessageValue | undefined {
+  return path.split(".").reduce<MessageValue | undefined>((acc, part) => {
+    if (!isMessageRecord(acc)) return undefined;
+    return acc[part];
+  }, obj);
 }
 
 function setCookie(name: string, value: string) {
@@ -40,11 +55,9 @@ export function I18nProvider({
 
   const raw = useCallback(
     (key: string) => {
-      
-      const direct = (messages as any)[key];
+      const direct = messages[key];
       if (direct !== undefined) return direct;
 
-      
       return getNested(messages, key);
     },
     [messages]
