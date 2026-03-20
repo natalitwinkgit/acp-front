@@ -13,13 +13,7 @@ export default function ModalCloseButton({ className, ariaLabel = "Close", onClo
 
   const fallbackClose = () => {
     const background = sessionStorage.getItem("auth:background");
-    const hasBackground = Boolean(background);
     sessionStorage.removeItem("auth:background");
-    if (hasBackground && window.history.length > 1) {
-      router.back();
-      return;
-    }
-
     router.replace(background || "/");
   };
 

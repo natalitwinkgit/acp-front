@@ -10,13 +10,7 @@ export default function LoginModalRoute() {
 
   const close = useCallback(() => {
     const background = sessionStorage.getItem("auth:background");
-    const hasBackground = Boolean(background);
     sessionStorage.removeItem("auth:background");
-    if (hasBackground && window.history.length > 1) {
-      router.back();
-      return;
-    }
-
     router.replace(background || "/");
   }, [router]);
 

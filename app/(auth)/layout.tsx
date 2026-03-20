@@ -1,5 +1,5 @@
 import styles from "./auth.module.css";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  return <main className={styles.page}>{children}</main>;
+  return <div className={styles.page}>{children}</div>;
 }
