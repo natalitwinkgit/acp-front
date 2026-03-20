@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import SurfacePanel from "@/src/shared/ui/SurfacePanel/SurfacePanel";
 import styles from "./not-found.module.css";
 
 export default function NotFoundPageContent() {
@@ -10,7 +11,7 @@ export default function NotFoundPageContent() {
 
   return (
     <section className={styles.page} aria-labelledby="not-found-title">
-      <div className={styles.card}>
+      <SurfacePanel className={styles.card}>
         <h1 id="not-found-title" className={styles.srOnly}>
           {t("notFound.title")}
         </h1>
@@ -36,7 +37,7 @@ export default function NotFoundPageContent() {
             </Link>
           </div>
         </div>
-      </div>
+      </SurfacePanel>
     </section>
   );
 }

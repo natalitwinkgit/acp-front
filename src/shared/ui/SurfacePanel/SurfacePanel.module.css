@@ -1,0 +1,12 @@
+.panel {
+  background: var(--surface-panel-bg, #f4f7f7);
+  border-radius: var(--surface-panel-radius, 24px);
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: var(--surface-panel-padding, 40px 20px);
+}
