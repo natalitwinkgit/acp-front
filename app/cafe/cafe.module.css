@@ -1,22 +1,608 @@
 .page {
   width: 100%;
-  padding: 8px 0 48px;
-  background: var(--color-page-bg, #FCFEFE);
+  padding: 0 260px;
+  background: var(--color-page-bg, #fcfefe);
 }
 
 .container {
-  max-width: var(--layout-max-width);
   width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--layout-padding-x);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
-@media (max-width: 768px) {
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.menuContent {
+  width: 1078px;
+  max-width: 100%;
+  padding-top: 61px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 101px;
+}
+
+.hotdogBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.card {
+  --card-frame-stroke-width: 8px;
+  --card-frame-radius: 12px;
+  position: relative;
+  width: 1078px;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 439px;
+  padding: var(--card-frame-stroke-width);
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+  overflow: visible;
+  border-radius: var(--card-frame-radius);
+  background: var(--color-white, #ffffff);
+}
+
+.cardImageLeft {
+  justify-content: flex-end;
+  padding-inline-end: calc(30px + var(--card-frame-stroke-width));
+}
+
+.cardImageRight {
+  justify-content: flex-start;
+  padding-inline-start: calc(30px + var(--card-frame-stroke-width));
+}
+
+.cardBorder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cardBorderShape {
+  stroke: #eebb3a;
+  stroke-width: var(--card-frame-stroke-width);
+  vector-effect: non-scaling-stroke;
+}
+
+.photoWrap {
+  position: absolute;
+  top: -61px;
+  z-index: 2;
+  width: 360px;
+  height: 360px;
+  overflow: visible;
+  background: transparent;
+}
+
+.cardImageLeft .photoWrap {
+  left: 64px;
+}
+
+.cardImageRight .photoWrap {
+  right: 64px;
+}
+
+.photo {
+  object-fit: contain;
+}
+
+.slot {
+  position: relative;
+  z-index: 1;
+  width: 590px;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: none;
+}
+
+.cardCoffee .slot,
+.cardSummer .slot,
+.cardHotdog .slot {
+  min-height: 381px;
+}
+
+.cardContent {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  gap: 0;
+  align-items: start;
+}
+
+.cardCoffee .cardContentSplit {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  max-width: 590px;
+  align-items: start;
+}
+
+.cardContentSingle {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  width: 100%;
+}
+
+.sideColumn {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.menuGroup {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 16px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.sectionCoffee {
+  width: 100%;
+  min-height: 387px;
+}
+
+.sectionAddons {
+  width: 100%;
+  min-height: 170px;
+}
+
+.sectionTea {
+  width: 100%;
+  min-height: 108px;
+}
+
+.sectionSummer,
+.cardSummer .singleGroup {
+  width: 344px;
+  max-width: 100%;
+  min-height: 201px;
+}
+
+.sectionHotdog,
+.cardHotdog .singleGroup {
+  width: 344px;
+  max-width: 100%;
+  min-height: 170px;
+}
+
+.groupTitle {
+  width: 100%;
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 124%;
+  color: var(--color-brand, #226078);
+}
+
+.groupNote {
+  margin: 0;
+  font-size: 16px;
+  line-height: 144%;
+  color: var(--color-text-strong, #11313d);
+}
+
+.menuList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.menuRow {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 4px 0;
+  flex-wrap: nowrap;
+}
+
+.menuName,
+.menuPrice {
+  display: block;
+  font-size: 16px;
+  line-height: 144%;
+  color: var(--color-text-strong, #11313d);
+}
+
+.menuName {
+  flex: 0 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.menuLine {
+  flex: 1 1 auto;
+  min-width: 16px;
+  height: 8px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 4px;
+  box-sizing: border-box;
+}
+
+.menuLineStroke {
+  display: block;
+  width: 100%;
+  border-top: 1px solid rgba(17, 49, 61, 0.92);
+}
+
+.menuPrice {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.story {
+  width: 100%;
+  min-height: 104px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.storyText {
+  width: 100%;
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 124%;
+  color: var(--color-brand, #226078);
+}
+
+@media (max-width: 1919px) {
   .page {
-    padding: 8px 0 40px;
+    padding-inline: 104px;
   }
 
   .container {
+    max-width: 1232px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 1239px) {
+  .page {
+    padding-inline: 24px;
+  }
+
+  .container {
+    max-width: 720px;
+    gap: 56px;
+  }
+
+  .menuContent {
+    width: min(100%, 660px);
+    padding-top: 0;
+    gap: 101px;
+  }
+
+  .card {
+    width: min(100%, 660px);
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 263px 0 24px;
+  }
+
+  .cardCoffee {
+    min-height: 668px;
+  }
+
+  .cardSummer {
+    min-height: 482px;
+  }
+
+  .cardHotdog {
+    min-height: 451px;
+  }
+
+  .cardImageLeft,
+  .cardImageRight {
+    padding-inline: 0;
+  }
+
+  .photoWrap {
+    top: -61px;
+    left: 50%;
+    right: auto;
+    width: 300px;
+    height: 300px;
+    transform: translateX(-50%);
+  }
+
+  .cardImageLeft .photoWrap,
+  .cardImageRight .photoWrap {
+    left: 50%;
+    right: auto;
+  }
+
+  .slot {
+    width: min(100%, 590px);
+    max-width: 590px;
+  }
+
+  .cardCoffee .cardContentSplit {
+    grid-template-columns: 292px 298px;
+    width: 590px;
+    max-width: 590px;
+  }
+
+  .groupTitle {
+    font-size: 18px;
+    line-height: 132%;
+    text-align: center;
+  }
+
+  .sectionCoffee {
+    width: 292px;
+    min-height: 387px;
+  }
+
+  .sideColumn {
+    width: 298px;
+    min-height: 381px;
+    gap: 10px;
+  }
+
+  .sectionAddons {
+    width: 298px;
+    min-height: 170px;
+  }
+
+  .sectionTea {
+    width: 298px;
+    min-height: 108px;
+  }
+
+  .sectionSummer,
+  .cardSummer .singleGroup {
+    width: 298px;
+    min-height: 195px;
+  }
+
+  .sectionHotdog,
+  .cardHotdog .singleGroup {
+    width: 344px;
+    min-height: 164px;
+  }
+
+  .cardCoffee .slot {
+    min-height: 381px;
+  }
+
+  .cardSummer .slot {
+    min-height: 195px;
+  }
+
+  .cardHotdog .slot {
+    min-height: 164px;
+  }
+
+  .story {
+    min-height: 104px;
     padding: 0 16px;
+  }
+
+  .storyText {
+    font-size: 18px;
+    line-height: 132%;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 431px) {
+  .container {
+    gap: 85px;
+  }
+}
+
+@media (max-width: 430px) {
+  .page {
+    padding: 0 15px 0 16px;
+  }
+
+  .container {
+    max-width: 362px;
+    gap: 58px;
+  }
+
+  .menuContent {
+    width: 100%;
+    gap: 82px;
+  }
+
+  .hotdogBlock {
+    gap: 24px;
+  }
+
+  .card {
+    --card-frame-stroke-width: 6px;
+    width: 100%;
+    max-width: 100%;
+    padding: 174px 0 24px;
+  }
+
+  .cardCoffee {
+    min-height: 853px;
+  }
+
+  .cardSummer {
+    min-height: 385px;
+  }
+
+  .cardHotdog {
+    min-height: 354px;
+  }
+
+  .photoWrap {
+    top: -42px;
+    width: 200px;
+    height: 200px;
+  }
+
+  .slot {
+    width: 100%;
+    max-width: 344px;
+  }
+
+  .cardCoffee .cardContentSplit,
+  .cardContentSingle {
+    width: 100%;
+    max-width: 344px;
+  }
+
+  .cardCoffee .cardContentSplit {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    height: auto;
+  }
+
+  .cardContentSingle {
+    justify-items: center;
+  }
+
+  .sideColumn {
+    width: 100%;
+    max-width: 344px;
+    min-height: auto;
+    height: auto;
+    gap: 16px;
+  }
+
+  .menuGroup {
+    width: 100%;
+    max-width: 344px;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  .sectionCoffee,
+  .sectionAddons,
+  .sectionTea,
+  .sectionSummer,
+  .sectionHotdog,
+  .cardSummer .singleGroup,
+  .cardHotdog .singleGroup {
+    width: 100%;
+    max-width: 344px;
+  }
+
+  .sectionCoffee {
+    min-height: 373px;
+  }
+
+  .sectionAddons {
+    min-height: 156px;
+  }
+
+  .sectionTea {
+    min-height: 94px;
+  }
+
+  .sectionSummer,
+  .cardSummer .singleGroup {
+    min-height: 187px;
+  }
+
+  .sectionHotdog,
+  .cardHotdog .singleGroup {
+    min-height: 156px;
+  }
+
+  .groupTitle {
+    width: 100%;
+    font-size: 18px;
+    line-height: 132%;
+    min-height: 24px;
+    text-align: center;
+  }
+
+  .groupNote,
+  .menuList {
+    width: 100%;
+  }
+
+  .menuRow {
+    width: 100%;
+    min-height: 31px;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .menuName,
+  .menuPrice {
+    font-size: 16px;
+    line-height: 144%;
+  }
+
+  .menuName {
+    flex: 0 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .menuLine {
+    flex: 1 1 auto;
+    min-width: 16px;
+  }
+
+  .cardCoffee .slot {
+    min-height: 655px;
+  }
+
+  .cardSummer .slot {
+    min-height: 187px;
+  }
+
+  .cardHotdog .slot {
+    min-height: 156px;
+  }
+
+  .story {
+    width: 100%;
+    min-height: 192px;
+    padding: 0 8px;
+  }
+
+  .storyText {
+    width: 100%;
+    max-width: 100%;
+    font-size: 18px;
+    line-height: 132%;
   }
 }
