@@ -1,12 +1,12 @@
 import { API_URL, apiFetch } from "./http";
 import { setAccessToken } from "./session";
 import type { TokenResponse } from "./auth";
+import { consumeAuthBackground } from "@/src/shared/auth-flow";
 
 export type GoogleAuthIntent = "login" | "register";
 
 const GOOGLE_AUTH_ERROR_KEY = "auth:google:error";
 const GOOGLE_AUTH_INTENT_KEY = "auth:google:intent";
-const AUTH_BACKGROUND_KEY = "auth:background";
 const DEFAULT_SUCCESS_REDIRECT = "/";
 const DEFAULT_ERROR_REDIRECT: Record<GoogleAuthIntent, string> = {
   login: "/login",
@@ -61,10 +61,7 @@ export function getGoogleAuthErrorRedirectPath() {
 
 export function getGoogleAuthSuccessRedirectPath() {
   if (!isBrowser()) return DEFAULT_SUCCESS_REDIRECT;
-
-  const background = window.sessionStorage.getItem(AUTH_BACKGROUND_KEY);
-  window.sessionStorage.removeItem(AUTH_BACKGROUND_KEY);
-  return background || DEFAULT_SUCCESS_REDIRECT;
+  return consumeAuthBackground() || DEFAULT_SUCCESS_REDIRECT;
 }
 
 export function startGoogleAuth(intent: GoogleAuthIntent) {

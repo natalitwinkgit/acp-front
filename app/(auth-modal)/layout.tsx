@@ -2,13 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import styles from "./auth.module.css";
+import { closeAuthRoute } from "@/src/shared/auth-flow";
 
 export default function AuthModalLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const close = () => {
-    const background = sessionStorage.getItem("auth:background");
-    sessionStorage.removeItem("auth:background");
-    router.replace(background || "/");
+    closeAuthRoute(router, { preferBack: true });
   };
 
   return (

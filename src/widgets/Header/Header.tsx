@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./Header.module.css";
+import { storeAuthBackground } from "@/src/shared/auth-flow";
 import { hasAccessToken } from "@/src/shared/api";
 import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
 import HeaderAuthControl from "./HeaderAuthControl";
@@ -94,7 +95,7 @@ export default function Header() {
     const search = searchParams?.toString();
     const hash = typeof window !== "undefined" ? window.location.hash : "";
     const background = search ? `${pathname}?${search}` : pathname;
-    sessionStorage.setItem("auth:background", `${background}${hash}`);
+    storeAuthBackground(`${background}${hash}`);
     router.push("/login", { scroll: false });
   };
 

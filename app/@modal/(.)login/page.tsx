@@ -4,14 +4,13 @@ import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
 import LoginPageContent from "@/app/(auth)/login/LoginPageContent";
+import { closeAuthRoute } from "@/src/shared/auth-flow";
 
 export default function LoginModalRoute() {
   const router = useRouter();
 
   const close = useCallback(() => {
-    const background = sessionStorage.getItem("auth:background");
-    sessionStorage.removeItem("auth:background");
-    router.replace(background || "/");
+    closeAuthRoute(router, { preferBack: true });
   }, [router]);
 
   useEffect(() => {

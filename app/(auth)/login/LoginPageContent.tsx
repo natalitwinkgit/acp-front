@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
+import { closeAuthRoute } from "@/src/shared/auth-flow";
 import { consumeGoogleAuthError, login, setAccessToken, startGoogleAuth } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
@@ -34,16 +35,13 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
     }
   }, []);
 
-  const closeAuthFlow = () => {
+  const handleCloseAuthFlow = () => {
     if (onClose) {
       onClose();
       return;
     }
 
-    const background = sessionStorage.getItem("auth:background");
-    sessionStorage.removeItem("auth:background");
-
-    router.replace(background || "/");
+    closeAuthRoute(router);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +64,7 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
       }
 
       setAccessToken(data.access_token);
-      closeAuthFlow();
+      handleCloseAuthFlow();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Сталася помилка. Спробуйте ще раз.");
     } finally {
