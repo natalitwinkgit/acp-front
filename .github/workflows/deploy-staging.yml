@@ -49,17 +49,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.32.1
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
-          cache: "npm"
+          cache: "pnpm"
+          cache-dependency-path: "pnpm-lock.yaml"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: npm run build
+        run: pnpm build
 
   deploy:
     name: Deploy via SSH
@@ -87,14 +93,15 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             . "$NVM_DIR/nvm.sh"
             nvm use 22
+            corepack enable
 
             cd "${{ env.DEPLOY_PATH }}"
 
             git fetch --all --prune
             git reset --hard origin/main
 
-            npm ci
-            npm run build
+            corepack pnpm install --frozen-lockfile
+            corepack pnpm build
 
             if ! command -v pm2 >/dev/null 2>&1; then
               npm i -g pm2
