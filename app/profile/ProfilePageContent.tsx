@@ -272,12 +272,8 @@ export default function ProfilePageContent() {
 
         <section className={styles.card} aria-labelledby="profile-title">
           <h1 id="profile-title" className={styles.title}>
-            {t("profile.title")}
+            Налаштування профілю
           </h1>
-
-          <p className={styles.description}>
-            Оновіть дані профілю та, за потреби, змініть пароль через чинний бекенд-контракт.
-          </p>
 
           {error ? (
             <div className={`${styles.notice} ${styles.noticeError}`} role="alert">
@@ -414,11 +410,6 @@ export default function ProfilePageContent() {
                 </span>
               </label>
             </div>
-
-            <p className={styles.helperText}>
-              Для зміни пароля існуючий бекенд вимагає поточний і новий пароль, тому форма збереження
-              працює саме в цьому форматі.
-            </p>
 
             <button
               type="submit"
