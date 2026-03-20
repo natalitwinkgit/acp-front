@@ -2,7 +2,21 @@ import { clearAccessToken, getAccessToken, setAccessToken } from "./session";
 
 const DEFAULT_API_URL = "http://localhost:3001/api/v1";
 
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL).replace(/\/$/, "");
+function normalizeApiUrl(rawApiUrl: string) {
+  const trimmedApiUrl = rawApiUrl.replace(/\/$/, "");
+
+  if (trimmedApiUrl.endsWith("/api/v1")) {
+    return trimmedApiUrl;
+  }
+
+  if (trimmedApiUrl.endsWith("/api")) {
+    return `${trimmedApiUrl}/v1`;
+  }
+
+  return `${trimmedApiUrl}/api/v1`;
+}
+
+export const API_URL = normalizeApiUrl(process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL);
 
 type ApiFetchOptions = RequestInit & {
   includeAuth?: boolean;
