@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./Header.module.css";
+import { hasAccessToken } from "@/src/shared/api";
 import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
 import HeaderAuthControl from "./HeaderAuthControl";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
@@ -23,7 +24,7 @@ const phones = [
 
 function getAuthStatusSnapshot() {
   if (typeof window === "undefined") return false;
-  return Boolean(localStorage.getItem("token") || localStorage.getItem("access_token"));
+  return hasAccessToken();
 }
 
 function subscribeToAuthStatus(onChange: () => void) {

@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
+import { login, setAccessToken } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 
 type LoginFormData = {
-  login: string;
+  identifier: string;
   password: string;
 };
 
@@ -21,11 +22,9 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
   const router = useRouter();
 
   const [showPass, setShowPass] = useState(false);
-  const [formData, setFormData] = useState<LoginFormData>({ login: "", password: "" });
+  const [formData, setFormData] = useState<LoginFormData>({ identifier: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const closeAuthFlow = () => {
     if (onClose) {
@@ -34,13 +33,7 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
     }
 
     const background = sessionStorage.getItem("auth:background");
-    const hasBackground = Boolean(background);
     sessionStorage.removeItem("auth:background");
-
-    if (hasBackground && window.history.length > 1) {
-      router.back();
-      return;
-    }
 
     router.replace(background || "/");
   };
@@ -55,31 +48,19 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!API_URL) {
-      setError("Не налаштовано NEXT_PUBLIC_API_URL (env).");
-      return;
-    }
-
     setIsLoading(true);
     setError("");
 
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json().catch(() => ({} as any));
-
-      if (!res.ok) {
-        throw new Error(data?.message || "Невірний логін або пароль");
+      const data = await login(formData);
+      if (!data?.access_token) {
+        throw new Error("Відповідь API не містить access token");
       }
 
-      if (data?.token) localStorage.setItem("token", data.token);
+      setAccessToken(data.access_token);
       closeAuthFlow();
-    } catch (err: any) {
-      setError(err?.message || "Сталася помилка. Спробуйте ще раз.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Сталася помилка. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
     }
@@ -108,8 +89,8 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
               <input
                 className={styles.input}
                 type="text"
-                name="login"
-                value={formData.login}
+                name="identifier"
+                value={formData.identifier}
                 onChange={handleChange}
                 required
               />
