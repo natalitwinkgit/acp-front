@@ -1,0 +1,8 @@
+cat <<EOF > .gitmessage
+# <type>(<scope>): <subject> BREW-XXX
+# Example: fix(eks): BREW-82 add force_delete to ECR
+# --------------------------------------------------
+# Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+# Scope: (optional) e.g., eks, ecr, auth, ui
+# BREW-XXX: Jira task link/ID
+EOF
