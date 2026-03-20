@@ -1,7 +1,5 @@
 import { clearAccessToken, getAccessToken, setAccessToken } from "./session";
 
-const DEFAULT_API_URL = "http://localhost:3001/api/v1";
-
 function normalizeApiUrl(rawApiUrl: string) {
   const trimmedApiUrl = rawApiUrl.replace(/\/$/, "");
 
@@ -16,7 +14,9 @@ function normalizeApiUrl(rawApiUrl: string) {
   return `${trimmedApiUrl}/api/v1`;
 }
 
-export const API_URL = normalizeApiUrl(process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL);
+const rawApiUrl = process.env.NEXT_PUBLIC_API_URL?.trim();
+
+export const API_URL = rawApiUrl ? normalizeApiUrl(rawApiUrl) : null;
 
 type ApiFetchOptions = RequestInit & {
   includeAuth?: boolean;
@@ -57,7 +57,7 @@ async function parseResponse<T>(response: Response): Promise<T> {
 }
 
 async function getErrorMessage(response: Response) {
-  let message = "Request failed";
+  const message = "Request failed";
 
   try {
     const body = (await parseResponse<ErrorResponse>(response)) ?? null;
@@ -76,7 +76,11 @@ async function sendRequest(
   options: ApiFetchOptions,
   accessToken: string | null,
 ) {
-  const { includeAuth = true, skipAuthRefresh: _skipAuthRefresh, ...requestInit } = options;
+  const { includeAuth = true, ...requestInit } = options;
+
+  if (!API_URL) {
+    throw new Error("NEXT_PUBLIC_API_URL is not configured");
+  }
 
   return fetch(`${API_URL}${path}`, {
     ...requestInit,
@@ -88,6 +92,7 @@ async function sendRequest(
 
 async function refreshAccessToken() {
   if (typeof window === "undefined") return null;
+  if (!API_URL) return null;
 
   if (!refreshPromise) {
     refreshPromise = (async () => {
