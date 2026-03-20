@@ -1,0 +1,6 @@
+# <type>(<scope>): <subject>
+# --------------------------------------------------
+# Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+# Scope: (optional) e.g., ui, api, deps, infra
+# --------------------------------------------------
+# Example: chore(frontend): update pnpm-lock and sync dependencies
