@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
-import { login, setAccessToken } from "@/src/shared/api";
+import { consumeGoogleAuthError, login, setAccessToken, startGoogleAuth } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 
@@ -25,6 +25,14 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
   const [formData, setFormData] = useState<LoginFormData>({ identifier: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  useEffect(() => {
+    const authError = consumeGoogleAuthError();
+    if (authError) {
+      setError(authError);
+    }
+  }, []);
 
   const closeAuthFlow = () => {
     if (onClose) {
@@ -65,6 +73,20 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
       setIsLoading(false);
     }
   };
+
+  const handleGoogleLogin = () => {
+    setError("");
+    setIsGoogleLoading(true);
+
+    try {
+      startGoogleAuth("login");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Не вдалося почати вхід через Google.");
+      setIsGoogleLoading(false);
+    }
+  };
+
+  const isBusy = isLoading || isGoogleLoading;
 
   return (
     <div
@@ -140,7 +162,13 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
             </div>
 
             <div className={styles.socialRow}>
-              <button className={styles.socialBtn} type="button" aria-label="Увійти через Google">
+              <button
+                className={styles.socialBtn}
+                type="button"
+                aria-label="Увійти через Google"
+                onClick={handleGoogleLogin}
+                disabled={isBusy}
+              >
                 <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
               </button>
             </div>
@@ -150,7 +178,7 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 text={isLoading ? "Вхід..." : "Увійти"}
                 variant="primary"
                 type="submit"
-                disabled={isLoading}
+                disabled={isBusy}
                 onClick={() => {}}
               />
 
@@ -158,6 +186,7 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 text="Зареєструватись"
                 variant="secondary"
                 type="button"
+                disabled={isBusy}
                 onClick={() => router.replace("/register")}
               />
             </div>

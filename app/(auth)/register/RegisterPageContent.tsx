@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
-import { register } from "@/src/shared/api";
+import { consumeGoogleAuthError, register, startGoogleAuth } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 
@@ -34,6 +34,14 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  useEffect(() => {
+    const authError = consumeGoogleAuthError();
+    if (authError) {
+      setError(authError);
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -81,6 +89,20 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
       setIsLoading(false);
     }
   };
+
+  const handleGoogleRegister = () => {
+    setError("");
+    setIsGoogleLoading(true);
+
+    try {
+      startGoogleAuth("register");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Не вдалося почати вхід через Google.");
+      setIsGoogleLoading(false);
+    }
+  };
+
+  const isBusy = isLoading || isGoogleLoading;
 
   return (
     <div
@@ -219,7 +241,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
             </div>
 
             <div className={styles.socialRowRegister}>
-              <button className={styles.socialBtn} type="button" aria-label="Увійти через Google">
+              <button
+                className={styles.socialBtn}
+                type="button"
+                aria-label="Увійти через Google"
+                onClick={handleGoogleRegister}
+                disabled={isBusy}
+              >
                 <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
               </button>
             </div>
@@ -230,7 +258,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                 text={isLoading ? "Завантаження..." : "Зареєструватись"}
                 variant="primary"
                 type="submit"
-                disabled={isLoading}
+                disabled={isBusy}
                 onClick={() => {}}
               />
             </div>
