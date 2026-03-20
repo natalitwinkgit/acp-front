@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
+import { logout } from "@/src/shared/api";
 import Chip from "@/src/shared/ui/Chip/Chip";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import SlantedChip from "@/src/shared/ui/SlantedChip/SlantedChip";
@@ -32,15 +33,16 @@ export default function ProfileTabsBar({
   const { t } = useI18n();
   const classes = `${styles.tabsBar} ${className}`.trim();
 
-  const handleLogout = () => {
-    if (typeof window !== "undefined") {
-      window.localStorage.removeItem("token");
-      window.localStorage.removeItem("access_token");
-      window.sessionStorage.removeItem("auth:background");
-      window.dispatchEvent(new Event("focus"));
-    }
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } finally {
+      if (typeof window !== "undefined") {
+        window.sessionStorage.removeItem("auth:background");
+      }
 
-    router.replace("/");
+      router.replace("/");
+    }
   };
 
   return (

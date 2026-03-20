@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
+import { register } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 
@@ -24,8 +25,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
   const [showPass, setShowPass] = useState(false);
   const [showPass2, setShowPass2] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
   const [formData, setFormData] = useState<RegisterFormData>({
     phone: "",
     email: "",
@@ -45,11 +44,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!API_URL) {
-      setError("Не налаштовано NEXT_PUBLIC_API_URL (env).");
-      return;
-    }
-
     setIsLoading(true);
     setError("");
 
@@ -60,25 +54,14 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
     }
 
     try {
-      const res = await fetch(`${API_URL}/auth/registration`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phone: formData.phone,
-          email: formData.email,
-          password: formData.password,
-        }),
+      await register({
+        email: formData.email,
+        password: formData.password,
       });
 
-      const data = await res.json().catch(() => ({} as any));
-
-      if (!res.ok) {
-        throw new Error(data?.message || "Помилка реєстрації");
-      }
-
       router.replace("/login");
-    } catch (err: any) {
-      setError(err?.message || "Сталася помилка. Спробуйте ще раз.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Сталася помилка. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
     }
@@ -125,7 +108,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
             )}
 
             <label className={styles.field}>
-              <span className={styles.label}>Введіть номер телефону +380…</span>
+              <span className={styles.label}>Номер телефону (необов’язково, можна додати пізніше)</span>
               <input
                 className={styles.input}
                 type="tel"
@@ -133,7 +116,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="+380..."
-                required
               />
             </label>
 
