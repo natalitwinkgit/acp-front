@@ -222,9 +222,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
               <button className={styles.socialBtn} type="button" aria-label="Увійти через Google">
                 <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
               </button>
-              <button className={styles.socialBtn} type="button" aria-label="Увійти через Apple">
-                <img src="/icons/icons8-apple.svg" alt="" className={styles.icon24} />
-              </button>
             </div>
 
             <div className={styles.buttonRegister}>
