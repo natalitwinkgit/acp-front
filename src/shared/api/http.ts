@@ -1,35 +1,131 @@
-export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
+import { clearAccessToken, getAccessToken, setAccessToken } from "./session";
+
+const DEFAULT_API_URL = "http://localhost:3001/api/v1";
+
+export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? DEFAULT_API_URL).replace(/\/$/, "");
+
+type ApiFetchOptions = RequestInit & {
+  includeAuth?: boolean;
+  skipAuthRefresh?: boolean;
+};
+
+type ErrorResponse = {
+  message?: string | string[];
+};
+
+type AccessTokenResponse = {
+  access_token?: string;
+};
+
+let refreshPromise: Promise<string | null> | null = null;
+
+function buildHeaders(
+  headersInit: HeadersInit | undefined,
+  body: BodyInit | null | undefined,
+  accessToken: string | null,
+) {
+  const headers = new Headers(headersInit);
+
+  if (body && !(body instanceof FormData) && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+
+  if (accessToken && !headers.has("Authorization")) {
+    headers.set("Authorization", `Bearer ${accessToken}`);
+  }
+
+  return headers;
+}
+
+async function parseResponse<T>(response: Response): Promise<T> {
+  const text = await response.text();
+  return (text ? JSON.parse(text) : null) as T;
+}
+
+async function getErrorMessage(response: Response) {
+  let message = "Request failed";
+
+  try {
+    const body = (await parseResponse<ErrorResponse>(response)) ?? null;
+    const responseMessage = body?.message;
+    if (Array.isArray(responseMessage)) return responseMessage.join(", ");
+    if (typeof responseMessage === "string" && responseMessage.trim()) {
+      return responseMessage;
+    }
+  } catch {}
+
+  return message;
+}
+
+async function sendRequest(
+  path: string,
+  options: ApiFetchOptions,
+  accessToken: string | null,
+) {
+  const { includeAuth = true, skipAuthRefresh: _skipAuthRefresh, ...requestInit } = options;
+
+  return fetch(`${API_URL}${path}`, {
+    ...requestInit,
+    headers: buildHeaders(requestInit.headers, requestInit.body, includeAuth ? accessToken : null),
+    cache: "no-store",
+    credentials: "include",
+  });
+}
+
+async function refreshAccessToken() {
+  if (typeof window === "undefined") return null;
+
+  if (!refreshPromise) {
+    refreshPromise = (async () => {
+      const response = await fetch(`${API_URL}/auth/refresh-token`, {
+        method: "POST",
+        cache: "no-store",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        clearAccessToken();
+        return null;
+      }
+
+      const body = await parseResponse<AccessTokenResponse>(response);
+      if (!body?.access_token) {
+        clearAccessToken();
+        return null;
+      }
+
+      setAccessToken(body.access_token);
+      return body.access_token;
+    })().finally(() => {
+      refreshPromise = null;
+    });
+  }
+
+  return refreshPromise;
+}
 
 export async function apiFetch<T>(
   path: string,
-  options: RequestInit = {},
+  options: ApiFetchOptions = {},
 ): Promise<T> {
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
+  const accessToken = options.includeAuth === false ? null : getAccessToken();
+  let response = await sendRequest(path, options, accessToken);
 
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers ?? {}),
-    },
-    cache: "no-store",
-  });
+  if (response.status === 401 && !options.skipAuthRefresh) {
+    const refreshedAccessToken = await refreshAccessToken();
 
-  
-  if (!res.ok) {
-    let msg = "Request failed";
-    try {
-      const body = await res.json();
-      msg = body?.message ?? msg;
-      if (Array.isArray(msg)) msg = msg.join(", ");
-    } catch {}
-    throw new Error(msg);
+    if (refreshedAccessToken) {
+      response = await sendRequest(path, options, refreshedAccessToken);
+    }
   }
 
-  
-  const text = await res.text();
-  return (text ? JSON.parse(text) : null) as T;
+  if (!response.ok) {
+    if (response.status === 401) {
+      clearAccessToken();
+    }
+
+    throw new Error(await getErrorMessage(response));
+  }
+
+  return parseResponse<T>(response);
 }
