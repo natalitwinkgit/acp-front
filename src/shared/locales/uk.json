@@ -15,6 +15,7 @@
   "profile.cabinet": "Особистий кабінет",
   "profile.title": "Профіль",
   "profile.tickets.title": "Мої квитки",
+  "profile.logoutAria": "Вийти з особистого кабінету",
   "profile.description": "Це мінімальна сторінка профілю. Тут згодом з'являться налаштування, квитки та історія ваших поїздок.",
   "profile.tabs.tickets": "Квитки",
   "profile.tabs.archive": "Архів",

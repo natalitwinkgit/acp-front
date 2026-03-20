@@ -1,6 +1,12 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import Chip from "@/src/shared/ui/Chip/Chip";
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import SlantedChip from "@/src/shared/ui/SlantedChip/SlantedChip";
 import styles from "./ProfileTabsBar.module.css";
 
 export type ProfileTabsBarItem = {
@@ -13,45 +19,81 @@ type ProfileTabsBarProps = {
   ariaLabel: string;
   items: ProfileTabsBarItem[];
   className?: string;
-  activeVariant?: "light" | "overlay";
+  showExitButton?: boolean;
 };
 
 export default function ProfileTabsBar({
   ariaLabel,
   items,
   className = "",
-  activeVariant = "light",
+  showExitButton = false,
 }: ProfileTabsBarProps) {
-  const activeClassName =
-    activeVariant === "overlay" ? styles.tabChipActiveOverlay : styles.tabChipActiveLight;
+  const router = useRouter();
+  const { t } = useI18n();
   const classes = `${styles.tabsBar} ${className}`.trim();
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem("token");
+      window.localStorage.removeItem("access_token");
+      window.sessionStorage.removeItem("auth:background");
+      window.dispatchEvent(new Event("focus"));
+    }
+
+    router.replace("/");
+  };
 
   return (
     <section className={classes} aria-label={ariaLabel}>
-      <div className={styles.tabsRow}>
-        {items.map((item, index) => {
-          const chip = (
-            <Chip
-              className={`${styles.tabChip} ${item.active ? activeClassName : styles.tabChipMuted}`.trim()}
-            >
-              {item.label}
-            </Chip>
-          );
+      <div className={styles.tabsInner}>
+        <div className={styles.tabsNav}>
+          <div className={styles.tabsRow}>
+            {items.map((item, index) => {
+              const chip = item.active ? (
+                <SlantedChip className={`${styles.tabChip} ${styles.tabChipActive}`.trim()}>
+                  {item.label}
+                </SlantedChip>
+              ) : (
+                <Chip className={`${styles.tabChip} ${styles.tabChipMuted}`.trim()}>
+                  {item.label}
+                </Chip>
+              );
 
-          if (item.href && !item.active) {
-            return (
-              <Link
-                key={`${String(item.label)}-${index}`}
-                href={item.href}
-                className={styles.tabLink}
-              >
-                {chip}
-              </Link>
-            );
-          }
+              if (item.href && !item.active) {
+                return (
+                  <Link
+                    key={`${String(item.label)}-${index}`}
+                    href={item.href}
+                    className={styles.tabLink}
+                  >
+                    {chip}
+                  </Link>
+                );
+              }
 
-          return <div key={`${String(item.label)}-${index}`}>{chip}</div>;
-        })}
+              return <div key={`${String(item.label)}-${index}`}>{chip}</div>;
+            })}
+          </div>
+        </div>
+
+        {showExitButton ? (
+          <button
+            type="button"
+            className={styles.exitButton}
+            aria-label={t("profile.logoutAria")}
+            onClick={handleLogout}
+          >
+            <Image
+              src="/icons/account/exit-icon.svg"
+              alt=""
+              className={styles.exitIcon}
+              width={24}
+              height={24}
+              aria-hidden="true"
+              unoptimized
+            />
+          </button>
+        ) : null}
       </div>
     </section>
   );

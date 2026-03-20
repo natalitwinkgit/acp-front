@@ -22,7 +22,7 @@ export default function ProfilePageContent() {
 
         <ProfileTabsBar
           ariaLabel={t("profile.tabsAria")}
-          activeVariant="overlay"
+          showExitButton
           items={[
             { label: t("profile.tabs.tickets"), href: "/profile/tickets" },
             { label: t("profile.tabs.archive"), href: "/profile" },

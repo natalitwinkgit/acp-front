@@ -1,0 +1,19 @@
+.chip {
+  position: relative;
+  padding-inline: 26px;
+  clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+}
+
+@media (max-width: 768px) {
+  .chip {
+    padding-inline: 22px;
+    clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  }
+}
+
+@media (max-width: 430px) {
+  .chip {
+    padding-inline: 18px;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  }
+}

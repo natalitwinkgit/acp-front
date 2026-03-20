@@ -23,6 +23,7 @@ export default function TicketsPageContent() {
 
         <ProfileTabsBar
           ariaLabel={t("profile.tabsAria")}
+          showExitButton
           items={[
             { label: t("profile.tabs.tickets"), active: true },
             { label: t("profile.tabs.archive") },

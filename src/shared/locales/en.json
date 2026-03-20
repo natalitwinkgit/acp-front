@@ -15,6 +15,7 @@
   "profile.cabinet": "Personal account",
   "profile.title": "Profile",
   "profile.tickets.title": "My tickets",
+  "profile.logoutAria": "Sign out from personal account",
   "profile.description": "This is a minimal profile page. Settings, tickets, and your trip history will appear here later.",
   "profile.tabs.tickets": "Tickets",
   "profile.tabs.archive": "Archive",
