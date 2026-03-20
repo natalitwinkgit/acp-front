@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import BreadcrumbChips from "@/src/shared/ui/BreadcrumbChips/BreadcrumbChips";
-import Chip from "@/src/shared/ui/Chip/Chip";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import ProfileTabsBar from "@/src/shared/ui/ProfileTabsBar/ProfileTabsBar";
 import styles from "./profile.module.css";
 
 export default function ProfilePageContent() {
@@ -21,25 +20,15 @@ export default function ProfilePageContent() {
           ]}
         />
 
-        <section className={styles.tabsBar} aria-label={t("profile.tabsAria")}>
-          <div className={styles.tabsRow}>
-            <Link href="/profile" className={styles.tabLink}>
-              <Chip className={`${styles.tabChip} ${styles.tabChipMuted}`}>
-                {t("profile.tabs.tickets")}
-              </Chip>
-            </Link>
-
-            <Link href="/profile" className={styles.tabLink}>
-              <Chip className={`${styles.tabChip} ${styles.tabChipMuted}`}>
-                {t("profile.tabs.archive")}
-              </Chip>
-            </Link>
-
-            <Chip className={`${styles.tabChip} ${styles.tabChipActive}`}>
-              {t("profile.tabs.profile")}
-            </Chip>
-          </div>
-        </section>
+        <ProfileTabsBar
+          ariaLabel={t("profile.tabsAria")}
+          activeVariant="overlay"
+          items={[
+            { label: t("profile.tabs.tickets"), href: "/profile/tickets" },
+            { label: t("profile.tabs.archive"), href: "/profile" },
+            { label: t("profile.tabs.profile"), active: true },
+          ]}
+        />
 
         <section className={styles.card} aria-labelledby="profile-title">
           <h1 id="profile-title" className={styles.title}>

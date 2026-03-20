@@ -53,7 +53,7 @@ export default function Header() {
   const searchParams = useSearchParams();
 
   const isAuthorized = useSyncExternalStore(subscribeToAuthStatus, getAuthStatusSnapshot, () => false);
-  const isAvatarActive = pathname === "/profile";
+  const isAvatarActive = pathname === "/profile" || pathname.startsWith("/profile/");
 
   const [activeMenuHref, setActiveMenuHref] = useState("#home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

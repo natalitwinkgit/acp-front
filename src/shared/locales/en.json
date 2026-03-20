@@ -14,6 +14,7 @@
   "profile.tabsAria": "Personal account navigation",
   "profile.cabinet": "Personal account",
   "profile.title": "Profile",
+  "profile.tickets.title": "My tickets",
   "profile.description": "This is a minimal profile page. Settings, tickets, and your trip history will appear here later.",
   "profile.tabs.tickets": "Tickets",
   "profile.tabs.archive": "Archive",

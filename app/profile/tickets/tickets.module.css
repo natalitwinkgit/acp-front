@@ -1,0 +1,73 @@
+.page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 0 64px;
+  background: var(--color-page-bg, #fcfefe);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  padding: 0 var(--layout-padding-x);
+  box-sizing: border-box;
+}
+
+.emptyState {
+  margin-top: 36px;
+}
+
+.emptyCard {
+  --surface-panel-bg: var(--light-bg, #f4f7f7);
+  --surface-panel-radius: 24px;
+  --surface-panel-padding: 40px 20px;
+  width: min(100%, 1030px);
+  min-height: 588px;
+  margin: 0 auto;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 8px 0 40px;
+  }
+
+  .container {
+    padding: 0 24px;
+  }
+
+  .emptyState {
+    margin-top: 28px;
+  }
+
+  .emptyCard {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .emptyState {
+    margin-top: 20px;
+  }
+
+  .emptyCard {
+    --surface-panel-padding: 40px 20px;
+    width: min(100%, 340px);
+    min-height: 583px;
+  }
+}
