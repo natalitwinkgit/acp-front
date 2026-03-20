@@ -5,9 +5,10 @@ import {
   authenticateWithGoogleCredential,
   getGoogleClientId,
   loadGoogleIdentityScript,
-  type GoogleAuthIntent,
 } from "@/src/shared/api/google-auth";
 import styles from "./GoogleAuthButton.module.css";
+
+type GoogleAuthIntent = "login" | "register";
 
 type GoogleCredentialResponse = {
   credential?: string;

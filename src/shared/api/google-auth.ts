@@ -1,17 +1,7 @@
 import { apiFetch } from "./http";
 import { setAccessToken } from "./session";
 import type { TokenResponse } from "./auth";
-import { consumeAuthBackground } from "@/src/shared/auth-flow";
 
-export type GoogleAuthIntent = "login" | "register";
-
-const GOOGLE_AUTH_ERROR_KEY = "auth:google:error";
-const GOOGLE_AUTH_INTENT_KEY = "auth:google:intent";
-const DEFAULT_SUCCESS_REDIRECT = "/";
-const DEFAULT_ERROR_REDIRECT: Record<GoogleAuthIntent, string> = {
-  login: "/login",
-  register: "/register",
-};
 const GOOGLE_IDENTITY_SCRIPT_SRC = "https://accounts.google.com/gsi/client";
 const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID?.trim() ?? "";
 
@@ -48,53 +38,6 @@ let googleIdentityScriptPromise: Promise<void> | null = null;
 
 function isBrowser() {
   return typeof window !== "undefined";
-}
-
-function getStoredGoogleAuthIntent(): GoogleAuthIntent {
-  if (!isBrowser()) return "login";
-
-  const intent = window.sessionStorage.getItem(GOOGLE_AUTH_INTENT_KEY);
-  return intent === "register" ? "register" : "login";
-}
-
-export function getGoogleAuthCallbackUrl() {
-  if (!isBrowser()) return "/auth/google/callback";
-  return new URL("/auth/google/callback", window.location.origin).toString();
-}
-
-export function consumeGoogleAuthError() {
-  if (!isBrowser()) return "";
-
-  const error = window.sessionStorage.getItem(GOOGLE_AUTH_ERROR_KEY) ?? "";
-  window.sessionStorage.removeItem(GOOGLE_AUTH_ERROR_KEY);
-  return error;
-}
-
-export function storeGoogleAuthError(message: string) {
-  if (!isBrowser()) return;
-
-  if (message.trim()) {
-    window.sessionStorage.setItem(GOOGLE_AUTH_ERROR_KEY, message);
-    return;
-  }
-
-  window.sessionStorage.removeItem(GOOGLE_AUTH_ERROR_KEY);
-}
-
-export function clearGoogleAuthContext() {
-  if (!isBrowser()) return;
-
-  window.sessionStorage.removeItem(GOOGLE_AUTH_ERROR_KEY);
-  window.sessionStorage.removeItem(GOOGLE_AUTH_INTENT_KEY);
-}
-
-export function getGoogleAuthErrorRedirectPath() {
-  return DEFAULT_ERROR_REDIRECT[getStoredGoogleAuthIntent()];
-}
-
-export function getGoogleAuthSuccessRedirectPath() {
-  if (!isBrowser()) return DEFAULT_SUCCESS_REDIRECT;
-  return consumeAuthBackground() || DEFAULT_SUCCESS_REDIRECT;
 }
 
 export function getGoogleClientId() {
@@ -167,14 +110,6 @@ export function loadGoogleIdentityScript() {
   return googleIdentityScriptPromise;
 }
 
-export function startGoogleAuth(intent: GoogleAuthIntent) {
-  if (!isBrowser()) return;
-
-  window.sessionStorage.setItem(GOOGLE_AUTH_INTENT_KEY, intent);
-  window.sessionStorage.removeItem(GOOGLE_AUTH_ERROR_KEY);
-  throw new Error("Google redirect-flow більше не підтримується поточним контрактом бекенда.");
-}
-
 export async function authenticateWithGoogleCredential(idToken: string) {
   const response = await apiFetch<TokenResponse>("/auth/google", {
     method: "POST",
@@ -188,10 +123,5 @@ export async function authenticateWithGoogleCredential(idToken: string) {
   }
 
   setAccessToken(response.access_token);
-  clearGoogleAuthContext();
   return response;
-}
-
-export async function finalizeGoogleAuth() {
-  throw new Error("Google redirect callback-flow не підтримується поточним контрактом бекенда.");
 }

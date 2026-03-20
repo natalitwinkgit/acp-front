@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
 import { closeAuthRoute } from "@/src/shared/auth-flow";
-import { consumeGoogleAuthError, register } from "@/src/shared/api";
+import { register } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
@@ -37,13 +37,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-
-  useEffect(() => {
-    const authError = consumeGoogleAuthError();
-    if (authError) {
-      setError(authError);
-    }
-  }, []);
 
   const handleCloseAuthFlow = () => {
     if (onClose) {

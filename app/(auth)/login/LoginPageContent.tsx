@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
 import { closeAuthRoute } from "@/src/shared/auth-flow";
-import { consumeGoogleAuthError, login, setAccessToken } from "@/src/shared/api";
+import { login, setAccessToken } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
@@ -28,13 +28,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-
-  useEffect(() => {
-    const authError = consumeGoogleAuthError();
-    if (authError) {
-      setError(authError);
-    }
-  }, []);
 
   const handleCloseAuthFlow = () => {
     if (onClose) {
