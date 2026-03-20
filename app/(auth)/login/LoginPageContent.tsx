@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
 import { closeAuthRoute } from "@/src/shared/auth-flow";
-import { consumeGoogleAuthError, login, setAccessToken, startGoogleAuth } from "@/src/shared/api";
+import { consumeGoogleAuthError, login, setAccessToken } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
+import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
 
 type LoginFormData = {
   identifier: string;
@@ -69,18 +70,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
       setError(err instanceof Error ? err.message : "Сталася помилка. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = () => {
-    setError("");
-    setIsGoogleLoading(true);
-
-    try {
-      startGoogleAuth("login");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Не вдалося почати вхід через Google.");
-      setIsGoogleLoading(false);
     }
   };
 
@@ -160,15 +149,13 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
             </div>
 
             <div className={styles.socialRow}>
-              <button
-                className={styles.socialBtn}
-                type="button"
-                aria-label="Увійти через Google"
-                onClick={handleGoogleLogin}
-                disabled={isBusy}
-              >
-                <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
-              </button>
+              <GoogleAuthButton
+                intent="login"
+                disabled={isLoading}
+                onBusyChange={setIsGoogleLoading}
+                onError={(message) => setError(message)}
+                onSuccess={handleCloseAuthFlow}
+              />
             </div>
 
             <div className={styles.buttonContainer}>

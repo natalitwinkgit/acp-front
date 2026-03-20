@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "../auth.module.css";
-import { consumeGoogleAuthError, register, startGoogleAuth } from "@/src/shared/api";
+import { closeAuthRoute } from "@/src/shared/auth-flow";
+import { consumeGoogleAuthError, register } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
 import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
+import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
 
 type RegisterFormData = {
   phone: string;
@@ -42,6 +44,15 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
       setError(authError);
     }
   }, []);
+
+  const handleCloseAuthFlow = () => {
+    if (onClose) {
+      onClose();
+      return;
+    }
+
+    closeAuthRoute(router);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -87,18 +98,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
       setError(err instanceof Error ? err.message : "Сталася помилка. Спробуйте ще раз.");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleGoogleRegister = () => {
-    setError("");
-    setIsGoogleLoading(true);
-
-    try {
-      startGoogleAuth("register");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Не вдалося почати вхід через Google.");
-      setIsGoogleLoading(false);
     }
   };
 
@@ -241,15 +240,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
             </div>
 
             <div className={styles.socialRowRegister}>
-              <button
-                className={styles.socialBtn}
-                type="button"
-                aria-label="Увійти через Google"
-                onClick={handleGoogleRegister}
-                disabled={isBusy}
-              >
-                <img src="/icons/icons8-google.svg" alt="" className={styles.icon24} />
-              </button>
+              <GoogleAuthButton
+                intent="register"
+                disabled={isLoading}
+                onBusyChange={setIsGoogleLoading}
+                onError={(message) => setError(message)}
+                onSuccess={handleCloseAuthFlow}
+              />
             </div>
 
             <div className={styles.buttonRegister}>
