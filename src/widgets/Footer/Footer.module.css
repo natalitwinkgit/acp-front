@@ -1,19 +1,16 @@
 .footer {
   width: 100%;
   min-height: 657px;
-  padding: 16px 260px;
+  padding: 16px 104px;
   box-sizing: border-box;
   background: var(--color-brand, #226078);
-
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
 }
 
 .container {
-  width: min(1400px, 100%);
+  width: min(1232px, 100%);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -24,11 +21,10 @@
   width: 100%;
   min-height: 117px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
-  border-bottom: 1px solid var(--color-surface-accent, #C9E4E7);
+  border-bottom: 1px solid var(--color-surface-accent, #c9e4e7);
 }
 
 .contactItem {
@@ -36,12 +32,11 @@
   min-height: 117px;
   padding: 20px;
   box-sizing: border-box;
-
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   gap: 24px;
+  background: transparent;
 }
 
 .timeItem {
@@ -56,8 +51,18 @@
   order: 2;
 }
 
-.instagramItem {
+.socialItem {
   order: 3;
+}
+
+.contactIconCol {
+  width: 24px;
+  min-width: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
 }
 
 .contactIcon {
@@ -74,6 +79,23 @@
   gap: 4px;
 }
 
+.timeItem .contactTextCol {
+  width: 195px;
+}
+
+.addressItem .contactTextCol {
+  width: 157px;
+}
+
+.phoneItem .contactTextCol {
+  width: 129px;
+}
+
+.socialTextCol {
+  width: 73px;
+  min-height: 47px;
+}
+
 .contactText,
 .contactLink,
 .contactTextMuted {
@@ -82,29 +104,53 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-white, #FFFFFF);
+  color: var(--color-white, #fcfefe);
   text-decoration: none;
 }
 
-.instagramLink {
+.contactTextMuted {
+  opacity: 0.96;
+}
+
+.contactLink {
+  transition: opacity 0.2s ease;
+}
+
+.contactLink:hover {
+  opacity: 0.84;
+}
+
+.contactLink:focus-visible,
+.mobileTopBar:focus-visible {
+  outline: 2px solid rgba(255, 254, 251, 0.8);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.socialIconCol {
+  min-height: 50px;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.socialIcon {
+  flex: none;
+}
+
+.socialLink {
   text-decoration: underline;
 }
 
-.contactTextMuted {
-  opacity: 0.95;
-}
-
-.contactLink:focus-visible {
-  outline: 2px solid rgba(255, 254, 251, 0.75);
-  outline-offset: 2px;
-  border-radius: 4px;
+.socialLinkSecondary {
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 .mapWrap {
   width: 100%;
   height: 450px;
-  border-radius: 12px;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .map {
@@ -114,24 +160,44 @@
   display: block;
 }
 
+.footerBottom {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .copy {
   width: 302px;
   font-family: var(--font-roboto), sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
-  color: var(--color-white, #FFFFFF);
-  text-align: center;
-  align-self: center;
+  color: var(--color-white, #fcfefe);
 }
 
-@media (max-width: 1919px) {
+.mobileTopBar {
+  display: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobileTopBarIcon {
+  width: 152px;
+  height: 5px;
+  display: block;
+}
+
+@media (min-width: 1920px) {
   .footer {
-    padding: 16px 104px;
+    padding-inline: 260px;
   }
 
   .container {
-    width: min(1232px, 100%);
+    width: min(1400px, 100%);
   }
 }
 
@@ -143,6 +209,7 @@
 
   .container {
     width: min(712px, 100%);
+    min-height: 614px;
   }
 
   .contacts {
@@ -150,7 +217,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: flex-start;
-    row-gap: 0;
+    gap: 0;
+  }
+
+  .contactItem {
+    width: 292px;
   }
 
   .timeItem {
@@ -165,7 +236,7 @@
     order: 2;
   }
 
-  .instagramItem {
+  .socialItem {
     order: 3;
   }
 
@@ -174,35 +245,103 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 430px) {
   .footer {
-    min-height: auto;
-    padding: 16px;
+    min-height: 689px;
+    padding: 16px 24px;
+    align-items: center;
   }
 
   .container {
-    width: 100%;
+    width: min(344px, 100%);
+    height: auto;
+    min-height: 582px;
+    gap: 24px;
   }
 
   .contacts {
-    min-height: auto;
+    width: 100%;
+    min-height: 361px;
     flex-direction: column;
-    flex-wrap: nowrap;
+    align-items: flex-start;
     gap: 0;
+    padding: 0;
   }
 
   .contactItem {
     width: 100%;
-    min-height: auto;
-    padding: 16px 0;
     justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .timeItem {
+    height: 64px;
+  }
+
+  .phoneItem {
+    height: 117px;
+  }
+
+  .addressItem {
+    height: 90px;
+  }
+
+  .socialItem {
+    height: 90px;
+  }
+
+  .timeItem .contactTextCol {
+    width: 195px;
+    min-height: 23px;
+  }
+
+  .phoneItem .contactTextCol {
+    width: 129px;
+    min-height: 77px;
+  }
+
+  .addressItem .contactTextCol {
+    width: 157px;
+    min-height: 50px;
+  }
+
+  .socialTextCol {
+    width: 73px;
+    min-height: 47px;
   }
 
   .mapWrap {
-    height: 260px;
+    width: 100%;
+    height: 197px;
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 
   .copy {
+    width: 302px;
+    align-self: flex-start;
+  }
+
+  .mobileTopBar {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .footer {
+    padding-inline: 16px;
+  }
+
+  .container {
     width: 100%;
   }
 }

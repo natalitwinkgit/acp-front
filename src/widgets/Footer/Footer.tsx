@@ -13,6 +13,10 @@ export default function Footer() {
     MAP_QUERY
   )}&output=embed`;
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer
       className={styles.footer}
@@ -23,14 +27,16 @@ export default function Footer() {
         <div className={styles.contacts}>
           {/* Work time */}
           <div className={`${styles.contactItem} ${styles.timeItem}`}>
-            <img
-              className={styles.contactIcon}
-              src="/icons/Footer/clock.svg"
-              alt=""
-              aria-hidden="true"
-              width={24}
-              height={24}
-            />
+            <div className={styles.contactIconCol}>
+              <img
+                className={styles.contactIcon}
+                src="/icons/Footer/clock.svg"
+                alt=""
+                aria-hidden="true"
+                width={24}
+                height={24}
+              />
+            </div>
             <div className={styles.contactTextCol}>
               <div className={styles.contactText}>{t("footer.workTime")}</div>
             </div>
@@ -38,14 +44,16 @@ export default function Footer() {
 
           {/* Address */}
           <div className={`${styles.contactItem} ${styles.addressItem}`}>
-            <img
-              className={styles.contactIcon}
-              src="/icons/Footer/map-point.svg"
-              alt=""
-              aria-hidden="true"
-              width={24}
-              height={24}
-            />
+            <div className={styles.contactIconCol}>
+              <img
+                className={styles.contactIcon}
+                src="/icons/Footer/map-point.svg"
+                alt=""
+                aria-hidden="true"
+                width={24}
+                height={24}
+              />
+            </div>
             <div className={styles.contactTextCol}>
               <div className={styles.contactText}>{t("footer.addressLine1")}</div>
               <div className={styles.contactTextMuted}>
@@ -56,14 +64,16 @@ export default function Footer() {
 
           {/* Phones */}
           <div className={`${styles.contactItem} ${styles.phoneItem}`}>
-            <img
-              className={styles.contactIcon}
-              src="/icons/Footer/phone.svg"
-              alt=""
-              aria-hidden="true"
-              width={24}
-              height={24}
-            />
+            <div className={styles.contactIconCol}>
+              <img
+                className={styles.contactIcon}
+                src="/icons/Footer/phone.svg"
+                alt=""
+                aria-hidden="true"
+                width={24}
+                height={24}
+              />
+            </div>
             <div className={styles.contactTextCol}>
               <a className={styles.contactLink} href="tel:+380974802428">
                 +38097 480 24 28
@@ -77,24 +87,42 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Instagram */}
-          <div className={`${styles.contactItem} ${styles.instagramItem}`}>
-            <img
-              className={styles.contactIcon}
-              src="/icons/Footer/instagram.svg"
-              alt=""
-              aria-hidden="true"
-              width={24}
-              height={24}
-            />
-            <div className={styles.contactTextCol}>
+          {/* Social */}
+          <div className={`${styles.contactItem} ${styles.socialItem}`}>
+            <div className={`${styles.contactIconCol} ${styles.socialIconCol}`}>
+              <img
+                className={`${styles.contactIcon} ${styles.socialIcon}`}
+                src="/icons/Footer/insta.svg"
+                alt=""
+                aria-hidden="true"
+                width={24}
+                height={24}
+              />
+              <img
+                className={`${styles.contactIcon} ${styles.socialIcon}`}
+                src="/icons/Footer/fs.svg"
+                alt=""
+                aria-hidden="true"
+                width={24}
+                height={24}
+              />
+            </div>
+            <div className={`${styles.contactTextCol} ${styles.socialTextCol}`}>
               <a
-                className={`${styles.contactLink} ${styles.instagramLink}`}
+                className={`${styles.contactLink} ${styles.socialLink}`}
                 href="https://www.instagram.com/"
                 target="_blank"
                 rel="noreferrer"
               >
                 {t("footer.instagram")}
+              </a>
+              <a
+                className={`${styles.contactLink} ${styles.socialLinkSecondary}`}
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t("footer.facebook")}
               </a>
             </div>
           </div>
@@ -110,7 +138,25 @@ export default function Footer() {
           />
         </div>
 
-        <div className={styles.copy}>{t("footer.copy")}</div>
+        <div className={styles.footerBottom}>
+          <div className={styles.copy}>{t("footer.copy")}</div>
+
+          <button
+            className={styles.mobileTopBar}
+            type="button"
+            onClick={scrollToTop}
+            aria-label={t("footer.scrollTop")}
+          >
+            <img
+              className={styles.mobileTopBarIcon}
+              src="/icons/Footer/Bar.svg"
+              alt=""
+              aria-hidden="true"
+              width={152}
+              height={5}
+            />
+          </button>
+        </div>
       </div>
     </footer>
   );
