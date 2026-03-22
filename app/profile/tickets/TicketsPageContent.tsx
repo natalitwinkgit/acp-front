@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import BreadcrumbChips from "@/src/shared/ui/BreadcrumbChips/BreadcrumbChips";
 import SurfacePanel from "@/src/shared/ui/SurfacePanel/SurfacePanel";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
@@ -36,7 +38,39 @@ export default function TicketsPageContent() {
             {t("profile.tickets.title")}
           </h1>
 
-          <SurfacePanel className={styles.emptyCard} aria-hidden="true" />
+          <SurfacePanel className={styles.emptyCard}>
+            <div className={styles.emptyContentWrapper}>
+              
+              {/* Блок з ілюстрацією */}
+              <div className={styles.illustrationBox}>
+                <Image
+                  src="/icons/account/tickets/fontisto_bus-ticket.svg"
+                  alt=""
+                  width={301}
+                  height={301}
+                  className={styles.ticketBack}
+                />
+                <Image
+                  src="/icons/account/tickets/fontisto_bus-ticket.svg"
+                  alt=""
+                  width={301}
+                  height={301}
+                  className={styles.ticketFront}
+                />
+              </div>
+
+              {/* Блок з текстом та кнопкою */}
+              <div className={styles.textAndActionBlock}>
+                <h2 className={styles.emptyStateText}>
+                  У вас ще немає квитків. Бажаєте знайти рейс?
+                </h2>
+                <Link href="/#routes" className={styles.searchButton}>
+                  Вибрати рейс
+                </Link>
+              </div>
+
+            </div>
+          </SurfacePanel>
         </section>
       </div>
     </main>
