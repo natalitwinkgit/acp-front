@@ -55,7 +55,7 @@ export default function BookingForm() {
                 }`}
                 aria-hidden="true"
               >
-                <img src="/icons/calendar.svg" alt="" />
+                <img src="/icons/calendar.svg" alt="" width={24} height={24} />
               </span>
             </button>
 
@@ -100,7 +100,7 @@ export default function BookingForm() {
                 readOnly
               />
               <span className={styles.iconRight} aria-hidden="true">
-                <img src="/icons/currency-hryvnia.svg" alt="" />
+                <img src="/icons/currency-hryvnia.svg" alt="" width={24} height={24} />
               </span>
             </div>
           </div>
