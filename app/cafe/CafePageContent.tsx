@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import BreadcrumbChips from "@/src/shared/ui/BreadcrumbChips/BreadcrumbChips";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import { DecorativeBorder } from "@/src/shared/ui/DecorativeBorder/DecorativeBorder";
 import styles from "./cafe.module.css";
 
 type MenuItem = {
@@ -112,28 +113,6 @@ const CAFE_CARDS: CafeCard[] = [
 const CAFE_DESCRIPTION =
   "«Станція кави» — затишна кав'ярня на автостанції, де пахне міцною кавою. Тут завжди раді гостям, які чекають на рейс, або просто хочуть насолодитися смачним напоєм. У меню — різноманітні кавові напої, чай, свіжі хот-доги та солодощі для приємного перекусу.";
 
-function CardFrame() {
-  return (
-    <svg
-      className={styles.cardBorder}
-      viewBox="0 0 1078 427"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <rect
-        className={styles.cardBorderShape}
-        x="4"
-        y="4"
-        width="1070"
-        height="419"
-        rx="12"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
 function MenuGroup({
   section,
   className = "",
@@ -192,8 +171,6 @@ export default function CafePageContent() {
 
     return (
       <article key={card.imageSrc} className={`${styles.card} ${cardSideClass} ${cardVariantClass}`}>
-        <CardFrame />
-
         <div className={styles.photoWrap}>
           <Image
             src={card.imageSrc}
@@ -205,27 +182,29 @@ export default function CafePageContent() {
           />
         </div>
 
-        <div className={styles.slot}>
-          <div
-            className={`${styles.cardContent} ${
-              isSplitLayout ? styles.cardContentSplit : styles.cardContentSingle
-            }`}
-          >
-            {isSplitLayout ? (
-              <>
-                <MenuGroup section={card.sections[0]} />
+        <DecorativeBorder className={styles.cardFrame}>
+          <div className={styles.slot}>
+            <div
+              className={`${styles.cardContent} ${
+                isSplitLayout ? styles.cardContentSplit : styles.cardContentSingle
+              }`}
+            >
+              {isSplitLayout ? (
+                <>
+                  <MenuGroup section={card.sections[0]} />
 
-                <div className={styles.sideColumn}>
-                  {card.sections.slice(1).map((section) => (
-                    <MenuGroup key={section.title} section={section} />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <MenuGroup section={card.sections[0]} className={styles.singleGroup} />
-            )}
+                  <div className={styles.sideColumn}>
+                    {card.sections.slice(1).map((section) => (
+                      <MenuGroup key={section.title} section={section} />
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <MenuGroup section={card.sections[0]} className={styles.singleGroup} />
+              )}
+            </div>
           </div>
-        </div>
+        </DecorativeBorder>
       </article>
     );
   };
