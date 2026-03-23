@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import TicketBookingPageContent from "./TicketBookingPageContent";
+
 import { getPopularRouteBySlug } from "@/src/shared/data/popularRoutes";
+import TicketBookingPageContent from "./TicketBookingPageContent";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -31,5 +32,5 @@ export default async function TicketBookingPage({ params }: PageProps) {
     notFound();
   }
 
-  return <TicketBookingPageContent />;
+  return <TicketBookingPageContent route={route} />;
 }
