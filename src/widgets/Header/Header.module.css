@@ -130,10 +130,21 @@
   flex: 0 0 auto;
 }
 
+.phoneToggle {
+  display: none;
+}
+
 .phoneIcon {
   width: 24px;
   height: 24px;
   display: block;
+}
+
+.phoneIconDesktop {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex: 0 0 auto;
 }
 
 .phoneCol {
@@ -160,6 +171,29 @@
 
 .phone:hover,
 .phone:focus-visible {
+  color: var(--color-text-strong, #11313D);
+}
+
+.phoneMenuPanel {
+  display: none;
+}
+
+.phoneMenuPanelOpen {
+  display: flex;
+}
+
+.phoneMenuItem {
+  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 144%;
+  color: var(--color-brand, #226078);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.phoneMenuItem:hover,
+.phoneMenuItem:focus-visible {
   color: var(--color-text-strong, #11313D);
 }
 
@@ -334,6 +368,10 @@
 @media (max-width: 768px) {
   .menu { display: none; }
 
+  .headerNoShadow {
+    box-shadow: 0px 2px 4px 0px var(--LightSlateGray, #7B98A3);
+  }
+
   .header {
     height: 82px;
   }
@@ -347,6 +385,18 @@
 
   .right { gap: 28px; }
 
+  .mobileMenuBtn {
+    order: 0;
+  }
+
+  .phoneWrap {
+    order: 1;
+  }
+
+  .authControl {
+    order: 2;
+  }
+
   .phoneWrap {
     width: 40px;
     height: 40px;
@@ -354,8 +404,58 @@
     gap: 0;
   }
 
+  .phoneIconDesktop {
+    display: none;
+  }
+
   .phoneCol {
     display: none;
+  }
+
+  .phoneToggle {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .phoneToggle:focus-visible {
+    outline: 2px solid var(--color-brand, #226078);
+    outline-offset: 2px;
+  }
+
+  .phoneMenuPanel {
+    position: absolute;
+    top: calc(100% - 1px);
+    right: 0;
+    z-index: 30;
+    width: 186px;
+    min-height: 164px;
+    padding: 20px 40px;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    background: var(--bg, #FCFEFE);
+    border: 1px solid #697c95;
+    box-shadow:
+      -2px 0px 4px #6581a9,
+      0px 2px 4px #6581a9;
+    border-radius: 0 0 0 12px;
+  }
+
+  .phoneMenuItem {
+    width: 113px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobileMenuBtn {
@@ -372,7 +472,7 @@
 
   .mobileMenuPanel {
     position: absolute;
-    top: 81px;
+    top: calc(100% - 1px);
     right: 0;
     z-index: 30;
 
@@ -382,26 +482,31 @@
 
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
 
     background: var(--bg, #FCFEFE);
-    box-shadow: -2px 0px 10px rgba(123, 152, 163, 0.35);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: var(--LightSlateGray, #7B98A3);
+    box-shadow:
+      0px 2px 4px 0px var(--LightSlateGray, #7B98A3),
+      -2px 0px 4px 0px var(--LightSlateGray, #7B98A3);
     border-radius: 0 0 0 12px;
   }
 
   .mobileMenuPanelOpen { display: flex; }
 
   .mobileMenuItem {
-    width: 160px;
+    width: 100%;
     height: 40px;
     padding: 4px 8px;
     box-sizing: border-box;
-    border-bottom: 2px solid transparent;
 
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    align-self: stretch;
 
     font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
     font-weight: 500;
@@ -415,7 +520,6 @@
 
   .mobileMenuItemActive {
     color: var(--color-brand, #226078);
-    border-bottom: 2px solid var(--DarkSlateGray, #226078);
   }
 }
 
@@ -426,11 +530,11 @@
 
   .container {
     height: 56px;
-    padding: 8px clamp(12px, 4vw, 20px);
+    padding: 8px 20px;
   }
 
   .logoWrap {
-    width: auto;
+    width: 123px;
     height: 32px;
     gap: 4px;
   }
@@ -490,11 +594,27 @@
     gap: 8px;
   }
 
+  .rightAuthorized {
+    width: 120px;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .authControl {
+    width: 40px;
+    height: 40px;
+  }
+
   .phoneWrap {
     width: 40px;
     height: 40px;
     justify-content: center;
     gap: 0;
+  }
+
+  .phoneToggle {
+    width: 40px;
+    height: 40px;
   }
 
   .phoneIcon {
@@ -521,14 +641,13 @@
   }
 
   .mobileMenuPanel {
-    top: 55px;
     width: 156px;
+    min-height: 232px;
     padding: 8px 16px;
     gap: 4px;
   }
 
   .mobileMenuItem {
-    width: 124px;
     height: 40px;
     justify-content: flex-start;
   }
@@ -588,6 +707,11 @@
 
   .phoneWrap,
   .mobileMenuBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .phoneToggle {
     width: 32px;
     height: 32px;
   }

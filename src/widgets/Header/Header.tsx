@@ -7,7 +7,7 @@ import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
 import HeaderAuthControl from "./HeaderAuthControl";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { MouseEvent, useEffect, useState, useSyncExternalStore } from "react";
+import { MouseEvent, useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
 
 const menu = [
   { key: "menu.home", href: "#home" },
@@ -59,7 +59,9 @@ export default function Header() {
 
   const [activeMenuHref, setActiveMenuHref] = useState("#home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPhoneMenuOpen, setIsPhoneMenuOpen] = useState(false);
   const currentMenuHref = pathname === "/cafe" ? "/cafe" : activeMenuHref;
+  const phoneMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -79,6 +81,7 @@ export default function Header() {
     const onResize = () => {
       if (window.innerWidth > 768) {
         setIsMobileMenuOpen(false);
+        setIsPhoneMenuOpen(false);
       }
     };
 
@@ -91,7 +94,36 @@ export default function Header() {
     router.prefetch("/login");
   }, [router]);
 
+  const closePhoneMenu = useEffectEvent(() => {
+    setIsPhoneMenuOpen(false);
+  });
+
+  useEffect(() => {
+    if (!isPhoneMenuOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!phoneMenuRef.current?.contains(event.target as Node)) {
+        closePhoneMenu();
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closePhoneMenu();
+      }
+    };
+
+    window.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isPhoneMenuOpen]);
+
   const openLoginModal = () => {
+    setIsPhoneMenuOpen(false);
     const search = searchParams?.toString();
     const hash = typeof window !== "undefined" ? window.location.hash : "";
     const background = search ? `${pathname}?${search}` : pathname;
@@ -100,12 +132,14 @@ export default function Header() {
   };
 
   const handleAvatarClick = () => {
+    setIsPhoneMenuOpen(false);
     router.push("/profile");
   };
 
   const handleScroll = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
+    setIsPhoneMenuOpen(false);
 
     if (!href.startsWith("#")) {
       router.push(href);
@@ -177,8 +211,22 @@ export default function Header() {
             onAvatarClick={handleAvatarClick}
           />
 
-          <div className={styles.phoneWrap}>
-            <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" />
+          <div className={styles.phoneWrap} ref={phoneMenuRef}>
+            <img className={styles.phoneIconDesktop} src="/icons/phone.svg" alt="" aria-hidden="true" />
+            <button
+              className={styles.phoneToggle}
+              type="button"
+              aria-label={t("profile.fields.phone")}
+              aria-expanded={isPhoneMenuOpen}
+              aria-controls="header-phone-menu"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsPhoneMenuOpen((prev) => !prev);
+              }}
+            >
+              <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" aria-hidden="true" />
+            </button>
+
             <div className={styles.phoneCol}>
               {phones.map((item) => (
                 <div className={styles.phoneRow} key={item.href}>
@@ -186,6 +234,24 @@ export default function Header() {
                     {item.text}
                   </a>
                 </div>
+              ))}
+            </div>
+
+            <div
+              id="header-phone-menu"
+              className={`${styles.phoneMenuPanel} ${isPhoneMenuOpen ? styles.phoneMenuPanelOpen : ""}`}
+              aria-hidden={!isPhoneMenuOpen}
+              aria-label={t("menu.contacts")}
+            >
+              {phones.map((item) => (
+                <a
+                  key={`popup-${item.href}`}
+                  className={styles.phoneMenuItem}
+                  href={item.href}
+                  onClick={() => setIsPhoneMenuOpen(false)}
+                >
+                  {item.text}
+                </a>
               ))}
             </div>
           </div>
@@ -196,7 +262,10 @@ export default function Header() {
             aria-label={t("header.menuAria")}
             aria-expanded={isMobileMenuOpen}
             aria-controls="header-mobile-menu"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            onClick={() => {
+              setIsPhoneMenuOpen(false);
+              setIsMobileMenuOpen((prev) => !prev);
+            }}
           >
             {isMobileMenuOpen ? (
               <span key="icon-close" className={styles.mobileCloseIcon} aria-hidden="true" />
