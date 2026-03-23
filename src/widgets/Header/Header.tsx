@@ -23,6 +23,8 @@ const phones = [
   { text: "+38099 078 20 21", href: "tel:+380990782021" },
 ];
 
+const HEADER_COLLAPSE_BREAKPOINT = 1024;
+
 function getAuthStatusSnapshot() {
   if (typeof window === "undefined") return false;
   return hasAccessToken();
@@ -79,7 +81,7 @@ export default function Header() {
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > HEADER_COLLAPSE_BREAKPOINT) {
         setIsMobileMenuOpen(false);
         setIsPhoneMenuOpen(false);
       }
@@ -175,8 +177,7 @@ export default function Header() {
           }}
           aria-label={t("aria.home")}
         >
-          <img className={styles.logo} src="/logo-sprinter.svg" alt={t("header.logoAlt")} />
-          <img className={styles.logoText} src="/Text.svg" alt="" aria-hidden="true" />
+          <img className={styles.logo} src="/logo-sprinter.svg" alt={t("header.logoAlt")} width={213} height={50} />
         </a>
 
         <nav className={styles.menu} aria-label={t("header.menuAria")}>
@@ -212,7 +213,7 @@ export default function Header() {
           />
 
           <div className={styles.phoneWrap} ref={phoneMenuRef}>
-            <img className={styles.phoneIconDesktop} src="/icons/phone.svg" alt="" aria-hidden="true" />
+            <img className={styles.phoneIconDesktop} src="/icons/phone.svg" alt="" aria-hidden="true" width={24} height={24} />
             <button
               className={styles.phoneToggle}
               type="button"
@@ -224,7 +225,7 @@ export default function Header() {
                 setIsPhoneMenuOpen((prev) => !prev);
               }}
             >
-              <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" aria-hidden="true" />
+              <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" aria-hidden="true" width={24} height={24} />
             </button>
 
             <div className={styles.phoneCol}>
@@ -275,6 +276,8 @@ export default function Header() {
                 className={styles.mobileMenuIcon}
                 src="/icons/Header/Vector%20(Stroke).png"
                 alt=""
+                width={24}
+                height={24}
               />
             )}
           </button>

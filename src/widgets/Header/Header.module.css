@@ -38,18 +38,19 @@
 .logoWrap {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   height: 50px;
-  width: 193px;
+  width: auto;
   flex: 0 0 auto;
   text-decoration: none;
 }
 
 .logo {
-  width: 94px;
+  width: auto;
   height: 50px;
   display: block;
   flex-shrink: 0;
+  max-width: none;
 }
 
 .logoText {
@@ -238,6 +239,51 @@
   transform: rotate(-45deg);
 }
 
+@media (max-width: 1439px) {
+  .container {
+    padding-inline: clamp(24px, 7.22vw, 104px);
+  }
+
+  .menu {
+    gap: clamp(12px, 1.4vw, 20px);
+  }
+
+  .menuItem {
+    padding-inline: 6px;
+    font-size: 15px;
+  }
+
+  .right {
+    gap: clamp(16px, 2.2vw, 40px);
+  }
+
+  .phoneWrap {
+    gap: clamp(8px, 0.95vw, 13px);
+  }
+
+  .phone {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .logoWrap {
+    width: auto;
+    height: 44px;
+    gap: 0;
+  }
+
+  .logo {
+    width: auto;
+    height: 44px;
+  }
+
+  .logoText {
+    width: 82px;
+    height: 30px;
+  }
+}
+
 /* 1920 desktop state (pixel-perfect to design spec) */
 @media (min-width: 1920px) {
   .header {
@@ -264,7 +310,7 @@
 
   .logoWrap {
     margin: 0 auto;
-    width: 193px;
+    width: auto;
     height: 50px;
     flex: none;
     order: 0;
@@ -272,7 +318,7 @@
   }
 
   .logo {
-    width: 94px;
+    width: auto;
     height: 50px;
   }
 
@@ -364,8 +410,8 @@
   }
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+/* TABLET + MOBILE COLLAPSED HEADER */
+@media (max-width: 1024px) {
   .menu { display: none; }
 
   .headerNoShadow {
@@ -373,17 +419,35 @@
   }
 
   .header {
-    height: 82px;
+    height: 72px;
   }
 
   .container {
-    height: 82px;
-    padding: 16px 24px;
+    --header-inline-offset: 24px;
+    height: 72px;
+    padding: 12px var(--header-inline-offset);
+    gap: 16px;
+  }
+
+  .logoWrap {
+    width: auto;
+    height: 42px;
+    gap: 0;
+  }
+
+  .logo {
+    width: auto;
+    height: 42px;
+  }
+
+  .logoText {
+    width: 78px;
+    height: 28px;
   }
 
   .mobileLang { display: none; }
 
-  .right { gap: 28px; }
+  .right { gap: 16px; }
 
   .mobileMenuBtn {
     order: 0;
@@ -432,9 +496,10 @@
   .phoneMenuPanel {
     position: absolute;
     top: calc(100% - 1px);
-    right: 0;
+    right: calc(-1 * var(--header-inline-offset));
     z-index: 30;
-    width: 186px;
+    width: min(186px, calc(100vw - 8px));
+    max-width: calc(100vw - 8px);
     min-height: 164px;
     padding: 20px 40px;
     box-sizing: border-box;
@@ -473,10 +538,11 @@
   .mobileMenuPanel {
     position: absolute;
     top: calc(100% - 1px);
-    right: 0;
+    right: calc(-1 * var(--header-inline-offset));
     z-index: 30;
 
-    width: 240px;
+    width: min(240px, calc(100vw - 8px));
+    max-width: calc(100vw - 8px);
     padding: 20px 40px;
     box-sizing: border-box;
 
@@ -523,20 +589,76 @@
   }
 }
 
+@media (max-width: 640px) {
+  .header {
+    height: 64px;
+  }
+
+  .container {
+    --header-inline-offset: 16px;
+    height: 64px;
+    padding: 10px var(--header-inline-offset);
+    gap: 12px;
+  }
+
+  .logoWrap {
+    width: auto;
+    height: 36px;
+    gap: 0;
+  }
+
+  .logo {
+    width: auto;
+    height: 36px;
+  }
+
+  .logoText {
+    width: auto;
+    height: 24px;
+  }
+
+  .right {
+    gap: 10px;
+  }
+
+  .phoneWrap,
+  .mobileMenuBtn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .phoneToggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .phoneMenuPanel {
+    width: min(176px, calc(100vw - 6px));
+    min-height: 148px;
+    padding: 16px 24px;
+  }
+
+  .mobileMenuPanel {
+    width: min(188px, calc(100vw - 6px));
+    padding: 12px 20px;
+  }
+}
+
 @media (max-width: 430px) {
   .header {
     height: 56px;
   }
 
   .container {
+    --header-inline-offset: 12px;
     height: 56px;
-    padding: 8px 20px;
+    padding: 8px var(--header-inline-offset);
   }
 
   .logoWrap {
-    width: 123px;
+    width: auto;
     height: 32px;
-    gap: 4px;
+    gap: 0;
   }
 
   .logo {
@@ -655,12 +777,13 @@
 
 @media (max-width: 360px) {
   .container {
-    padding-inline: 12px;
+    --header-inline-offset: 10px;
+    padding-inline: var(--header-inline-offset);
   }
 
   .logoWrap {
     height: 28px;
-    gap: 3px;
+    gap: 0;
   }
 
   .logo {

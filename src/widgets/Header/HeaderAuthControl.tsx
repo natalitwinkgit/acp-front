@@ -34,6 +34,8 @@ export default function HeaderAuthControl({
             className={styles.avatarIcon}
             src="/icons/Header/user/avatar_login.svg"
             alt=""
+            width={32}
+            height={32}
           />
         </button>
       ) : (
