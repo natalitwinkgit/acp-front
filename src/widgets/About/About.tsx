@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import styles from "./About.module.css";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import StatStepperCore from "./StatStepperCore/StatStepperCore";
@@ -29,10 +31,11 @@ export default function About() {
         {cards.map((card) => (
           <article key={card.key} className={styles.card}>
             <div className={styles.iconWrap} aria-hidden="true">
-              <img
+              <Image
                 className={styles.icon}
                 src={encodeURI(card.icon)}
                 alt=""
+                aria-hidden="true"
                 width={40}
                 height={40}
               />

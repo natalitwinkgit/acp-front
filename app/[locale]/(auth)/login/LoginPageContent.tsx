@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -121,11 +122,13 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                     onClick={() => setShowPass((v) => !v)}
                     aria-label={showPass ? t("common.password.hide") : t("common.password.show")}
                   >
-                    <img
+                    <Image
                       className={styles.icon24}
                       src={showPass ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
                       alt=""
                       aria-hidden="true"
+                      width={24}
+                      height={24}
                     />
                   </button>
                 </div>
@@ -176,12 +179,13 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
 
         <div className={styles.loginAside}>
           <div className={styles.loginBrand}>
-            <img
+            <Image
               src="/logo-sprinter.svg"
               alt={t("header.logoAlt")}
               className={styles.brandLogo}
               width={213}
               height={50}
+              priority
             />
             <div className={styles.loginBrandDesc}>{t("auth.common.brandDesc")}</div>
           </div>

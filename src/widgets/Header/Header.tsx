@@ -4,6 +4,7 @@ import { hasAccessToken } from "@/src/shared/api";
 import { storeAuthBackground } from "@/src/shared/auth-flow";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import { stripLocaleFromPathname } from "@/src/shared/i18n/routing";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { MouseEvent, useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
 
@@ -181,7 +182,14 @@ export default function Header() {
           }}
           aria-label={t("aria.home")}
         >
-          <img className={styles.logo} src="/logo-sprinter.svg" alt={t("header.logoAlt")} width={213} height={50} />
+          <Image
+            className={styles.logo}
+            src="/logo-sprinter.svg"
+            alt={t("header.logoAlt")}
+            width={213}
+            height={50}
+            priority
+          />
         </a>
 
         <nav className={styles.menu} aria-label={t("header.menuAria")}>
@@ -217,7 +225,14 @@ export default function Header() {
           />
 
           <div className={styles.phoneWrap} ref={phoneMenuRef}>
-            <img className={styles.phoneIconDesktop} src="/icons/phone.svg" alt="" aria-hidden="true" width={24} height={24} />
+            <Image
+              className={styles.phoneIconDesktop}
+              src="/icons/phone.svg"
+              alt=""
+              aria-hidden="true"
+              width={24}
+              height={24}
+            />
             <button
               className={styles.phoneToggle}
               type="button"
@@ -229,7 +244,14 @@ export default function Header() {
                 setIsPhoneMenuOpen((prev) => !prev);
               }}
             >
-              <img className={styles.phoneIcon} src="/icons/phone.svg" alt="" aria-hidden="true" width={24} height={24} />
+              <Image
+                className={styles.phoneIcon}
+                src="/icons/phone.svg"
+                alt=""
+                aria-hidden="true"
+                width={24}
+                height={24}
+              />
             </button>
 
             <div className={styles.phoneCol}>
@@ -275,11 +297,12 @@ export default function Header() {
             {isMobileMenuOpen ? (
               <span key="icon-close" className={styles.mobileCloseIcon} aria-hidden="true" />
             ) : (
-              <img
+              <Image
                 key="icon-menu"
                 className={styles.mobileMenuIcon}
                 src="/icons/Header/Vector%20(Stroke).png"
                 alt=""
+                aria-hidden="true"
                 width={24}
                 height={24}
               />

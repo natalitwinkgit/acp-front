@@ -1,6 +1,8 @@
 // Footer.tsx
 "use client";
 
+import Image from "next/image";
+
 import styles from "./Footer.module.css";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 
@@ -28,7 +30,7 @@ export default function Footer() {
           {/* Work time */}
           <div className={`${styles.contactItem} ${styles.timeItem}`}>
             <div className={styles.contactIconCol}>
-              <img
+              <Image
                 className={styles.contactIcon}
                 src="/icons/Footer/clock.svg"
                 alt=""
@@ -45,7 +47,7 @@ export default function Footer() {
           {/* Address */}
           <div className={`${styles.contactItem} ${styles.addressItem}`}>
             <div className={styles.contactIconCol}>
-              <img
+              <Image
                 className={styles.contactIcon}
                 src="/icons/Footer/map-point.svg"
                 alt=""
@@ -65,7 +67,7 @@ export default function Footer() {
           {/* Phones */}
           <div className={`${styles.contactItem} ${styles.phoneItem}`}>
             <div className={styles.contactIconCol}>
-              <img
+              <Image
                 className={styles.contactIcon}
                 src="/icons/Footer/phone.svg"
                 alt=""
@@ -90,7 +92,7 @@ export default function Footer() {
           {/* Social */}
           <div className={`${styles.contactItem} ${styles.socialItem}`}>
             <div className={`${styles.contactIconCol} ${styles.socialIconCol}`}>
-              <img
+              <Image
                 className={`${styles.contactIcon} ${styles.socialIcon}`}
                 src="/icons/Footer/insta.svg"
                 alt=""
@@ -98,7 +100,7 @@ export default function Footer() {
                 width={24}
                 height={24}
               />
-              <img
+              <Image
                 className={`${styles.contactIcon} ${styles.socialIcon}`}
                 src="/icons/Footer/fs.svg"
                 alt=""
@@ -147,7 +149,7 @@ export default function Footer() {
             onClick={scrollToTop}
             aria-label={t("footer.scrollTop")}
           >
-            <img
+            <Image
               className={styles.mobileTopBarIcon}
               src="/icons/Footer/Bar.svg"
               alt=""

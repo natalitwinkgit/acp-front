@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import styles from "./BenefitsWidget.module.css";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 
@@ -29,7 +31,13 @@ export default function BenefitsWidget() {
       <div className={styles.inner}>
         {items.map((it) => (
           <div key={it.textKey} className={styles.card}>
-            <img className={styles.icon} src={it.icon} alt={t(it.altKey)} />
+            <Image
+              className={styles.icon}
+              src={it.icon}
+              alt={t(it.altKey)}
+              width={44}
+              height={44}
+            />
             <div className={styles.text}>{t(it.textKey)}</div>
           </div>
         ))}

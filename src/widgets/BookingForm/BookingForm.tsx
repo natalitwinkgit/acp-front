@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import styles from "./BookingForm.module.css";
 import Button from "../Button/Button";
@@ -55,7 +56,7 @@ export default function BookingForm() {
                 }`}
                 aria-hidden="true"
               >
-                <img src="/icons/calendar.svg" alt="" width={24} height={24} />
+                <Image src="/icons/calendar.svg" alt="" aria-hidden="true" width={24} height={24} />
               </span>
             </button>
 
@@ -100,7 +101,7 @@ export default function BookingForm() {
                 readOnly
               />
               <span className={styles.iconRight} aria-hidden="true">
-                <img src="/icons/currency-hryvnia.svg" alt="" width={24} height={24} />
+                <Image src="/icons/currency-hryvnia.svg" alt="" aria-hidden="true" width={24} height={24} />
               </span>
             </div>
           </div>

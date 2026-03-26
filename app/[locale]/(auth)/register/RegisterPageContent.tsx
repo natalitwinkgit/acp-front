@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -113,12 +114,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
       <div className={styles.registerContent}>
         <div className={styles.registerAside}>
           <div className={styles.registerBrand}>
-            <img
+            <Image
               src="/logo-sprinter.svg"
               alt={t("header.logoAlt")}
               className={styles.brandLogo}
               width={213}
               height={50}
+              priority
             />
             <div className={styles.registerBrandDesc}>{t("auth.common.brandDesc")}</div>
           </div>
@@ -187,11 +189,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                   onClick={() => setShowPass((v) => !v)}
                   aria-label={showPass ? t("common.password.hide") : t("common.password.show")}
                 >
-                  <img
+                  <Image
                     className={styles.icon24}
                     src={showPass ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
                     alt=""
                     aria-hidden="true"
+                    width={24}
+                    height={24}
                   />
                 </button>
               </div>
@@ -218,11 +222,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                     onClick={() => setShowPass2((v) => !v)}
                     aria-label={showPass2 ? t("common.password.hide") : t("common.password.show")}
                   >
-                    <img
+                    <Image
                       className={styles.icon24}
                       src={showPass2 ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
                       alt=""
                       aria-hidden="true"
+                      width={24}
+                      height={24}
                     />
                   </button>
                 </div>

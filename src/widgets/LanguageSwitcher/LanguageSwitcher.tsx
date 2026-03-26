@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 import "./LanguageSwitcher.css";
@@ -45,7 +46,14 @@ export default function LanguageSwitcher() {
         aria-pressed={!isEn}
         aria-label={t("languageSwitcher.ua")}
       >
-        <img className="language-switcher__img" src="/icons/flag-ua.svg" alt="UA" width={24} height={24} />
+        <Image
+          className="language-switcher__img"
+          src="/icons/flag-ua.svg"
+          alt=""
+          aria-hidden="true"
+          width={24}
+          height={24}
+        />
       </button>
 
       <button
@@ -55,10 +63,11 @@ export default function LanguageSwitcher() {
         aria-pressed={isEn}
         aria-label={t("languageSwitcher.en")}
       >
-        <img
+        <Image
           className="language-switcher__img language-switcher__img--en"
           src="/icons/flag-en.svg"
-          alt="EN"
+          alt=""
+          aria-hidden="true"
           width={24}
           height={24}
         />

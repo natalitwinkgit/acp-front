@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import styles from "./HeaderAuthControl.module.css";
 
 type HeaderAuthControlProps = {
@@ -30,10 +32,11 @@ export default function HeaderAuthControl({
           type="button"
           onClick={onAvatarClick}
         >
-          <img
+          <Image
             className={styles.avatarIcon}
             src="/icons/Header/user/avatar_login.svg"
             alt=""
+            aria-hidden="true"
             width={32}
             height={32}
           />
