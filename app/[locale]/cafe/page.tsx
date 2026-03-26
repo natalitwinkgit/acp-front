@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
-import { getDictionary } from "@/src/shared/i18n/getDictionary";
+import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
 import CafePageContent from "./CafePageContent";
 
 type PageProps = {
@@ -15,16 +15,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
-  const dictionary = await getDictionary(locale);
-  const cafeTitle = typeof dictionary["menu.cafe"] === "string" ? dictionary["menu.cafe"] : "Cafe";
+  const seo = getSeoCopy(locale);
 
-  return {
-    title: `${cafeTitle} | Автолюкс Черкаси-Плюс`,
-    description:
-      locale === "en"
-        ? "Cafe page for Autolux Cherkasy-Plus."
-        : "Сторінка кафе Автолюкс Черкаси-Плюс.",
-  };
+  return createPageMetadata({
+    locale,
+    pathname: "/cafe",
+    title: seo.cafe.title,
+    description: seo.cafe.description,
+    keywords: seo.cafe.keywords,
+  });
 }
 
 export default function CafePage() {

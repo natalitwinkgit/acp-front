@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { hasLocale, type Locale } from "@/src/shared/i18n/config";
 import { getPopularRouteBySlug } from "@/src/shared/data/popularRoutes";
+import { createPageMetadata, getSeoCopy, getTicketBookingSeo } from "@/src/shared/seo/metadata";
 import TicketBookingPageContent from "./TicketBookingPageContent";
 
 type PageProps = {
@@ -12,23 +13,32 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const route = getPopularRouteBySlug(slug);
+  const safeLocale: Locale = hasLocale(locale) ? locale : "uk";
 
   if (!route) {
-    return {
-      title: locale === "en" ? "Route not found | Autolux Cherkasy-Plus" : "Рейс не знайдено | Автолюкс Черкаси-Плюс",
-    };
+    const seo = getSeoCopy(safeLocale);
+
+    return createPageMetadata({
+      locale: safeLocale,
+      pathname: `/tickets/${slug}`,
+      title: seo.notFound.title,
+      description: seo.notFound.description,
+      keywords: seo.notFound.keywords,
+      noIndex: true,
+    });
   }
 
-  const safeLocale: Locale = hasLocale(locale) ? locale : "uk";
   const routeTitle = route.title[safeLocale];
+  const routeSeo = getTicketBookingSeo(safeLocale, routeTitle);
 
-  return {
-    title: `${routeTitle} | ${safeLocale === "en" ? "Booking" : "Бронювання"}`,
-    description:
-      safeLocale === "en"
-        ? `Booking page for the ${routeTitle} route.`
-        : `Сторінка бронювання для рейсу ${routeTitle}.`,
-  };
+  return createPageMetadata({
+    locale: safeLocale,
+    pathname: `/tickets/${slug}`,
+    title: routeSeo.title,
+    description: routeSeo.description,
+    keywords: routeSeo.keywords,
+    imagePath: route.imageSrc,
+  });
 }
 
 export default async function TicketBookingPage({ params }: PageProps) {
