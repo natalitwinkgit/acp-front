@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 
 import { closeAuthRoute } from "@/src/shared/auth-flow";
 import Button from "@/src/widgets/Button/Button";
-import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 import styles from "./forgot-password.module.css";
+import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
 
 type ForgotPasswordPageContentProps = {
   onClose?: () => void;
@@ -125,11 +125,11 @@ export default function ForgotPasswordPageContent({
         <aside className={styles.aside}>
           <div className={styles.brand}>
             <Image
-              src="/icons/Text.svg"
-              alt="АВТОЛЮКС"
+              src="/logo-sprinter.svg"
+              alt="Автолюкс Черкаси-Плюс"
               className={styles.brandLogo}
-              width={208}
-              height={77}
+              width={213}
+              height={50}
             />
             <p className={styles.brandDesc}>Подорожуйте безпечно і з комфотом</p>
           </div>

@@ -7,8 +7,8 @@ import styles from "../auth.module.css";
 import { closeAuthRoute } from "@/src/shared/auth-flow";
 import { register } from "@/src/shared/api";
 import Button from "@/src/widgets/Button/Button";
-import ModalCloseButton from "@/src/widgets/ModalCloseButton/ModalCloseButton";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
+import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
 
 type RegisterFormData = {
   phone: string;
@@ -110,7 +110,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
       <div className={styles.registerContent}>
         <div className={styles.registerAside}>
           <div className={styles.registerBrand}>
-            <img src="/icons/Text.svg" alt="АВТОЛЮКС" className={styles.brandLogo} />
+            <img
+              src="/logo-sprinter.svg"
+              alt="Автолюкс Черкаси-Плюс"
+              className={styles.brandLogo}
+              width={213}
+              height={50}
+            />
             <div className={styles.registerBrandDesc}>Подорожуйте безпечно і з комфотом</div>
           </div>
 
