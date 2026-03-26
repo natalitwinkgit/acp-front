@@ -15,6 +15,8 @@
   "profile.cabinet": "Personal account",
   "profile.title": "Profile",
   "profile.tickets.title": "My tickets",
+  "profile.tickets.empty.title": "You do not have any tickets yet.\nWould you like to find a route?",
+  "profile.tickets.empty.action": "Choose a route",
   "profile.logoutAria": "Sign out from personal account",
   "profile.description": "This is a minimal profile page. Settings, tickets, and your trip history will appear here later.",
   "profile.tabs.tickets": "Tickets",

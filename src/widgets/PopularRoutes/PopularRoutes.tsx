@@ -45,7 +45,7 @@ export default function PopularRoutes({ routes }: Props) {
                   src={r.imageSrc}
                   alt={alt}
                   fill
-                  sizes="(max-width: 900px) 100vw, (max-width: 1300px) 50vw, 608px"
+                  sizes="(max-width: 520px) calc(100vw - 32px), (max-width: 768px) calc((100vw - 72px) / 2), (max-width: 1300px) 50vw, 608px"
                 />
                 <Chip className={styles.routeChip}>{title}</Chip>
               </Link>
@@ -70,7 +70,7 @@ export default function PopularRoutes({ routes }: Props) {
                   src={r.imageSrc}
                   alt={alt}
                   fill
-                  sizes="(max-width: 520px) 100vw, (max-width: 900px) 50vw, 397px"
+                  sizes="(max-width: 520px) calc(100vw - 32px), (max-width: 768px) calc((100vw - 72px) / 2), (max-width: 1300px) 33vw, 397px"
                 />
                 <Chip className={styles.routeChip}>{title}</Chip>
               </Link>

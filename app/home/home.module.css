@@ -56,6 +56,11 @@
   align-items: center;
 }
 
+.fullWidthSection {
+  width: 100%;
+  align-self: stretch;
+}
+
 .pageLanguage {
   display: none;
 }
@@ -80,7 +85,7 @@
 @media (max-width: 768px) {
   .page {
     padding-top: 0;
-    padding-bottom: 40px;
+    padding-bottom: 32px;
   }
 
   .container {
@@ -89,7 +94,7 @@
   }
 
   .content {
-    gap: 0;
+    gap: 32px;
   }
 
   .mainScreenBlock {
@@ -98,22 +103,36 @@
     height: auto;
     margin: 0;
     padding-top: 0;
-    gap: 0;
+    gap: 24px;
   }
 
   .homeSection {
-    max-width: var(--layout-max-width);
-    padding: 16px 0 0;
-    gap: 0;
+    width: 100%;
+    max-width: 393px;
+    padding: 16px 16px 0;
+    box-sizing: border-box;
+    align-items: flex-start;
+    gap: 16px;
   }
 
   .title {
     width: 100%;
+    max-width: 361px;
     font-weight: 500;
-    font-size: 32px;
-    line-height: 120%;
+    font-size: 18px;
+    line-height: 132%;
     letter-spacing: 0;
-    text-align: center;
+    text-align: left;
     color: var(--color-brand, #226078);
+  }
+}
+
+@media (max-width: 360px) {
+  .homeSection {
+    padding-inline: 12px;
+  }
+
+  .title {
+    font-size: 16px;
   }
 }

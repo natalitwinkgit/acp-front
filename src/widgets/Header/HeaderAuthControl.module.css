@@ -73,7 +73,74 @@
     hue-rotate(176deg) brightness(101%) contrast(94%);
 }
 
+@media (max-width: 1024px) {
+  .loginBtn {
+    width: auto;
+    min-width: 58px;
+    height: 36px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .avatarBtn {
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    border-radius: 20px;
+  }
+
+  .avatarIcon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .authControl {
+    width: 36px;
+    height: 36px;
+  }
+
+  .loginBtn {
+    min-width: 52px;
+    height: 32px;
+    padding: 4px 10px;
+    font-size: 14px;
+  }
+
+  .avatarBtn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .avatarBtn:hover,
+  .avatarBtn:focus-visible,
+  .avatarBtnActive {
+    background: transparent;
+  }
+
+  .avatarBtn:hover .avatarIcon,
+  .avatarBtn:focus-visible .avatarIcon,
+  .avatarBtnActive .avatarIcon {
+    filter: none;
+  }
+
+  .avatarIcon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 @media (max-width: 430px) {
+  .authControl {
+    width: 40px;
+    height: 40px;
+  }
+
   .loginBtn {
     width: auto;
     min-width: 52px;
@@ -84,14 +151,28 @@
   }
 
   .avatarBtn {
-    width: 32px;
-    height: 32px;
-    padding: 4px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
   }
 
   .avatarIcon {
     width: 24px;
     height: 24px;
+  }
+
+  .avatarBtn:hover,
+  .avatarBtn:focus-visible,
+  .avatarBtnActive {
+    background: transparent;
+  }
+
+  .avatarBtn:hover .avatarIcon,
+  .avatarBtn:focus-visible .avatarIcon,
+  .avatarBtnActive .avatarIcon {
+    filter: none;
   }
 }
 

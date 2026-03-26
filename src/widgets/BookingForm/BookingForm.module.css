@@ -328,36 +328,48 @@
 
 @media (max-width: 768px) {
   .card {
-    --booking-btn-width: 384px;
+    --booking-btn-width: 100%;
 
-    width: min(424px, 100%);
-    height: 438px;
-    padding: 20px;
-    gap: 16px;
+    width: min(361px, 100%);
+    min-height: 342px;
+    height: auto;
+    padding: 12px 16px 16px;
+    gap: 12px;
     justify-content: flex-start;
-    background: rgba(244, 247, 247, 0.72);
+    align-items: stretch;
+    background: rgba(244, 247, 247, 0.76);
+    backdrop-filter: blur(2px);
     border: 0;
     border-radius: 12px;
   }
 
   .cardTitle {
     width: 100%;
-    height: 24px;
+    height: auto;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 132%;
+    text-align: left;
     color: var(--color-brand, #226078);
   }
 
   .form {
     width: 100%;
     max-width: 100%;
+    align-items: stretch;
   }
 
   .inputBlock {
     width: 100%;
-    align-items: center;
-    gap: 16px;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .control,
+  .controlHalf {
+    height: 40px;
+    padding: 8px 12px;
+    font-size: 14px;
   }
 
   .control,
@@ -369,20 +381,73 @@
 
   .row2 {
     width: 100%;
+    gap: 8px;
   }
 
   .controlHalf,
   .controlWithIconHalf {
-    width: calc((100% - 16px) / 2);
+    width: calc((100% - 8px) / 2);
+  }
+
+  .controlWithIconBtn,
+  .controlWithIconHalf {
+    height: 40px;
+    padding: 8px 12px;
+  }
+
+  .dateValue,
+  .controlInner {
+    font-size: 14px;
+  }
+
+  .select {
+    background-position: right 12px center;
+  }
+
+  .iconRight,
+  .calendarIcon,
+  .calendarIcon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .primaryBtnWrap,
+  .primaryBtnWrap > :global(button) {
+    height: 40px;
+  }
+
+  .primaryBtnWrap > :global(button) {
+    padding: 8px 16px;
+  }
+
+  .calendarPopover {
+    left: 0;
+    right: auto;
   }
 }
 
 @media (max-width: 393px) {
   .card {
-    --booking-btn-width: 290px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    min-height: 328px;
+    padding: 12px;
   }
 
-  .primaryBtnWrap {
-    width: min(var(--booking-btn-width), 100%);
+  .cardTitle {
+    font-size: 11px;
+  }
+
+  .row2 {
+    gap: 6px;
+  }
+
+  .controlHalf,
+  .controlWithIconHalf {
+    width: calc((100% - 6px) / 2);
   }
 }

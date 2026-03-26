@@ -1,3 +1,4 @@
+/* --- БАЗОВІ СТИЛІ СТОРІНКИ --- */
 .page {
   width: 100%;
   box-sizing: border-box;
@@ -13,19 +14,6 @@
   box-sizing: border-box;
 }
 
-.emptyState {
-  margin-top: 36px;
-}
-
-.emptyCard {
-  --surface-panel-bg: var(--light-bg, #f4f7f7);
-  --surface-panel-radius: 24px;
-  --surface-panel-padding: 40px 20px;
-  width: min(100%, 1030px);
-  min-height: 588px;
-  margin: 0 auto;
-}
-
 .srOnly {
   position: absolute;
   width: 1px;
@@ -38,21 +26,169 @@
   border: 0;
 }
 
-@media (max-width: 768px) {
+/* --- КОНТЕЙНЕР ПОРОЖНЬОГО СТАНУ --- */
+.emptyState {
+  margin-top: 36px;
+}
+
+/* Container */
+.emptyCard {
+  --surface-panel-bg: #F4F7F7;
+  --surface-panel-radius: 24px;
+  --surface-panel-padding: 0;
+  width: min(100%, 1030px);
+  height: 588px;
+  margin: 0 auto;
+}
+
+/* --- ВМІСТ ПОРОЖНЬОГО СТАНУ --- */
+.emptyContentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* --- ІЛЮСТРАЦІЯ (КВИТКИ) --- */
+.illustrationBox {
+  width: 421px;
+  height: 322px;
+  position: relative;
+}
+
+.ticketBack, 
+.ticketFront {
+  position: absolute;
+  width: 300.51px;
+  height: 300.51px;
+  max-width: none;
+  object-fit: contain;
+}
+
+.ticketBack {
+  left: 60.25px;
+  top: -39.35px;
+  z-index: 2;
+  transform: rotate(52deg);
+}
+
+.ticketFront {
+  left: 61.2px;
+  top: 45.15px;
+  z-index: 1;
+  transform: rotate(22deg);
+}
+
+/* --- ТЕКСТ ТА КНОПКА --- */
+.textAndActionBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: min(100%, 604px);
+  min-height: 186px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  gap: 24px;
+}
+
+.emptyStateText {
+  width: 100%;
+  min-height: 76px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #697C95 !important;
+  margin: 0;
+}
+
+.searchButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 10px;
+  width: 300px;
+  min-width: 145px;
+  height: 46px;
+  background: #EEBB3A;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 144%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #11313D;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.searchButton:hover {
+  opacity: 0.9;
+}
+
+/* --- АДАПТИВНІСТЬ --- */
+@media (max-width: 1919px) {
+  .emptyCard {
+    width: min(100%, 644px);
+    height: 572px;
+  }
+}
+
+@media (max-width: 769px) {
   .page {
     padding: 8px 0 40px;
   }
-
   .container {
     padding: 0 24px;
   }
-
   .emptyState {
     margin-top: 28px;
   }
-
   .emptyCard {
-    min-height: 520px;
+    width: min(100%, 340px);
+    height: 574px;
+  }
+
+  .illustrationBox {
+    width: 320px;
+    height: 250px;
+  }
+  .ticketBack, 
+  .ticketFront {
+    width: 220px;
+    height: 220px;
+  }
+  .ticketBack { left: 45px; top: -20px; }
+  .ticketFront { left: 45px; top: 30px; }
+
+  .emptyStateText {
+    font-size: 24px;
+    max-width: 400px;
+    height: auto;
+  }
+
+  .textAndActionBlock {
+    width: min(100%, 420px);
+    min-height: auto;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 20px;
   }
 }
 
@@ -60,14 +196,47 @@
   .container {
     padding: 0 16px;
   }
-
   .emptyState {
     margin-top: 20px;
   }
 
   .emptyCard {
-    --surface-panel-padding: 40px 20px;
     width: min(100%, 340px);
-    min-height: 583px;
+    height: 574px;
+  }
+
+  .emptyContentWrapper {
+    gap: 40px;
+  }
+
+  .illustrationBox {
+    width: 260px;
+    height: 200px;
+  }
+  .ticketBack, 
+  .ticketFront {
+    width: 180px;
+    height: 180px;
+  }
+  .ticketBack { left: 30px; top: -15px; }
+  .ticketFront { left: 35px; top: 20px; }
+
+  .emptyStateText {
+    font-size: 20px;
+    max-width: 280px;
+    height: auto;
+  }
+
+  .textAndActionBlock {
+    width: 100%;
+    min-height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    gap: 16px;
+  }
+
+  .searchButton {
+    width: 100%;
+    max-width: 300px;
   }
 }

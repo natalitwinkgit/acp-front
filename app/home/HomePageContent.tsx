@@ -51,7 +51,7 @@ export default function HomePageContent() {
             <BenefitsWidget />
           </div>
 
-          <section id="routes">
+          <section id="routes" className={styles.fullWidthSection}>
             <PopularRoutes />
           </section>
 

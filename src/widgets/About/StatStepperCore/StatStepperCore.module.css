@@ -32,9 +32,12 @@
 
 /* Фонова синя плашка на 1440, контент строго 1239 як у Figma */
 .statsBar {
-  width: 100%;
-  align-self: stretch;
+  width: 100vw;
+  max-width: none;
+  align-self: center;
   background: var(--color-brand, #226078);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 
   display: flex;
   justify-content: center;
@@ -176,14 +179,18 @@
   }
 
   .statsBar {
-    width: 100%;
-    padding: 24px 0;
+    width: 100vw;
+    max-width: none;
+    padding: 24px 20px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    align-self: center;
   }
 
   .statsInner {
     width: 100%;
     max-width: 1239px;
-    padding: 0 20px;
+    padding: 0;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -197,6 +204,88 @@
 
   .textCard {
     width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    gap: 24px;
+  }
+
+  .container {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    gap: 24px;
+  }
+
+  .statsBar {
+    width: 100vw;
+    max-width: none;
+    padding: 12px 0;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    align-self: center;
+  }
+
+  .statsInner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding: 0;
+  }
+
+  .statCard {
+    width: 100%;
+    height: auto;
+    min-height: 96px;
+    padding: 12px 8px;
+    gap: 8px;
+  }
+
+  .statLabel {
+    height: auto;
+    font-size: 12px;
+    line-height: 150%;
+  }
+
+  .textGrid {
+    width: 100%;
+    max-width: none;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0;
+  }
+
+  .textCard {
+    width: 100%;
+    min-height: 160px;
+    padding: 8px 10px 8px 16px;
+    align-items: center;
+    background: var(--color-white, #FFFFFF);
+    border-left-width: 6px;
+  }
+
+  .text {
+    width: 100%;
+    max-width: 335px;
+    color: var(--color-brand, #226078);
+  }
+
+  .stepperViewportYears {
+    width: 52px;
+  }
+
+  .stepperViewportPassengers,
+  .stepperViewportKm {
+    width: 102px;
+  }
+
+  .stepperRow {
+    font-size: 20px;
+    line-height: 47px;
   }
 }
 
@@ -236,3 +325,19 @@
   line-height: 47px;
   color: var(--color-accent-strong, #F0B523);
 } 
+
+@media (max-width: 767px) {
+  .stepperViewportYears {
+    width: 52px;
+  }
+
+  .stepperViewportPassengers,
+  .stepperViewportKm {
+    width: 102px;
+  }
+
+  .stepperRow {
+    font-size: 20px;
+    line-height: 47px;
+  }
+}

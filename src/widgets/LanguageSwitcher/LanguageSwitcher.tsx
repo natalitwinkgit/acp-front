@@ -28,7 +28,7 @@ export default function LanguageSwitcher() {
         aria-pressed={!isEn}
         aria-label="Українська"
       >
-        <img className="language-switcher__img" src="/icons/flag-ua.svg" alt="UA" />
+        <img className="language-switcher__img" src="/icons/flag-ua.svg" alt="UA" width={24} height={24} />
       </button>
 
       <button
@@ -42,6 +42,8 @@ export default function LanguageSwitcher() {
           className="language-switcher__img language-switcher__img--en"
           src="/icons/flag-en.svg"
           alt="EN"
+          width={24}
+          height={24}
         />
       </button>
     </div>

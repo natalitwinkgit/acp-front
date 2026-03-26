@@ -103,10 +103,11 @@
   .formBlock {
     position: relative;
     width: 100%;
-    max-width: var(--layout-max-width);
-    height: 478px;
+    max-width: 393px;
+    height: 492px;
     display: block;
     overflow: hidden;
+    border-radius: 12px;
   }
 
   .imageWrap {
@@ -114,17 +115,28 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    border-radius: 0;
+    border-radius: 12px;
   }
 
   /* перший елемент у formBlock — BookingForm */
   .formBlock > :first-child {
     position: absolute;
-    top: 20px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    width: min(424px, calc(100% - (var(--layout-padding-x) * 2)));
+    width: min(361px, calc(100% - 32px));
     min-width: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .formBlock {
+    height: 468px;
+  }
+
+  .formBlock > :first-child {
+    top: 10px;
+    width: calc(100% - 24px);
   }
 }

@@ -1,14 +1,263 @@
 .page {
   width: 100%;
-  padding: 8px 0 48px;
-  background: var(--color-page-bg, #FCFEFE);
+  padding: 12px 0 72px;
+  background: var(--color-page-bg, #fcfefe);
 }
 
 .container {
-  max-width: var(--layout-max-width);
   width: 100%;
+  max-width: var(--layout-max-width);
   margin: 0 auto;
   padding: 0 var(--layout-padding-x);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 14px;
+  line-height: 144%;
+  color: #7b98a3;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 116%;
+  color: #226078;
+}
+
+.tripLabel {
+  margin: 0;
+  font-size: 16px;
+  line-height: 144%;
+  color: #11313d;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 24px;
+  align-items: start;
+}
+
+.formCard,
+.summaryCard {
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.formCard {
+  padding: 24px;
+  background: #f4f7f7;
+  border: 1px solid #c9e4e7;
+  box-shadow: 0 8px 24px rgba(34, 96, 120, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 24px;
+  line-height: 124%;
+  color: #226078;
+}
+
+.cardNote {
+  margin: 0;
+  font-size: 16px;
+  line-height: 144%;
+  color: #11313d;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  line-height: 144%;
+  color: #226078;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #7b98a3;
+  border-radius: 12px;
+  box-sizing: border-box;
+  background: #fcfefe;
+  font-size: 16px;
+  line-height: 144%;
+  color: #11313d;
+  outline: none;
+}
+
+.input:focus-visible {
+  border-color: #226078;
+}
+
+.fieldSeats {
+  justify-content: flex-end;
+}
+
+.seatsControl {
+  width: 100%;
+  height: 48px;
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: stretch;
+  border: 1px solid #7b98a3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fcfefe;
+}
+
+.seatButton {
+  border: 0;
+  background: #e7f2f3;
+  color: #226078;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.seatButton:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.seatValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 132%;
+  color: #11313d;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.actions :global(button) {
+  flex: 1 1 220px;
+}
+
+.summaryCard {
+  background: linear-gradient(180deg, #11313d 0%, #226078 100%);
+  color: #fcfefe;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(17, 49, 61, 0.18);
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 420 / 240;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.summaryBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px 24px;
+}
+
+.summaryTitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: 132%;
+  color: #fcfefe;
+}
+
+.summaryRoute {
+  font-size: 24px;
+  line-height: 124%;
+  font-weight: 500;
+}
+
+.summaryTrip {
+  font-size: 14px;
+  line-height: 144%;
+  color: rgba(252, 254, 254, 0.88);
+}
+
+.summaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(252, 254, 254, 0.2);
+  font-size: 16px;
+  line-height: 144%;
+}
+
+.summaryRow strong {
+  font-size: 18px;
+  line-height: 132%;
+}
+
+.summaryFoot {
+  font-size: 14px;
+  line-height: 144%;
+  color: rgba(252, 254, 254, 0.72);
+}
+
+@media (max-width: 1023px) {
+  .page {
+    padding-bottom: 56px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryCard {
+    order: -1;
+  }
 }
 
 @media (max-width: 640px) {
@@ -18,5 +267,59 @@
 
   .container {
     padding: 0 16px;
+    gap: 20px;
+  }
+
+  .hero {
+    gap: 6px;
+  }
+
+  .tripLabel {
+    font-size: 14px;
+  }
+
+  .formCard {
+    padding: 18px 16px;
+    gap: 20px;
+  }
+
+  .cardTitle {
+    font-size: 20px;
+  }
+
+  .cardNote {
+    font-size: 14px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .input,
+  .seatsControl {
+    height: 44px;
+  }
+
+  .seatsControl {
+    grid-template-columns: 44px 1fr 44px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions :global(button) {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .summaryBody {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .summaryRoute {
+    font-size: 20px;
   }
 }
