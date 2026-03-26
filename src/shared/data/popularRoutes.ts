@@ -1,4 +1,5 @@
 import type { Locale } from "@/src/shared/i18n/config";
+import type { Trip } from "@/src/shared/api/trips";
 
 export type LocalizedValue<T> = Record<Locale, T>;
 
@@ -181,4 +182,57 @@ export function getPopularRouteHref(slug: string) {
 
 export function getPopularRouteBySlug(slug: string) {
   return popularRoutes.find((route) => route.slug === slug);
+}
+
+function formatTripDateLabel(date: string | null, locale: Locale) {
+  if (!date) {
+    return locale === "en" ? "date to be confirmed" : "дату уточнюйте";
+  }
+
+  const parsedDate = new Date(`${date}T00:00:00`);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return date;
+  }
+
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "uk-UA", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(parsedDate);
+}
+
+function formatTripTimeLabel(trip: Trip, locale: Locale) {
+  const dateLabel = formatTripDateLabel(trip.date, locale);
+  const timeLabel = trip.departureTime ?? (locale === "en" ? "time to be confirmed" : "час уточнюйте");
+
+  return locale === "en"
+    ? `Nearest trip: ${dateLabel} at ${timeLabel}`
+    : `Найближчий рейс: ${dateLabel} о ${timeLabel}`;
+}
+
+export function mapTripToPopularRoute(trip: Trip): PopularRoute {
+  const title = `${trip.from} — ${trip.to}`;
+  const imageSrc = trip.imageSrc ?? "/BookingHero/main_photo_bus.png";
+  const maxSeatsCandidate = trip.availableSeats ?? trip.totalSeats ?? 1;
+
+  return {
+    id: trip.id,
+    slug: trip.slug ?? trip.id,
+    title: {
+      uk: title,
+      en: title,
+    },
+    imageSrc,
+    imageAlt: {
+      uk: `Рейс ${title}`,
+      en: `${title} route`,
+    },
+    nearestTripLabel: {
+      uk: formatTripTimeLabel(trip, "uk"),
+      en: formatTripTimeLabel(trip, "en"),
+    },
+    price: trip.price ?? 0,
+    maxSeats: Math.max(1, maxSeatsCandidate),
+  };
 }

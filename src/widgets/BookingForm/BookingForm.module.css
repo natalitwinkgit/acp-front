@@ -40,6 +40,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 24px;
 }
 
 .inputBlock {
@@ -266,6 +267,22 @@
   align-self: stretch;
 }
 
+.status {
+  width: 100%;
+  min-height: 20px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 140%;
+}
+
+.statusInfo {
+  color: var(--color-brand, #226078);
+}
+
+.statusError {
+  color: #b42318;
+}
+
 .primaryBtnWrap > :global(button) {
   width: 100%;
   height: 46px;
@@ -286,6 +303,14 @@
 .controlWithIconHalf:focus-within {
   border-color: var(--color-brand, #226078);
   box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
+}
+
+.control:disabled,
+.controlHalf:disabled,
+.select:disabled,
+.controlWithIconBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
 }
 
 @media (min-width: 1920px) {
@@ -357,6 +382,7 @@
     width: 100%;
     max-width: 100%;
     align-items: stretch;
+    gap: 12px;
   }
 
   .inputBlock {
@@ -414,6 +440,10 @@
   .primaryBtnWrap,
   .primaryBtnWrap > :global(button) {
     height: 40px;
+  }
+
+  .status {
+    font-size: 12px;
   }
 
   .primaryBtnWrap > :global(button) {
