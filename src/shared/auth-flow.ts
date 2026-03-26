@@ -1,3 +1,6 @@
+import { getLocaleFromPathnameOrDefault } from "@/src/shared/i18n/routing";
+import { localizeHref } from "@/src/shared/i18n/routing";
+
 type RouterLike = {
   back: () => void;
   replace: (href: string) => void;
@@ -42,5 +45,6 @@ export function closeAuthRoute(
     return;
   }
 
-  router.replace(background || fallback);
+  const locale = isBrowser() ? getLocaleFromPathnameOrDefault(window.location.pathname) : "uk";
+  router.replace(background || localizeHref(fallback, locale));
 }

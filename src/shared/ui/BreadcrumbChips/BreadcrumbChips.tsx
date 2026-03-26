@@ -1,4 +1,4 @@
-import Link from "next/link";
+import LocaleLink from "@/src/shared/i18n/Link";
 import styles from "./BreadcrumbChips.module.css";
 
 export type BreadcrumbChipItem = {
@@ -25,9 +25,9 @@ export default function BreadcrumbChips({
       {items.map((item, index) => {
         const content =
           item.href && !item.current ? (
-            <Link href={item.href} className={styles.link}>
+            <LocaleLink href={item.href} className={styles.link}>
               {item.label}
-            </Link>
+            </LocaleLink>
           ) : (
             <span className={styles.current}>{item.label}</span>
           );

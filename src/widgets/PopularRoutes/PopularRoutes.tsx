@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+
+import LocaleLink from "@/src/shared/i18n/Link";
 import styles from "./PopularRoutes.module.css";
 import PopularRoutesTitle from "./PopularRoutesTitle";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
@@ -34,7 +35,7 @@ export default function PopularRoutes({ routes }: Props) {
             const alt = getLocalizedRouteValue(r.imageAlt, lang);
 
             return (
-              <Link
+              <LocaleLink
                 key={r.id}
                 href={getPopularRouteHref(r.slug)}
                 className={`${styles.card} ${styles.cardLarge}`}
@@ -48,7 +49,7 @@ export default function PopularRoutes({ routes }: Props) {
                   sizes="(max-width: 520px) calc(100vw - 32px), (max-width: 768px) calc((100vw - 72px) / 2), (max-width: 1300px) 50vw, 608px"
                 />
                 <Chip className={styles.routeChip}>{title}</Chip>
-              </Link>
+              </LocaleLink>
             );
           })}
         </div>
@@ -59,7 +60,7 @@ export default function PopularRoutes({ routes }: Props) {
             const alt = getLocalizedRouteValue(r.imageAlt, lang);
 
             return (
-              <Link
+              <LocaleLink
                 key={r.id}
                 href={getPopularRouteHref(r.slug)}
                 className={`${styles.card} ${styles.cardSmall}`}
@@ -73,7 +74,7 @@ export default function PopularRoutes({ routes }: Props) {
                   sizes="(max-width: 520px) calc(100vw - 32px), (max-width: 768px) calc((100vw - 72px) / 2), (max-width: 1300px) 33vw, 397px"
                 />
                 <Chip className={styles.routeChip}>{title}</Chip>
-              </Link>
+              </LocaleLink>
             );
           })}
         </div>

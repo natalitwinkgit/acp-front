@@ -1,13 +1,15 @@
 "use client";
 
-import styles from "./Header.module.css";
-import { storeAuthBackground } from "@/src/shared/auth-flow";
 import { hasAccessToken } from "@/src/shared/api";
-import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
-import HeaderAuthControl from "./HeaderAuthControl";
-import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { storeAuthBackground } from "@/src/shared/auth-flow";
+import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
+import { stripLocaleFromPathname } from "@/src/shared/i18n/routing";
+import { useRouter, usePathname } from "next/navigation";
 import { MouseEvent, useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
+
+import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
+import styles from "./Header.module.css";
+import HeaderAuthControl from "./HeaderAuthControl";
 
 const menu = [
   { key: "menu.home", href: "#home" },
@@ -52,21 +54,23 @@ function subscribeToAuthStatus(onChange: () => void) {
 
 export default function Header() {
   const { t } = useI18n();
+  const resolveHref = useLocalizedHref();
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const pathnameWithoutLocale = stripLocaleFromPathname(pathname || "/");
 
   const isAuthorized = useSyncExternalStore(subscribeToAuthStatus, getAuthStatusSnapshot, () => false);
-  const isAvatarActive = pathname === "/profile" || pathname.startsWith("/profile/");
+  const isAvatarActive =
+    pathnameWithoutLocale === "/profile" || pathnameWithoutLocale.startsWith("/profile/");
 
   const [activeMenuHref, setActiveMenuHref] = useState("#home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPhoneMenuOpen, setIsPhoneMenuOpen] = useState(false);
-  const currentMenuHref = pathname === "/cafe" ? "/cafe" : activeMenuHref;
+  const currentMenuHref = pathnameWithoutLocale === "/cafe" ? "/cafe" : activeMenuHref;
   const phoneMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (pathname !== "/") return;
+    if (pathnameWithoutLocale !== "/") return;
 
     const syncActiveFromHash = () => {
       const hash = window.location.hash;
@@ -77,7 +81,7 @@ export default function Header() {
     syncActiveFromHash();
     window.addEventListener("hashchange", syncActiveFromHash);
     return () => window.removeEventListener("hashchange", syncActiveFromHash);
-  }, [pathname]);
+  }, [pathnameWithoutLocale]);
 
   useEffect(() => {
     const onResize = () => {
@@ -93,8 +97,8 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    router.prefetch("/login");
-  }, [router]);
+    router.prefetch(resolveHref("/login"));
+  }, [resolveHref, router]);
 
   const closePhoneMenu = useEffectEvent(() => {
     setIsPhoneMenuOpen(false);
@@ -126,16 +130,16 @@ export default function Header() {
 
   const openLoginModal = () => {
     setIsPhoneMenuOpen(false);
-    const search = searchParams?.toString();
+    const search = typeof window !== "undefined" ? window.location.search : "";
     const hash = typeof window !== "undefined" ? window.location.hash : "";
-    const background = search ? `${pathname}?${search}` : pathname;
+    const background = pathname ? `${pathname}${search}` : `/${search}`;
     storeAuthBackground(`${background}${hash}`);
-    router.push("/login", { scroll: false });
+    router.push(resolveHref("/login"), { scroll: false });
   };
 
   const handleAvatarClick = () => {
     setIsPhoneMenuOpen(false);
-    router.push("/profile");
+    router.push(resolveHref("/profile"));
   };
 
   const handleScroll = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -144,12 +148,12 @@ export default function Header() {
     setIsPhoneMenuOpen(false);
 
     if (!href.startsWith("#")) {
-      router.push(href);
+      router.push(resolveHref(href));
       return;
     }
 
-    if (pathname !== "/") {
-      router.push(`/${href}`);
+    if (pathnameWithoutLocale !== "/") {
+      router.push(resolveHref(`/${href}`));
       return;
     }
 

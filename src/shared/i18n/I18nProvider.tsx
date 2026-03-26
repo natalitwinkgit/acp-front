@@ -1,23 +1,15 @@
 "use client";
 
-import React, { createContext, useContext, useMemo, useCallback, useState } from "react";
-import uk from "@/src/shared/locales/uk.json";
-import en from "@/src/shared/locales/en.json";
+import React, { createContext, useCallback, useContext, useEffect, useMemo } from "react";
 
-export type Lang = "UA" | "EN";
-export type MessageValue =
-  | string
-  | number
-  | boolean
-  | null
-  | MessageValue[]
-  | { [key: string]: MessageValue };
-
-type Messages = Record<string, MessageValue>;
+import type { Locale } from "./config";
+import { localizeHref } from "./routing";
+import type { MessageValue, Messages } from "./types";
 
 type I18nCtx = {
-  lang: Lang;
-  setLang: (next: Lang) => void;
+  locale: Locale;
+  lang: Locale;
+  messages: Messages;
   t: (key: string) => string;
   raw: (key: string) => MessageValue | undefined;
 };
@@ -30,71 +22,77 @@ function isMessageRecord(value: MessageValue | undefined): value is Record<strin
 
 function getNested(obj: MessageValue | undefined, path: string): MessageValue | undefined {
   return path.split(".").reduce<MessageValue | undefined>((acc, part) => {
-    if (!isMessageRecord(acc)) return undefined;
+    if (!isMessageRecord(acc)) {
+      return undefined;
+    }
+
     return acc[part];
   }, obj);
 }
 
-function setCookie(name: string, value: string) {
-  try {
-    document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; Max-Age=31536000; SameSite=Lax`;
-  } catch {}
-}
-
 export function I18nProvider({
   children,
-  initialLang = "UA",
+  locale,
+  messages,
 }: {
   children: React.ReactNode;
-  initialLang?: Lang;
+  locale: Locale;
+  messages: Messages;
 }) {
-  
-  const [lang, setLangState] = useState<Lang>(initialLang);
-
-  const messages: Messages = useMemo(() => (lang === "EN" ? (en as Messages) : (uk as Messages)), [lang]);
-
   const raw = useCallback(
     (key: string) => {
       const direct = messages[key];
-      if (direct !== undefined) return direct;
+
+      if (direct !== undefined) {
+        return direct;
+      }
 
       return getNested(messages, key);
     },
-    [messages]
+    [messages],
   );
 
   const t = useCallback(
     (key: string) => {
-      const v = raw(key);
-      return typeof v === "string" ? v : key;
+      const value = raw(key);
+      return typeof value === "string" ? value : key;
     },
-    [raw]
+    [raw],
   );
 
-  const setLang = useCallback((next: Lang) => {
-    setLangState(next);
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
-    
-    setCookie("lang", next);
-
-    
-    try {
-      window.localStorage.setItem("lang", next);
-    } catch {}
-
-    
-    try {
-      document.documentElement.lang = next === "EN" ? "en" : "uk";
-    } catch {}
-  }, []);
-
-  const value = useMemo<I18nCtx>(() => ({ lang, setLang, t, raw }), [lang, setLang, t, raw]);
+  const value = useMemo<I18nCtx>(
+    () => ({
+      locale,
+      lang: locale,
+      messages,
+      t,
+      raw,
+    }),
+    [locale, messages, raw, t],
+  );
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
 
 export function useI18n() {
-  const ctx = useContext(I18nContext);
-  if (!ctx) throw new Error("useI18n must be used within I18nProvider");
-  return ctx;
+  const context = useContext(I18nContext);
+
+  if (!context) {
+    throw new Error("useI18n must be used within I18nProvider");
+  }
+
+  return context;
+}
+
+export function useLocalizedHref() {
+  const { locale } = useI18n();
+
+  return useCallback(
+    (href: string, targetLocale: Locale = locale) => localizeHref(href, targetLocale),
+    [locale],
+  );
 }

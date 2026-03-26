@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
+
 import { logout } from "@/src/shared/api";
+import LocaleLink from "@/src/shared/i18n/Link";
 import Chip from "@/src/shared/ui/Chip/Chip";
-import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import SlantedChip from "@/src/shared/ui/SlantedChip/SlantedChip";
 import styles from "./ProfileTabsBar.module.css";
 
@@ -30,6 +31,7 @@ export default function ProfileTabsBar({
   showExitButton = false,
 }: ProfileTabsBarProps) {
   const router = useRouter();
+  const resolveHref = useLocalizedHref();
   const { t } = useI18n();
   const classes = `${styles.tabsBar} ${className}`.trim();
 
@@ -43,7 +45,7 @@ export default function ProfileTabsBar({
         window.sessionStorage.removeItem("auth:background");
       }
 
-      router.replace("/");
+      router.replace(resolveHref("/"));
     }
   };
 
@@ -73,9 +75,9 @@ export default function ProfileTabsBar({
                   className={styles.tabItem}
                 >
                   {item.href && !item.active ? (
-                    <Link href={item.href} className={styles.tabLink}>
+                    <LocaleLink href={item.href} className={styles.tabLink}>
                       {chip}
-                    </Link>
+                    </LocaleLink>
                   ) : (
                     chip
                   )}

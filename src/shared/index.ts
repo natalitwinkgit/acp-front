@@ -7,5 +7,5 @@
 export * from './api';
 
 // Internationalization
-export { I18nProvider, useI18n, useT } from './i18n';
-export type { Lang } from './i18n';
+export { I18nProvider, LocaleLink, useI18n, useLocalizedHref, useT } from './i18n';
+export type { Locale, MessageValue, Messages } from './i18n';

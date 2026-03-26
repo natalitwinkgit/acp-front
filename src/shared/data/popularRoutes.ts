@@ -1,6 +1,6 @@
-export type RouteLocale = "UA" | "EN";
+import type { Locale } from "@/src/shared/i18n/config";
 
-export type LocalizedValue<T> = Record<RouteLocale, T>;
+export type LocalizedValue<T> = Record<Locale, T>;
 
 export type PopularRoute = {
   id: string;
@@ -18,17 +18,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "1",
     slug: "cherkasy-kyiv-kharkivska",
     title: {
-      UA: "Черкаси-Київ (ст.м. Харківська)",
-      EN: "Cherkasy-Kyiv (Kharkivska metro)",
+      uk: "Черкаси-Київ (ст.м. Харківська)",
+      en: "Cherkasy-Kyiv (Kharkivska metro)",
     },
     imageSrc: "/Routes/cherkasy-kyiv-kharkivska.jpg",
     imageAlt: {
-      UA: "Рейс Черкаси-Київ Харківська",
-      EN: "Cherkasy-Kyiv Kharkivska route",
+      uk: "Рейс Черкаси-Київ Харківська",
+      en: "Cherkasy-Kyiv Kharkivska route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 10:30",
-      EN: "Nearest trip: today at 10:30",
+      uk: "Найближчий рейс: сьогодні о 10:30",
+      en: "Nearest trip: today at 10:30",
     },
     price: 500,
     maxSeats: 7,
@@ -37,17 +37,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "2",
     slug: "cherkasy-kyiv-chernihivska",
     title: {
-      UA: "Черкаси-Київ (ст.м. Чернігівська)",
-      EN: "Cherkasy-Kyiv (Chernihivska metro)",
+      uk: "Черкаси-Київ (ст.м. Чернігівська)",
+      en: "Cherkasy-Kyiv (Chernihivska metro)",
     },
     imageSrc: "/Routes/cherkasy-kyiv-chernihivska.png",
     imageAlt: {
-      UA: "Рейс Черкаси-Київ Чернігівська",
-      EN: "Cherkasy-Kyiv Chernihivska route",
+      uk: "Рейс Черкаси-Київ Чернігівська",
+      en: "Cherkasy-Kyiv Chernihivska route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 11:00",
-      EN: "Nearest trip: today at 11:00",
+      uk: "Найближчий рейс: сьогодні о 11:00",
+      en: "Nearest trip: today at 11:00",
     },
     price: 500,
     maxSeats: 7,
@@ -56,17 +56,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "3",
     slug: "kyiv-kharkivska-cherkasy",
     title: {
-      UA: "Київ (ст.м. Харківська)-Черкаси",
-      EN: "Kyiv (Kharkivska metro)-Cherkasy",
+      uk: "Київ (ст.м. Харківська)-Черкаси",
+      en: "Kyiv (Kharkivska metro)-Cherkasy",
     },
     imageSrc: "/Routes/kyiv-kharkivska-cherkasy.png",
     imageAlt: {
-      UA: "Рейс Київ Харківська-Черкаси",
-      EN: "Kyiv Kharkivska-Cherkasy route",
+      uk: "Рейс Київ Харківська-Черкаси",
+      en: "Kyiv Kharkivska-Cherkasy route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 08:00",
-      EN: "Nearest trip: today at 08:00",
+      uk: "Найближчий рейс: сьогодні о 08:00",
+      en: "Nearest trip: today at 08:00",
     },
     price: 500,
     maxSeats: 7,
@@ -75,17 +75,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "4",
     slug: "kyiv-chernihivska-cherkasy",
     title: {
-      UA: "Київ (ст.м. Чернігівська)-Черкаси",
-      EN: "Kyiv (Chernihivska metro)-Cherkasy",
+      uk: "Київ (ст.м. Чернігівська)-Черкаси",
+      en: "Kyiv (Chernihivska metro)-Cherkasy",
     },
     imageSrc: "/Routes/kyiv-chernihivska-cherkasy.jpg",
     imageAlt: {
-      UA: "Рейс Київ Чернігівська-Черкаси",
-      EN: "Kyiv Chernihivska-Cherkasy route",
+      uk: "Рейс Київ Чернігівська-Черкаси",
+      en: "Kyiv Chernihivska-Cherkasy route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 08:15",
-      EN: "Nearest trip: today at 08:15",
+      uk: "Найближчий рейс: сьогодні о 08:15",
+      en: "Nearest trip: today at 08:15",
     },
     price: 500,
     maxSeats: 7,
@@ -94,17 +94,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "5",
     slug: "cherkasy-kharkiv",
     title: {
-      UA: "Черкаси-Харків",
-      EN: "Cherkasy-Kharkiv",
+      uk: "Черкаси-Харків",
+      en: "Cherkasy-Kharkiv",
     },
     imageSrc: "/Routes/cherkasy-kharkiv.png",
     imageAlt: {
-      UA: "Рейс Черкаси-Харків",
-      EN: "Cherkasy-Kharkiv route",
+      uk: "Рейс Черкаси-Харків",
+      en: "Cherkasy-Kharkiv route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 07:00",
-      EN: "Nearest trip: today at 07:00",
+      uk: "Найближчий рейс: сьогодні о 07:00",
+      en: "Nearest trip: today at 07:00",
     },
     price: 950,
     maxSeats: 7,
@@ -113,17 +113,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "6",
     slug: "cherkasy-poltava",
     title: {
-      UA: "Черкаси-Полтава",
-      EN: "Cherkasy-Poltava",
+      uk: "Черкаси-Полтава",
+      en: "Cherkasy-Poltava",
     },
     imageSrc: "/Routes/cherkasy-poltava.png",
     imageAlt: {
-      UA: "Рейс Черкаси-Полтава",
-      EN: "Cherkasy-Poltava route",
+      uk: "Рейс Черкаси-Полтава",
+      en: "Cherkasy-Poltava route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 09:00",
-      EN: "Nearest trip: today at 09:00",
+      uk: "Найближчий рейс: сьогодні о 09:00",
+      en: "Nearest trip: today at 09:00",
     },
     price: 667,
     maxSeats: 7,
@@ -132,17 +132,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "7",
     slug: "cherkasy-kremenchuk",
     title: {
-      UA: "Черкаси-Кременчук",
-      EN: "Cherkasy-Kremenchuk",
+      uk: "Черкаси-Кременчук",
+      en: "Cherkasy-Kremenchuk",
     },
     imageSrc: "/Routes/cherkasy-kremenchuk.jpg",
     imageAlt: {
-      UA: "Рейс Черкаси-Кременчук",
-      EN: "Cherkasy-Kremenchuk route",
+      uk: "Рейс Черкаси-Кременчук",
+      en: "Cherkasy-Kremenchuk route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 08:20",
-      EN: "Nearest trip: today at 08:20",
+      uk: "Найближчий рейс: сьогодні о 08:20",
+      en: "Nearest trip: today at 08:20",
     },
     price: 400,
     maxSeats: 7,
@@ -151,17 +151,17 @@ export const popularRoutes: PopularRoute[] = [
     id: "8",
     slug: "zolotonosha-kyiv",
     title: {
-      UA: "Золотоноша-Київ",
-      EN: "Zolotonosha-Kyiv",
+      uk: "Золотоноша-Київ",
+      en: "Zolotonosha-Kyiv",
     },
     imageSrc: "/Routes/zolotonosha-kyiv.png",
     imageAlt: {
-      UA: "Рейс Золотоноша-Київ",
-      EN: "Zolotonosha-Kyiv route",
+      uk: "Рейс Золотоноша-Київ",
+      en: "Zolotonosha-Kyiv route",
     },
     nearestTripLabel: {
-      UA: "Найближчий рейс: сьогодні о 06:45",
-      EN: "Nearest trip: today at 06:45",
+      uk: "Найближчий рейс: сьогодні о 06:45",
+      en: "Nearest trip: today at 06:45",
     },
     price: 450,
     maxSeats: 7,
@@ -170,9 +170,9 @@ export const popularRoutes: PopularRoute[] = [
 
 export function getLocalizedRouteValue<T>(
   value: LocalizedValue<T>,
-  lang: RouteLocale
+  locale: Locale
 ) {
-  return value[lang];
+  return value[locale];
 }
 
 export function getPopularRouteHref(slug: string) {
