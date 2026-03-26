@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 
 import { hasLocale, locales } from "@/src/shared/i18n/config";
 import { getDictionary } from "@/src/shared/i18n/getDictionary";
+import { createSiteMetadata, getOrganizationStructuredData } from "@/src/shared/seo/metadata";
 import Footer from "@/src/widgets/Footer/Footer";
 import Header from "@/src/widgets/Header/Header";
 import { I18nProvider } from "@/src/shared/i18n/I18nProvider";
@@ -28,14 +29,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const safeLocale = hasLocale(locale) ? locale : "uk";
 
-  return {
-    title: safeLocale === "en" ? "Autolux Cherkasy-PLUS" : "Автолюкс Черкаси-ПЛЮС",
-    description:
-      safeLocale === "en"
-        ? "Professional passenger transportation services"
-        : "Професійні послуги пасажирських перевезень",
-    icons: { icon: "/favicon-light.svg" },
-  };
+  return createSiteMetadata(safeLocale);
 }
 
 export function generateStaticParams() {
@@ -54,6 +48,7 @@ export default async function RootLayout({
   }
 
   const dictionary = await getDictionary(locale);
+  const organizationStructuredData = getOrganizationStructuredData(locale);
 
   return (
     <html lang={locale} className={roboto.variable}>
@@ -69,6 +64,12 @@ export default async function RootLayout({
           href="/favicon-dark.svg"
           type="image/svg+xml"
           media="(prefers-color-scheme: dark)"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationStructuredData),
+          }}
         />
       </head>
 
