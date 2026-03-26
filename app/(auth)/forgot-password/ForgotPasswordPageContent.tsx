@@ -14,31 +14,28 @@ type ForgotPasswordPageContentProps = {
 };
 
 type StatusState =
+  | { type: "info"; message: string }
   | { type: "success"; message: string }
   | { type: "error"; message: string }
   | null;
 
-function isEmailValid(value: string) {
-  const trimmedValue = value.trim();
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue);
-}
-
-function isPhoneValid(value: string) {
-  const trimmedValue = value.trim();
-  const normalizedPhone = trimmedValue.replace(/[\s()-]/g, "");
-  return /^\+?\d{10,15}$/.test(normalizedPhone);
-}
+const FORGOT_PASSWORD_UNAVAILABLE_MESSAGE =
+  "Відновлення пароля тимчасово недоступне. Бекенд ще не затвердив forgot password flow.";
 
 export default function ForgotPasswordPageContent({
   onClose,
 }: ForgotPasswordPageContentProps) {
   const router = useRouter();
+  const isForgotPasswordAvailable = false;
 
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [sendToEmail, setSendToEmail] = useState(false);
   const [sendToPhone, setSendToPhone] = useState(false);
-  const [status, setStatus] = useState<StatusState>(null);
+  const [status, setStatus] = useState<StatusState>({
+    type: "info",
+    message: FORGOT_PASSWORD_UNAVAILABLE_MESSAGE,
+  });
 
   const handleCloseAuthFlow = () => {
     if (onClose) {
@@ -51,62 +48,9 @@ export default function ForgotPasswordPageContent({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const trimmedPhone = phone.trim();
-    const trimmedEmail = email.trim();
-
-    if (!trimmedPhone && !trimmedEmail) {
-      setStatus({
-        type: "error",
-        message: "Введіть номер телефону або email.",
-      });
-      return;
-    }
-
-    if (trimmedPhone && !isPhoneValid(trimmedPhone)) {
-      setStatus({
-        type: "error",
-        message: "Введіть коректний номер телефону.",
-      });
-      return;
-    }
-
-    if (trimmedEmail && !isEmailValid(trimmedEmail)) {
-      setStatus({
-        type: "error",
-        message: "Введіть коректний email.",
-      });
-      return;
-    }
-
-    if (!sendToEmail && !sendToPhone) {
-      setStatus({
-        type: "error",
-        message: "Оберіть, куди надіслати новий пароль.",
-      });
-      return;
-    }
-
-    if (sendToEmail && !trimmedEmail) {
-      setStatus({
-        type: "error",
-        message: "Введіть email, щоб надіслати новий пароль на пошту.",
-      });
-      return;
-    }
-
-    if (sendToPhone && !trimmedPhone) {
-      setStatus({
-        type: "error",
-        message: "Введіть номер телефону, щоб надіслати новий пароль на телефон.",
-      });
-      return;
-    }
-
     setStatus({
-      type: "success",
-      message:
-        "Якщо акаунт із такими даними існує, новий пароль буде надіслано на вибрані контакти.",
+      type: "info",
+      message: FORGOT_PASSWORD_UNAVAILABLE_MESSAGE,
     });
   };
 
@@ -163,10 +107,10 @@ export default function ForgotPasswordPageContent({
                   value={phone}
                   onChange={(event) => {
                     setPhone(event.target.value);
-                    if (status) setStatus(null);
                   }}
                   autoComplete="tel"
                   inputMode="tel"
+                  disabled={!isForgotPasswordAvailable}
                 />
                 <Image
                   src="/icons/eye-off-light.svg"
@@ -189,9 +133,9 @@ export default function ForgotPasswordPageContent({
                   value={email}
                   onChange={(event) => {
                     setEmail(event.target.value);
-                    if (status) setStatus(null);
                   }}
                   autoComplete="email"
+                  disabled={!isForgotPasswordAvailable}
                 />
                 <Image
                   src="/icons/eye-off-light.svg"
@@ -204,37 +148,68 @@ export default function ForgotPasswordPageContent({
               </div>
             </label>
 
-            <label className={styles.optionRow}>
+            <label
+              className={`${styles.optionRow} ${
+                !isForgotPasswordAvailable ? styles.optionRowDisabled : ""
+              }`.trim()}
+            >
               <input
                 className={styles.optionInput}
                 type="checkbox"
                 checked={sendToEmail}
                 onChange={(event) => {
                   setSendToEmail(event.target.checked);
-                  if (status) setStatus(null);
                 }}
+                disabled={!isForgotPasswordAvailable}
               />
-              <span className={styles.checkboxUi} aria-hidden="true" />
-              <span className={styles.optionText}>Надіслати новий пароль на пошту</span>
+              <span
+                className={`${styles.checkboxUi} ${
+                  !isForgotPasswordAvailable ? styles.checkboxUiDisabled : ""
+                }`.trim()}
+                aria-hidden="true"
+              />
+              <span
+                className={`${styles.optionText} ${
+                  !isForgotPasswordAvailable ? styles.optionTextMuted : ""
+                }`.trim()}
+              >
+                Надіслати новий пароль на пошту
+              </span>
             </label>
 
-            <label className={styles.optionRow}>
+            <label
+              className={`${styles.optionRow} ${
+                !isForgotPasswordAvailable ? styles.optionRowDisabled : ""
+              }`.trim()}
+            >
               <input
                 className={styles.optionInput}
                 type="checkbox"
                 checked={sendToPhone}
                 onChange={(event) => {
                   setSendToPhone(event.target.checked);
-                  if (status) setStatus(null);
                 }}
+                disabled={!isForgotPasswordAvailable}
               />
-              <span className={styles.checkboxUi} aria-hidden="true" />
-              <span className={styles.optionText}>Надіслати новий пароль на телефон</span>
+              <span
+                className={`${styles.checkboxUi} ${
+                  !isForgotPasswordAvailable ? styles.checkboxUiDisabled : ""
+                }`.trim()}
+                aria-hidden="true"
+              />
+              <span
+                className={`${styles.optionText} ${
+                  !isForgotPasswordAvailable ? styles.optionTextMuted : ""
+                }`.trim()}
+              >
+                Надіслати новий пароль на телефон
+              </span>
             </label>
 
             <div
-              className={`${styles.status} ${status?.type === "success" ? styles.statusSuccess : ""} ${
-                status?.type === "error" ? styles.statusError : ""
+              className={`${styles.status} ${status?.type === "info" ? styles.statusInfo : ""} ${
+                status?.type === "success" ? styles.statusSuccess : ""
+              } ${status?.type === "error" ? styles.statusError : ""
               }`.trim()}
               aria-live="polite"
             >
@@ -242,7 +217,13 @@ export default function ForgotPasswordPageContent({
             </div>
 
             <div className={styles.actions}>
-              <Button text="Продовжити" variant="primary" type="submit" onClick={() => {}} />
+              <Button
+                text="Тимчасово недоступно"
+                variant="primary"
+                type="submit"
+                onClick={() => {}}
+                disabled={!isForgotPasswordAvailable}
+              />
 
               <div className={styles.bottomRow}>
                 <button
