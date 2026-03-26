@@ -212,6 +212,150 @@
     "mapTitle": "Map: Mytnytska St, 7, Cherkasy",
     "copy": "© 2026 Autolux Cherkasy-Plus. All rights reserved.",
     "scrollTop": "Back to top"
+  },
+  "common": {
+    "close": "Close",
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
+  },
+  "bookingHero": {
+    "imageAlt": "Bus"
+  },
+  "googleAuth": {
+    "loading": "Connecting Google...",
+    "unavailable": "Google sign-in is unavailable",
+    "submitting": "Please wait...",
+    "errors": {
+      "noCredential": "Google didn't return an identity token. Please try again.",
+      "complete": "Failed to complete Google sign-in.",
+      "unavailable": "Failed to connect Google sign-in."
+    }
+  },
+  "auth": {
+    "common": {
+      "brandDesc": "Travel safely and comfortably",
+      "promo": {
+        "one": "Flexible ticket management: you can reserve a seat for the route you need for free or make an instant purchase online.",
+        "two": "Updated departure times are always available online in just a couple of clicks.",
+        "three": "Sign up and plan your trip in a minute."
+      }
+    },
+    "login": {
+      "title": "Personal account",
+      "identifierLabel": "Email or phone number +380…",
+      "passwordLabel": "Password",
+      "remember": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "submitLoading": "Signing in...",
+      "register": "Sign up",
+      "benefits": {
+        "reserve": "Reserve tickets for free",
+        "buy": "Buy tickets online",
+        "manage": "Manage tickets and order history"
+      },
+      "errors": {
+        "missingToken": "API response does not include an access token",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "register": {
+      "title": "Registration",
+      "phoneLabel": "Phone number",
+      "emailLabel": "Enter email",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm password",
+      "passwordHint": "Password must contain at least 8 characters, including uppercase letters and numbers.",
+      "submit": "Sign up",
+      "submitLoading": "Loading...",
+      "existingAccount": "I already have an account",
+      "errors": {
+        "passwordMismatch": "Passwords do not match",
+        "phoneRequired": "Enter a phone number",
+        "phoneFormat": "Phone must be in the format +380XXXXXXXXX",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "forgotPassword": {
+      "title": "Password recovery",
+      "subtitle": "Enter your email or phone number",
+      "phoneLabel": "Enter phone number +380...",
+      "emailLabel": "Enter email",
+      "sendToEmail": "Send a new password to email",
+      "sendToPhone": "Send a new password to phone",
+      "unavailableButton": "Temporarily unavailable",
+      "loginVia": "Sign in via",
+      "existingAccount": "I already have an account",
+      "unavailableMessage": "Password recovery is temporarily unavailable. The backend has not approved the forgot password flow yet."
+    }
+  },
+  "profile": {
+    "breadcrumbsAria": "Personal account breadcrumbs",
+    "tabsAria": "Personal account navigation",
+    "cabinet": "Personal account",
+    "title": "Profile",
+    "tickets": {
+      "title": "My tickets",
+      "empty": {
+        "title": "You do not have any tickets yet. Would you like to find a route?",
+        "action": "Choose a route"
+      }
+    },
+    "logoutAria": "Sign out from personal account",
+    "description": "This is a minimal profile page. Settings, tickets, and your trip history will appear here later.",
+    "tabs": {
+      "tickets": "Tickets",
+      "archive": "Archive",
+      "profile": "Profile"
+    },
+    "fields": {
+      "name": "Full name",
+      "phone": "Phone number",
+      "email": "Email"
+    },
+    "placeholders": {
+      "name": "Your profile",
+      "phone": "+380",
+      "email": "example@email.com"
+    },
+    "page": {
+      "title": "Profile settings",
+      "labels": {
+        "name": "Full name",
+        "phone": "Phone number +380...",
+        "emailConfirm": "Email (for confirmation)",
+        "currentPassword": "Current password",
+        "newPassword": "New password"
+      },
+      "placeholders": {
+        "name": "Enter your full name",
+        "currentPassword": "Enter current password",
+        "newPassword": "Enter new password"
+      },
+      "actions": {
+        "retry": "Retry",
+        "login": "Sign in",
+        "save": "Save",
+        "saving": "Saving...",
+        "loading": "Loading..."
+      },
+      "messages": {
+        "sessionInactive": "Your session is inactive. Sign in again to view and update your profile.",
+        "noChanges": "There are no changes to save."
+      },
+      "errors": {
+        "load": "Failed to load profile.",
+        "nameMin": "Enter a name with at least 2 characters.",
+        "phoneFormat": "Phone number must be in the format +380XXXXXXXXX.",
+        "emailInvalid": "Enter a valid email address.",
+        "passwordBothRequired": "To change the password, fill in both the current and the new password.",
+        "passwordMin": "The new password must contain at least 6 characters.",
+        "passwordSame": "The new password cannot match the current password.",
+        "updateProfile": "Failed to update profile details.",
+        "changePassword": "Failed to change password."
+      }
+    }
   }
-  
 }

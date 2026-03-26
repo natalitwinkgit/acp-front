@@ -6,6 +6,7 @@ import {
   getGoogleClientId,
   loadGoogleIdentityScript,
 } from "@/src/shared/api/google-auth";
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import styles from "./GoogleAuthButton.module.css";
 
 type GoogleAuthIntent = "login" | "register";
@@ -38,10 +39,11 @@ export default function GoogleAuthButton({
   onError,
   onSuccess,
 }: GoogleAuthButtonProps) {
+  const { t } = useI18n();
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [placeholderText, setPlaceholderText] = useState("Підключаємо Google...");
+  const [placeholderText, setPlaceholderText] = useState(t("googleAuth.loading"));
 
   const reportBusyChange = useEffectEvent((busy: boolean) => {
     onBusyChange?.(busy);
@@ -57,7 +59,7 @@ export default function GoogleAuthButton({
 
   const handleCredentialResponse = useEffectEvent(async (response: GoogleCredentialResponse) => {
     if (!response.credential) {
-      reportError("Google не повернув identity token. Спробуйте ще раз.");
+      reportError(t("googleAuth.errors.noCredential"));
       return;
     }
 
@@ -69,7 +71,7 @@ export default function GoogleAuthButton({
       await authenticateWithGoogleCredential(response.credential);
       reportSuccess();
     } catch (err) {
-      reportError(err instanceof Error ? err.message : "Не вдалося завершити вхід через Google.");
+      reportError(err instanceof Error ? err.message : t("googleAuth.errors.complete"));
     } finally {
       reportBusyChange(false);
       setIsSubmitting(false);
@@ -126,10 +128,10 @@ export default function GoogleAuthButton({
         }
       } catch (err) {
         const message =
-          err instanceof Error ? err.message : "Не вдалося підключити Google авторизацію.";
+          err instanceof Error ? err.message : t("googleAuth.errors.unavailable");
 
         if (isActive) {
-          setPlaceholderText("Google авторизація недоступна");
+          setPlaceholderText(t("googleAuth.unavailable"));
           setIsReady(false);
           reportError(message);
         }
@@ -142,7 +144,7 @@ export default function GoogleAuthButton({
       isActive = false;
       resizeObserver?.disconnect();
     };
-  }, [intent]);
+  }, [intent, t]);
 
   const rootClassName = `${styles.root} ${disabled || isSubmitting ? styles.disabled : ""}`.trim();
 
@@ -152,7 +154,7 @@ export default function GoogleAuthButton({
 
       {!isReady ? <div className={styles.placeholder}>{placeholderText}</div> : null}
 
-      {isSubmitting ? <div className={styles.overlay}>Зачекайте...</div> : null}
+      {isSubmitting ? <div className={styles.overlay}>{t("googleAuth.submitting")}</div> : null}
     </div>
   );
 }

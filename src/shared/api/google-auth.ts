@@ -36,8 +36,39 @@ declare global {
 
 let googleIdentityScriptPromise: Promise<void> | null = null;
 
+const GOOGLE_AUTH_MESSAGES = {
+  onlyBrowser: {
+    uk: "Google Identity Services доступний лише у браузері",
+    en: "Google Identity Services is only available in the browser",
+  },
+  initFailed: {
+    uk: "Google Identity Services не ініціалізувався коректно",
+    en: "Google Identity Services did not initialize correctly",
+  },
+  loadFailed: {
+    uk: "Не вдалося завантажити Google Identity Services",
+    en: "Failed to load Google Identity Services",
+  },
+  missingToken: {
+    uk: "Відповідь API не містить access token",
+    en: "API response does not include an access token",
+  },
+} as const;
+
 function isBrowser() {
   return typeof window !== "undefined";
+}
+
+function getClientLocale() {
+  if (typeof document === "undefined") {
+    return "uk" as const;
+  }
+
+  return document.documentElement.lang?.toLowerCase().startsWith("en") ? "en" : "uk";
+}
+
+function getGoogleAuthMessage(key: keyof typeof GOOGLE_AUTH_MESSAGES) {
+  return GOOGLE_AUTH_MESSAGES[key][getClientLocale()];
 }
 
 export function getGoogleClientId() {
@@ -50,7 +81,7 @@ export function getGoogleClientId() {
 
 export function loadGoogleIdentityScript() {
   if (!isBrowser()) {
-    return Promise.reject(new Error("Google Identity Services доступний лише у браузері"));
+    return Promise.reject(new Error(getGoogleAuthMessage("onlyBrowser")));
   }
 
   if (window.google?.accounts?.id) {
@@ -72,7 +103,7 @@ export function loadGoogleIdentityScript() {
         return;
       }
 
-      reject(new Error("Google Identity Services не ініціалізувався коректно"));
+      reject(new Error(getGoogleAuthMessage("initFailed")));
     };
 
     if (existingScript) {
@@ -84,7 +115,7 @@ export function loadGoogleIdentityScript() {
       existingScript.addEventListener("load", handleLoad, { once: true });
       existingScript.addEventListener(
         "error",
-        () => reject(new Error("Не вдалося завантажити Google Identity Services")),
+        () => reject(new Error(getGoogleAuthMessage("loadFailed"))),
         { once: true },
       );
       return;
@@ -97,7 +128,7 @@ export function loadGoogleIdentityScript() {
     script.addEventListener("load", handleLoad, { once: true });
     script.addEventListener(
       "error",
-      () => reject(new Error("Не вдалося завантажити Google Identity Services")),
+      () => reject(new Error(getGoogleAuthMessage("loadFailed"))),
       { once: true },
     );
 
@@ -119,7 +150,7 @@ export async function authenticateWithGoogleCredential(idToken: string) {
   });
 
   if (!response?.access_token) {
-    throw new Error("Відповідь API не містить access token");
+    throw new Error(getGoogleAuthMessage("missingToken"));
   }
 
   setAccessToken(response.access_token);
