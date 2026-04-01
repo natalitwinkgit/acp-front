@@ -177,6 +177,143 @@
   color: #11313D;
 }
 
+.timeDropdown {
+  position: relative;
+  width: 100%;
+  z-index: 20;
+}
+
+.timeDropdownTrigger {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  background: #FCFEFE;
+  border: 1px solid #7B98A3;
+  border-radius: 12px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #11313D;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.timeDropdownTrigger:focus-visible {
+  border-color: var(--color-brand, #226078);
+  box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
+}
+
+.timeDropdownTrigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.timeDropdownValue {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timeDropdownChevron {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.timeDropdownMenu {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  width: 100%;
+  z-index: 35;
+}
+
+.timeDropdownList {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  background: #C9E4E7;
+  border: 1px solid #7B98A3;
+  border-radius: 12px;
+  overflow: hidden auto;
+}
+
+.timeDropdownListGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  max-height: 228px;
+}
+
+.timeDropdownListSingle {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-height: 132px;
+}
+
+.timeDropdownOption {
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  gap: 10px;
+  border: 0;
+  background: #FCFEFE;
+  cursor: pointer;
+  text-align: center;
+}
+
+.timeDropdownOption:hover,
+.timeDropdownOption:focus-visible {
+  background: #F4F7F7;
+  outline: none;
+}
+
+.timeDropdownOptionSelected {
+  background: #F4F7F7;
+}
+
+.timeDropdownOptionGrid {
+  width: 100%;
+}
+
+.timeDropdownOptionSingle {
+  width: 100%;
+}
+
+.timeDropdownOptionLabel {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-family: Roboto, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #226078;
+  text-align: center;
+}
+
+.timeDropdownOptionSelected .timeDropdownOptionLabel {
+  color: #11313D;
+}
+
 .seatsDropdown {
   position: relative;
   width: calc((100% - 16px) / 2);
@@ -673,6 +810,11 @@
     font-size: 14px;
   }
 
+  .timeDropdownTrigger {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
   .seatsDropdownTrigger {
     min-height: 40px;
     font-size: 14px;
@@ -680,6 +822,7 @@
 
   .control,
   .routeDropdown,
+  .timeDropdown,
   .seatsDropdown,
   .dateWrap,
   .controlWithIconBtn,
@@ -720,11 +863,19 @@
     min-height: 40px;
   }
 
+  .timeDropdownOption {
+    min-height: 40px;
+  }
+
   .seatsDropdownOption {
     min-height: 40px;
   }
 
   .routeDropdownOptionLabel {
+    font-size: 14px;
+  }
+
+  .timeDropdownOptionLabel {
     font-size: 14px;
   }
 
@@ -744,6 +895,11 @@
   }
 
   .routeDropdownChevron {
+    width: 20px;
+    height: 20px;
+  }
+
+  .timeDropdownChevron {
     width: 20px;
     height: 20px;
   }
