@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { getTripById } from "@/src/shared/api";
 import { hasLocale, type Locale } from "@/src/shared/i18n/config";
-import { getPopularRouteBySlug } from "@/src/shared/data/popularRoutes";
+import { getPopularRouteBySlug, mapTripToPopularRoute } from "@/src/shared/data/popularRoutes";
 import { createPageMetadata, getSeoCopy, getTicketBookingSeo } from "@/src/shared/seo/metadata";
 import TicketBookingPageContent from "./TicketBookingPageContent";
 
@@ -10,9 +11,24 @@ type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+async function resolveRoute(slug: string) {
+  const fallbackRoute = getPopularRouteBySlug(slug);
+
+  if (fallbackRoute) {
+    return fallbackRoute;
+  }
+
+  try {
+    const trip = await getTripById(slug);
+    return mapTripToPopularRoute(trip);
+  } catch {
+    return null;
+  }
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const route = getPopularRouteBySlug(slug);
+  const route = await resolveRoute(slug);
   const safeLocale: Locale = hasLocale(locale) ? locale : "uk";
 
   if (!route) {
@@ -48,7 +64,7 @@ export default async function TicketBookingPage({ params }: PageProps) {
     notFound();
   }
 
-  const route = getPopularRouteBySlug(slug);
+  const route = await resolveRoute(slug);
 
   if (!route) {
     notFound();

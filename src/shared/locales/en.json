@@ -55,11 +55,22 @@
     "price": { "placeholder": "Price" },
     "buttons": {
       "reserve": "Reserve a ticket",
-      "continue": "Continue"
+      "continue": "Continue",
+      "loading": "Checking..."
     },
     "calendar": {
       "months": ["January","February","March","April","May","June","July","August","September","October","November","December"],
       "weekdays": ["Mo","Tu","We","Th","Fr","Sa","Su"]
+    },
+    "status": {
+      "loading": "Loading trips...",
+      "empty": "There are no routes available right now.",
+      "loadError": "Failed to load the trip list. Please try again.",
+      "noTrips": "No trips were found for the selected filters.",
+      "searchError": "Failed to find trips for the selected filters.",
+      "selectTrip": "Choose a route and departure time.",
+      "seatsUnavailable": "There are not enough free seats on this trip.",
+      "availabilityError": "Failed to check seat availability."
     }
     
   },
