@@ -51,6 +51,133 @@
   gap: 24px;
 }
 
+.routeDropdown {
+  position: relative;
+  width: 100%;
+  z-index: 20;
+}
+
+.routeDropdownTrigger {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  background: #FCFEFE;
+  border: 1px solid #7B98A3;
+  border-radius: 12px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #11313D;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.routeDropdownTrigger:focus-visible {
+  border-color: var(--color-brand, #226078);
+  box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
+}
+
+.routeDropdownTrigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.routeDropdownValue {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.routeDropdownChevron {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition: transform 0.15s ease;
+}
+
+.routeDropdownChevronOpen {
+  transform: rotate(180deg);
+}
+
+.routeDropdownMenu {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  width: 100%;
+  z-index: 30;
+}
+
+.routeDropdownList {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 1px;
+  width: 100%;
+  max-height: 360px;
+  overflow-y: auto;
+  background: #C9E4E7;
+  border: 1px solid #7B98A3;
+  border-radius: 12px;
+}
+
+.routeDropdownOption {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  border: 0;
+  background: #FCFEFE;
+  text-align: left;
+  cursor: pointer;
+}
+
+.routeDropdownOption:hover,
+.routeDropdownOption:focus-visible {
+  background: #F4F7F7;
+  outline: none;
+}
+
+.routeDropdownOptionSelected {
+  background: #F4F7F7;
+}
+
+.routeDropdownOptionLabel {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-family: Roboto, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #226078;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.routeDropdownOptionSelected .routeDropdownOptionLabel {
+  color: #11313D;
+}
+
 
 
 
@@ -398,7 +525,13 @@
     font-size: 14px;
   }
 
+  .routeDropdownTrigger {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
   .control,
+  .routeDropdown,
   .dateWrap,
   .controlWithIconBtn,
   .primaryBtnWrap {
@@ -430,9 +563,26 @@
     background-position: right 12px center;
   }
 
+  .routeDropdownList {
+    max-height: 280px;
+  }
+
+  .routeDropdownOption {
+    min-height: 40px;
+  }
+
+  .routeDropdownOptionLabel {
+    font-size: 14px;
+  }
+
   .iconRight,
   .calendarIcon,
   .calendarIcon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .routeDropdownChevron {
     width: 20px;
     height: 20px;
   }

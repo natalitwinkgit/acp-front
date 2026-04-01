@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 import { getTripAvailability, getTrips, type Trip } from "@/src/shared/api";
@@ -135,12 +135,14 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
   const resolveHref = useLocalizedHref();
   const { lang, t, raw } = useI18n();
   const timeLocale = lang === "en" ? "en-GB" : "uk-UA";
+  const routeDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [date, setDate] = useState<Date | null>(null);
   const [openCal, setOpenCal] = useState(false);
   const [allTrips, setAllTrips] = useState<Trip[]>(initialTrips);
   const [matchingTrips, setMatchingTrips] = useState<Trip[]>([]);
   const [selectedRouteValue, setSelectedRouteValue] = useState("");
+  const [isRouteDropdownOpen, setIsRouteDropdownOpen] = useState(false);
   const [selectedTripId, setSelectedTripId] = useState("");
   const [seatsValue, setSeatsValue] = useState("1");
   const [statusMessage, setStatusMessage] = useState("");
@@ -159,6 +161,10 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
   const months = raw("bookingForm.calendar.months") as string[];
   const weekdays = raw("bookingForm.calendar.weekdays") as string[];
   const routeOptions = useMemo(() => buildRouteOptions(allTrips), [allTrips]);
+  const selectedRouteOption = useMemo(
+    () => routeOptions.find((routeOption) => routeOption.value === selectedRouteValue) ?? null,
+    [routeOptions, selectedRouteValue],
+  );
   const timeOptions = useMemo(() => sortTripsByTime(matchingTrips), [matchingTrips]);
   const selectedTrip = useMemo(
     () => timeOptions.find((trip) => trip.id === selectedTripId) ?? null,
@@ -175,6 +181,40 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
     ? priceFormatter.format(selectedTrip.price)
     : "";
   const isBusy = isBootstrapping || isSearchingTrips || isCheckingAvailability || isPendingNavigation;
+
+  useEffect(() => {
+    if (!isRouteDropdownOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: MouseEvent | TouchEvent) => {
+      const target = event.target;
+
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (!routeDropdownRef.current?.contains(target)) {
+        setIsRouteDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsRouteDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isRouteDropdownOpen]);
 
   useEffect(() => {
     if (initialTrips.length > 0) {
@@ -241,6 +281,7 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
 
     let isCancelled = false;
     const { from, to } = parseRouteValue(selectedRouteValue);
+    const selectedDateKey = date ? formatISODate(date) : null;
 
     const loadMatchingTrips = async () => {
       setIsSearchingTrips(true);
@@ -251,7 +292,7 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
         const trips = await getTrips({
           from,
           to,
-          date: date ? formatISODate(date) : undefined,
+          date: selectedDateKey ?? undefined,
           seats,
         });
 
@@ -324,7 +365,7 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
       }
 
       startNavigation(() => {
-        router.push(resolveHref(`/tickets/${selectedTrip.id}`));
+        router.push(resolveHref(`/tickets/${selectedTrip.slug ?? selectedTrip.id}`));
       });
     } catch (error) {
       setStatusMessage(
@@ -344,21 +385,66 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputBlock}>
-          <select
-            className={`${styles.control} ${styles.select}`}
-            value={selectedRouteValue}
-            onChange={(event) => setSelectedRouteValue(event.target.value)}
-            disabled={isBootstrapping || routeOptions.length === 0}
-          >
-            <option value="" disabled>
-              {t("bookingForm.route.placeholder")}
-            </option>
-            {routeOptions.map((routeOption) => (
-              <option key={routeOption.value} value={routeOption.value}>
-                {routeOption.label}
-              </option>
-            ))}
-          </select>
+          <div className={styles.routeDropdown} ref={routeDropdownRef}>
+            <button
+              type="button"
+              className={styles.routeDropdownTrigger}
+              onClick={() => {
+                if (!isBootstrapping && routeOptions.length > 0) {
+                  setIsRouteDropdownOpen((currentValue) => !currentValue);
+                }
+              }}
+              aria-haspopup="listbox"
+              aria-expanded={isRouteDropdownOpen}
+              aria-controls="booking-form-route-listbox"
+              disabled={isBootstrapping || routeOptions.length === 0}
+            >
+              <span className={styles.routeDropdownValue}>
+                {selectedRouteOption?.label ?? t("bookingForm.route.placeholder")}
+              </span>
+              <span
+                className={`${styles.routeDropdownChevron} ${
+                  isRouteDropdownOpen ? styles.routeDropdownChevronOpen : ""
+                }`}
+                aria-hidden="true"
+              >
+                <Image src="/icons/down-arrow.svg" alt="" width={12} height={7} />
+              </span>
+            </button>
+
+            {isRouteDropdownOpen ? (
+              <div className={styles.routeDropdownMenu}>
+                <div
+                  id="booking-form-route-listbox"
+                  className={styles.routeDropdownList}
+                  role="listbox"
+                  aria-label={t("bookingForm.route.placeholder")}
+                >
+                  {routeOptions.map((routeOption) => {
+                    const isSelected = routeOption.value === selectedRouteValue;
+
+                    return (
+                      <button
+                        key={routeOption.value}
+                        type="button"
+                        role="option"
+                        aria-selected={isSelected}
+                        className={`${styles.routeDropdownOption} ${
+                          isSelected ? styles.routeDropdownOptionSelected : ""
+                        }`}
+                        onClick={() => {
+                          setSelectedRouteValue(routeOption.value);
+                          setIsRouteDropdownOpen(false);
+                        }}
+                      >
+                        <span className={styles.routeDropdownOptionLabel}>{routeOption.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
+          </div>
 
           <div className={styles.dateWrap}>
             <button
