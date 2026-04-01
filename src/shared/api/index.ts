@@ -17,3 +17,5 @@ export {
   hasAccessToken,
   setAccessToken,
 } from "./session";
+export { getTrips } from "./trips";
+export type { Trip } from "./trips";
