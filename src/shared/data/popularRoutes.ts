@@ -204,11 +204,30 @@ function formatTripDateLabel(date: string | null, locale: Locale) {
 
 function formatTripTimeLabel(trip: Trip, locale: Locale) {
   const dateLabel = formatTripDateLabel(trip.date, locale);
-  const timeLabel = trip.departureTime ?? (locale === "en" ? "time to be confirmed" : "час уточнюйте");
+  const timeLabel = formatTripTimeValue(trip.departureTime, locale);
 
   return locale === "en"
     ? `Nearest trip: ${dateLabel} at ${timeLabel}`
     : `Найближчий рейс: ${dateLabel} о ${timeLabel}`;
+}
+
+function formatTripTimeValue(value: string | null, locale: Locale) {
+  if (!value) {
+    return locale === "en" ? "time to be confirmed" : "час уточнюйте";
+  }
+
+  const parsedDate = new Date(value);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    const timeMatch = value.match(/(\d{2}:\d{2})/);
+    return timeMatch?.[1] ?? value;
+  }
+
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "uk-UA", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(parsedDate);
 }
 
 export function mapTripToPopularRoute(trip: Trip): PopularRoute {

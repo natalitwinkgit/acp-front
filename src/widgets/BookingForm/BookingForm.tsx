@@ -76,25 +76,65 @@ function buildRouteOptions(trips: Trip[]) {
 
 function sortTripsByTime(trips: Trip[]) {
   return [...trips].sort((left, right) => {
-    const leftTime = left.departureTime ?? "99:99";
-    const rightTime = right.departureTime ?? "99:99";
+    const leftTime = getTripSortValue(left.departureTime);
+    const rightTime = getTripSortValue(right.departureTime);
 
-    return leftTime.localeCompare(rightTime);
+    return leftTime - rightTime;
   });
 }
 
-function formatTripTime(trip: Trip) {
-  return trip.departureTime ?? "--:--";
+function getTripSortValue(value: string | null) {
+  if (!value) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const parsedValue = Date.parse(value);
+  if (!Number.isNaN(parsedValue)) {
+    return parsedValue;
+  }
+
+  const timeMatch = value.match(/(\d{2}):(\d{2})/);
+  if (!timeMatch) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  return Number(timeMatch[1]) * 60 + Number(timeMatch[2]);
+}
+
+function formatTripTime(trip: Trip, locale: string) {
+  if (!trip.departureTime) {
+    return "--:--";
+  }
+
+  const parsedDate = new Date(trip.departureTime);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return normalizeTimeFallback(trip.departureTime);
+  }
+
+  return new Intl.DateTimeFormat(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(parsedDate);
+}
+
+function normalizeTimeFallback(value: string) {
+  const match = value.match(/(\d{2}:\d{2})/);
+  return match?.[1] ?? value;
 }
 
 type BookingFormProps = {
   initialTrips?: Trip[];
 };
 
-export default function BookingForm({ initialTrips = [] }: BookingFormProps) {
+const EMPTY_TRIPS: Trip[] = [];
+
+export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormProps) {
   const router = useRouter();
   const resolveHref = useLocalizedHref();
   const { lang, t, raw } = useI18n();
+  const timeLocale = lang === "en" ? "en-GB" : "uk-UA";
 
   const [date, setDate] = useState<Date | null>(null);
   const [openCal, setOpenCal] = useState(false);
@@ -273,9 +313,9 @@ export default function BookingForm({ initialTrips = [] }: BookingFormProps) {
     try {
       const availability = await getTripAvailability(selectedTrip.id, seats);
 
-      const hasEnoughSeats = availability.available === false
-        ? false
-        : availability.availableSeats == null || availability.availableSeats >= seats;
+      const hasEnoughSeats =
+        availability.canReserve ??
+        (availability.availableSeats == null || availability.availableSeats >= seats);
 
       if (!hasEnoughSeats) {
         setStatusMessage(t("bookingForm.status.seatsUnavailable"));
@@ -364,7 +404,7 @@ export default function BookingForm({ initialTrips = [] }: BookingFormProps) {
             </option>
             {timeOptions.map((trip) => (
               <option key={trip.id} value={trip.id}>
-                {formatTripTime(trip)}
+                {formatTripTime(trip, timeLocale)}
               </option>
             ))}
           </select>

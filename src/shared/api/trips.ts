@@ -7,10 +7,15 @@ export type TripSearchParams = {
   to?: string;
   date?: string;
   seats?: number;
+  page?: number;
+  limit?: number;
 };
 
 export type Trip = {
   id: string;
+  routeNumber: string | null;
+  platform: string | null;
+  direction: string;
   slug: string | null;
   from: string;
   to: string;
@@ -26,9 +31,10 @@ export type Trip = {
 
 export type TripAvailability = {
   tripId: string;
-  available: boolean | null;
+  totalSeats: number | null;
+  reservedSeats: number | null;
   availableSeats: number | null;
-  requestedSeats: number | null;
+  canReserve: boolean | null;
   raw: unknown;
 };
 
@@ -111,22 +117,16 @@ function normalizeDate(value: string | null) {
   return parsedDate.toISOString().slice(0, 10);
 }
 
-function normalizeTime(value: string | null) {
-  if (!value) {
-    return null;
-  }
+function splitDirection(direction: string) {
+  const parts = direction
+    .split(/\s[-—–]\s/)
+    .map((part) => part.trim())
+    .filter(Boolean);
 
-  const timeMatch = value.match(/(\d{2}:\d{2})/);
-  if (timeMatch) {
-    return timeMatch[1];
-  }
-
-  const parsedDate = new Date(value);
-  if (Number.isNaN(parsedDate.getTime())) {
-    return null;
-  }
-
-  return parsedDate.toISOString().slice(11, 16);
+  return {
+    from: parts[0] ?? "",
+    to: parts.slice(1).join(" - ").trim(),
+  };
 }
 
 function normalizeTrip(payload: unknown): Trip | null {
@@ -135,7 +135,7 @@ function normalizeTrip(payload: unknown): Trip | null {
   }
 
   const id = getString(payload, ["id", "tripId", "trip_id"]);
-  const from = getString(payload, [
+  const explicitFrom = getString(payload, [
     "from",
     "fromCity",
     "departureCity",
@@ -144,7 +144,7 @@ function normalizeTrip(payload: unknown): Trip | null {
     "route.from",
     "route.origin",
   ]);
-  const to = getString(payload, [
+  const explicitTo = getString(payload, [
     "to",
     "toCity",
     "arrivalCity",
@@ -153,12 +153,24 @@ function normalizeTrip(payload: unknown): Trip | null {
     "route.to",
     "route.destination",
   ]);
+  const direction =
+    getString(payload, ["direction", "route.direction"]) ??
+    (explicitFrom && explicitTo ? `${explicitFrom} - ${explicitTo}` : null);
 
-  if (!id || !from || !to) {
+  if (!id || !direction) {
+    return null;
+  }
+
+  const splitRoute = explicitFrom && explicitTo
+    ? { from: explicitFrom, to: explicitTo }
+    : splitDirection(direction);
+
+  if (!splitRoute.from || !splitRoute.to) {
     return null;
   }
 
   const departureDateTime = getString(payload, [
+    "departureTime",
     "departureAt",
     "departureDateTime",
     "departure_datetime",
@@ -167,6 +179,7 @@ function normalizeTrip(payload: unknown): Trip | null {
   ]);
 
   const arrivalDateTime = getString(payload, [
+    "arrivalTime",
     "arrivalAt",
     "arrivalDateTime",
     "arrival_datetime",
@@ -176,22 +189,17 @@ function normalizeTrip(payload: unknown): Trip | null {
     getString(payload, ["date", "tripDate", "departureDate"]) ?? departureDateTime,
   );
 
-  const departureTime = normalizeTime(
-    getString(payload, ["departureTime", "time", "tripTime", "startTime"]) ?? departureDateTime,
-  );
-
-  const arrivalTime = normalizeTime(
-    getString(payload, ["arrivalTime", "endTime"]) ?? arrivalDateTime,
-  );
-
   return {
     id,
+    routeNumber: getString(payload, ["routeNumber", "route_number"]),
+    platform: getString(payload, ["platform"]),
+    direction,
     slug: getString(payload, ["slug"]),
-    from,
-    to,
+    from: splitRoute.from,
+    to: splitRoute.to,
     date,
-    departureTime,
-    arrivalTime,
+    departureTime: departureDateTime,
+    arrivalTime: arrivalDateTime,
     price: getNumber(payload, ["price", "ticketPrice", "cost"]),
     availableSeats: getNumber(payload, [
       "availableSeats",
@@ -268,35 +276,40 @@ function extractAvailabilityEntity(payload: unknown) {
   return payload;
 }
 
-function normalizeAvailability(payload: unknown, tripId: string, requestedSeats: number | null): TripAvailability {
+function normalizeAvailability(payload: unknown, tripId: string): TripAvailability {
   if (!isRecord(payload)) {
     return {
       tripId,
-      available: null,
+      totalSeats: null,
+      reservedSeats: null,
       availableSeats: null,
-      requestedSeats,
+      canReserve: null,
       raw: payload,
     };
   }
 
-  const availableValue = getNestedValue(payload, "available");
-  const available =
-    typeof availableValue === "boolean"
-      ? availableValue
-      : null;
+  const canReserveValue = getNestedValue(payload, "canReserve");
+  const legacyAvailableValue = getNestedValue(payload, "available");
+  const canReserve =
+    typeof canReserveValue === "boolean"
+      ? canReserveValue
+      : typeof legacyAvailableValue === "boolean"
+        ? legacyAvailableValue
+        : null;
 
   return {
     tripId,
-    available,
+    totalSeats: getNumber(payload, ["totalSeats", "maxSeats", "capacity", "seatsTotal"]),
+    reservedSeats: getNumber(payload, ["reservedSeats", "reserved_seats"]),
     availableSeats: getNumber(payload, [
       "availableSeats",
       "freeSeats",
       "free_seats",
       "available_places",
       "available_places_count",
+      "seatsAvailable",
     ]),
-    requestedSeats:
-      getNumber(payload, ["requestedSeats", "requested_seats"]) ?? requestedSeats,
+    canReserve,
     raw: payload,
   };
 }
@@ -319,6 +332,9 @@ function toQueryString(params: TripSearchParams) {
   if (typeof params.seats === "number" && Number.isFinite(params.seats)) {
     searchParams.set("seats", String(params.seats));
   }
+
+  searchParams.set("page", String(params.page ?? 1));
+  searchParams.set("limit", String(params.limit ?? 100));
 
   const queryString = searchParams.toString();
   return queryString ? `?${queryString}` : "";
@@ -364,7 +380,7 @@ export async function getTripAvailability(id: string | number, seats?: number) {
     },
   );
 
-  return normalizeAvailability(extractAvailabilityEntity(response), String(id), seats ?? null);
+  return normalizeAvailability(extractAvailabilityEntity(response), String(id));
 }
 
 export function createTrip(payload: CreateTripPayload) {
