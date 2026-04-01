@@ -54,7 +54,7 @@
 .routeDropdown {
   position: relative;
   width: 100%;
-  z-index: 20;
+  z-index: 30;
 }
 
 .routeDropdownTrigger {
@@ -117,7 +117,7 @@
   top: calc(100% + 1px);
   left: 0;
   width: 100%;
-  z-index: 30;
+  z-index: 40;
 }
 
 .routeDropdownList {
@@ -181,7 +181,7 @@
   position: relative;
   width: calc((100% - 16px) / 2);
   min-width: 0;
-  z-index: 25;
+  z-index: 10;
 }
 
 .seatsDropdownTrigger {
@@ -236,7 +236,7 @@
   top: calc(100% + 1px);
   left: 0;
   width: 100%;
-  z-index: 35;
+  z-index: 20;
 }
 
 .seatsDropdownList {
