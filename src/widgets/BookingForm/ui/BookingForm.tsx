@@ -92,7 +92,30 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
       }
 
       startNavigation(() => {
-        router.push(resolveHref(`/tickets/${selectedTrip.slug ?? selectedTrip.id}`));
+        const searchParams = new URLSearchParams({
+          tripId: selectedTrip.id,
+          seats: String(seats),
+          from: selectedTrip.from,
+          to: selectedTrip.to,
+        });
+
+        if (selectedTrip.date) {
+          searchParams.set("date", selectedTrip.date);
+        }
+
+        if (selectedTrip.departureTime) {
+          searchParams.set("departureTime", selectedTrip.departureTime);
+        }
+
+        if (selectedTrip.arrivalTime) {
+          searchParams.set("arrivalTime", selectedTrip.arrivalTime);
+        }
+
+        if (selectedTrip.price != null) {
+          searchParams.set("price", String(selectedTrip.price));
+        }
+
+        router.push(resolveHref(`/tickets/${selectedTrip.slug ?? selectedTrip.id}?${searchParams}`));
       });
     } catch (error) {
       setStatusMessage(

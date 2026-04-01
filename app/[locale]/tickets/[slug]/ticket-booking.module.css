@@ -1,7 +1,7 @@
 .page {
   width: 100%;
-  padding: 12px 0 72px;
-  background: var(--color-page-bg, #fcfefe);
+  padding: 0 0 72px;
+  background: #fcfefe;
 }
 
 .container {
@@ -9,98 +9,98 @@
   max-width: var(--layout-max-width);
   margin: 0 auto;
   padding: 0 var(--layout-padding-x);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  box-sizing: border-box;
+  gap: 40px;
+}
+
+.headBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.breadcrumbs {
+  min-height: 56px;
 }
 
 .hero {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 24px;
+  background: #226078;
 }
 
-.kicker {
+.heroTitle {
   margin: 0;
-  font-size: 14px;
-  line-height: 144%;
-  color: #7b98a3;
+  font-size: 24px;
+  line-height: 124%;
+  font-weight: 500;
+  color: #fcfefe;
 }
 
-.title {
+.heroMeta {
   margin: 0;
-  font-size: clamp(28px, 4vw, 40px);
-  line-height: 116%;
-  color: #226078;
-}
-
-.tripLabel {
-  margin: 0;
-  font-size: 16px;
-  line-height: 144%;
-  color: #11313d;
+  font-size: 18px;
+  line-height: 132%;
+  font-weight: 500;
+  color: #fcfefe;
 }
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 420px;
-  gap: 24px;
-  align-items: start;
+  grid-template-columns: minmax(0, 797px) 374px;
+  justify-content: center;
+  gap: 32px;
+  padding: 0;
 }
 
-.formCard,
-.summaryCard {
-  border-radius: 12px;
-  box-sizing: border-box;
+.mainColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .formCard {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px;
   background: #f4f7f7;
-  border: 1px solid #c9e4e7;
-  box-shadow: 0 8px 24px rgba(34, 96, 120, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 4px rgba(123, 152, 163, 0.7);
 }
 
-.cardHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cardTitle {
+.formTitle {
   margin: 0;
   font-size: 24px;
   line-height: 124%;
+  font-weight: 500;
   color: #226078;
-}
-
-.cardNote {
-  margin: 0;
-  font-size: 16px;
-  line-height: 144%;
-  color: #11313d;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .formGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px 20px;
+  gap: 24px 32px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .label {
@@ -111,12 +111,12 @@
 
 .input {
   width: 100%;
-  height: 48px;
-  padding: 0 14px;
-  border: 1px solid #7b98a3;
-  border-radius: 12px;
+  height: 43px;
+  padding: 10px 12px;
   box-sizing: border-box;
   background: #fcfefe;
+  border: 1px solid #7b98a3;
+  border-radius: 12px;
   font-size: 16px;
   line-height: 144%;
   color: #11313d;
@@ -127,142 +127,280 @@
   border-color: #226078;
 }
 
-.fieldSeats {
-  justify-content: flex-end;
-}
-
-.seatsControl {
-  width: 100%;
-  height: 48px;
-  display: grid;
-  grid-template-columns: 48px 1fr 48px;
-  align-items: stretch;
-  border: 1px solid #7b98a3;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fcfefe;
-}
-
-.seatButton {
-  border: 0;
-  background: #e7f2f3;
-  color: #226078;
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.seatButton:disabled {
-  cursor: default;
-  opacity: 0.5;
-}
-
-.seatValue {
+.seatsRow {
   display: flex;
   align-items: center;
+  gap: 16px;
+  min-height: 31px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepperButton,
+.stepperValue {
+  width: 36px;
+  height: 31px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  font-size: 18px;
-  line-height: 132%;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 144%;
+}
+
+.stepperButton {
+  border: 1px solid #7b98a3;
+  background: #fcfefe;
+  color: #226078;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.stepperButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.stepperValue {
+  border: 1px solid #7b98a3;
+  background: #fcfefe;
+  color: #226078;
+}
+
+.seatsHint {
+  font-size: 12px;
+  line-height: 150%;
   color: #11313d;
 }
 
-.actions {
+.identityNote {
+  padding: 8px 0 8px 8px;
+  border-left: 2px solid #eebb3a;
+}
+
+.identityNote p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 144%;
+  color: #11313d;
+}
+
+.paymentSecurity {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
 }
 
-.actions :global(button) {
-  flex: 1 1 220px;
+.paymentText {
+  font-size: 16px;
+  line-height: 144%;
+  font-weight: 500;
+  color: #11313d;
 }
 
-.summaryCard {
-  background: linear-gradient(180deg, #11313d 0%, #226078 100%);
-  color: #fcfefe;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(17, 49, 61, 0.18);
+.paymentMarks {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.imageWrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 420 / 240;
+.paymentLogoVisa,
+.paymentLogoMastercard,
+.paymentLogoMaestro {
+  display: block;
+  width: auto;
+  object-fit: contain;
 }
 
-.image {
-  object-fit: cover;
+.paymentLogoVisa {
+  height: 22px;
 }
 
-.summaryBody {
+.paymentLogoMastercard,
+.paymentLogoMaestro {
+  height: 24px;
+}
+
+.actionBlock {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 20px 24px 24px;
 }
 
-.summaryTitle {
+.actions {
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
+}
+
+.actions :global(button) {
+  flex: 1 1 0;
+  min-width: 0;
+  width: auto;
+  height: 46px;
+}
+
+.termsText {
   margin: 0;
+  font-size: 12px;
+  line-height: 150%;
+  text-align: center;
+  color: #11313d;
+}
+
+.sidebarCard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+  background: #f4f7f7;
+  border-radius: 12px;
+  box-shadow: 0 4px 4px rgba(123, 152, 163, 0.7);
+}
+
+.sidebarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebarTitle {
+  margin: 0;
+  font-size: 24px;
+  line-height: 124%;
+  font-weight: 500;
+  color: #226078;
+}
+
+.routeInfo {
+  display: grid;
+  grid-template-columns: 41px 24px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.routeTimes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 198px;
+  font-size: 16px;
+  line-height: 144%;
+  font-weight: 500;
+  color: #226078;
+}
+
+.routeTimeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 198px;
+  padding: 2px 0;
+}
+
+.timelineStart,
+.timelineEnd {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
+.timelineStart {
+  border: 1.5px solid #eebb3a;
+  background: #fcfefe;
+}
+
+.timelineEnd {
+  background: #eebb3a;
+  border: 1.5px solid #eebb3a;
+}
+
+.timelineDots {
+  width: 8px;
+  flex: 1 1 auto;
+  min-height: 140px;
+  background-image: radial-gradient(circle, #c9e4e7 0 3px, transparent 3.2px);
+  background-size: 8px 14px;
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
+.routeStops {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 195px;
+}
+
+.routeStop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+}
+
+.routeStop strong {
   font-size: 18px;
   line-height: 132%;
-  color: #fcfefe;
+  font-weight: 500;
+  color: #226078;
 }
 
-.summaryRoute {
+.routeStop span {
+  font-size: 16px;
+  line-height: 144%;
+  color: #226078;
+}
+
+.sidebarDivider {
+  border-top: 2px dashed #7b98a3;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 16px;
+  line-height: 144%;
+  color: #226078;
+}
+
+.summaryRow strong {
   font-size: 24px;
   line-height: 124%;
   font-weight: 500;
 }
 
-.summaryTrip {
-  font-size: 14px;
-  line-height: 144%;
-  color: rgba(252, 254, 254, 0.88);
-}
-
-.summaryRows {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.summaryRow {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(252, 254, 254, 0.2);
-  font-size: 16px;
-  line-height: 144%;
-}
-
-.summaryRow strong {
-  font-size: 18px;
-  line-height: 132%;
-}
-
-.summaryFoot {
-  font-size: 14px;
-  line-height: 144%;
-  color: rgba(252, 254, 254, 0.72);
-}
-
-@media (max-width: 1023px) {
-  .page {
-    padding-bottom: 56px;
+@media (max-width: 1279px) {
+  .container {
+    padding: 0 24px;
+    gap: 32px;
   }
 
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .summaryCard {
-    order: -1;
+  .sidebarCard {
+    max-width: 797px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .page {
-    padding: 8px 0 40px;
+    padding-bottom: 40px;
   }
 
   .container {
@@ -270,43 +408,46 @@
     gap: 20px;
   }
 
+  .breadcrumbs {
+    min-height: 40px;
+  }
+
   .hero {
-    gap: 6px;
+    padding: 12px 16px;
   }
 
-  .tripLabel {
-    font-size: 14px;
-  }
-
-  .formCard {
-    padding: 18px 16px;
-    gap: 20px;
-  }
-
-  .cardTitle {
+  .heroTitle {
     font-size: 20px;
   }
 
-  .cardNote {
+  .heroMeta {
     font-size: 14px;
+  }
+
+  .layout {
+    gap: 20px;
+    padding-top: 0;
+  }
+
+  .formCard,
+  .sidebarCard {
+    padding: 20px 16px;
+    gap: 20px;
   }
 
   .formGrid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 16px;
   }
 
-  .input,
-  .seatsControl {
-    height: 44px;
-  }
-
-  .seatsControl {
-    grid-template-columns: 44px 1fr 44px;
+  .paymentSecurity {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .actions {
     flex-direction: column;
+    gap: 12px;
   }
 
   .actions :global(button) {
@@ -314,12 +455,14 @@
     flex-basis: auto;
   }
 
-  .summaryBody {
-    padding: 16px;
-    gap: 14px;
+  .routeInfo {
+    grid-template-columns: 41px 24px minmax(0, 1fr);
+    gap: 12px;
   }
 
-  .summaryRoute {
-    font-size: 20px;
+  .routeTimes,
+  .routeTimeline,
+  .routeStops {
+    min-height: 160px;
   }
 }

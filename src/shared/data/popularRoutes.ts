@@ -12,7 +12,18 @@ export type PopularRoute = {
   nearestTripLabel: LocalizedValue<string>;
   price: number;
   maxSeats: number;
+  tripDate: string | null;
+  departureTime: string | null;
+  arrivalTime: string | null;
+  departureCity: LocalizedValue<string>;
+  departureStop: LocalizedValue<string>;
+  arrivalCity: LocalizedValue<string>;
+  arrivalStop: LocalizedValue<string>;
 };
+
+function localize<T>(uk: T, en: T): LocalizedValue<T> {
+  return { uk, en };
+}
 
 export const popularRoutes: PopularRoute[] = [
   {
@@ -33,6 +44,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 500,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "10:30",
+    arrivalTime: null,
+    departureCity: localize("м. Черкаси", "Cherkasy"),
+    departureStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
+    arrivalCity: localize("м. Київ", "Kyiv"),
+    arrivalStop: localize("ст.м. Харківська", "Kharkivska metro"),
   },
   {
     id: "2",
@@ -52,6 +70,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 500,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "11:00",
+    arrivalTime: null,
+    departureCity: localize("м. Черкаси", "Cherkasy"),
+    departureStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
+    arrivalCity: localize("м. Київ", "Kyiv"),
+    arrivalStop: localize("ст.м. Чернігівська", "Chernihivska metro"),
   },
   {
     id: "3",
@@ -71,6 +96,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 500,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "08:00",
+    arrivalTime: null,
+    departureCity: localize("м. Київ", "Kyiv"),
+    departureStop: localize("ст.м. Харківська", "Kharkivska metro"),
+    arrivalCity: localize("м. Черкаси", "Cherkasy"),
+    arrivalStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
   },
   {
     id: "4",
@@ -90,6 +122,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 500,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "08:15",
+    arrivalTime: null,
+    departureCity: localize("м. Київ", "Kyiv"),
+    departureStop: localize("ст.м. Чернігівська", "Chernihivska metro"),
+    arrivalCity: localize("м. Черкаси", "Cherkasy"),
+    arrivalStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
   },
   {
     id: "5",
@@ -109,6 +148,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 950,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "07:00",
+    arrivalTime: null,
+    departureCity: localize("м. Черкаси", "Cherkasy"),
+    departureStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
+    arrivalCity: localize("м. Харків", "Kharkiv"),
+    arrivalStop: localize("", ""),
   },
   {
     id: "6",
@@ -128,6 +174,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 667,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "09:00",
+    arrivalTime: null,
+    departureCity: localize("м. Черкаси", "Cherkasy"),
+    departureStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
+    arrivalCity: localize("м. Полтава", "Poltava"),
+    arrivalStop: localize("", ""),
   },
   {
     id: "7",
@@ -147,6 +200,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 400,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "08:20",
+    arrivalTime: null,
+    departureCity: localize("м. Черкаси", "Cherkasy"),
+    departureStop: localize("пл. Дружби Народів", "Druzhby Narodiv Sq."),
+    arrivalCity: localize("м. Кременчук", "Kremenchuk"),
+    arrivalStop: localize("", ""),
   },
   {
     id: "8",
@@ -166,6 +226,13 @@ export const popularRoutes: PopularRoute[] = [
     },
     price: 450,
     maxSeats: 7,
+    tripDate: null,
+    departureTime: "06:45",
+    arrivalTime: null,
+    departureCity: localize("м. Золотоноша", "Zolotonosha"),
+    departureStop: localize("", ""),
+    arrivalCity: localize("м. Київ", "Kyiv"),
+    arrivalStop: localize("", ""),
   },
 ];
 
@@ -230,22 +297,24 @@ function formatTripTimeValue(value: string | null, locale: Locale) {
   }).format(parsedDate);
 }
 
-export function mapTripToPopularRoute(trip: Trip): PopularRoute {
+export function mapTripToPopularRoute(trip: Trip, fallbackRoute?: PopularRoute): PopularRoute {
   const title = `${trip.from} — ${trip.to}`;
   const imageSrc = trip.imageSrc ?? "/BookingHero/main_photo_bus.png";
   const maxSeatsCandidate = trip.availableSeats ?? trip.totalSeats ?? 1;
+  const departureTime = formatTripTimeValue(trip.departureTime, "uk");
+  const arrivalTime = trip.arrivalTime ? formatTripTimeValue(trip.arrivalTime, "uk") : null;
 
   return {
     id: trip.id,
     slug: trip.slug ?? trip.id,
     title: {
-      uk: title,
-      en: title,
+      uk: fallbackRoute?.title.uk ?? title,
+      en: fallbackRoute?.title.en ?? title,
     },
-    imageSrc,
+    imageSrc: fallbackRoute?.imageSrc ?? imageSrc,
     imageAlt: {
-      uk: `Рейс ${title}`,
-      en: `${title} route`,
+      uk: fallbackRoute?.imageAlt.uk ?? `Рейс ${title}`,
+      en: fallbackRoute?.imageAlt.en ?? `${title} route`,
     },
     nearestTripLabel: {
       uk: formatTripTimeLabel(trip, "uk"),
@@ -253,5 +322,12 @@ export function mapTripToPopularRoute(trip: Trip): PopularRoute {
     },
     price: trip.price ?? 0,
     maxSeats: Math.max(1, maxSeatsCandidate),
+    tripDate: trip.date,
+    departureTime,
+    arrivalTime,
+    departureCity: fallbackRoute?.departureCity ?? localize(trip.from, trip.from),
+    departureStop: fallbackRoute?.departureStop ?? localize("", ""),
+    arrivalCity: fallbackRoute?.arrivalCity ?? localize(trip.to, trip.to),
+    arrivalStop: fallbackRoute?.arrivalStop ?? localize("", ""),
   };
 }
