@@ -146,6 +146,13 @@
   color: #b9c4c9;
 }
 
+.cellAvailable {
+  background: rgba(238, 187, 58, 0.24);
+  color: var(--color-brand, #226078);
+  font-weight: 500;
+}
+
 .selected {
   background: rgba(34, 96, 120, 0.16);
+  box-shadow: inset 0 0 0 1px var(--color-brand, #226078);
 }

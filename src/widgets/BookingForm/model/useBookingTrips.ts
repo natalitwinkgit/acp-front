@@ -20,6 +20,38 @@ type UseBookingTripsParams = {
   t: BookingTranslateFn;
 };
 
+function normalizeTripDateKey(trip: Trip) {
+  if (trip.date) {
+    return trip.date;
+  }
+
+  if (trip.departureTime) {
+    const directMatch = trip.departureTime.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (directMatch) {
+      return directMatch[1];
+    }
+
+    const parsedDate = new Date(trip.departureTime);
+    if (!Number.isNaN(parsedDate.getTime())) {
+      const year = parsedDate.getFullYear();
+      const month = String(parsedDate.getMonth() + 1).padStart(2, "0");
+      const day = String(parsedDate.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    }
+  }
+
+  return null;
+}
+
+function buildAvailableDateKeys(trips: Trip[]) {
+  return [...new Set(
+    trips
+      .map(normalizeTripDateKey)
+      .filter((dateKey): dateKey is string => Boolean(dateKey)),
+  )].sort();
+}
+
 export function useBookingTrips({
   initialTrips,
   selectedRouteValue,
@@ -34,6 +66,7 @@ export function useBookingTrips({
   const [isError, setIsError] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(initialTrips.length === 0);
   const [isSearchingTrips, setIsSearchingTrips] = useState(false);
+  const [availableDateKeys, setAvailableDateKeys] = useState<string[]>([]);
 
   const routeOptions = useMemo(() => buildRouteOptions(allTrips), [allTrips]);
   const selectedRouteOption = useMemo(
@@ -96,6 +129,42 @@ export function useBookingTrips({
       isCancelled = true;
     };
   }, [initialTrips, t]);
+
+  useEffect(() => {
+    if (!selectedRouteValue) {
+      setAvailableDateKeys([]);
+      return;
+    }
+
+    let isCancelled = false;
+    const { from, to } = parseRouteValue(selectedRouteValue);
+
+    const loadAvailableDates = async () => {
+      try {
+        const trips = await getTrips({
+          from,
+          to,
+          seats,
+        });
+
+        if (isCancelled) {
+          return;
+        }
+
+        setAvailableDateKeys(buildAvailableDateKeys(trips));
+      } catch {
+        if (!isCancelled) {
+          setAvailableDateKeys([]);
+        }
+      }
+    };
+
+    void loadAvailableDates();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [seats, selectedRouteValue]);
 
   useEffect(() => {
     if (!selectedRouteValue) {
@@ -181,5 +250,6 @@ export function useBookingTrips({
     setIsError,
     isBootstrapping,
     isSearchingTrips,
+    availableDateKeys,
   };
 }

@@ -48,6 +48,7 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
     setIsError,
     isBootstrapping,
     isSearchingTrips,
+    availableDateKeys,
   } = useBookingTrips({
     initialTrips,
     selectedRouteValue,
@@ -150,6 +151,7 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
             placeholder={t("bookingForm.date.placeholder")}
             months={months}
             weekdays={weekdays}
+            availableDateKeys={availableDateKeys}
           />
 
           <TripTimeSelect

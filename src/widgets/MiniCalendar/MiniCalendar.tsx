@@ -8,6 +8,7 @@ type Props = {
   onChange: (d: Date) => void;
   onClose: () => void;
   minDate?: Date;
+  availableDates?: string[];
 
   // NEW: локализация (опционально)
   months?: string[];
@@ -33,6 +34,14 @@ function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
+function toDateKey(d: Date) {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
 // Monday-first: 0..6 where 0 = Monday
 function mondayIndex(jsDay: number) {
   return (jsDay + 6) % 7;
@@ -43,6 +52,7 @@ export default function MiniCalendar({
   onChange,
   onClose,
   minDate,
+  availableDates,
   months,
   weekdays,
 }: Props) {
@@ -50,6 +60,7 @@ export default function MiniCalendar({
   const locWeekdays = weekdays && weekdays.length === 7 ? weekdays : DEFAULT_WEEKDAYS;
 
   const normalizedMinDate = useMemo(() => (minDate ? startOfDay(minDate) : null), [minDate]);
+  const availableDateSet = useMemo(() => new Set(availableDates ?? []), [availableDates]);
   const [cursor, setCursor] = useState<Date>(() => value ?? normalizedMinDate ?? new Date());
 
   const monthTitle = useMemo(() => locMonths[cursor.getMonth()], [cursor, locMonths]);
@@ -157,6 +168,7 @@ export default function MiniCalendar({
           const isWeekend = idx % 7 === 5 || idx % 7 === 6;
           const isDisabled = normalizedMinDate != null && startOfDay(cell.date) < normalizedMinDate;
           const isSelected = !isDisabled && selected ? isSameDay(cell.date, selected) : false;
+          const isAvailable = !isDisabled && availableDateSet.has(toDateKey(cell.date));
 
           return (
             <button
@@ -167,6 +179,7 @@ export default function MiniCalendar({
                 !cell.inCurrentMonth ? styles.cellMuted : "",
                 isWeekend ? styles.cellWeekend : "",
                 isDisabled ? styles.cellDisabled : "",
+                isAvailable ? styles.cellAvailable : "",
                 isSelected ? styles.selected : "",
               ].join(" ")}
               onClick={() => {

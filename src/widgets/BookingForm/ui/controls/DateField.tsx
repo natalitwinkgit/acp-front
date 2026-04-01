@@ -13,6 +13,7 @@ type DateFieldProps = {
   placeholder: string;
   months: string[];
   weekdays: string[];
+  availableDateKeys?: string[];
 };
 
 export default function DateField({
@@ -21,6 +22,7 @@ export default function DateField({
   placeholder,
   months,
   weekdays,
+  availableDateKeys,
 }: DateFieldProps) {
   const [isOpen, setIsOpen] = useState(false);
   const minDate = useMemo(() => {
@@ -59,6 +61,7 @@ export default function DateField({
             minDate={minDate}
             months={months}
             weekdays={weekdays}
+            availableDates={availableDateKeys}
           />
         </div>
       ) : null}
