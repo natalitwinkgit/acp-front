@@ -53,6 +53,8 @@
     "time": { "placeholder": "Час" },
     "qty": { "placeholder": "Кількість" },
     "price": { "placeholder": "Ціна" },
+    "loading": "Завантажуємо рейси...",
+    "error": "Не вдалося завантажити рейси.",
     "buttons": {
       "reserve": "Забронювати квиток",
       "continue": "Продовжити"

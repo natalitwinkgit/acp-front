@@ -432,6 +432,12 @@
   }
 }
 
+.errorMessage {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-error, #c0392b);
+}
+
 @media (max-width: 360px) {
   .card {
     min-height: 328px;

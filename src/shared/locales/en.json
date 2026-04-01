@@ -53,6 +53,8 @@
     "time": { "placeholder": "Time" },
     "qty": { "placeholder": "Quantity" },
     "price": { "placeholder": "Price" },
+    "loading": "Loading trips...",
+    "error": "Failed to load trips.",
     "buttons": {
       "reserve": "Reserve a ticket",
       "continue": "Continue"
