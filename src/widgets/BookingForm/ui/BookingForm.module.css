@@ -106,11 +106,10 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  transition: transform 0.15s ease;
 }
 
 .routeDropdownChevronOpen {
-  transform: rotate(180deg);
+  transform: none;
 }
 
 .routeDropdownMenu {
@@ -176,6 +175,150 @@
 
 .routeDropdownOptionSelected .routeDropdownOptionLabel {
   color: #11313D;
+}
+
+.seatsDropdown {
+  position: relative;
+  width: calc((100% - 16px) / 2);
+  min-width: 0;
+  z-index: 25;
+}
+
+.seatsDropdownTrigger {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  background: #FCFEFE;
+  border: 1px solid #7B98A3;
+  border-radius: 12px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #11313D;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.seatsDropdownTrigger:focus-visible {
+  border-color: var(--color-brand, #226078);
+  box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
+}
+
+.seatsDropdownValue {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.seatsDropdownChevron {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.seatsDropdownChevronOpen {
+  transform: none;
+}
+
+.seatsDropdownMenu {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  width: 100%;
+  z-index: 35;
+}
+
+.seatsDropdownList {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  padding: 0;
+  background: #DCE2E8;
+  border: 1px solid #7B98A3;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.seatsDropdownOption {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  gap: 10px;
+  border: 0;
+  background: #FCFEFE;
+  cursor: pointer;
+  text-align: center;
+}
+
+.seatsDropdownOption:hover,
+.seatsDropdownOption:focus-visible {
+  background: #F4F7F7;
+  outline: none;
+}
+
+.seatsDropdownOptionSelected {
+  background: #F4F7F7;
+}
+
+.seatsDropdownOptionIconCell {
+  justify-content: center;
+}
+
+.seatsDropdownOptionLabel {
+  min-width: 0;
+  flex: 1 1 auto;
+  font-family: Roboto, system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  color: #226078;
+  text-align: center;
+}
+
+.seatsDropdownOptionSelected .seatsDropdownOptionLabel {
+  color: #11313D;
+}
+
+.seatsDropdownOptionIcon {
+  width: 12px;
+  height: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.seatsDropdownOptionIcon img {
+  width: 12px;
+  height: 10px;
+  display: block;
+}
+
+.seatsNotification {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+  width: 220px;
+  z-index: 40;
+  box-shadow: 0 10px 24px rgba(17, 49, 61, 0.18);
 }
 
 
@@ -530,8 +673,14 @@
     font-size: 14px;
   }
 
+  .seatsDropdownTrigger {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
   .control,
   .routeDropdown,
+  .seatsDropdown,
   .dateWrap,
   .controlWithIconBtn,
   .primaryBtnWrap {
@@ -571,8 +720,20 @@
     min-height: 40px;
   }
 
+  .seatsDropdownOption {
+    min-height: 40px;
+  }
+
   .routeDropdownOptionLabel {
     font-size: 14px;
+  }
+
+  .seatsDropdownOptionLabel {
+    font-size: 14px;
+  }
+
+  .seatsNotification {
+    width: min(220px, 100%);
   }
 
   .iconRight,
@@ -583,6 +744,11 @@
   }
 
   .routeDropdownChevron {
+    width: 20px;
+    height: 20px;
+  }
+
+  .seatsDropdownChevron {
     width: 20px;
     height: 20px;
   }

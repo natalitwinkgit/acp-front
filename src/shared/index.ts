@@ -9,3 +9,7 @@ export * from './api';
 // Internationalization
 export { I18nProvider, LocaleLink, useI18n, useLocalizedHref, useT } from './i18n';
 export type { Locale, MessageValue, Messages } from './i18n';
+
+// Shared UI
+export { default as Notification } from './ui/Notification/Notification';
+export type { NotificationSize, NotificationVariant } from './ui/Notification/Notification';

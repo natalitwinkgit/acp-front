@@ -51,7 +51,10 @@
     },
     "date": { "placeholder": "Date" },
     "time": { "placeholder": "Time" },
-    "qty": { "placeholder": "Quantity" },
+    "qty": {
+      "placeholder": "Quantity",
+      "toast": "For bookings over 7 seats, please contact an operator."
+    },
     "price": { "placeholder": "Price" },
     "buttons": {
       "reserve": "Reserve a ticket",

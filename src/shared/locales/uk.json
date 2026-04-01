@@ -51,7 +51,10 @@
     },
     "date": { "placeholder": "Дата" },
     "time": { "placeholder": "Час" },
-    "qty": { "placeholder": "Кількість" },
+    "qty": {
+      "placeholder": "Кількість",
+      "toast": "Для бронювання понад 7 місць зверніться до оператора."
+    },
     "price": { "placeholder": "Ціна" },
     "buttons": {
       "reserve": "Забронювати квиток",
