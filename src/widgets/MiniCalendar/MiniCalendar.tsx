@@ -7,6 +7,7 @@ type Props = {
   value: Date | null;
   onChange: (d: Date) => void;
   onClose: () => void;
+  minDate?: Date;
 
   // NEW: локализация (опционально)
   months?: string[];
@@ -28,6 +29,10 @@ function endOfMonth(d: Date) {
   return new Date(d.getFullYear(), d.getMonth() + 1, 0);
 }
 
+function startOfDay(d: Date) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+}
+
 // Monday-first: 0..6 where 0 = Monday
 function mondayIndex(jsDay: number) {
   return (jsDay + 6) % 7;
@@ -37,13 +42,15 @@ export default function MiniCalendar({
   value,
   onChange,
   onClose,
+  minDate,
   months,
   weekdays,
 }: Props) {
   const locMonths = months && months.length === 12 ? months : DEFAULT_MONTHS;
   const locWeekdays = weekdays && weekdays.length === 7 ? weekdays : DEFAULT_WEEKDAYS;
 
-  const [cursor, setCursor] = useState<Date>(() => value ?? new Date());
+  const normalizedMinDate = useMemo(() => (minDate ? startOfDay(minDate) : null), [minDate]);
+  const [cursor, setCursor] = useState<Date>(() => value ?? normalizedMinDate ?? new Date());
 
   const monthTitle = useMemo(() => locMonths[cursor.getMonth()], [cursor, locMonths]);
   const yearTitle = useMemo(() => String(cursor.getFullYear()), [cursor]);
@@ -97,6 +104,13 @@ export default function MiniCalendar({
     a.getDate() === b.getDate();
 
   const selected = value;
+  const canGoToPreviousMonth = normalizedMinDate == null || (
+    cursor.getFullYear() > normalizedMinDate.getFullYear() ||
+    (
+      cursor.getFullYear() === normalizedMinDate.getFullYear() &&
+      cursor.getMonth() > normalizedMinDate.getMonth()
+    )
+  );
 
   return (
     <div className={styles.wrap} role="dialog" aria-label="Calendar">
@@ -106,6 +120,7 @@ export default function MiniCalendar({
           className={styles.navBtn}
           onClick={() => setCursor((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1, 1))}
           aria-label="Prev month"
+          disabled={!canGoToPreviousMonth}
         >
           ‹
         </button>
@@ -139,8 +154,9 @@ export default function MiniCalendar({
 
       <div className={styles.grid}>
         {days.map((cell, idx) => {
-          const isSelected = selected ? isSameDay(cell.date, selected) : false;
           const isWeekend = idx % 7 === 5 || idx % 7 === 6;
+          const isDisabled = normalizedMinDate != null && startOfDay(cell.date) < normalizedMinDate;
+          const isSelected = !isDisabled && selected ? isSameDay(cell.date, selected) : false;
 
           return (
             <button
@@ -150,12 +166,18 @@ export default function MiniCalendar({
                 styles.cell,
                 !cell.inCurrentMonth ? styles.cellMuted : "",
                 isWeekend ? styles.cellWeekend : "",
+                isDisabled ? styles.cellDisabled : "",
                 isSelected ? styles.selected : "",
               ].join(" ")}
               onClick={() => {
+                if (isDisabled) {
+                  return;
+                }
+
                 onChange(cell.date);
                 onClose();
               }}
+              disabled={isDisabled}
             >
               {cell.label}
             </button>

@@ -23,6 +23,10 @@ export default function DateField({
   weekdays,
 }: DateFieldProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const minDate = useMemo(() => {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  }, []);
   const dateText = useMemo(() => (value ? formatDDMMYYYY(value) : ""), [value]);
 
   return (
@@ -52,6 +56,7 @@ export default function DateField({
             value={value}
             onChange={onChange}
             onClose={() => setIsOpen(false)}
+            minDate={minDate}
             months={months}
             weekdays={weekdays}
           />
