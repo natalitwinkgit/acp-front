@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import styles from "./BookingHero.module.css";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import BookingForm from "../BookingForm/BookingForm";
+import BookingForm from "../BookingForm";
 
 export default function BookingHero() {
   const { t } = useI18n();

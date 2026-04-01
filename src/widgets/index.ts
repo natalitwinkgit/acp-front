@@ -4,7 +4,7 @@
 
 export { default as Header } from './Header/Header';
 export { default as Footer } from './Footer/Footer';
-export { default as BookingForm } from './BookingForm/BookingForm';
+export { default as BookingForm } from './BookingForm';
 export { default as BookingHero } from './BookingHero/BookingHero';
 export { default as Button } from './Button/Button';
 export { default as LanguageSwitcher } from './LanguageSwitcher/LanguageSwitcher';
