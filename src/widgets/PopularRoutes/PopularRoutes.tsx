@@ -37,7 +37,7 @@ export default function PopularRoutes({ routes }: Props) {
             return (
               <LocaleLink
                 key={r.id}
-                href={getPopularRouteHref(r.slug)}
+                href={getPopularRouteHref(r)}
                 className={`${styles.card} ${styles.cardLarge}`}
                 aria-label={`${t("popularRoutes.openRoute")}: ${title}`}
               >
@@ -62,7 +62,7 @@ export default function PopularRoutes({ routes }: Props) {
             return (
               <LocaleLink
                 key={r.id}
-                href={getPopularRouteHref(r.slug)}
+                href={getPopularRouteHref(r)}
                 className={`${styles.card} ${styles.cardSmall}`}
                 aria-label={`${t("popularRoutes.openRoute")}: ${title}`}
               >

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { getTripAvailability } from "@/src/shared/api";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
@@ -18,12 +18,14 @@ import Button from "../../Button/Button";
 
 export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const resolveHref = useLocalizedHref();
   const { lang, t, raw } = useI18n();
   const timeLocale = lang === "en" ? "en-GB" : "uk-UA";
+  const preselectedRouteValue = searchParams.get("route")?.trim() ?? "";
 
   const [date, setDate] = useState<Date | null>(null);
-  const [selectedRouteValue, setSelectedRouteValue] = useState("");
+  const [selectedRouteValue, setSelectedRouteValue] = useState(preselectedRouteValue);
   const [seatsValue, setSeatsValue] = useState("1");
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
   const [isPendingNavigation, startNavigation] = useTransition();
@@ -65,6 +67,18 @@ export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormP
   );
   const priceText = selectedTrip?.price != null ? priceFormatter.format(selectedTrip.price) : "";
   const isBusy = isBootstrapping || isSearchingTrips || isCheckingAvailability || isPendingNavigation;
+
+  useEffect(() => {
+    if (!preselectedRouteValue) {
+      return;
+    }
+
+    setSelectedRouteValue((currentValue) => (
+      currentValue === preselectedRouteValue ? currentValue : preselectedRouteValue
+    ));
+    setDate(null);
+    setSeatsValue("1");
+  }, [preselectedRouteValue]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

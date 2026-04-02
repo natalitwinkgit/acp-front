@@ -10,7 +10,7 @@ export default function BookingHero() {
   const { t } = useI18n();
 
   return (
-    <section className={styles.section}>
+    <section id="booking" className={styles.section}>
       <div className={styles.mainBlock}>
         <div className={styles.formBlock}>
           <BookingForm />

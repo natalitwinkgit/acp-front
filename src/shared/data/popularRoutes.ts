@@ -6,6 +6,8 @@ export type LocalizedValue<T> = Record<Locale, T>;
 export type PopularRoute = {
   id: string;
   slug: string;
+  searchFrom: string;
+  searchTo: string;
   title: LocalizedValue<string>;
   imageSrc: string;
   imageAlt: LocalizedValue<string>;
@@ -29,6 +31,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "1",
     slug: "cherkasy-kyiv-kharkivska",
+    searchFrom: "Черкаси",
+    searchTo: "Київ",
     title: {
       uk: "Черкаси-Київ (ст.м. Харківська)",
       en: "Cherkasy-Kyiv (Kharkivska metro)",
@@ -55,6 +59,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "2",
     slug: "cherkasy-kyiv-chernihivska",
+    searchFrom: "Черкаси",
+    searchTo: "Київ",
     title: {
       uk: "Черкаси-Київ (ст.м. Чернігівська)",
       en: "Cherkasy-Kyiv (Chernihivska metro)",
@@ -81,6 +87,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "3",
     slug: "kyiv-kharkivska-cherkasy",
+    searchFrom: "Київ",
+    searchTo: "Черкаси",
     title: {
       uk: "Київ (ст.м. Харківська)-Черкаси",
       en: "Kyiv (Kharkivska metro)-Cherkasy",
@@ -107,6 +115,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "4",
     slug: "kyiv-chernihivska-cherkasy",
+    searchFrom: "Київ",
+    searchTo: "Черкаси",
     title: {
       uk: "Київ (ст.м. Чернігівська)-Черкаси",
       en: "Kyiv (Chernihivska metro)-Cherkasy",
@@ -133,6 +143,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "5",
     slug: "cherkasy-kharkiv",
+    searchFrom: "Черкаси",
+    searchTo: "Харків",
     title: {
       uk: "Черкаси-Харків",
       en: "Cherkasy-Kharkiv",
@@ -159,6 +171,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "6",
     slug: "cherkasy-poltava",
+    searchFrom: "Черкаси",
+    searchTo: "Полтава",
     title: {
       uk: "Черкаси-Полтава",
       en: "Cherkasy-Poltava",
@@ -185,6 +199,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "7",
     slug: "cherkasy-kremenchuk",
+    searchFrom: "Черкаси",
+    searchTo: "Кременчук",
     title: {
       uk: "Черкаси-Кременчук",
       en: "Cherkasy-Kremenchuk",
@@ -211,6 +227,8 @@ export const popularRoutes: PopularRoute[] = [
   {
     id: "8",
     slug: "zolotonosha-kyiv",
+    searchFrom: "Золотоноша",
+    searchTo: "Київ",
     title: {
       uk: "Золотоноша-Київ",
       en: "Zolotonosha-Kyiv",
@@ -243,8 +261,16 @@ export function getLocalizedRouteValue<T>(
   return value[locale];
 }
 
-export function getPopularRouteHref(slug: string) {
-  return `/tickets/${slug}`;
+function buildSearchRouteValue(from: string, to: string) {
+  return `${from}__${to}`;
+}
+
+export function getPopularRouteHref(route: Pick<PopularRoute, "searchFrom" | "searchTo">) {
+  const searchParams = new URLSearchParams({
+    route: buildSearchRouteValue(route.searchFrom, route.searchTo),
+  });
+
+  return `/?${searchParams.toString()}#booking`;
 }
 
 export function getPopularRouteBySlug(slug: string) {
@@ -307,6 +333,8 @@ export function mapTripToPopularRoute(trip: Trip, fallbackRoute?: PopularRoute):
   return {
     id: trip.id,
     slug: trip.slug ?? trip.id,
+    searchFrom: trip.from,
+    searchTo: trip.to,
     title: {
       uk: fallbackRoute?.title.uk ?? title,
       en: fallbackRoute?.title.en ?? title,
