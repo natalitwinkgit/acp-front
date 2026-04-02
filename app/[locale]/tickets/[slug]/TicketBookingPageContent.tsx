@@ -99,92 +99,141 @@ export default function TicketBookingPageContent({
         </section>
 
         <section className={styles.layout}>
-          <section className={styles.formCard} aria-labelledby="ticket-booking-form-title">
-            <h2 id="ticket-booking-form-title" className={styles.formTitle}>
-              {t("ticketBooking.form.title")}
-            </h2>
+          <section>
+            <section className={styles.formCard} aria-labelledby="ticket-booking-form-title">
+              <h2 id="ticket-booking-form-title" className={styles.formTitle}>
+                {t("ticketBooking.form.title")}
+              </h2>
 
-            <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
-              <div className={styles.formGrid}>
-                <label className={styles.field}>
-                  <span className={styles.label}>{t("ticketBooking.form.nameLabel")}</span>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    name="fullName"
-                    value={fullName}
-                    onChange={(event) => setFullName(event.target.value)}
-                    placeholder={t("ticketBooking.form.namePlaceholder")}
-                    autoComplete="name"
-                  />
-                </label>
+              <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
+                <div className={styles.formGrid}>
+                  <label className={styles.field}>
+                    <span className={styles.label}>{t("ticketBooking.form.nameLabel")}</span>
+                    <input
+                      className={styles.input}
+                      type="text"
+                      name="fullName"
+                      value={fullName}
+                      onChange={(event) => setFullName(event.target.value)}
+                      placeholder={t("ticketBooking.form.namePlaceholder")}
+                      autoComplete="name"
+                    />
+                  </label>
 
-                <label className={styles.field}>
-                  <span className={styles.label}>{t("ticketBooking.form.emailLabel")}</span>
-                  <input
-                    className={styles.input}
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder={t("ticketBooking.form.emailPlaceholder")}
-                    autoComplete="email"
-                  />
-                </label>
+                  <label className={styles.field}>
+                    <span className={styles.label}>{t("ticketBooking.form.emailLabel")}</span>
+                    <input
+                      className={styles.input}
+                      type="email"
+                      name="email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      placeholder={t("ticketBooking.form.emailPlaceholder")}
+                      autoComplete="email"
+                    />
+                  </label>
 
-                <label className={styles.field}>
-                  <span className={styles.label}>{t("ticketBooking.form.phoneLabel")}</span>
-                  <input
-                    className={styles.input}
-                    type="tel"
-                    name="phone"
-                    value={phone}
-                    onChange={(event) => setPhone(event.target.value)}
-                    placeholder={t("ticketBooking.form.phonePlaceholder")}
-                    autoComplete="tel"
-                    inputMode="tel"
-                  />
-                </label>
+                  <label className={styles.field}>
+                    <span className={styles.label}>{t("ticketBooking.form.phoneLabel")}</span>
+                    <input
+                      className={styles.input}
+                      type="tel"
+                      name="phone"
+                      value={phone}
+                      onChange={(event) => setPhone(event.target.value)}
+                      placeholder={t("ticketBooking.form.phonePlaceholder")}
+                      autoComplete="tel"
+                      inputMode="tel"
+                    />
+                  </label>
 
-                <div className={styles.field}>
-                  <span className={styles.label}>
-                    {t("ticketBooking.form.seatsLabel")} (Макс. {route.maxSeats})*
-                  </span>
+                  <div className={styles.field}>
+                    <span className={styles.label}>
+                      {t("ticketBooking.form.seatsLabel")} (Макс. {route.maxSeats})*
+                    </span>
 
-                  <div className={styles.seatsRow}>
-                    <div className={styles.stepper}>
-                      <button
-                        type="button"
-                        className={styles.stepperButton}
-                        aria-label={t("ticketBooking.controls.decreaseSeats")}
-                        onClick={() => setSeats((current) => Math.max(1, current - 1))}
-                        disabled={seats <= 1}
-                      >
-                        -
-                      </button>
+                    <div className={styles.seatsRow}>
+                      <div className={styles.stepper}>
+                        <button
+                          type="button"
+                          className={styles.stepperButton}
+                          aria-label={t("ticketBooking.controls.decreaseSeats")}
+                          onClick={() => setSeats((current) => Math.max(1, current - 1))}
+                          disabled={seats <= 1}
+                        >
+                          -
+                        </button>
 
-                      <span className={styles.stepperValue}>{seats}</span>
+                        <span className={styles.stepperValue}>{seats}</span>
 
-                      <button
-                        type="button"
-                        className={styles.stepperButton}
-                        aria-label={t("ticketBooking.controls.increaseSeats")}
-                        onClick={() => setSeats((current) => Math.min(route.maxSeats, current + 1))}
-                        disabled={seats >= route.maxSeats}
-                      >
-                        +
-                      </button>
+                        <button
+                          type="button"
+                          className={styles.stepperButton}
+                          aria-label={t("ticketBooking.controls.increaseSeats")}
+                          onClick={() => setSeats((current) => Math.min(route.maxSeats, current + 1))}
+                          disabled={seats >= route.maxSeats}
+                        >
+                          +
+                        </button>
+                      </div>
+
+                      <span className={styles.seatsHint}>{t("ticketBooking.form.seatsHint")}</span>
                     </div>
-
-                    <span className={styles.seatsHint}>{t("ticketBooking.form.seatsHint")}</span>
                   </div>
+                </div>
+
+                <div className={styles.identityNote}>
+                  <p>{t("ticketBooking.form.identityNote")}</p>
+                </div>
+              </form>
+            </section>
+            <section className={styles.paymentCard} aria-labelledby="payment-section-title">
+              <div className={styles.actionBlock}>
+              <div className={styles.paymentSecurity}>
+                <span className={styles.paymentText}>{t("ticketBooking.payment.secure")}</span>
+
+                <div className={styles.paymentMarks} aria-hidden="true">
+                  <Image
+                    src="/icons/tickets/logos_visa.svg"
+                    alt=""
+                    width={68}
+                    height={22}
+                    className={styles.paymentLogoVisa}
+                  />
+                  <Image
+                    src="/icons/tickets/logos_mastercard.svg"
+                    alt=""
+                    width={31}
+                    height={24}
+                    className={styles.paymentLogoMastercard}
+                  />
+                  <Image
+                    src="/icons/tickets/logos_maestro.svg"
+                    alt=""
+                    width={31}
+                    height={24}
+                    className={styles.paymentLogoMaestro}
+                  />
                 </div>
               </div>
 
-              <div className={styles.identityNote}>
-                <p>{t("ticketBooking.form.identityNote")}</p>
+              <div className={styles.actions}>
+                <Button
+                  text={t("ticketBooking.form.pay")}
+                  fullWidth={false}
+                  onClick={() => { }}
+                />
+                <Button
+                  text={t("ticketBooking.form.reserve")}
+                  variant="secondary"
+                  fullWidth={false}
+                  onClick={() => { }}
+                />
               </div>
-            </form>
+
+              <p className={styles.termsText}>{t("ticketBooking.payment.terms")}</p>
+            </div>
+            </section>
           </section>
 
           <aside className={styles.sidebarCard}>
@@ -234,51 +283,7 @@ export default function TicketBookingPageContent({
             </section>
           </aside>
 
-          <div className={styles.actionBlock}>
-            <div className={styles.paymentSecurity}>
-              <span className={styles.paymentText}>{t("ticketBooking.payment.secure")}</span>
 
-              <div className={styles.paymentMarks} aria-hidden="true">
-                <Image
-                  src="/icons/tickets/logos_visa.svg"
-                  alt=""
-                  width={68}
-                  height={22}
-                  className={styles.paymentLogoVisa}
-                />
-                <Image
-                  src="/icons/tickets/logos_mastercard.svg"
-                  alt=""
-                  width={31}
-                  height={24}
-                  className={styles.paymentLogoMastercard}
-                />
-                <Image
-                  src="/icons/tickets/logos_maestro.svg"
-                  alt=""
-                  width={31}
-                  height={24}
-                  className={styles.paymentLogoMaestro}
-                />
-              </div>
-            </div>
-
-            <div className={styles.actions}>
-              <Button
-                text={t("ticketBooking.form.pay")}
-                fullWidth={false}
-                onClick={() => {}}
-              />
-              <Button
-                text={t("ticketBooking.form.reserve")}
-                variant="secondary"
-                fullWidth={false}
-                onClick={() => {}}
-              />
-            </div>
-
-            <p className={styles.termsText}>{t("ticketBooking.payment.terms")}</p>
-          </div>
         </section>
       </div>
     </main>
