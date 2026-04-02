@@ -156,7 +156,7 @@ export async function getGoogleClientId() {
         payload = (await response.json()) as GoogleClientConfigResponse;
       } catch {}
 
-      if (!response.ok || !payload) {
+      if (!payload) {
         throw new GoogleAuthError("request_failed");
       }
 
@@ -166,6 +166,10 @@ export async function getGoogleClientId() {
 
       if (!payload.clientId) {
         throw getGoogleClientConfigError("missing_client_id");
+      }
+
+      if (!response.ok) {
+        throw new GoogleAuthError("request_failed");
       }
 
       return payload.clientId;
