@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { Trip } from "@/src/shared/api";
@@ -83,15 +84,12 @@ export default function TripTimeSelect({
           {selectedOption ? formatTripTime(selectedOption, locale) : placeholder}
         </span>
         <span className={styles.timeDropdownChevron} aria-hidden="true">
-          <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M1 1L6 6L11 1"
-              stroke="#11313D"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image
+            src={isOpen ? "/icons/arrow-up.svg" : "/icons/down-arrow.svg"}
+            alt=""
+            width={12}
+            height={7}
+          />
         </span>
       </button>
 

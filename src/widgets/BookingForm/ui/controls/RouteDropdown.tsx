@@ -82,7 +82,12 @@ export default function RouteDropdown({
           }`}
           aria-hidden="true"
         >
-          <Image src="/icons/down-arrow.svg" alt="" width={12} height={7} />
+          <Image
+            src={isOpen ? "/icons/arrow-up.svg" : "/icons/down-arrow.svg"}
+            alt=""
+            width={12}
+            height={7}
+          />
         </span>
       </button>
 
