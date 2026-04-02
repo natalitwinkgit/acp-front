@@ -3,6 +3,7 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import {
   authenticateWithGoogleCredential,
+  getGoogleAuthErrorMessage,
   getGoogleClientId,
   loadGoogleIdentityScript,
 } from "@/src/shared/api/google-auth";
@@ -104,7 +105,7 @@ export default function GoogleAuthButton({
 
     const initializeGoogleButton = async () => {
       try {
-        const clientId = getGoogleClientId();
+        const clientId = await getGoogleClientId();
         await loadGoogleIdentityScript();
 
         if (!isActive || !hostRef.current || !window.google?.accounts?.id) {
@@ -127,8 +128,7 @@ export default function GoogleAuthButton({
           setIsReady(true);
         }
       } catch (err) {
-        const message =
-          err instanceof Error ? err.message : t("googleAuth.errors.unavailable");
+        const message = getGoogleAuthErrorMessage(err);
 
         if (isActive) {
           setPlaceholderText(t("googleAuth.unavailable"));

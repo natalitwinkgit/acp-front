@@ -248,6 +248,9 @@
     "unavailable": "Google авторизація недоступна",
     "submitting": "Зачекайте...",
     "errors": {
+      "missingClientId": "Google авторизація ще не налаштована.",
+      "invalidClient": "Google авторизація тимчасово недоступна: OAuth client не знайдено.",
+      "misconfigured": "Google авторизація налаштована некоректно.",
       "noCredential": "Google не повернув identity token. Спробуйте ще раз.",
       "complete": "Не вдалося завершити вхід через Google.",
       "unavailable": "Не вдалося підключити Google авторизацію."

@@ -249,6 +249,9 @@
     "unavailable": "Google sign-in is unavailable",
     "submitting": "Please wait...",
     "errors": {
+      "missingClientId": "Google sign-in is not configured yet.",
+      "invalidClient": "Google sign-in is temporarily unavailable: OAuth client was not found.",
+      "misconfigured": "Google sign-in is misconfigured.",
       "noCredential": "Google didn't return an identity token. Please try again.",
       "complete": "Failed to complete Google sign-in.",
       "unavailable": "Failed to connect Google sign-in."
