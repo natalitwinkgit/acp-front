@@ -90,40 +90,40 @@ export default function Footer() {
           </div>
 
           {/* Social */}
-          <div className={`${styles.contactItem} ${styles.socialItem}`}>
-            <div className={`${styles.contactIconCol} ${styles.socialIconCol}`}>
-              <Image
-                className={`${styles.contactIcon} ${styles.socialIcon}`}
-                src="/icons/Footer/insta.svg"
-                alt=""
-                aria-hidden="true"
-                width={24}
-                height={24}
-              />
-              <Image
-                className={`${styles.contactIcon} ${styles.socialIcon}`}
-                src="/icons/Footer/fs.svg"
-                alt=""
-                aria-hidden="true"
-                width={24}
-                height={24}
-              />
-            </div>
-            <div className={`${styles.contactTextCol} ${styles.socialTextCol}`}>
+          <div className={`${styles.socialItem}`}>
+            <div className={`${styles.contactIconCol}`}>
               <a
                 className={`${styles.contactLink} ${styles.socialLink}`}
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/autoluxplus_cherkassy?igsh=MW1zd2M4MXdhcGN5"
                 target="_blank"
                 rel="noreferrer"
               >
+                <Image
+                  className={`${styles.contactIcon} ${styles.socialIcon}`}
+                  src="/icons/Footer/insta.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={24}
+                />
                 {t("footer.instagram")}
               </a>
+            </div>
+            <div className={`${styles.contactTextCol}`}>
               <a
-                className={`${styles.contactLink} ${styles.socialLinkSecondary}`}
-                href="https://www.facebook.com/"
+                className={`${styles.contactLink} ${styles.socialLink}`}
+                href="https://www.facebook.com/profile.php?id=61584960235643"
                 target="_blank"
                 rel="noreferrer"
               >
+                <Image
+                  className={`${styles.contactIcon} ${styles.socialIcon}`}
+                  src="/icons/Footer/fs.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={24}
+                />
                 {t("footer.facebook")}
               </a>
             </div>
