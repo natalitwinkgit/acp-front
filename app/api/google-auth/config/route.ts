@@ -28,20 +28,12 @@ function getStatusFromLocation(location: string): GoogleClientConfigStatus {
     return "unknown_error";
   }
 
-  if (location.includes("redirect_uri_mismatch")) {
-    return "redirect_uri_mismatch";
-  }
-
   const parsedUrl = new URL(location);
   const authError = parsedUrl.searchParams.get("authError");
   const decodedError = authError ? decodeAuthErrorPayload(authError) : "";
 
   if (decodedError.includes("invalid_client") || decodedError.includes("OAuth client was not found")) {
     return "invalid_client";
-  }
-
-  if (decodedError.includes("redirect_uri_mismatch")) {
-    return "redirect_uri_mismatch";
   }
 
   return "ready";
