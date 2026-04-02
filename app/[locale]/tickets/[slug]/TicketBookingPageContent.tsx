@@ -40,6 +40,31 @@ function formatDisplayTime(value: string | null) {
   return timeMatch?.[1] ?? value;
 }
 
+function formatHeroDate(value: string) {
+  return value.replace(/(^\d+\s+)(\p{L})/u, (_match, prefix: string, firstLetter: string) => {
+    return `${prefix}${firstLetter.toUpperCase()}`;
+  });
+}
+
+function formatPassengerCount(value: number, lang: "uk" | "en") {
+  if (lang === "en") {
+    return `${value} ${value === 1 ? "passenger" : "passengers"}`;
+  }
+
+  const mod10 = value % 10;
+  const mod100 = value % 100;
+
+  if (mod10 === 1 && mod100 !== 11) {
+    return `${value} пасажир`;
+  }
+
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) {
+    return `${value} пасажири`;
+  }
+
+  return `${value} пасажирів`;
+}
+
 export default function TicketBookingPageContent({
   route,
   initialSeats,
@@ -72,9 +97,10 @@ export default function TicketBookingPageContent({
   const formattedDate = formatDisplayDate(route.tripDate, locale);
   const departureTime = formatDisplayTime(route.departureTime);
   const arrivalTime = formatDisplayTime(route.arrivalTime);
+  const passengerCount = formatPassengerCount(seats, lang);
   const heroMeta = formattedDate
-    ? `${formattedDate}${route.departureTime ? ` • ${departureTime}` : ""} • ${seats}`
-    : `${nearestTripLabel} • ${seats}`;
+    ? `${formatHeroDate(formattedDate)}${route.departureTime ? ` ${lang === "en" ? "at" : "о"} ${departureTime}` : ""}, ${passengerCount}`
+    : `${nearestTripLabel}, ${passengerCount}`;
 
   return (
     <main className={styles.page}>
