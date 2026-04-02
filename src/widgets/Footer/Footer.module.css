@@ -56,13 +56,13 @@
 }
 
 .contactIconCol {
-  width: 24px;
+  /* width: 24px; */
   min-width: 24px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  /* flex-direction: column; */
+  /* justify-content: center; */
   align-items: flex-start;
-  gap: 2px;
+  gap: 10px;
 }
 
 .contactIcon {
@@ -118,18 +118,19 @@
   border-radius: 6px;
 }
 
-.socialIconCol {
-  min-height: 50px;
-  justify-content: flex-start;
-  gap: 2px;
+.footer .socialItem{
+  padding: 20px;
 }
+
 
 .socialIcon {
   flex: none;
 }
-
 .socialLink {
+  display: flex;
+  gap: 24px;
   text-decoration: underline;
+  margin-bottom: 9px;
 }
 
 .socialLinkSecondary {
@@ -154,7 +155,7 @@
 .footerBottom {
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -262,6 +263,7 @@
     align-items: flex-start;
     padding: 20px;
     gap: 24px;
+    min-height: 0;
   }
 
   .socialTextCol {
