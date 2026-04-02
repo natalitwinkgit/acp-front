@@ -227,6 +227,11 @@
   height: 24px;
 }
 
+.paymentCard{
+  padding-top: 32px;
+}
+
+
 .actionBlock {
   display: flex;
   flex-direction: column;
