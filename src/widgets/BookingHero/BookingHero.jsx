@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Suspense } from "react";
 
 import styles from "./BookingHero.module.css";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
@@ -13,7 +14,9 @@ export default function BookingHero() {
     <section id="booking" className={styles.section}>
       <div className={styles.mainBlock}>
         <div className={styles.formBlock}>
-          <BookingForm />
+          <Suspense fallback={<div className={styles.formFallback} aria-hidden="true" />}>
+            <BookingForm />
+          </Suspense>
 
           <div className={styles.imageWrap}>
             <Image
