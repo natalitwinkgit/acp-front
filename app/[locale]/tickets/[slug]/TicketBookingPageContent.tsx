@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 
 import BreadcrumbChips from "@/src/shared/ui/BreadcrumbChips/BreadcrumbChips";
 import { type PopularRoute, getLocalizedRouteValue } from "@/src/shared/data/popularRoutes";
+import LocaleLink from "@/src/shared/i18n/Link";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import Button from "@/src/widgets/Button/Button";
 import styles from "./ticket-booking.module.css";
@@ -13,6 +14,8 @@ type TicketBookingPageContentProps = {
   route: PopularRoute;
   initialSeats: number;
 };
+
+const MAX_BOOKING_SEATS = 7;
 
 function formatDisplayDate(value: string | null, locale: string) {
   if (!value) {
@@ -46,23 +49,27 @@ function formatHeroDate(value: string) {
   });
 }
 
-function formatPassengerCount(value: number, lang: "uk" | "en") {
+function getPassengerLabelKey(count: number, lang: "uk" | "en") {
   if (lang === "en") {
-    return `${value} ${value === 1 ? "passenger" : "passengers"}`;
+    return count === 1 ? "one" : "other";
   }
 
-  const mod10 = value % 10;
-  const mod100 = value % 100;
+  const n = Math.abs(count) % 100;
+  const n1 = n % 10;
 
-  if (mod10 === 1 && mod100 !== 11) {
-    return `${value} пасажир`;
+  if (n > 10 && n < 20) {
+    return "many";
   }
 
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) {
-    return `${value} пасажири`;
+  if (n1 > 1 && n1 < 5) {
+    return "few";
   }
 
-  return `${value} пасажирів`;
+  if (n1 === 1) {
+    return "one";
+  }
+
+  return "many";
 }
 
 export default function TicketBookingPageContent({
@@ -71,7 +78,8 @@ export default function TicketBookingPageContent({
 }: TicketBookingPageContentProps) {
   const { lang, t } = useI18n();
   const locale = lang === "en" ? "en-GB" : "uk-UA";
-  const safeInitialSeats = Math.min(Math.max(initialSeats, 1), route.maxSeats);
+  const maxBookableSeats = Math.max(1, Math.min(route.maxSeats, MAX_BOOKING_SEATS));
+  const safeInitialSeats = Math.min(Math.max(initialSeats, 1), maxBookableSeats);
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -97,9 +105,9 @@ export default function TicketBookingPageContent({
   const formattedDate = formatDisplayDate(route.tripDate, locale);
   const departureTime = formatDisplayTime(route.departureTime);
   const arrivalTime = formatDisplayTime(route.arrivalTime);
-  const passengerCount = formatPassengerCount(seats, lang);
+  const passengerCount = `${seats} ${t(`ticketBooking.hero.passenger.${getPassengerLabelKey(seats, lang)}`)}`;
   const heroMeta = formattedDate
-    ? `${formatHeroDate(formattedDate)}${route.departureTime ? ` ${lang === "en" ? "at" : "о"} ${departureTime}` : ""}, ${passengerCount}`
+    ? `${formatHeroDate(formattedDate)}${route.departureTime ? ` ${t("ticketBooking.hero.timePrefix")} ${departureTime}` : ""}, ${passengerCount}`
     : `${nearestTripLabel}, ${passengerCount}`;
 
   return (
@@ -175,7 +183,7 @@ export default function TicketBookingPageContent({
 
                   <div className={styles.field}>
                     <span className={styles.label}>
-                      {t("ticketBooking.form.seatsLabel")} (Макс. {route.maxSeats})*
+                      {t("ticketBooking.form.seatsLabel")} (Макс. {maxBookableSeats})*
                     </span>
 
                     <div className={styles.seatsRow}>
@@ -196,8 +204,8 @@ export default function TicketBookingPageContent({
                           type="button"
                           className={styles.stepperButton}
                           aria-label={t("ticketBooking.controls.increaseSeats")}
-                          onClick={() => setSeats((current) => Math.min(route.maxSeats, current + 1))}
-                          disabled={seats >= route.maxSeats}
+                          onClick={() => setSeats((current) => Math.min(maxBookableSeats, current + 1))}
+                          disabled={seats >= maxBookableSeats}
                         >
                           +
                         </button>
@@ -257,7 +265,12 @@ export default function TicketBookingPageContent({
                 />
               </div>
 
-              <p className={styles.termsText}>{t("ticketBooking.payment.terms")}</p>
+              <p className={styles.termsText}>
+                {t("ticketBooking.payment.termsPrefix")}{" "}
+                <LocaleLink href="/404" className={styles.termsLink}>
+                  {t("ticketBooking.payment.termsLink")}
+                </LocaleLink>
+              </p>
             </div>
             </section>
           </section>
@@ -298,12 +311,12 @@ export default function TicketBookingPageContent({
               <h2 className={styles.sidebarTitle}>{t("ticketBooking.routeCard.title")}</h2>
 
               <div className={styles.summaryRow}>
-                <span>{t("ticketBooking.routeCard.passengers")}</span>
+                <span>{t(`ticketBooking.routeCard.passenger.${getPassengerLabelKey(seats, lang)}`)}:</span>
                 <strong>{seats}</strong>
               </div>
 
               <div className={styles.summaryRow}>
-                <span>{t("ticketBooking.routeCard.total")}</span>
+                <span>{t("ticketBooking.routeCard.total")}:</span>
                 <strong>{priceFormatter.format(totalPrice)} ₴</strong>
               </div>
             </section>

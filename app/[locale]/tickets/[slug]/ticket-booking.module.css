@@ -257,10 +257,19 @@
 
 .termsText {
   margin: 0;
+  width: 100%;
+  align-self: stretch;
+  min-height: 18px;
   font-size: 12px;
   line-height: 150%;
+  font-weight: 400;
   text-align: center;
   color: #11313d;
+}
+
+.termsLink {
+  color: inherit;
+  text-decoration: underline;
 }
 
 .sidebarCard {
@@ -380,6 +389,10 @@
   font-size: 16px;
   line-height: 144%;
   color: #226078;
+}
+
+.summaryRow span {
+  font-weight: 500;
 }
 
 .summaryRow strong {

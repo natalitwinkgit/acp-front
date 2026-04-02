@@ -103,6 +103,15 @@
       "current": "Booking/Payment"
     },
     "routePrefix": "Route",
+    "hero": {
+      "timePrefix": "at",
+      "passenger": {
+        "one": "passenger",
+        "few": "passengers",
+        "many": "passengers",
+        "other": "passengers"
+      }
+    },
     "form": {
       "title": "Ticket booking",
       "nameLabel": "Full name",
@@ -120,12 +129,18 @@
     },
     "payment": {
       "secure": "All payments are protected according to security standards",
-      "terms": "By clicking, you agree to the terms"
+      "termsPrefix": "By clicking, you agree to the",
+      "termsLink": "terms"
     },
     "routeCard": {
       "aboutTitle": "Trip details",
       "title": "Summary",
-      "passengers": "Passengers",
+      "passenger": {
+        "one": "Passenger",
+        "few": "Passengers",
+        "many": "Passengers",
+        "other": "Passengers"
+      },
       "total": "Total"
     },
     "controls": {
