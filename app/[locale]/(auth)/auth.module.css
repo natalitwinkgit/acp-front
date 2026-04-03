@@ -6,7 +6,6 @@
   background: #fcfbf4;
 }
 
-
 .shell {
   position: relative;
   width: 1100px;
@@ -395,7 +394,6 @@
   border-color: #a2aebd;
 }
 
-
 .left {
   position: absolute;
   left: 0;
@@ -403,7 +401,6 @@
   width: 550px;
   height: 606px;
 }
-
 
 .formWrap {
   position: absolute;
@@ -417,7 +414,6 @@
   padding: 20px;
   gap: 32px;
 }
-
 
 .formWrapRegister {
   position: absolute;
@@ -475,7 +471,6 @@
   flex-grow: 0;
 }
 
-
 .field {
   width: 360px;
   height: 70px;
@@ -503,7 +498,6 @@
   order: 0;
   flex-grow: 1;
 }
-
 
 .input {
   box-sizing: border-box;
@@ -570,7 +564,6 @@
   display: block;
 }
 
-
 .rowBetween {
   width: 360px;
   height: 24px;
@@ -580,7 +573,6 @@
   padding: 0;
   gap: 12px;
 }
-
 
 .remember {
   position: relative;
@@ -601,7 +593,6 @@
   user-select: none;
 }
 
-
 .rememberInput {
   position: absolute;
   opacity: 0;
@@ -609,7 +600,6 @@
   height: 1px;
   pointer-events: none;
 }
-
 
 .checkboxUi {
   width: 24px;
@@ -621,7 +611,6 @@
   place-items: center;
   box-sizing: border-box;
 }
-
 
 .checkboxUi::after {
   content: "";
@@ -637,12 +626,10 @@
   transform: scale(1);
 }
 
-
 .rememberInput:focus-visible + .checkboxUi {
   outline: 2px solid #4c6381;
   outline-offset: 2px;
 }
-
 
 .forgot {
   font-weight: 400;
@@ -655,7 +642,6 @@
   align-items: center;
   white-space: nowrap;
 }
-
 
 .passwordBlock {
   display: flex;
@@ -671,7 +657,6 @@
   flex-grow: 0;
 }
 
-
 .hint {
   width: 360px;
   height: 36px;
@@ -686,7 +671,6 @@
   align-self: stretch;
   flex-grow: 0;
 }
-
 
 .socialRow {
   width: 360px;
@@ -737,7 +721,6 @@
   flex-grow: 1;
 }
 
-
 .buttonContainer {
   display: flex;
   flex-direction: column;
@@ -751,7 +734,6 @@
   align-self: stretch;
   flex-grow: 0;
 }
-
 
 .primaryBtn {
   width: 360px;
@@ -788,7 +770,7 @@
   height: 18px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   font-weight: 400;
   font-size: 12px;
   line-height: 150%;
@@ -803,7 +785,7 @@
   order: 6;
   align-self: flex-end;
   flex-grow: 0;
-   transform: translate(0px, -45px);
+  transform: translate(35px, -45px);
 }
 
 .buttonRegister {
@@ -820,8 +802,6 @@
   flex-grow: 0;
 }
 
-
-
 .right {
   --auth-overlay-bg: rgba(76, 99, 129, 0.7);
   --auth-overlay-blur: blur(2.5px);
@@ -835,10 +815,9 @@
   overflow: hidden;
 
   background-repeat: no-repeat;
-  background-position: right center; 
-  background-size: cover;            
+  background-position: right center;
+  background-size: cover;
 }
-
 
 .right::before {
   content: "";
@@ -846,14 +825,13 @@
   inset: 0;
   background: var(--auth-overlay-bg);
   backdrop-filter: var(--auth-overlay-blur);
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .rightLogin {
   --auth-overlay-bg: #226078b2;
   --auth-overlay-blur: blur(5px);
 }
-
 
 .close {
   position: absolute;
@@ -871,7 +849,6 @@
   top: 12px;
   right: 12px;
 }
-
 
 .brand {
   position: absolute;
@@ -954,7 +931,6 @@
   flex-grow: 0;
 }
 
-
 .textBlock {
   position: absolute;
   left: 40px;
@@ -1031,7 +1007,6 @@
 .textLineRegister:nth-of-type(3) {
   height: 23px;
 }
-
 
 @media (max-width: 900px) {
   .shellLogin,
@@ -1118,6 +1093,10 @@
   .registerBlock .input,
   .registerBlock .inputWithIcon {
     width: 100%;
+  }
+  
+  .underLink {
+    width: 40% !important;
   }
 
   .brandLogo {
@@ -1373,5 +1352,9 @@
     width: min(260px, 100%);
     height: auto;
     max-width: 100%;
+  }
+  .underLink {
+    width: 45% !important;
+     transform: translate(5px, -40px);
   }
 }
