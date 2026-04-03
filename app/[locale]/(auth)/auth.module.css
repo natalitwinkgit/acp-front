@@ -337,6 +337,7 @@
 .registerCard {
   grid-column: 2;
   grid-row: 1 / span 2;
+  position: relative;
   width: 400px;
   height: 532px;
   padding: 12px 20px;
@@ -348,6 +349,16 @@
   gap: 16px;
   flex: 0 0 400px;
   box-sizing: border-box;
+}
+
+.registerInlineToast {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  width: min(360px, calc(100% - 40px)) !important;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 .registerTitle {
@@ -702,14 +713,28 @@
   height: 44px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 0px 8px;
+  padding: 0;
   gap: 24px;
   flex: none;
   order: 5;
   align-self: stretch;
   flex-grow: 0;
+}
+
+.socialRowRegister > * {
+  margin-right: auto;
+}
+
+.socialRowRegister :global(.root) {
+  justify-content: flex-start;
+}
+
+.socialRowRegister :global(.host) {
+  margin-inline: 0;
+  justify-content: flex-start;
+  padding-left: 0;
 }
 
 .socialBtn {
@@ -724,7 +749,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 10px 12px;
   gap: 10px;
   flex: none;
   order: 0;
@@ -1229,6 +1254,11 @@
     width: 100%;
     max-width: 330px;
     padding: 20px;
+  }
+
+  .registerInlineToast {
+    top: 78px;
+    width: min(350px, calc(100% - 40px)) !important;
   }
 
   .loginTitle,

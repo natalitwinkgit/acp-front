@@ -12,6 +12,7 @@ import Button from "@/src/widgets/Button/Button";
 import AuthPromoList from "../AuthPromoList";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
+import Notification from "@/src/shared/ui/Notification/Notification";
 
 type RegisterFormData = {
   phone: string;
@@ -139,10 +140,18 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
         <div className={styles.registerCard}>
           <h1 className={styles.registerTitle}>{t("auth.register.title")}</h1>
 
+          {error ? (
+            <Notification
+              variant="error"
+              size="small"
+              message={error}
+              onClose={() => setError("")}
+              closeLabel={t("common.close")}
+              className={styles.registerInlineToast}
+            />
+          ) : null}
+
           <form className={styles.registerBlock} onSubmit={handleSubmit}>
-            {error && (
-              <div style={{ color: "red", marginBottom: 10 }}>{error}</div>
-            )}
 
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.phoneLabel")}</span>
@@ -262,13 +271,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
               />
             </div>
 
-            <button
-              className={styles.underLink}
-              type="button"
-              onClick={() => router.replace(resolveHref("/login"))}
-            >
-              {t("auth.register.existingAccount")}
-            </button>
+              <button
+                className={styles.underLink}
+                type="button"
+                onClick={() => router.replace(resolveHref("/login"))}
+              >
+                {t("auth.register.existingAccount")}
+              </button>
           </form>
         </div>
       </div>
