@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { closeAuthRoute } from "@/src/shared/auth-flow";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import Button from "@/src/widgets/Button/Button";
+import AuthPromoList from "../AuthPromoList";
 import styles from "./forgot-password.module.css";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
 
@@ -14,29 +15,22 @@ type ForgotPasswordPageContentProps = {
   onClose?: () => void;
 };
 
-type StatusState =
-  | { type: "info"; message: string }
-  | { type: "success"; message: string }
-  | { type: "error"; message: string }
-  | null;
-
 export default function ForgotPasswordPageContent({
   onClose,
 }: ForgotPasswordPageContentProps) {
   const router = useRouter();
   const { t } = useI18n();
   const resolveHref = useLocalizedHref();
-  const isForgotPasswordAvailable = false;
-  const unavailableMessage = t("auth.forgotPassword.unavailableMessage");
 
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [sendToEmail, setSendToEmail] = useState(false);
-  const [sendToPhone, setSendToPhone] = useState(false);
-  const [status, setStatus] = useState<StatusState>({
-    type: "info",
-    message: unavailableMessage,
-  });
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const promoItems = [
+    t("auth.common.promo.one"),
+    t("auth.common.promo.two"),
+    t("auth.common.promo.three"),
+  ];
 
   const handleCloseAuthFlow = () => {
     if (onClose) {
@@ -49,10 +43,6 @@ export default function ForgotPasswordPageContent({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setStatus({
-      type: "info",
-      message: unavailableMessage,
-    });
   };
 
   return (
@@ -79,11 +69,11 @@ export default function ForgotPasswordPageContent({
             <p className={styles.brandDesc}>{t("auth.common.brandDesc")}</p>
           </div>
 
-          <div className={styles.infoBlock}>
-            <p className={styles.infoLine}>{t("auth.common.promo.one")}</p>
-            <p className={styles.infoLine}>{t("auth.common.promo.two")}</p>
-            <p className={styles.infoLine}>{t("auth.common.promo.three")}</p>
-          </div>
+          <AuthPromoList
+            items={promoItems}
+            listClassName={styles.infoBlock}
+            itemClassName={styles.infoLine}
+          />
         </aside>
 
         <section className={styles.card} aria-labelledby="forgot-password-title">
@@ -106,7 +96,6 @@ export default function ForgotPasswordPageContent({
                   }}
                   autoComplete="tel"
                   inputMode="tel"
-                  disabled={!isForgotPasswordAvailable}
                 />
                 <Image
                   src="/icons/eye-off-light.svg"
@@ -131,7 +120,6 @@ export default function ForgotPasswordPageContent({
                     setEmail(event.target.value);
                   }}
                   autoComplete="email"
-                  disabled={!isForgotPasswordAvailable}
                 />
                 <Image
                   src="/icons/eye-off-light.svg"
@@ -144,81 +132,60 @@ export default function ForgotPasswordPageContent({
               </div>
             </label>
 
-            <label
-              className={`${styles.optionRow} ${
-                !isForgotPasswordAvailable ? styles.optionRowDisabled : ""
-              }`.trim()}
-            >
-              <input
-                className={styles.optionInput}
-                type="checkbox"
-                checked={sendToEmail}
-                onChange={(event) => {
-                  setSendToEmail(event.target.checked);
-                }}
-                disabled={!isForgotPasswordAvailable}
-              />
-              <span
-                className={`${styles.checkboxUi} ${
-                  !isForgotPasswordAvailable ? styles.checkboxUiDisabled : ""
-                }`.trim()}
-                aria-hidden="true"
-              />
-              <span
-                className={`${styles.optionText} ${
-                  !isForgotPasswordAvailable ? styles.optionTextMuted : ""
-                }`.trim()}
-              >
-                {t("auth.forgotPassword.sendToEmail")}
-              </span>
+            <label className={styles.field}>
+              <span className={styles.label}>{t("auth.forgotPassword.newPasswordLabel")}</span>
+              <div className={styles.inputWrap}>
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="newPassword"
+                  value={newPassword}
+                  onChange={(event) => {
+                    setNewPassword(event.target.value);
+                  }}
+                  autoComplete="new-password"
+                />
+                <Image
+                  src="/icons/eye-off-light.svg"
+                  alt=""
+                  className={styles.inputIcon}
+                  width={24}
+                  height={24}
+                  aria-hidden="true"
+                />
+              </div>
             </label>
 
-            <label
-              className={`${styles.optionRow} ${
-                !isForgotPasswordAvailable ? styles.optionRowDisabled : ""
-              }`.trim()}
-            >
-              <input
-                className={styles.optionInput}
-                type="checkbox"
-                checked={sendToPhone}
-                onChange={(event) => {
-                  setSendToPhone(event.target.checked);
-                }}
-                disabled={!isForgotPasswordAvailable}
-              />
-              <span
-                className={`${styles.checkboxUi} ${
-                  !isForgotPasswordAvailable ? styles.checkboxUiDisabled : ""
-                }`.trim()}
-                aria-hidden="true"
-              />
-              <span
-                className={`${styles.optionText} ${
-                  !isForgotPasswordAvailable ? styles.optionTextMuted : ""
-                }`.trim()}
-              >
-                {t("auth.forgotPassword.sendToPhone")}
-              </span>
+            <label className={styles.field}>
+              <span className={styles.label}>{t("auth.forgotPassword.confirmPasswordLabel")}</span>
+              <div className={styles.inputWrap}>
+                <input
+                  className={styles.input}
+                  type="password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(event) => {
+                    setConfirmPassword(event.target.value);
+                  }}
+                  autoComplete="new-password"
+                />
+                <Image
+                  src="/icons/eye-off-light.svg"
+                  alt=""
+                  className={styles.inputIcon}
+                  width={24}
+                  height={24}
+                  aria-hidden="true"
+                />
+              </div>
             </label>
-
-            <div
-              className={`${styles.status} ${status?.type === "info" ? styles.statusInfo : ""} ${
-                status?.type === "success" ? styles.statusSuccess : ""
-              } ${status?.type === "error" ? styles.statusError : ""
-              }`.trim()}
-              aria-live="polite"
-            >
-              {status?.message ?? ""}
-            </div>
 
             <div className={styles.actions}>
               <Button
-                text={t("auth.forgotPassword.unavailableButton")}
+                text={t("auth.forgotPassword.submitButton")}
                 variant="primary"
                 type="submit"
                 onClick={() => {}}
-                disabled={!isForgotPasswordAvailable}
               />
 
               <div className={styles.bottomRow}>
