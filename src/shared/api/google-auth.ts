@@ -31,6 +31,7 @@ type GoogleIdentityApi = {
     client_id: string;
     callback: (response: { credential?: string }) => void;
   }) => void;
+  prompt: () => void;
   renderButton: (
     parent: HTMLElement,
     options: {
