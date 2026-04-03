@@ -244,7 +244,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                 intent="register"
                 disabled={isLoading}
                 onBusyChange={setIsGoogleLoading}
-                onError={(message) => setError(message)}
                 onSuccess={handleCloseAuthFlow}
               />
             </div>

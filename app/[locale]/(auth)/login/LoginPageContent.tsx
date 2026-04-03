@@ -152,7 +152,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 intent="login"
                 disabled={isLoading}
                 onBusyChange={setIsGoogleLoading}
-                onError={(message) => setError(message)}
                 onSuccess={handleCloseAuthFlow}
               />
             </div>

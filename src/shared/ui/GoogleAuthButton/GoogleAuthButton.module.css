@@ -2,6 +2,9 @@
   position: relative;
   width: 100%;
   min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .host {
@@ -13,6 +16,7 @@
   justify-content: center;
   background-color: transparent;
   border: none;
+  margin-inline: auto;
 }
 
 .host:empty {
