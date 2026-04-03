@@ -19,6 +19,7 @@
   --color-navy: #012169;
   --color-ua-yellow: #FFD500;
   --color-white: #FFFFFF;
+  --font-roboto: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* Compatibility aliases for existing CSS */
   --bg: var(--color-page-bg);

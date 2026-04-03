@@ -1,6 +1,5 @@
 import "../globals.css";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { hasLocale, locales } from "@/src/shared/i18n/config";
@@ -9,13 +8,6 @@ import { createSiteMetadata, getOrganizationStructuredData } from "@/src/shared/
 import Footer from "@/src/widgets/Footer/Footer";
 import Header from "@/src/widgets/Header/Header";
 import { I18nProvider } from "@/src/shared/i18n/I18nProvider";
-
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700", "800"],
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-  variable: "--font-roboto",
-});
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -51,7 +43,7 @@ export default async function RootLayout({
   const organizationStructuredData = getOrganizationStructuredData(locale);
 
   return (
-    <html lang={locale} className={roboto.variable}>
+    <html lang={locale}>
       <head>
         <link
           rel="icon"

@@ -170,7 +170,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
             </label>
 
             <div className={styles.field}>
-              <span className={styles.label}>{t("auth.register.*passwordLabel")}</span>
+              <span className={styles.label}>{t("auth.register.passwordLabel")}</span>
 
               <div className={styles.inputWithIcon}>
                 <input

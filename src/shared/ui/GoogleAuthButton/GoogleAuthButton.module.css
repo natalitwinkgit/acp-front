@@ -17,6 +17,7 @@
   background-color: transparent;
   border: none;
   margin-inline: auto;
+  color: #11313d;
 }
 
 .host:empty {
