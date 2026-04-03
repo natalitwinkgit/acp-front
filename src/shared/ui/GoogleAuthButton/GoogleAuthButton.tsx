@@ -6,8 +6,8 @@ import {
   getGoogleClientId,
   loadGoogleIdentityScript,
 } from "@/src/shared/api/google-auth";
-import Image from "next/image";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import Image from "next/image";
 import { useEffect, useEffectEvent, useState } from "react";
 import styles from "./GoogleAuthButton.module.css";
 // import Logo from "@/public/google-logo.svg";

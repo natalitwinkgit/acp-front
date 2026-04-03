@@ -247,7 +247,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                 onError={(message) => setError(message)}
                 onSuccess={handleCloseAuthFlow}
               />
-              
             </div>
 
             <div className={styles.buttonRegister}>
