@@ -5,7 +5,9 @@
   background: rgba(0, 0, 0, 0.35);
   display: grid;
   place-items: center;
+  min-height: 100dvh;
   padding: 24px 16px;
+  overflow-y: auto;
   touch-action: none;
   overscroll-behavior: contain;
 }
@@ -17,4 +19,17 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 767px) {
+  .overlay {
+    place-items: start center;
+    padding: 12px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 362px;
+    box-shadow: none;
+  }
 }

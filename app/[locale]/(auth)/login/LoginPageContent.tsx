@@ -10,6 +10,7 @@ import { login, setAccessToken } from "@/src/shared/api";
 import LocaleLink from "@/src/shared/i18n/Link";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import Button from "@/src/widgets/Button/Button";
+import AuthPromoList from "../AuthPromoList";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
 
@@ -71,6 +72,11 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
   };
 
   const isBusy = isLoading || isGoogleLoading;
+  const benefitItems = [
+    t("auth.login.benefits.reserve"),
+    t("auth.login.benefits.buy"),
+    t("auth.login.benefits.manage"),
+  ];
 
   return (
     <div
@@ -84,6 +90,18 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
       />
 
       <div className={styles.loginContent}>
+        <div className={styles.loginBrand}>
+          <Image
+            src="/logo-sprinter.svg"
+            alt={t("header.logoAlt")}
+            className={styles.brandLogo}
+            width={213}
+            height={50}
+            priority
+          />
+          <div className={styles.loginBrandDesc}>{t("auth.common.brandDesc")}</div>
+        </div>
+
         <div className={styles.loginCard}>
           <h1 className={styles.loginTitle}>{t("auth.login.title")}</h1>
 
@@ -152,7 +170,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 intent="login"
                 disabled={isLoading}
                 onBusyChange={setIsGoogleLoading}
-                onError={(message) => setError(message)}
                 onSuccess={handleCloseAuthFlow}
               />
             </div>
@@ -177,25 +194,11 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
           </form>
         </div>
 
-        <div className={styles.loginAside}>
-          <div className={styles.loginBrand}>
-            <Image
-              src="/logo-sprinter.svg"
-              alt={t("header.logoAlt")}
-              className={styles.brandLogo}
-              width={213}
-              height={50}
-              priority
-            />
-            <div className={styles.loginBrandDesc}>{t("auth.common.brandDesc")}</div>
-          </div>
-
-          <div className={styles.loginTextBlock}>
-            <p className={styles.loginTextLine}>{t("auth.login.benefits.reserve")}</p>
-            <p className={styles.loginTextLine}>{t("auth.login.benefits.buy")}</p>
-            <p className={styles.loginTextLine}>{t("auth.login.benefits.manage")}</p>
-          </div>
-        </div>
+        <AuthPromoList
+          items={benefitItems}
+          listClassName={styles.loginTextBlock}
+          itemClassName={styles.loginTextLine}
+        />
       </div>
     </div>
   );

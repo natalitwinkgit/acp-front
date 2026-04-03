@@ -19,6 +19,7 @@
   --color-navy: #012169;
   --color-ua-yellow: #FFD500;
   --color-white: #FFFFFF;
+  --font-roboto: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* Compatibility aliases for existing CSS */
   --bg: var(--color-page-bg);
@@ -32,8 +33,13 @@
   --Light-blue: var(--color-surface-accent);
   --light-bg: var(--color-surface-soft);
 }
-
-@media (max-width: 1919px) {
+@media (max-width: 1920px) {
+  :root {
+    --layout-max-width: 1920px;
+    --layout-padding-x: 256px;
+  }
+}
+@media (max-width: 1440px) {
   :root {
     --layout-max-width: 1440px;
     --layout-padding-x: 104px;

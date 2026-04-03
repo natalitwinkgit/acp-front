@@ -9,8 +9,10 @@ import { closeAuthRoute } from "@/src/shared/auth-flow";
 import { register } from "@/src/shared/api";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import Button from "@/src/widgets/Button/Button";
+import AuthPromoList from "../AuthPromoList";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
+import Notification from "@/src/shared/ui/Notification/Notification";
 
 type RegisterFormData = {
   phone: string;
@@ -99,6 +101,11 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
   };
 
   const isBusy = isLoading || isGoogleLoading;
+  const promoItems = [
+    t("auth.common.promo.one"),
+    t("auth.common.promo.two"),
+    t("auth.common.promo.three"),
+  ];
 
   return (
     <div
@@ -112,33 +119,39 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
       />
 
       <div className={styles.registerContent}>
-        <div className={styles.registerAside}>
-          <div className={styles.registerBrand}>
-            <Image
-              src="/logo-sprinter.svg"
-              alt={t("header.logoAlt")}
-              className={styles.brandLogo}
-              width={213}
-              height={50}
-              priority
-            />
-            <div className={styles.registerBrandDesc}>{t("auth.common.brandDesc")}</div>
-          </div>
-
-          <div className={styles.registerTextBlock}>
-            <p className={styles.registerTextLine}>{t("auth.common.promo.one")}</p>
-            <p className={styles.registerTextLine}>{t("auth.common.promo.two")}</p>
-            <p className={styles.registerTextLine}>{t("auth.common.promo.three")}</p>
-          </div>
+        <div className={styles.registerBrand}>
+          <Image
+            src="/logo-sprinter.svg"
+            alt={t("header.logoAlt")}
+            className={styles.brandLogo}
+            width={213}
+            height={50}
+            priority
+          />
+          <div className={styles.registerBrandDesc}>{t("auth.common.brandDesc")}</div>
         </div>
+
+        <AuthPromoList
+          items={promoItems}
+          listClassName={styles.registerTextBlock}
+          itemClassName={styles.registerTextLine}
+        />
 
         <div className={styles.registerCard}>
           <h1 className={styles.registerTitle}>{t("auth.register.title")}</h1>
 
+          {error ? (
+            <Notification
+              variant="error"
+              size="small"
+              message={error}
+              onClose={() => setError("")}
+              closeLabel={t("common.close")}
+              className={styles.registerInlineToast}
+            />
+          ) : null}
+
           <form className={styles.registerBlock} onSubmit={handleSubmit}>
-            {error && (
-              <div style={{ color: "red", marginBottom: 10 }}>{error}</div>
-            )}
 
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.phoneLabel")}</span>
@@ -170,7 +183,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
             </label>
 
             <div className={styles.field}>
-              <span className={styles.label}>{t("auth.register.*passwordLabel")}</span>
+              <span className={styles.label}>{t("auth.register.passwordLabel")}</span>
 
               <div className={styles.inputWithIcon}>
                 <input
@@ -244,7 +257,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
                 intent="register"
                 disabled={isLoading}
                 onBusyChange={setIsGoogleLoading}
-                onError={(message) => setError(message)}
                 onSuccess={handleCloseAuthFlow}
               />
             </div>
@@ -259,13 +271,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
               />
             </div>
 
-            <button
-              className={styles.underLink}
-              type="button"
-              onClick={() => router.replace(resolveHref("/login"))}
-            >
-              {t("auth.register.existingAccount")}
-            </button>
+              <button
+                className={styles.underLink}
+                type="button"
+                onClick={() => router.replace(resolveHref("/login"))}
+              >
+                {t("auth.register.existingAccount")}
+              </button>
           </form>
         </div>
       </div>

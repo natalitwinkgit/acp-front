@@ -2,7 +2,6 @@
 
 import {
   authenticateWithGoogleCredential,
-  getGoogleAuthErrorMessage,
   getGoogleClientId,
   loadGoogleIdentityScript,
 } from "@/src/shared/api/google-auth";
@@ -40,7 +39,6 @@ export default function GoogleAuthButton({
   const { t } = useI18n();
   const [isReady, setIsReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [placeholderText, setPlaceholderText] = useState(t("googleAuth.loading"));
 
   const reportBusyChange = useEffectEvent((busy: boolean) => {
     onBusyChange?.(busy);
@@ -95,16 +93,11 @@ export default function GoogleAuthButton({
         });
 
         if (isActive) {
-          setPlaceholderText("");
           setIsReady(true);
         }
       } catch (err) {
-        const message = getGoogleAuthErrorMessage(err);
-
         if (isActive) {
-          setPlaceholderText(t("googleAuth.unavailable"));
           setIsReady(false);
-          reportError(message);
         }
       }
     };
@@ -135,8 +128,6 @@ export default function GoogleAuthButton({
           aria-hidden="true"
         />
       </button>
-
-      {!isReady ? <div className={styles.placeholder}>{placeholderText}</div> : null}
 
       {isSubmitting ? <div className={styles.overlay}>{t("googleAuth.submitting")}</div> : null}
     </div>
