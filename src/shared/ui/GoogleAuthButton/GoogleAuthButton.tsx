@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useEffectEvent, useRef, useState } from "react";
 import {
   authenticateWithGoogleCredential,
   getGoogleAuthErrorMessage,
   getGoogleClientId,
   loadGoogleIdentityScript,
 } from "@/src/shared/api/google-auth";
+import Image from "next/image";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import { useEffect, useEffectEvent, useState } from "react";
 import styles from "./GoogleAuthButton.module.css";
+// import Logo from "@/public/google-logo.svg";
 
 type GoogleAuthIntent = "login" | "register";
 
@@ -25,12 +27,7 @@ type GoogleAuthButtonProps = {
 };
 
 function getGoogleButtonText(intent: GoogleAuthIntent) {
-  return intent === "register" ? "signup_with" : "signin_with";
-}
-
-function getGoogleButtonLocale() {
-  if (typeof document === "undefined") return "uk";
-  return document.documentElement.lang?.toLowerCase().startsWith("en") ? "en" : "uk";
+  return intent === "register" ? "Вхід через" : "Вхід через";
 }
 
 export default function GoogleAuthButton({
@@ -41,7 +38,6 @@ export default function GoogleAuthButton({
   onSuccess,
 }: GoogleAuthButtonProps) {
   const { t } = useI18n();
-  const hostRef = useRef<HTMLDivElement | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [placeholderText, setPlaceholderText] = useState(t("googleAuth.loading"));
@@ -81,34 +77,13 @@ export default function GoogleAuthButton({
 
   useEffect(() => {
     let isActive = true;
-    let resizeObserver: ResizeObserver | null = null;
-
-    const renderGoogleButton = () => {
-      const host = hostRef.current;
-      const googleId = window.google?.accounts?.id;
-
-      if (!host || !googleId) return;
-
-      const width = Math.max(240, Math.floor(host.getBoundingClientRect().width || 360));
-
-      host.innerHTML = "";
-      googleId.renderButton(host, {
-        theme: "outline",
-        size: "large",
-        shape: "rectangular",
-        text: getGoogleButtonText(intent),
-        logo_alignment: "left",
-        width,
-        locale: getGoogleButtonLocale(),
-      });
-    };
 
     const initializeGoogleButton = async () => {
       try {
         const clientId = await getGoogleClientId();
         await loadGoogleIdentityScript();
 
-        if (!isActive || !hostRef.current || !window.google?.accounts?.id) {
+        if (!isActive || !window.google?.accounts?.id) {
           return;
         }
 
@@ -118,10 +93,6 @@ export default function GoogleAuthButton({
             void handleCredentialResponse(response);
           },
         });
-
-        renderGoogleButton();
-        resizeObserver = new ResizeObserver(() => renderGoogleButton());
-        resizeObserver.observe(hostRef.current);
 
         if (isActive) {
           setPlaceholderText("");
@@ -142,7 +113,6 @@ export default function GoogleAuthButton({
 
     return () => {
       isActive = false;
-      resizeObserver?.disconnect();
     };
   }, [intent, t]);
 
@@ -150,7 +120,21 @@ export default function GoogleAuthButton({
 
   return (
     <div className={rootClassName} aria-busy={isSubmitting}>
-      <div ref={hostRef} className={styles.host} />
+      <button
+        className={styles.host}
+        onClick={() => window.google?.accounts?.id?.prompt()}
+        disabled={disabled || isSubmitting || !isReady}
+      >
+        {getGoogleButtonText(intent)}
+        <Image
+          src="/(auth)/flat-color-icons_google.svg"
+          alt=""
+          className={styles.googleIcon}
+          width={24}
+          height={24}
+          aria-hidden="true"
+        />
+      </button>
 
       {!isReady ? <div className={styles.placeholder}>{placeholderText}</div> : null}
 

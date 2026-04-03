@@ -5,10 +5,14 @@
 }
 
 .host {
-  width: 100%;
+  width: 50%;
   min-height: 44px;
   display: flex;
+  gap:  calc(5px + (16 - 20) * ((100vw - 320px) / (1200 - 320)));;
+  align-items: center;
   justify-content: center;
+  background-color: transparent;
+  border: none;
 }
 
 .host:empty {
