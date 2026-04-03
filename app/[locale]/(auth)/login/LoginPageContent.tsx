@@ -144,7 +144,7 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 <LocaleLink className={styles.forgot} href="/forgot-password">
                   {t("auth.login.forgotPassword")}
                 </LocaleLink>
-              </div>
+так               </div>
             </div>
 
             <div className={styles.socialRow}>
@@ -152,7 +152,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 intent="login"
                 disabled={isLoading}
                 onBusyChange={setIsGoogleLoading}
-                onError={(message) => setError(message)}
                 onSuccess={handleCloseAuthFlow}
               />
             </div>
