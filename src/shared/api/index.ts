@@ -2,8 +2,14 @@
 export { API_URL, apiFetch } from './http';
 
 // Auth API
-export { register, login, logout } from './auth';
-export type { RegisterPayload, LoginPayload, TokenResponse } from './auth';
+export { register, login, logout, forgotPassword, resetPassword } from './auth';
+export type {
+  RegisterPayload,
+  LoginPayload,
+  TokenResponse,
+  ForgotPasswordPayload,
+  ResetPasswordPayload,
+} from './auth';
 export {
   createTrip,
   deleteTrip,

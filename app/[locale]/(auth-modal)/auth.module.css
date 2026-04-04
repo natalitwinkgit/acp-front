@@ -6,6 +6,11 @@
   place-items: center;
   padding: 24px 16px;
   z-index: 9999;
+  min-height: 100dvh;
+  overflow-y: auto;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modalWrap{
@@ -15,5 +20,18 @@
   border-radius: 12px;
   overflow: visible;
   box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+}
+
+@media (max-width: 767px) {
+  .overlay {
+    place-items: start center;
+    padding: 12px;
+  }
+
+  .modalWrap {
+    width: 100%;
+    max-width: 362px;
+    box-shadow: none;
+  }
 }
 

@@ -22,6 +22,15 @@ type MessageResponse = {
   message: string;
 };
 
+export type ForgotPasswordPayload = {
+  email: string;
+};
+
+export type ResetPasswordPayload = {
+  token: string;
+  newPassword: string;
+};
+
 export function register(payload: RegisterPayload) {
   return apiFetch<TokenResponse>("/auth/register", {
     method: "POST",
@@ -33,6 +42,24 @@ export function register(payload: RegisterPayload) {
 
 export function login(payload: LoginPayload) {
   return apiFetch<TokenResponse>("/auth/login", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    includeAuth: false,
+    skipAuthRefresh: true,
+  });
+}
+
+export function forgotPassword(payload: ForgotPasswordPayload) {
+  return apiFetch<MessageResponse>("/auth/forgot-password", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    includeAuth: false,
+    skipAuthRefresh: true,
+  });
+}
+
+export function resetPassword(payload: ResetPasswordPayload) {
+  return apiFetch<MessageResponse>("/auth/reset-password", {
     method: "POST",
     body: JSON.stringify(payload),
     includeAuth: false,

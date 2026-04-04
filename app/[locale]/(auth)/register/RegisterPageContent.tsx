@@ -8,6 +8,7 @@ import styles from "../auth.module.css";
 import { closeAuthRoute } from "@/src/shared/auth-flow";
 import { register } from "@/src/shared/api";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
+import TextField from "@/src/shared/ui/TextField/TextField";
 import Button from "@/src/widgets/Button/Button";
 import AuthPromoList from "../AuthPromoList";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
@@ -29,9 +30,6 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
   const router = useRouter();
   const { t } = useI18n();
   const resolveHref = useLocalizedHref();
-
-  const [showPass, setShowPass] = useState(false);
-  const [showPass2, setShowPass2] = useState(false);
 
   const [formData, setFormData] = useState<RegisterFormData>({
     phone: "",
@@ -155,8 +153,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
 
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.phoneLabel")}</span>
-              <input
-                className={styles.input}
+              <TextField
                 type="tel"
                 name="phone"
                 value={formData.phone}
@@ -171,8 +168,7 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
 
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.emailLabel")}</span>
-              <input
-                className={styles.input}
+              <TextField
                 type="email"
                 name="email"
                 value={formData.email}
@@ -184,67 +180,33 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
 
             <div className={styles.field}>
               <span className={styles.label}>{t("auth.register.passwordLabel")}</span>
-
-              <div className={styles.inputWithIcon}>
-                <input
-                  className={styles.inputInner}
-                  type={showPass ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  autoComplete="new-password"
-                  required
-                />
-
-                <button
-                  type="button"
-                  className={styles.iconBtn}
-                  onClick={() => setShowPass((v) => !v)}
-                  aria-label={showPass ? t("common.password.hide") : t("common.password.show")}
-                >
-                  <Image
-                    className={styles.icon24}
-                    src={showPass ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
-                    alt=""
-                    aria-hidden="true"
-                    width={24}
-                    height={24}
-                  />
-                </button>
-              </div>
+              <TextField
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                autoComplete="new-password"
+                required
+                passwordToggle
+                showPasswordLabel={t("common.password.show")}
+                hidePasswordLabel={t("common.password.hide")}
+              />
             </div>
 
             <div className={styles.passwordBlock}>
               <div className={styles.field}>
                 <span className={styles.label}>{t("auth.register.confirmPasswordLabel")}</span>
-
-                <div className={styles.inputWithIcon}>
-                  <input
-                    className={styles.inputInner}
-                    type={showPass2 ? "text" : "password"}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    autoComplete="new-password"
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    className={styles.iconBtn}
-                    onClick={() => setShowPass2((v) => !v)}
-                    aria-label={showPass2 ? t("common.password.hide") : t("common.password.show")}
-                  >
-                    <Image
-                      className={styles.icon24}
-                      src={showPass2 ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
-                      alt=""
-                      aria-hidden="true"
-                      width={24}
-                      height={24}
-                    />
-                  </button>
-                </div>
+                <TextField
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                  required
+                  passwordToggle
+                  showPasswordLabel={t("common.password.show")}
+                  hidePasswordLabel={t("common.password.hide")}
+                />
               </div>
 
               <div className={styles.hint}>
@@ -252,32 +214,36 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
               </div>
             </div>
 
-            <div className={styles.socialRowRegister}>
-              <GoogleAuthButton
-                intent="register"
-                disabled={isLoading}
-                onBusyChange={setIsGoogleLoading}
-                onSuccess={handleCloseAuthFlow}
-              />
-            </div>
+            <div className={styles.registerActions}>
+              <div className={styles.buttonRegister}>
+                <Button
+                  text={isLoading ? t("auth.register.submitLoading") : t("auth.register.submit")}
+                  variant="primary"
+                  type="submit"
+                  disabled={isBusy}
+                  onClick={() => {}}
+                />
+              </div>
 
-            <div className={styles.buttonRegister}>
-              <Button
-                text={isLoading ? t("auth.register.submitLoading") : t("auth.register.submit")}
-                variant="primary"
-                type="submit"
-                disabled={isBusy}
-                onClick={() => {}}
-              />
-            </div>
+              <div className={styles.registerFooterRow}>
+                <div className={styles.socialRowRegister}>
+                  <GoogleAuthButton
+                    intent="register"
+                    disabled={isLoading}
+                    onBusyChange={setIsGoogleLoading}
+                    onSuccess={handleCloseAuthFlow}
+                  />
+                </div>
 
-              <button
-                className={styles.underLink}
-                type="button"
-                onClick={() => router.replace(resolveHref("/login"))}
-              >
-                {t("auth.register.existingAccount")}
-              </button>
+                <button
+                  className={styles.underLink}
+                  type="button"
+                  onClick={() => router.replace(resolveHref("/login"))}
+                >
+                  {t("auth.register.existingAccount")}
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>

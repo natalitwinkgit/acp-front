@@ -319,18 +319,36 @@
     },
     "forgotPassword": {
       "title": "Password recovery",
-      "subtitle": "Enter your email or phone number",
-      "phoneLabel": "Enter phone number +380...",
-      "emailLabel": "Enter email",
-      "newPasswordLabel": "Enter new password",
-      "confirmPasswordLabel": "Confirm new password",
-      "submitButton": "Continue",
-      "sendToEmail": "Send a new password to email",
-      "sendToPhone": "Send a new password to phone",
-      "unavailableButton": "Temporarily unavailable",
+      "subtitle": "Enter your email and we will send you a password reset link.",
+      "emailLabel": "Email",
+      "submitButton": "Send link",
+      "submitLoading": "Sending...",
+      "successMessage": "Check your email. If an account with this email exists, the password reset link has already been sent.",
       "loginVia": "Sign in via",
+      "rememberedPassword": "Remembered your password?",
+      "loginAction": "Sign in",
       "existingAccount": "I already have an account",
-      "unavailableMessage": "Password recovery is temporarily unavailable. The backend has not approved the forgot password flow yet."
+      "errors": {
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "resetPassword": {
+      "title": "Create a new password",
+      "subtitle": "Enter a new password for your account.",
+      "invalidLinkSubtitle": "The reset link is invalid or incomplete.",
+      "newPasswordLabel": "New password",
+      "confirmPasswordLabel": "Confirm new password",
+      "passwordHint": "Password must contain at least 8 characters, one uppercase letter, and one digit.",
+      "submitButton": "Update password",
+      "submitLoading": "Updating...",
+      "successMessage": "Password has been reset successfully. Sign in with your new password.",
+      "loginAction": "Sign in",
+      "backToLogin": "Back to sign in",
+      "errors": {
+        "passwordMismatch": "Passwords do not match",
+        "missingToken": "The reset link is invalid, expired, or incomplete.",
+        "generic": "Something went wrong. Please try again."
+      }
     }
   },
   "profile": {

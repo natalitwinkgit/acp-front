@@ -9,10 +9,11 @@ import { closeAuthRoute } from "@/src/shared/auth-flow";
 import { login, setAccessToken } from "@/src/shared/api";
 import LocaleLink from "@/src/shared/i18n/Link";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
+import TextField from "@/src/shared/ui/TextField/TextField";
 import Button from "@/src/widgets/Button/Button";
-import AuthPromoList from "../AuthPromoList";
 import GoogleAuthButton from "@/src/shared/ui/GoogleAuthButton/GoogleAuthButton";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
+import Notification from "@/src/shared/ui/Notification/Notification";
 
 type LoginFormData = {
   identifier: string;
@@ -28,7 +29,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
   const { t } = useI18n();
   const resolveHref = useLocalizedHref();
 
-  const [showPass, setShowPass] = useState(false);
   const [formData, setFormData] = useState<LoginFormData>({ identifier: "", password: "" });
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -106,16 +106,26 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
           <h1 className={styles.loginTitle}>{t("auth.login.title")}</h1>
 
           <form className={styles.loginBlock} onSubmit={handleSubmit}>
-            {error && <div style={{ color: "red", marginBottom: 10 }}>{error}</div>}
+            {error ? (
+              <Notification
+                variant="error"
+                size="small"
+                message={error}
+                onClose={() => setError("")}
+                closeLabel={t("common.close")}
+                className={styles.loginNotice}
+              />
+            ) : null}
 
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.login.identifierLabel")}</span>
-              <input
-                className={styles.input}
+              <TextField
                 type="text"
                 name="identifier"
                 value={formData.identifier}
                 onChange={handleChange}
+                autoComplete="username"
+                className={styles.loginInput}
                 required
               />
             </label>
@@ -123,33 +133,18 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
             <div className={styles.loginPasswordGroup}>
               <div className={styles.field}>
                 <span className={styles.label}>{t("auth.login.passwordLabel")}</span>
-
-                <div className={styles.inputWithIcon}>
-                  <input
-                    className={styles.inputInner}
-                    type={showPass ? "text" : "password"}
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <button
-                    type="button"
-                    className={styles.iconBtn}
-                    onClick={() => setShowPass((v) => !v)}
-                    aria-label={showPass ? t("common.password.hide") : t("common.password.show")}
-                  >
-                    <Image
-                      className={styles.icon24}
-                      src={showPass ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
-                      alt=""
-                      aria-hidden="true"
-                      width={24}
-                      height={24}
-                    />
-                  </button>
-                </div>
+                <TextField
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  autoComplete="current-password"
+                  className={styles.loginInput}
+                  required
+                  passwordToggle
+                  showPasswordLabel={t("common.password.show")}
+                  hidePasswordLabel={t("common.password.hide")}
+                />
               </div>
 
               <div className={styles.rowBetween}>
@@ -163,15 +158,6 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                   {t("auth.login.forgotPassword")}
                 </LocaleLink>
               </div>
-            </div>
-
-            <div className={styles.socialRow}>
-              <GoogleAuthButton
-                intent="login"
-                disabled={isLoading}
-                onBusyChange={setIsGoogleLoading}
-                onSuccess={handleCloseAuthFlow}
-              />
             </div>
 
             <div className={styles.buttonContainer}>
@@ -191,14 +177,25 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
                 onClick={() => router.replace(resolveHref("/register"))}
               />
             </div>
+
+            <div className={styles.socialRow}>
+              <GoogleAuthButton
+                intent="login"
+                disabled={isLoading}
+                onBusyChange={setIsGoogleLoading}
+                onSuccess={handleCloseAuthFlow}
+              />
+            </div>
           </form>
         </div>
 
-        <AuthPromoList
-          items={benefitItems}
-          listClassName={styles.loginTextBlock}
-          itemClassName={styles.loginTextLine}
-        />
+        <ul className={styles.loginTextBlock}>
+          {benefitItems.map((item) => (
+            <li key={item} className={styles.loginTextLine}>
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

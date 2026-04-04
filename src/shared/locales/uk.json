@@ -318,18 +318,36 @@
     },
     "forgotPassword": {
       "title": "Відновлення пароля",
-      "subtitle": "Введіть електронну пошту або телефон",
-      "phoneLabel": "Введіть номер телефону +380...",
-      "emailLabel": "Введіть email",
-      "newPasswordLabel": "Введіть новий пароль",
-      "confirmPasswordLabel": "Підтвердіть новий пароль",
-      "submitButton": "Продовжити",
-      "sendToEmail": "Надіслати новий пароль на пошту",
-      "sendToPhone": "Надіслати новий пароль на телефон",
-      "unavailableButton": "Тимчасово недоступно",
+      "subtitle": "Введіть email, і ми надішлемо посилання для відновлення пароля.",
+      "emailLabel": "Email",
+      "submitButton": "Надіслати посилання",
+      "submitLoading": "Надсилаємо...",
+      "successMessage": "Перевірте пошту. Якщо акаунт з таким email існує, посилання для відновлення вже надіслано.",
       "loginVia": "Вхід через",
+      "rememberedPassword": "Згадали пароль?",
+      "loginAction": "Увійти",
       "existingAccount": "У мене вже є акаунт",
-      "unavailableMessage": "Відновлення пароля тимчасово недоступне. Бекенд ще не затвердив forgot password flow."
+      "errors": {
+        "generic": "Сталася помилка. Спробуйте ще раз."
+      }
+    },
+    "resetPassword": {
+      "title": "Створіть новий пароль",
+      "subtitle": "Введіть новий пароль для вашого акаунта.",
+      "invalidLinkSubtitle": "Посилання для відновлення недійсне або неповне.",
+      "newPasswordLabel": "Новий пароль",
+      "confirmPasswordLabel": "Підтвердіть новий пароль",
+      "passwordHint": "Пароль має містити щонайменше 8 символів, одну велику літеру та одну цифру.",
+      "submitButton": "Оновити пароль",
+      "submitLoading": "Оновлюємо...",
+      "successMessage": "Пароль успішно відновлено. Тепер увійдіть з новим паролем.",
+      "loginAction": "Увійти",
+      "backToLogin": "Повернутися до входу",
+      "errors": {
+        "passwordMismatch": "Паролі не співпадають",
+        "missingToken": "Посилання для відновлення недійсне, прострочене або неповне.",
+        "generic": "Сталася помилка. Спробуйте ще раз."
+      }
     }
   },
   "profile": {

@@ -95,7 +95,7 @@ export default function GoogleAuthButton({
         if (isActive) {
           setIsReady(true);
         }
-      } catch (err) {
+      } catch {
         if (isActive) {
           setIsReady(false);
         }

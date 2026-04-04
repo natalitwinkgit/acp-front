@@ -8,8 +8,9 @@
   min-height: 100dvh;
   padding: 24px 16px;
   overflow-y: auto;
-  touch-action: none;
+  touch-action: pan-y;
   overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .wrap {
