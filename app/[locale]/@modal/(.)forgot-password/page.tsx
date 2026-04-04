@@ -23,20 +23,12 @@ export default function ForgotPasswordModalRoute() {
     sessionStorage.setItem("scroll:position", scrollY.toString());
 
     document.body.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
-
-    const preventScroll = (event: TouchEvent) => {
-      event.preventDefault();
-    };
-    document.addEventListener("touchmove", preventScroll, { passive: false });
 
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
       const savedScrollY = sessionStorage.getItem("scroll:position");
       document.body.style.overflow = "";
-      document.body.style.touchAction = "";
-      document.removeEventListener("touchmove", preventScroll);
       window.removeEventListener("keydown", onKeyDown);
 
       if (savedScrollY) {

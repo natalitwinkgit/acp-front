@@ -20,6 +20,7 @@ type LocaleSeo = {
   login: StaticPageSeo;
   register: StaticPageSeo;
   forgotPassword: StaticPageSeo;
+  resetPassword: StaticPageSeo;
   profile: StaticPageSeo;
   profileTickets: StaticPageSeo;
   notFound: StaticPageSeo;
@@ -73,6 +74,12 @@ const seoByLocale: Record<Locale, LocaleSeo> = {
       description:
         "Сторінка відновлення доступу до особистого кабінету Автолюкс Черкаси-Плюс.",
       keywords: ["відновлення пароля", "доступ до акаунта", "змінити пароль"],
+    },
+    resetPassword: {
+      title: "Створення нового пароля",
+      description:
+        "Оновіть пароль для особистого кабінету Автолюкс Черкаси-Плюс за посиланням із листа.",
+      keywords: ["новий пароль", "скидання пароля", "відновлення доступу"],
     },
     profile: {
       title: "Профіль користувача",
@@ -135,6 +142,12 @@ const seoByLocale: Record<Locale, LocaleSeo> = {
       description:
         "Restore access to your Autolux Cherkasy-Plus passenger account.",
       keywords: ["password recovery", "account access", "reset password"],
+    },
+    resetPassword: {
+      title: "Create a new password",
+      description:
+        "Update your Autolux Cherkasy-Plus account password using the link from the email.",
+      keywords: ["new password", "reset password", "account recovery"],
     },
     profile: {
       title: "User profile",

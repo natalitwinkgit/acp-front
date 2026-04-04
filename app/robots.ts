@@ -11,6 +11,8 @@ const disallowPaths = [
   "/en/register",
   "/forgot-password",
   "/en/forgot-password",
+  "/reset-password",
+  "/en/reset-password",
   "/profile",
   "/en/profile",
   "/profile/tickets",

@@ -22,15 +22,8 @@ export default function RegisterModalRoute() {
     const scrollY = window.scrollY;
     sessionStorage.setItem("scroll:position", scrollY.toString());
 
-    // Блокуємо скролл без зміни позиції
+    // Блокуємо фон сторінки, але не скрол усередині модалки
     document.body.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
-
-    // Запобігаємо свайпу
-    const preventScroll = (e: TouchEvent) => {
-      e.preventDefault();
-    };
-    document.addEventListener("touchmove", preventScroll, { passive: false });
 
     window.addEventListener("keydown", onKeyDown);
 
@@ -38,8 +31,6 @@ export default function RegisterModalRoute() {
       // Восстановлюємо скролл
       const savedScrollY = sessionStorage.getItem("scroll:position");
       document.body.style.overflow = "";
-      document.body.style.touchAction = "";
-      document.removeEventListener("touchmove", preventScroll);
       window.removeEventListener("keydown", onKeyDown);
       
       // Повертаємо до збереженої позиції після видалення стилів
