@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "../modal.module.css";
@@ -9,12 +9,19 @@ import { closeAuthRoute } from "@/src/shared/auth-flow";
 
 export default function ForgotPasswordModalRoute() {
   const router = useRouter();
+  const [isDismissed, setIsDismissed] = useState(false);
 
   const close = useCallback(() => {
+    setIsDismissed(true);
     closeAuthRoute(router, { preferBack: true });
   }, [router]);
 
   useEffect(() => {
+    if (isDismissed) {
+      document.body.style.overflow = "";
+      return;
+    }
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") close();
     };
@@ -38,12 +45,16 @@ export default function ForgotPasswordModalRoute() {
         });
       }
     };
-  }, [close]);
+  }, [close, isDismissed]);
+
+  if (isDismissed) {
+    return null;
+  }
 
   return (
     <div
       className={styles.overlay}
-      onMouseDown={(event) => {
+      onPointerDown={(event) => {
         if (event.target === event.currentTarget) {
           close();
         }
@@ -51,7 +62,7 @@ export default function ForgotPasswordModalRoute() {
       role="dialog"
       aria-modal="true"
     >
-      <div className={styles.wrap} onMouseDown={(event) => event.stopPropagation()}>
+      <div className={styles.wrap} onPointerDown={(event) => event.stopPropagation()}>
         <ForgotPasswordPageContent onClose={close} />
       </div>
     </div>

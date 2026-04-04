@@ -4,6 +4,7 @@ import { localizeHref } from "@/src/shared/i18n/routing";
 type RouterLike = {
   back: () => void;
   replace: (href: string) => void;
+  refresh?: () => void;
 };
 
 export const AUTH_BACKGROUND_KEY = "auth:background";
@@ -38,13 +39,15 @@ export function closeAuthRoute(
   options: { fallback?: string; preferBack?: boolean } = {},
 ) {
   const { fallback = "/", preferBack = false } = options;
-  const background = consumeAuthBackground();
-
-  if (preferBack && background && isBrowser() && window.history.length > 1) {
-    router.back();
-    return;
-  }
+  const background = getAuthBackground();
+  clearAuthBackground();
 
   const locale = isBrowser() ? getLocaleFromPathnameOrDefault(window.location.pathname) : "uk";
   router.replace(background || localizeHref(fallback, locale));
+
+  if (preferBack && typeof router.refresh === "function") {
+    requestAnimationFrame(() => {
+      router.refresh?.();
+    });
+  }
 }

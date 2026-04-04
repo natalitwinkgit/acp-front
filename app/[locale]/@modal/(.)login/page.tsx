@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
 import LoginPageContent from "@/app/[locale]/(auth)/login/LoginPageContent";
@@ -8,12 +8,19 @@ import { closeAuthRoute } from "@/src/shared/auth-flow";
 
 export default function LoginModalRoute() {
   const router = useRouter();
+  const [isDismissed, setIsDismissed] = useState(false);
 
   const close = useCallback(() => {
+    setIsDismissed(true);
     closeAuthRoute(router, { preferBack: true });
   }, [router]);
 
   useEffect(() => {
+    if (isDismissed) {
+      document.body.style.overflow = "";
+      return;
+    }
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
     };
@@ -41,12 +48,16 @@ export default function LoginModalRoute() {
         });
       }
     };
-  }, [close]);
+  }, [close, isDismissed]);
+
+  if (isDismissed) {
+    return null;
+  }
 
   return (
     <div 
       className={styles.overlay} 
-      onMouseDown={(e) => {
+      onPointerDown={(e) => {
         if (e.target === e.currentTarget) {
           close();
         }
@@ -56,7 +67,7 @@ export default function LoginModalRoute() {
     >
       <div
         className={styles.wrap}
-        onMouseDown={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
       >
         <LoginPageContent onClose={close} />
       </div>

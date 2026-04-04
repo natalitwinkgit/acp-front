@@ -27,13 +27,21 @@ export default function ForgotPasswordPageContent({
   onClose,
 }: ForgotPasswordPageContentProps) {
   const router = useRouter();
-  const { t } = useI18n();
+  const { t, raw } = useI18n();
   const resolveHref = useLocalizedHref();
 
   const [email, setEmail] = useState("");
   const [feedback, setFeedback] = useState<FeedbackState>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+
+  const rememberedPassword = raw("auth.forgotPassword.rememberedPassword");
+  const loginAction =
+    raw("auth.forgotPassword.loginAction") ?? raw("auth.resetPassword.loginAction");
+  const loginButtonText =
+    typeof rememberedPassword === "string" && typeof loginAction === "string"
+      ? `${rememberedPassword} ${loginAction}`
+      : t("auth.forgotPassword.existingAccount");
 
   const handleCloseAuthFlow = () => {
     if (onClose) {
@@ -149,7 +157,7 @@ export default function ForgotPasswordPageContent({
               </div>
 
               <Button
-                text={`${t("auth.forgotPassword.rememberedPassword")} ${t("auth.forgotPassword.loginAction")}`}
+                text={loginButtonText}
                 variant="secondary"
                 type="button"
                 disabled={isBusy}

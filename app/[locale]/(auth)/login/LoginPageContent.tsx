@@ -80,13 +80,13 @@ export default function LoginPageContent({ onClose }: LoginPageContentProps) {
 
   return (
     <div
-      className={styles.shellLogin}
+      className={`${styles.shellLogin} ${styles.bannerGlass}`}
       style={{ backgroundImage: "url('/(auth)/login/login-bus.png')" }}
     >
       <ModalCloseButton
         className={`${styles.close} ${styles.closeLogin}`}
         ariaLabel={t("common.close")}
-        onClose={onClose}
+        onClose={handleCloseAuthFlow}
       />
 
       <div className={styles.loginContent}>

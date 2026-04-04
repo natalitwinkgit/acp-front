@@ -15,13 +15,13 @@ export default function AuthModalLayout({ children }: { children: React.ReactNod
       className={styles.overlay}
       role="dialog"
       aria-modal="true"
-      onMouseDown={(e) => {
+      onPointerDown={(e) => {
         if (e.target === e.currentTarget) close();
       }}
     >
       <div
         className={styles.modalWrap}
-        onMouseDown={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
       >
         {children}
       </div>

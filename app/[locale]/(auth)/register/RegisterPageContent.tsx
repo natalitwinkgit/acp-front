@@ -107,13 +107,13 @@ export default function RegisterPageContent({ onClose }: RegisterPageContentProp
 
   return (
     <div
-      className={styles.shellRegister}
+      className={`${styles.shellRegister} ${styles.bannerGlass}`}
       style={{ backgroundImage: "url('/(auth)/register/register-bus.jpg')" }}
     >
       <ModalCloseButton
         className={`${styles.close} ${styles.closeRegister}`}
         ariaLabel={t("common.close")}
-        onClose={onClose}
+        onClose={handleCloseAuthFlow}
       />
 
       <div className={styles.registerContent}>

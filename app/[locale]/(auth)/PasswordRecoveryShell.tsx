@@ -53,7 +53,7 @@ export default function PasswordRecoveryShell({
 
   return (
     <div
-      className={[styles.shell, shellClassName].filter(Boolean).join(" ")}
+      className={[styles.shell, styles.bannerGlass, shellClassName].filter(Boolean).join(" ")}
       style={{ backgroundImage: "url('/(auth)/forgot-pass/forgot-bus.jpg')" }}
     >
       <ModalCloseButton

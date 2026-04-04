@@ -22,6 +22,12 @@
   --auth-banner-top: -64.66px;
   --auth-banner-left: -60.26px;
   --auth-banner-rotate: -3.92deg;
+  --banner-surface: linear-gradient(180deg, #d9eef1 0%, #bddbdf 100%);
+  --banner-opacity: 0.96;
+  --banner-radius: 0px;
+  --banner-border: none;
+  --banner-shadow: none;
+  --banner-backdrop: none;
   position: relative;
   width: 904px;
   height: 540px;
@@ -42,6 +48,12 @@
   --auth-banner-top: -40.76px;
   --auth-banner-left: -55.27px;
   --auth-banner-rotate: -3.92deg;
+  --banner-surface: linear-gradient(180deg, #d9eef1 0%, #bddbdf 100%);
+  --banner-opacity: 0.96;
+  --banner-radius: 0px;
+  --banner-border: none;
+  --banner-shadow: none;
+  --banner-backdrop: none;
   position: relative;
   width: 904px;
   height: 612px;
@@ -90,13 +102,41 @@
   left: var(--auth-banner-left);
   width: var(--auth-banner-width);
   height: var(--auth-banner-height);
-  border-radius: 0;
-  background: linear-gradient(180deg, #d9eef1 0%, #bddbdf 100%);
-  opacity: 0.96;
+  border-radius: var(--banner-radius);
+  background: var(--banner-surface);
+  opacity: var(--banner-opacity);
+  border: var(--banner-border);
+  box-shadow: var(--banner-shadow);
+  backdrop-filter: var(--banner-backdrop);
   transform: rotate(var(--auth-banner-rotate));
   transform-origin: center;
   z-index: 0;
   pointer-events: none;
+}
+
+.bannerSoft {
+  --banner-surface: linear-gradient(180deg, #eef8fa 0%, #d7ebee 100%);
+  --banner-opacity: 0.92;
+  --banner-radius: 22px;
+  --banner-border: 1px solid rgba(252, 254, 254, 0.44);
+  --banner-shadow: 0 18px 40px rgba(17, 49, 61, 0.12);
+}
+
+.bannerGlass {
+  --banner-surface: linear-gradient(180deg, rgba(239, 248, 250, 0.8) 0%, rgba(201, 228, 231, 0.56) 100%);
+  --banner-opacity: 1;
+  --banner-radius: 22px;
+  --banner-border: 1px solid rgba(252, 254, 254, 0.34);
+  --banner-shadow: 0 18px 40px rgba(17, 49, 61, 0.14);
+  --banner-backdrop: blur(6px);
+}
+
+.bannerBrand {
+  --banner-surface: linear-gradient(90deg, rgba(238, 187, 58, 0.96) 0%, rgba(244, 247, 247, 0.98) 40%, rgba(201, 228, 231, 0.94) 100%);
+  --banner-opacity: 1;
+  --banner-radius: 18px;
+  --banner-border: 1px solid rgba(252, 254, 254, 0.28);
+  --banner-shadow: 0 18px 40px rgba(17, 49, 61, 0.16);
 }
 
 .loginContent {
