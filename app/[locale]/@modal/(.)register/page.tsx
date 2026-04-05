@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
-import RegisterPageContent from "@/app/[locale]/(auth)/register/RegisterPageContent";
-import { closeAuthRoute } from "@/src/shared/auth-flow";
+import RegisterPage from "@/src/pages-layer/auth/register/ui/RegisterPage";
+import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
 
 export default function RegisterModalRoute() {
   const router = useRouter();
@@ -69,7 +69,7 @@ export default function RegisterModalRoute() {
         className={styles.wrap}
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <RegisterPageContent onClose={close} />
+        <RegisterPage onClose={close} />
       </div>
     </div>
   );

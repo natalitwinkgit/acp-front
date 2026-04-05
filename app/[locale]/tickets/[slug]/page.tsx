@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getTripById } from "@/src/shared/api";
+import { getTripById } from "@/src/entities/trip";
+import TicketBookingScreen from "@/src/pages-layer/ticket-booking/ui/TicketBookingPage";
 import { hasLocale, type Locale } from "@/src/shared/i18n/config";
 import {
   getPopularRouteBySlug,
   getLocalizedRouteValue,
   mapTripToPopularRoute,
   type PopularRoute,
-} from "@/src/shared/data/popularRoutes";
+} from "@/src/entities/trip";
 import { createPageMetadata, getSeoCopy, getTicketBookingSeo } from "@/src/shared/seo/metadata";
-import TicketBookingPageContent from "./TicketBookingPageContent";
 
 type PageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -119,7 +119,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   });
 }
 
-export default async function TicketBookingPage({ params, searchParams }: PageProps) {
+export default async function TicketBookingRoutePage({ params, searchParams }: PageProps) {
   const { locale, slug } = await params;
 
   if (!hasLocale(locale)) {
@@ -134,7 +134,7 @@ export default async function TicketBookingPage({ params, searchParams }: PagePr
   }
 
   return (
-    <TicketBookingPageContent
+    <TicketBookingScreen
       route={applySelectionToRoute(route, selection)}
       initialSeats={selection.seats}
     />

@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 
+import { popularRoutes } from "@/src/entities/trip";
 import { locales } from "@/src/shared/i18n/config";
 import { localizeHref } from "@/src/shared/i18n/routing";
-import { popularRoutes } from "@/src/shared/data/popularRoutes";
 import { buildAbsoluteUrl, getLocaleAlternates } from "@/src/shared/seo/metadata";
 
 const staticPages = [

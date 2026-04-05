@@ -1,4 +1,4 @@
-import type { Trip } from "@/src/shared/api";
+import type { Trip } from "@/src/entities/trip";
 
 import type { RouteOption } from "../model/types";
 

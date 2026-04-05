@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import ForgotPasswordPageContent from "./ForgotPasswordPageContent";
+import ForgotPasswordPage from "@/src/pages-layer/auth/forgot-password/ui/ForgotPasswordPage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -27,6 +27,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default function ForgotPasswordPage() {
-  return <ForgotPasswordPageContent />;
+export default function ForgotPasswordRoutePage() {
+  return <ForgotPasswordPage />;
 }

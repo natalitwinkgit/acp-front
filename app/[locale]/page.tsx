@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import HomePageContent from "./home/HomePageContent";
+import HomePage from "@/src/pages-layer/home/ui/HomePage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -27,5 +27,5 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default function Page() {
-  return <HomePageContent />;
+  return <HomePage />;
 }

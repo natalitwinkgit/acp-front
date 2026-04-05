@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import NotFoundPageContent from "../not-found-page/NotFoundPageContent";
+import NotFoundPage from "@/src/pages-layer/not-found/ui/NotFoundPage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -28,5 +28,5 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default function Custom404Page() {
-  return <NotFoundPageContent />;
+  return <NotFoundPage />;
 }

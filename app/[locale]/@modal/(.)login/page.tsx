@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../modal.module.css";
-import LoginPageContent from "@/app/[locale]/(auth)/login/LoginPageContent";
-import { closeAuthRoute } from "@/src/shared/auth-flow";
+import LoginPage from "@/src/pages-layer/auth/login/ui/LoginPage";
+import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
 
 export default function LoginModalRoute() {
   const router = useRouter();
@@ -69,7 +69,7 @@ export default function LoginModalRoute() {
         className={styles.wrap}
         onPointerDown={(e) => e.stopPropagation()}
       >
-        <LoginPageContent onClose={close} />
+        <LoginPage onClose={close} />
       </div>
     </div>
   );

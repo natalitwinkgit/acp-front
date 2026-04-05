@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import TicketsPageContent from "./TicketsPageContent";
+import ProfileTicketsPage from "@/src/pages-layer/profile-tickets/ui/ProfileTicketsPage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -27,6 +27,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default function ProfileTicketsPage() {
-  return <TicketsPageContent />;
+export default function ProfileTicketsRoutePage() {
+  return <ProfileTicketsPage />;
 }

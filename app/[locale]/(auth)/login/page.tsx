@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import LoginPageContent from "./LoginPageContent";
+import LoginPage from "@/src/pages-layer/auth/login/ui/LoginPage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -27,6 +27,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default function LoginPage() {
-  return <LoginPageContent />;
+export default function LoginRoutePage() {
+  return <LoginPage />;
 }

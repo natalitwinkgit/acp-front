@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import CafePageContent from "./CafePageContent";
+import CafePage from "@/src/pages-layer/cafe/ui/CafePage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -26,6 +26,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default function CafePage() {
-  return <CafePageContent />;
+export default function CafeRoutePage() {
+  return <CafePage />;
 }

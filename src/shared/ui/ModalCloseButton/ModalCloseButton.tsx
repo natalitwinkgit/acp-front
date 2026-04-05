@@ -1,9 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
-import { closeAuthRoute } from "@/src/shared/auth-flow";
-
 import styles from "./ModalCloseButton.module.css";
 
 type Props = {
@@ -13,7 +9,6 @@ type Props = {
 };
 
 export default function ModalCloseButton({ className, ariaLabel = "Close", onClose }: Props) {
-  const router = useRouter();
   const buttonClassName = className ? `${styles.button} ${className}` : styles.button;
 
   return (
@@ -24,13 +19,7 @@ export default function ModalCloseButton({ className, ariaLabel = "Close", onClo
       onClick={(event) => {
         event.preventDefault();
         event.stopPropagation();
-
-        if (onClose) {
-          onClose();
-          return;
-        }
-
-        closeAuthRoute(router);
+        onClose?.();
       }}
     >
       <svg

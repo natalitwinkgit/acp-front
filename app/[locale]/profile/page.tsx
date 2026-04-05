@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import ProfilePageContent from "./ProfilePageContent";
+import ProfilePage from "@/src/pages-layer/profile/ui/ProfilePage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -27,6 +27,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default function ProfilePage() {
-  return <ProfilePageContent />;
+export default function ProfileRoutePage() {
+  return <ProfilePage />;
 }

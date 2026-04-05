@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import type { Trip } from "@/src/shared/api";
+import type { Trip } from "@/src/entities/trip";
 
 import styles from "../BookingForm.module.css";
 import { formatTripTime } from "../../lib/bookingForm.utils";

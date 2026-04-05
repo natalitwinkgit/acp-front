@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { hasLocale } from "@/src/shared/i18n/config";
 import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
-import ResetPasswordPageContent from "./ResetPasswordPageContent";
+import ResetPasswordPage from "@/src/pages-layer/auth/reset-password/ui/ResetPasswordPage";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -28,10 +28,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-export default async function ResetPasswordPage({ searchParams }: PageProps) {
+export default async function ResetPasswordRoutePage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
   const rawToken = resolvedSearchParams.token;
   const token = Array.isArray(rawToken) ? rawToken[0] ?? "" : rawToken ?? "";
 
-  return <ResetPasswordPageContent token={token} />;
+  return <ResetPasswordPage token={token} />;
 }

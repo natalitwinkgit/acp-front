@@ -12,7 +12,7 @@ import {
   getPopularRouteHref,
   popularRoutes as fallbackRoutes,
   type PopularRoute,
-} from "@/src/shared/data/popularRoutes";
+} from "@/src/entities/trip";
 
 type Props = {
   routes?: PopularRoute[];

@@ -4,8 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "../modal.module.css";
-import ForgotPasswordPageContent from "@/app/[locale]/(auth)/forgot-password/ForgotPasswordPageContent";
-import { closeAuthRoute } from "@/src/shared/auth-flow";
+import ForgotPasswordPage from "@/src/pages-layer/auth/forgot-password/ui/ForgotPasswordPage";
+import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
 
 export default function ForgotPasswordModalRoute() {
   const router = useRouter();
@@ -63,7 +63,7 @@ export default function ForgotPasswordModalRoute() {
       aria-modal="true"
     >
       <div className={styles.wrap} onPointerDown={(event) => event.stopPropagation()}>
-        <ForgotPasswordPageContent onClose={close} />
+        <ForgotPasswordPage onClose={close} />
       </div>
     </div>
   );

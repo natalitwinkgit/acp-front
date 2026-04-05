@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { getTrips, type Trip } from "@/src/shared/api";
+import { getTrips, type Trip } from "@/src/entities/trip";
 
 import {
   buildRouteOptions,

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import styles from "./auth.module.css";
-import { closeAuthRoute } from "@/src/shared/auth-flow";
+import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
 
 export default function AuthModalLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();

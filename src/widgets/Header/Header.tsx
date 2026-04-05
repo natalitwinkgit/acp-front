@@ -1,14 +1,14 @@
 "use client";
 
-import { hasAccessToken } from "@/src/shared/api";
-import { storeAuthBackground } from "@/src/shared/auth-flow";
+import { hasAccessToken } from "@/src/shared/api/session";
+import { storeAuthBackground } from "@/src/features/auth/model/auth-flow";
+import { LanguageSwitcher } from "@/src/features/change-language";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import { stripLocaleFromPathname } from "@/src/shared/i18n/routing";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { MouseEvent, useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
 
-import LanguageSwitcher from "@/src/widgets/LanguageSwitcher/LanguageSwitcher";
 import styles from "./Header.module.css";
 import HeaderAuthControl from "./HeaderAuthControl";
 

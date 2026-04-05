@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { getTripAvailability } from "@/src/shared/api";
+import { getTripAvailability } from "@/src/entities/trip";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import styles from "./BookingForm.module.css";
 import { EMPTY_TRIPS, type BookingFormProps } from "../model/types";
@@ -14,7 +14,7 @@ import PriceField from "./controls/PriceField";
 import RouteDropdown from "./controls/RouteDropdown";
 import SeatsSelect from "./controls/SeatsSelect";
 import TripTimeSelect from "./controls/TripTimeSelect";
-import Button from "../../Button/Button";
+import Button from "@/src/shared/ui/Button/Button";
 
 export default function BookingForm({ initialTrips = EMPTY_TRIPS }: BookingFormProps) {
   const router = useRouter();
