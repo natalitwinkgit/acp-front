@@ -21,18 +21,64 @@ type AuthSessionContextValue = {
 };
 
 const AuthSessionContext = createContext<AuthSessionContextValue | null>(null);
+const DEV_ROLE_KEY = "dev-role";
+const DEV_AUTH_ENABLED = process.env.NEXT_PUBLIC_ENABLE_DEV_AUTH === "true";
+
+function getDevRole(): UserRole | null {
+  if (!DEV_AUTH_ENABLED) {
+    return null;
+  }
+
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  // DEV ONLY: temporary local role override for UI testing in development.
+  const value = window.localStorage.getItem(DEV_ROLE_KEY);
+
+  if (value === "USER" || value === "ADMIN" || value === "DISPETCHER") {
+    return value;
+  }
+
+  return null;
+}
+
+function createDevProfile(role: UserRole): UserProfile {
+  return {
+    id: 1,
+    email: "dev@example.com",
+    name: role === "ADMIN" ? "Admin Test" : role === "DISPETCHER" ? "Dispatcher Test" : "User Test",
+    phone: null,
+    role,
+    specialCategory: null,
+    documentPhoto: null,
+    createdAt: new Date().toISOString(),
+  };
+}
 
 export function AuthSessionProvider({ children }: { children: React.ReactNode }) {
   const requestIdRef = useRef(0);
-  const [isAuthenticated, setIsAuthenticated] = useState(() => hasAccessToken());
-  const [isLoading, setIsLoading] = useState(() => hasAccessToken());
+  const [isAuthenticated, setIsAuthenticated] = useState(() => hasAccessToken() || getDevRole() != null);
+  const [isLoading, setIsLoading] = useState(() => hasAccessToken() || getDevRole() != null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const refreshSession = useCallback(async () => {
     const requestId = ++requestIdRef.current;
     const authenticated = hasAccessToken();
+    const devRole = getDevRole();
 
-    setIsAuthenticated(authenticated);
+    setIsAuthenticated(authenticated || devRole != null);
+
+    if (devRole != null) {
+      const nextProfile = createDevProfile(devRole);
+
+      if (requestId === requestIdRef.current) {
+        setProfile(nextProfile);
+        setIsLoading(false);
+      }
+
+      return nextProfile;
+    }
 
     if (!authenticated) {
       setProfile(null);

@@ -460,9 +460,41 @@
     "title": "Dispatcher panel",
     "description": "An operational interface for live departures, reservations, and quick passenger communication without the overhead of full admin capabilities.",
     "cardsAria": "Primary dispatcher panel sections",
+    "sidebar": {
+      "navAria": "Dispatcher panel navigation",
+      "roleDispatcher": "Dispatcher",
+      "roleAdmin": "Administrator",
+      "fallbackName": "Svitlana Kirichenko",
+        "logout": "Sign out",
+        "menu": {
+          "dashboard": "Dashboard",
+          "bookings": "Tickets and reservations",
+          "routes": "Routes",
+          "analytics": "Analytics",
+          "notifications": "Notifications",
+          "settings": "Settings"
+        }
+      },
     "actions": {
       "profile": "User account",
       "home": "Go home"
+    },
+    "panels": {
+      "bookings": {
+        "eyebrow": "Dispatcher queue",
+        "title": "Tickets and reservations",
+        "description": "A focused workspace for booking control, manual seat confirmation, and fast reaction to passenger issues."
+      },
+      "statistics": {
+        "eyebrow": "Dispatcher metrics",
+        "title": "Statistics",
+        "description": "A separate analytics block for operational visibility: trip load, boarding dynamics, and areas where dispatch needs to step in quickly."
+      },
+      "settings": {
+        "eyebrow": "Workspace settings",
+        "title": "Settings",
+        "description": "Personal workspace preferences, service notifications, and security rules should live nearby without getting mixed into active reservations."
+      }
     },
     "cards": {
       "board": {
@@ -476,6 +508,34 @@
       "support": {
         "title": "Passenger communication",
         "description": "Calls, confirmations, trip changes, and service notes are best concentrated in the dispatcher interface."
+      }
+    },
+    "statisticsCards": {
+      "departures": {
+        "title": "Departure dynamics",
+        "description": "This section is suitable for punctuality tracking, delay monitoring, and visibility into overloaded time slots."
+      },
+      "load": {
+        "title": "Trip load",
+        "description": "Occupancy indicators help highlight overloaded directions and periods where manual dispatch control is needed."
+      },
+      "quality": {
+        "title": "Processing quality",
+        "description": "This is the right place for response speed, conflict-case frequency, and resolved dispatcher workflows."
+      }
+    },
+    "settingsCards": {
+      "profile": {
+        "title": "Dispatcher profile",
+        "description": "Core contact details, personal markers, and role-specific parameters should live in a controlled settings block."
+      },
+      "notifications": {
+        "title": "Service notifications",
+        "description": "Alerts for trip changes, new bookings, and critical incidents should be configurable in one place."
+      },
+      "security": {
+        "title": "Access security",
+        "description": "Password, active sessions, and sign-in control belong in a separate area so they do not interfere with active operations."
       }
     }
   }
