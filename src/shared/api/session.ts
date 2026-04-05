@@ -1,5 +1,6 @@
 const ACCESS_TOKEN_KEY = "access_token";
 const LEGACY_TOKEN_KEY = "token";
+const AUTH_CHANGE_EVENT = "auth-change";
 
 function isBrowser() {
   return typeof window !== "undefined";
@@ -7,7 +8,30 @@ function isBrowser() {
 
 function notifyAuthChange() {
   if (!isBrowser()) return;
+  window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
   window.dispatchEvent(new Event("focus"));
+}
+
+export function subscribeToAuthChange(onChange: () => void) {
+  if (!isBrowser()) return () => {};
+
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === ACCESS_TOKEN_KEY || event.key === LEGACY_TOKEN_KEY || event.key === null) {
+      onChange();
+    }
+  };
+
+  window.addEventListener(AUTH_CHANGE_EVENT, onChange);
+  window.addEventListener("storage", onStorage);
+  window.addEventListener("focus", onChange);
+  window.addEventListener("pageshow", onChange);
+
+  return () => {
+    window.removeEventListener(AUTH_CHANGE_EVENT, onChange);
+    window.removeEventListener("storage", onStorage);
+    window.removeEventListener("focus", onChange);
+    window.removeEventListener("pageshow", onChange);
+  };
 }
 
 export function getAccessToken() {

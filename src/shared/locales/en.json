@@ -256,6 +256,19 @@
       "hide": "Hide password"
     }
   },
+  "accessControl": {
+    "loadingTitle": "Preparing workspace",
+    "loadingDescription": "Checking your session and access level before opening the required interface.",
+    "loginRequiredTitle": "Sign-in required",
+    "loginRequiredDescription": "Sign in to your account to continue working with the restricted interface.",
+    "forbiddenTitle": "Access level is not sufficient",
+    "forbiddenDescription": "This area is not available for your role. Return to the workspace that is allowed for your account.",
+    "actions": {
+      "login": "Sign in",
+      "workspace": "My workspace",
+      "home": "Go home"
+    }
+  },
   "bookingHero": {
     "imageAlt": "Bus"
   },
@@ -415,6 +428,54 @@
         "passwordSame": "The new password cannot match the current password.",
         "updateProfile": "Failed to update profile details.",
         "changePassword": "Failed to change password."
+      }
+    }
+  },
+  "adminArea": {
+    "eyebrow": "ADMIN WORKSPACE",
+    "title": "Admin panel",
+    "description": "A separate area for managing trips, team members, and operational processes. It gives you a clean place to build role-based tools without mixing them into the customer profile.",
+    "cardsAria": "Primary admin panel sections",
+    "actions": {
+      "profile": "User account",
+      "home": "Go home"
+    },
+    "cards": {
+      "routes": {
+        "title": "Trip management",
+        "description": "Routes, schedules, departure states, and seat availability are better maintained inside a dedicated admin flow."
+      },
+      "team": {
+        "title": "Users and roles",
+        "description": "This is the right place for role assignment, access policies, account verification, and internal permissions."
+      },
+      "operations": {
+        "title": "Operational control",
+        "description": "Finance, service notifications, incidents, and system-level actions should be grouped into one admin workspace."
+      }
+    }
+  },
+  "dispatcherArea": {
+    "eyebrow": "DISPATCHER WORKSPACE",
+    "title": "Dispatcher panel",
+    "description": "An operational interface for live departures, reservations, and quick passenger communication without the overhead of full admin capabilities.",
+    "cardsAria": "Primary dispatcher panel sections",
+    "actions": {
+      "profile": "User account",
+      "home": "Go home"
+    },
+    "cards": {
+      "board": {
+        "title": "Trips board",
+        "description": "This area is a natural fit for near-term departures, trip statuses, delays, and boarding scenarios in real time."
+      },
+      "reservations": {
+        "title": "Reservations and seats",
+        "description": "A dedicated block for manual booking handling, seat availability checks, and fast conflict resolution."
+      },
+      "support": {
+        "title": "Passenger communication",
+        "description": "Calls, confirmations, trip changes, and service notes are best concentrated in the dispatcher interface."
       }
     }
   }

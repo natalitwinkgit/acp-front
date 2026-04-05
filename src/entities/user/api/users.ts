@@ -1,10 +1,15 @@
 import { apiFetch } from "@/src/shared/api/http";
 
+export const USER_ROLES = ["USER", "ADMIN", "DISPETCHER"] as const;
+
+export type UserRole = (typeof USER_ROLES)[number];
+
 export type UserProfile = {
   id: number;
   email: string;
   name: string | null;
   phone: string | null;
+  role?: UserRole | null;
   specialCategory: string | null;
   documentPhoto: string | null;
   createdAt: string;

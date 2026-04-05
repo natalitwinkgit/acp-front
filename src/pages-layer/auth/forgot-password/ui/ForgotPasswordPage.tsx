@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
-import { forgotPassword } from "@/src/features/auth";
+import { forgotPassword, usePostAuthNavigation } from "@/src/features/auth";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import GoogleAuthButton from "@/src/features/auth/google/ui/GoogleAuthButton";
 import Button from "@/src/shared/ui/Button/Button";
@@ -53,6 +53,7 @@ export default function ForgotPasswordPage({
   };
 
   const isBusy = isLoading || isGoogleLoading;
+  const handlePostAuthSuccess = usePostAuthNavigation(handleCloseAuthFlow);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -152,7 +153,9 @@ export default function ForgotPasswordPage({
                   intent="login"
                   disabled={isLoading}
                   onBusyChange={setIsGoogleLoading}
-                  onSuccess={handleCloseAuthFlow}
+                  onSuccess={() => {
+                    void handlePostAuthSuccess();
+                  }}
                 />
               </div>
 

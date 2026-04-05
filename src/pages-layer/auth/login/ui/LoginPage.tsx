@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import styles from "@/src/pages-layer/auth/ui/auth-page.module.css";
 import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
-import { login } from "@/src/features/auth";
+import { login, usePostAuthNavigation } from "@/src/features/auth";
 import LocaleLink from "@/src/shared/i18n/Link";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import { setAccessToken } from "@/src/shared/api/session";
@@ -51,6 +51,8 @@ export default function LoginPage({ onClose }: LoginPageProps) {
     if (error) setError("");
   };
 
+  const handlePostAuthSuccess = usePostAuthNavigation(handleCloseAuthFlow);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -64,7 +66,7 @@ export default function LoginPage({ onClose }: LoginPageProps) {
       }
 
       setAccessToken(data.access_token);
-      handleCloseAuthFlow();
+      await handlePostAuthSuccess();
     } catch (err) {
       setError(err instanceof Error ? err.message : t("auth.login.errors.generic"));
     } finally {
@@ -184,7 +186,9 @@ export default function LoginPage({ onClose }: LoginPageProps) {
                 intent="login"
                 disabled={isLoading}
                 onBusyChange={setIsGoogleLoading}
-                onSuccess={handleCloseAuthFlow}
+                onSuccess={() => {
+                  void handlePostAuthSuccess();
+                }}
               />
             </div>
           </form>

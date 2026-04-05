@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import styles from "@/src/pages-layer/auth/ui/auth-page.module.css";
 import { closeAuthRoute } from "@/src/features/auth/model/auth-flow";
-import { register } from "@/src/features/auth";
+import { register, usePostAuthNavigation } from "@/src/features/auth";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import Button from "@/src/shared/ui/Button/Button";
 import TextField from "@/src/shared/ui/TextField/TextField";
@@ -56,6 +56,8 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (error) setError("");
   };
+
+  const handlePostAuthSuccess = usePostAuthNavigation(handleCloseAuthFlow);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,7 +233,9 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                     intent="register"
                     disabled={isLoading}
                     onBusyChange={setIsGoogleLoading}
-                    onSuccess={handleCloseAuthFlow}
+                    onSuccess={() => {
+                      void handlePostAuthSuccess();
+                    }}
                   />
                 </div>
 

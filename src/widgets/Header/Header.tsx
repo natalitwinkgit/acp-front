@@ -1,13 +1,14 @@
 "use client";
 
-import { hasAccessToken } from "@/src/shared/api/session";
+import { getRoleLandingPath } from "@/src/features/access-control";
 import { storeAuthBackground } from "@/src/features/auth/model/auth-flow";
+import { useAuthSession } from "@/src/features/auth";
 import { LanguageSwitcher } from "@/src/features/change-language";
 import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 import { stripLocaleFromPathname } from "@/src/shared/i18n/routing";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
-import { MouseEvent, useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
+import { MouseEvent, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import styles from "./Header.module.css";
 import HeaderAuthControl from "./HeaderAuthControl";
@@ -28,41 +29,18 @@ const phones = [
 
 const HEADER_COLLAPSE_BREAKPOINT = 1024;
 
-function getAuthStatusSnapshot() {
-  if (typeof window === "undefined") return false;
-  return hasAccessToken();
-}
-
-function subscribeToAuthStatus(onChange: () => void) {
-  if (typeof window === "undefined") return () => {};
-
-  const onStorage = (event: StorageEvent) => {
-    if (event.key === "token" || event.key === "access_token" || event.key === null) {
-      onChange();
-    }
-  };
-
-  window.addEventListener("storage", onStorage);
-  window.addEventListener("focus", onChange);
-  window.addEventListener("pageshow", onChange);
-
-  return () => {
-    window.removeEventListener("storage", onStorage);
-    window.removeEventListener("focus", onChange);
-    window.removeEventListener("pageshow", onChange);
-  };
-}
-
 export default function Header() {
   const { t } = useI18n();
   const resolveHref = useLocalizedHref();
   const router = useRouter();
   const pathname = usePathname();
+  const { isAuthenticated, role } = useAuthSession();
   const pathnameWithoutLocale = stripLocaleFromPathname(pathname || "/");
+  const workspaceHref = getRoleLandingPath(role);
 
-  const isAuthorized = useSyncExternalStore(subscribeToAuthStatus, getAuthStatusSnapshot, () => false);
+  const isAuthorized = isAuthenticated;
   const isAvatarActive =
-    pathnameWithoutLocale === "/profile" || pathnameWithoutLocale.startsWith("/profile/");
+    pathnameWithoutLocale === workspaceHref || pathnameWithoutLocale.startsWith(`${workspaceHref}/`);
 
   const [activeMenuHref, setActiveMenuHref] = useState("#home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -140,7 +118,7 @@ export default function Header() {
 
   const handleAvatarClick = () => {
     setIsPhoneMenuOpen(false);
-    router.push(resolveHref("/profile"));
+    router.push(resolveHref(workspaceHref));
   };
 
   const handleScroll = (e: MouseEvent<HTMLAnchorElement>, href: string) => {

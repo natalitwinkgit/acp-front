@@ -6,5 +6,6 @@ export {
   clearAccessToken,
   getAccessToken,
   hasAccessToken,
+  subscribeToAuthChange,
   setAccessToken,
 } from "./session";
