@@ -1,70 +1,84 @@
-# Frontend Structure
+# Архітектура Feature-Sliced Design (FSD)
 
-## Layers
+У проекті `acp-front` використовується методологія **Feature-Sliced Design (FSD)** для організації бізнес-логіки та UI-компонентів. Оскільки Next.js жорстко резервує папку `app/` для маршрутизації (App Router), вся структура FSD розміщена в директорії `src/`.
 
-The repo now follows a Feature-Sliced-oriented structure for product code in `src`.
-Because Next.js reserves `src/pages` for the Pages Router, the FSD page layer lives in `src/pages-layer`:
+Ця методологія дозволяє зробити код модульним, передбачуваним і незалежним від конкретного фреймворку маршрутизації.
 
-- `app`
-  - Next.js App Router entrypoints only.
-  - Route files, layouts, metadata, error boundaries, API route handlers.
-- `src/pages-layer`
-  - Page-level UI composition for concrete screens.
-  - Example: auth pages in `src/pages-layer/auth/*`.
-- `src/widgets`
-  - Large reusable page blocks composed from shared UI and features.
-  - Example: header, footer, booking form, auth recovery shell.
-- `src/features`
-  - User scenarios and business interactions.
-  - Example: auth route-closing flow, Google auth trigger, language switching.
-- `src/entities`
-  - Reserved for domain entities when the project gets richer domain slices.
-- `src/shared`
-  - Reusable infrastructure and primitives.
-  - API client, i18n, SEO, base UI, helpers.
+## Основні шари (Layers)
 
-## Current Auth Mapping
+Структура `src/` поділена на наступні шари (від найвищого рівня абстракції до найнижчого):
 
-- `app/[locale]/(auth)/*/page.tsx`
-  - Thin route wrappers only.
-- `app/[locale]/@modal/*`
-  - Thin intercepted modal wrappers only.
-- `src/pages-layer/auth/login/ui/LoginPage.tsx`
-- `src/pages-layer/auth/register/ui/RegisterPage.tsx`
-- `src/pages-layer/auth/forgot-password/ui/ForgotPasswordPage.tsx`
-- `src/pages-layer/auth/reset-password/ui/ResetPasswordPage.tsx`
-- `src/widgets/password-recovery-shell/ui/PasswordRecoveryShell.tsx`
-- `src/widgets/auth-promo-list/ui/AuthPromoList.tsx`
-- `src/features/auth/model/auth-flow.ts`
-- `src/features/auth/google/ui/GoogleAuthButton.tsx`
-- `src/features/change-language/ui/LanguageSwitcher.tsx`
+### 1. `app` (Не є частиною FSD, належить Next.js)
+- **Призначення:** Тільки точки входу Next.js App Router.
+- **Вміст:** Файли маршрутів (`page.tsx`), макети (`layout.tsx`), метадані, глобальні стилі, конфігурація i18n маршрутизатора, API-роути.
+- **Правило:** Жодної бізнес-логіки. Компоненти тут лише імпортують сторінки з `pages-layer` і передають їм параметри з URL.
 
-## Current App Mapping
+### 2. `src/pages-layer`
+- *Примітка: Через те, що Next.js раніше використовував `src/pages`, ми використовуємо `pages-layer`, щоб уникнути конфліктів.*
+- **Призначення:** Композиція UI на рівні цілої сторінки.
+- **Вміст:** Збірка сторінки з віджетів, фіч та сутностей.
+- **Приклад:** `src/pages-layer/auth/login/ui/LoginPage.tsx` об'єднує форму авторизації та візуальні елементи сторінки.
 
-- `src/pages-layer/home/ui/HomePage.tsx`
-- `src/pages-layer/cafe/ui/CafePage.tsx`
-- `src/pages-layer/profile/ui/ProfilePage.tsx`
-- `src/pages-layer/profile-tickets/ui/ProfileTicketsPage.tsx`
-- `src/pages-layer/ticket-booking/ui/TicketBookingPage.tsx`
-- `src/pages-layer/not-found/ui/NotFoundPage.tsx`
-- `src/widgets/profile-tabs-bar/ui/ProfileTabsBar.tsx`
-- `src/widgets/PopularRoutes/PopularRoutes.tsx`
-- `src/widgets/BookingForm/*`
-- `src/entities/trip/*`
-- `src/entities/user/*`
-- `src/shared/ui/Button/Button.jsx`
+### 3. `src/widgets`
+- **Призначення:** Великі, самостійні блоки інтерфейсу, які можна перевикористовувати на різних сторінках.
+- **Вміст:** Складаються з UI-компонентів, фіч та сутностей.
+- **Приклад:** `Header`, `Footer`, `BookingForm`, `PopularRoutes`. Віджет `BookingForm` об'єднує в собі поля вводу, логіку валідації та запит на пошук квитків.
 
-## Placement Rules
+### 4. `src/features`
+- **Призначення:** Користувацькі сценарії та бізнес-взаємодії, які несуть бізнес-цінність.
+- **Вміст:** Логіка, яка виконує конкретну дію.
+- **Приклад:** `auth` (логіка авторизації, `GoogleAuthButton`), `change-language` (перемикач мови `LanguageSwitcher`).
 
-- Put route orchestration in `app`, not business UI.
-- Put screen composition in `src/pages-layer`.
-- Put reusable screen sections in `src/widgets`.
-- Put business-specific interactions in `src/features`.
-- Put domain data and domain API in `src/entities`.
-- Keep `src/shared` free from feature-specific knowledge.
-- Keep `src/shared/api` generic: only transport/session-level code belongs there.
+### 5. `src/entities`
+- **Призначення:** Бізнес-сутності предметної області (Domain entities).
+- **Вміст:** Моделі даних, API-запити до конкретних сутностей, базові UI-компоненти (наприклад, картка квитка без логіки кнопки "Купити").
+- **Приклад:** `trip` (API для отримання рейсів, моделі популярних маршрутів), `user` (API для роботи з профілем).
 
-## Important Constraint
+### 6. `src/shared`
+- **Призначення:** Перевикористовуваний інфраструктурний код, базові UI-елементи, утиліти, які не прив'язані до бізнес-логіки.
+- **Вміст:** Кнопки, інпути, конфігурація API (axios/fetch), i18n, SEO-утиліти.
+- **Приклад:** `src/shared/ui/Button`, `src/shared/api/http.ts`, `src/shared/locales`.
 
-`shared` must not depend on `features`, `widgets`, or `pages`.
-If a shared component needs business behavior, pass it through props instead of importing feature logic directly.
+---
+
+## Суворі правила залежностей (Dependency Rules)
+
+Найголовніше правило FSD: **Модуль може імпортувати лише модулі з нижчих шарів.**
+
+✅ **Дозволено:**
+- `app` імпортує з `pages-layer`, `widgets`, `features`, `entities`, `shared`.
+- `pages-layer` імпортує з `widgets`, `features`, `entities`, `shared`.
+- `widgets` імпортує з `features`, `entities`, `shared`.
+- `features` імпортує з `entities`, `shared`.
+- `entities` імпортує з `shared`.
+- `shared` імпортує тільки інші модулі всередині `shared`.
+
+❌ **ЗАБОРОНЕНО:**
+- `shared` **НЕ МОЖЕ** імпортувати нічого з `entities`, `features`, `widgets`, `pages-layer`. Якщо базовому компоненту (напр. кнопці) потрібна бізнес-логіка, вона передається через `props`.
+- `entities` **НЕ МОЖЕ** імпортувати з `features` або `widgets`.
+- Жоден шар не може імпортувати безпосередньо з `app/`.
+
+---
+
+## Структура всередині слайсу
+
+Кожна сутність, фіча чи віджет (який ми називаємо "слайсом" - Slice) має стандартизовану внутрішню структуру:
+
+```text
+src/features/auth/
+├── ui/             # Візуальні компоненти (GoogleAuthButton.tsx)
+├── model/          # Бізнес-логіка, стан, типи (session.tsx, auth-flow.ts)
+├── api/            # (опціонально) Запити до сервера, специфічні для фічі
+└── index.ts        # Public API (експортує лише те, що дозволено використовувати іншим шарам)
+```
+
+## Public API (`index.ts`)
+
+Кожен модуль (папка всередині шару) повинен мати файл `index.ts` у своєму корені. Цей файл є єдиною точкою входу (Public API) для інших модулів.
+
+**Приклад:**
+Якщо віджету потрібна фіча авторизації, він імпортує її так:
+`import { GoogleAuthButton } from '@/features/auth'`
+
+Імпорт в обхід Public API **категорично заборонений**:
+❌ `import { GoogleAuthButton } from '@/features/auth/ui/GoogleAuthButton'` (Порушення інкапсуляції).
