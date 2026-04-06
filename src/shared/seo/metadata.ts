@@ -17,6 +17,7 @@ type LocaleSeo = {
   defaultKeywords: string[];
   home: StaticPageSeo;
   cafe: StaticPageSeo;
+  publicOffer: StaticPageSeo;
   login: StaticPageSeo;
   register: StaticPageSeo;
   forgotPassword: StaticPageSeo;
@@ -56,6 +57,12 @@ const seoByLocale: Record<Locale, LocaleSeo> = {
       description:
         "Кафе Автолюкс Черкаси-Плюс: комфортна зона очікування для пасажирів перед відправленням рейсу.",
       keywords: ["кафе автостанції", "зона очікування", "кава перед рейсом"],
+    },
+    publicOffer: {
+      title: "Договір публічної оферти",
+      description:
+        "Умови бронювання, оформлення та придбання квитків, правила користування сервісом і порядок взаємодії з Автолюкс Черкаси-Плюс.",
+      keywords: ["публічна оферта", "умови бронювання", "правила перевезення"],
     },
     login: {
       title: "Вхід до особистого кабінету",
@@ -124,6 +131,12 @@ const seoByLocale: Record<Locale, LocaleSeo> = {
       description:
         "Autolux Cherkasy-Plus cafe: a comfortable waiting area for passengers before departure.",
       keywords: ["bus station cafe", "waiting area", "coffee before departure"],
+    },
+    publicOffer: {
+      title: "Public Offer Agreement",
+      description:
+        "Terms for booking, issuing, and purchasing tickets, service rules, and customer interaction conditions at Autolux Cherkasy-Plus.",
+      keywords: ["public offer", "booking terms", "transportation rules"],
     },
     login: {
       title: "Sign in to your account",

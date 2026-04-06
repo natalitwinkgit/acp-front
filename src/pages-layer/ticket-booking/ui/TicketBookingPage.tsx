@@ -267,7 +267,7 @@ export default function TicketBookingPage({
 
               <p className={styles.termsText}>
                 {t("ticketBooking.payment.termsPrefix")}{" "}
-                <LocaleLink href="/404" className={styles.termsLink}>
+                <LocaleLink href="/public-offer" className={styles.termsLink}>
                   {t("ticketBooking.payment.termsLink")}
                 </LocaleLink>
               </p>

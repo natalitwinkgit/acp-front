@@ -1,20 +1,31 @@
-"use client";
+import type { Metadata } from "next";
 
-import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import PublicOfferPage from "@/src/pages-layer/public-offer/ui/PublicOfferPage";
+import { hasLocale } from "@/src/shared/i18n/config";
+import { createPageMetadata, getSeoCopy } from "@/src/shared/seo/metadata";
 
-export default function PublicOfferPage() {
-  const { t } = useI18n();
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
 
-  return (
-    <main style={{ width: "100%", padding: "40px 24px", boxSizing: "border-box" }}>
-      <section style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: 24 }}>
-        <h1 style={{ margin: 0, fontSize: 32, fontWeight: 700, color: "#11313D" }}>
-          {t("publicOffer.title")}
-        </h1>
-        <p style={{ margin: 0, fontSize: 16, lineHeight: "1.75", color: "#11313D" }}>
-          {t("publicOffer.description")}
-        </p>
-      </section>
-    </main>
-  );
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!hasLocale(locale)) {
+    return {};
+  }
+
+  const seo = getSeoCopy(locale);
+
+  return createPageMetadata({
+    locale,
+    pathname: "/public-offer",
+    title: seo.publicOffer.title,
+    description: seo.publicOffer.description,
+    keywords: seo.publicOffer.keywords,
+  });
+}
+
+export default function PublicOfferRoutePage() {
+  return <PublicOfferPage />;
 }

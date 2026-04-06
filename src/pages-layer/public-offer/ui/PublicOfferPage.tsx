@@ -1,0 +1,53 @@
+"use client";
+
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import BreadcrumbChips from "@/src/shared/ui/BreadcrumbChips/BreadcrumbChips";
+import { publicOfferContent } from "../model/public-offer-content";
+import styles from "./public-offer-page.module.css";
+
+export default function PublicOfferPage() {
+  const { locale, t } = useI18n();
+  const content = publicOfferContent[locale];
+
+  return (
+    <section className={styles.page}>
+      <div className={styles.breadcrumbsBlock}>
+        <BreadcrumbChips
+          ariaLabel={content.breadcrumbsAria}
+          items={[
+            { label: t("menu.home"), href: "/home" },
+            { label: t("publicOffer.title"), current: true },
+          ]}
+        />
+      </div>
+
+      <div className={styles.content}>
+        <h1 className={styles.title}>{content.title}</h1>
+
+        <div className={styles.intro}>
+          {content.introduction.map((paragraph) => (
+            <p key={paragraph} className={styles.paragraph}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        {content.sections.map((section) => (
+          <section key={section.id} className={styles.section} aria-labelledby={section.id}>
+            <h2 id={section.id} className={styles.sectionTitle}>
+              {section.title}
+            </h2>
+
+            <div className={styles.sectionText}>
+              {section.paragraphs.map((paragraph) => (
+                <p key={`${section.id}-${paragraph}`} className={styles.paragraph}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </section>
+  );
+}
