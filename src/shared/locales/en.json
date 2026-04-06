@@ -247,7 +247,12 @@
     "facebook": "Facebook",
     "mapTitle": "Map: Mytnytska St, 7, Cherkasy",
     "copy": "© 2026 Autolux Cherkasy-Plus. All rights reserved.",
+    "publicOffer": "PUBLIC OFFER AGREEMENT",
     "scrollTop": "Back to top"
+  },
+  "publicOffer": {
+    "title": "Public Offer Agreement",
+    "description": "This section contains the terms of the public offer agreement for Autolux Cherkasy-Plus. Please review the conditions carefully before using the site."
   },
   "common": {
     "close": "Close",
@@ -375,6 +380,12 @@
         "title": "You do not have any tickets yet. Would you like to find a route?",
         "action": "Choose a route"
       }
+    },
+    "archive": {
+      "description": "Archived tickets and completed trips are stored here for quick review.",
+      "backToTickets": "Back to tickets",
+      "pay": "Pay ticket",
+      "cancel": "Cancel reservation"
     },
     "logoutAria": "Sign out from personal account",
     "description": "This is a minimal profile page. Settings, tickets, and your trip history will appear here later.",

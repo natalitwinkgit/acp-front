@@ -2,14 +2,16 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./Footer.module.css";
-import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import { useI18n, useLocalizedHref } from "@/src/shared/i18n/I18nProvider";
 
 const MAP_QUERY = "вулиця Митницька, 7, Черкаси, Черкаська область, 18000";
 
 export default function Footer() {
   const { t } = useI18n();
+  const localizeHref = useLocalizedHref();
 
   const src = `https://www.google.com/maps?q=${encodeURIComponent(
     MAP_QUERY
@@ -27,105 +29,122 @@ export default function Footer() {
     >
       <div className={styles.container}>
         <div className={styles.contacts}>
-          {/* Work time */}
-          <div className={`${styles.contactItem} ${styles.timeItem}`}>
-            <div className={styles.contactIconCol}>
-              <Image
-                className={styles.contactIcon}
-                src="/icons/Footer/clock.svg"
-                alt=""
-                aria-hidden="true"
-                width={24}
-                height={24}
-              />
+          {/* Column 1: Time & Address */}
+          <div className={styles.contactColumn}>
+            <div className={styles.contactItem}>
+              <div className={styles.iconWrapper}>
+                <Image
+                  src="/icons/Footer/clock.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className={styles.textColumn}>
+                <div className={styles.contactText}>{t("footer.workTime")}</div>
+              </div>
             </div>
-            <div className={styles.contactTextCol}>
-              <div className={styles.contactText}>{t("footer.workTime")}</div>
-            </div>
-          </div>
 
-          {/* Address */}
-          <div className={`${styles.contactItem} ${styles.addressItem}`}>
-            <div className={styles.contactIconCol}>
-              <Image
-                className={styles.contactIcon}
-                src="/icons/Footer/map-point.svg"
-                alt=""
-                aria-hidden="true"
-                width={24}
-                height={24}
-              />
-            </div>
-            <div className={styles.contactTextCol}>
-              <div className={styles.contactText}>{t("footer.addressLine1")}</div>
-              <div className={styles.contactTextMuted}>
-                {t("footer.addressLine2")}
+            <div className={styles.contactItem}>
+              <div className={styles.iconWrapper}>
+                <Image
+                  src="/icons/Footer/map-point.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className={styles.textColumn}>
+                <div className={styles.contactText}>{t("footer.addressLine1")}</div>
+                <div className={styles.contactTextMuted}>
+                  {t("footer.addressLine2")}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Phones */}
-          <div className={`${styles.contactItem} ${styles.phoneItem}`}>
-            <div className={styles.contactIconCol}>
-              <Image
-                className={styles.contactIcon}
-                src="/icons/Footer/phone.svg"
-                alt=""
-                aria-hidden="true"
-                width={24}
-                height={24}
-              />
-            </div>
-            <div className={styles.contactTextCol}>
-              <a className={styles.contactLink} href="tel:+380974802428">
-                +38097 480 24 28
-              </a>
-              <a className={styles.contactLink} href="tel:+380939660940">
-                +38093 966 09 40
-              </a>
-              <a className={styles.contactLink} href="tel:+380990782021">
-                +38099 078 20 21
-              </a>
+          {/* Column 2: Phones */}
+          <div className={styles.contactColumn}>
+            <div className={styles.contactItem}>
+              <div className={styles.iconWrapper}>
+                <Image
+                  src="/icons/Footer/phone.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className={styles.textColumn}>
+                <a className={styles.contactLink} href="tel:+380974802428">
+                  +38097 480 24 28
+                </a>
+                <a className={styles.contactLink} href="tel:+380939660940">
+                  +38093 966 09 40
+                </a>
+                <a className={styles.contactLink} href="tel:+380990782021">
+                  +38099 078 20 21
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Social */}
-          <div className={`${styles.socialItem}`}>
-            <div className={`${styles.contactIconCol}`}>
-              <a
-                className={`${styles.contactLink} ${styles.socialLink}`}
-                href="https://www.instagram.com/autoluxplus_cherkassy?igsh=MW1zd2M4MXdhcGN5"
-                target="_blank"
-                rel="noreferrer"
-              >
+          {/* Column 3: Public Offer */}
+          <div className={styles.contactColumn}>
+            <div className={styles.contactItem}>
+              <div className={styles.iconWrapper}>
                 <Image
-                  className={`${styles.contactIcon} ${styles.socialIcon}`}
+                  src="/icons/Footer/lets-icons_order-light.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={24}
+                />
+              </div>
+              <div className={styles.textColumn}>
+                <Link href={localizeHref("/public-offer")} className={styles.offerText}>
+                  {t("footer.publicOffer")}
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 4: Socials */}
+          <div className={styles.contactColumn}>
+            <div className={styles.contactItem}>
+              <div className={styles.iconWrapper}>
+                <Image
                   src="/icons/Footer/insta.svg"
                   alt=""
                   aria-hidden="true"
                   width={24}
                   height={24}
                 />
-                {t("footer.instagram")}
-              </a>
+              </div>
+              <div className={styles.textColumn}>
+                <a className={styles.offerText} href="https://instagram.com" target="_blank" rel="noreferrer">
+                  Instagram
+                </a>
+              </div>
             </div>
-            <div className={`${styles.contactTextCol}`}>
-              <a
-                className={`${styles.contactLink} ${styles.socialLink}`}
-                href="https://www.facebook.com/profile.php?id=61584960235643"
-                target="_blank"
-                rel="noreferrer"
-              >
+
+            <div className={styles.contactItem}>
+              <div className={styles.iconWrapper}>
                 <Image
-                  className={`${styles.contactIcon} ${styles.socialIcon}`}
                   src="/icons/Footer/fs.svg"
                   alt=""
                   aria-hidden="true"
                   width={24}
                   height={24}
                 />
-                {t("footer.facebook")}
-              </a>
+              </div>
+              <div className={styles.textColumn}>
+                <a className={styles.offerText} href="https://facebook.com" target="_blank" rel="noreferrer">
+                  Facebook
+                </a>
+              </div>
             </div>
           </div>
         </div>

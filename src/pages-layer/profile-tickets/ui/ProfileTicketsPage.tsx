@@ -29,7 +29,7 @@ export default function ProfileTicketsPage() {
           showExitButton
           items={[
             { label: t("profile.tabs.tickets"), active: true },
-            { label: t("profile.tabs.archive") },
+            { label: t("profile.tabs.archive"), href: "/profile/archive" },
             { label: t("profile.tabs.profile"), href: "/profile" },
           ]}
         />

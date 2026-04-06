@@ -58,8 +58,9 @@ function createDevProfile(role: UserRole): UserProfile {
 
 export function AuthSessionProvider({ children }: { children: React.ReactNode }) {
   const requestIdRef = useRef(0);
-  const [isAuthenticated, setIsAuthenticated] = useState(() => hasAccessToken() || getDevRole() != null);
-  const [isLoading, setIsLoading] = useState(() => hasAccessToken() || getDevRole() != null);
+  // Keep the first server and client render identical. Real auth state is resolved after mount.
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const refreshSession = useCallback(async () => {

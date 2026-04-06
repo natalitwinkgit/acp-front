@@ -6,8 +6,6 @@ import { hasLocale, locales } from "@/src/shared/i18n/config";
 import { getDictionary } from "@/src/shared/i18n/getDictionary";
 import { createSiteMetadata, getOrganizationStructuredData } from "@/src/shared/seo/metadata";
 import { AuthSessionProvider } from "@/src/features/auth";
-import Footer from "@/src/widgets/Footer/Footer";
-import Header from "@/src/widgets/Header/Header";
 import { I18nProvider } from "@/src/shared/i18n/I18nProvider";
 
 type LayoutProps = {
@@ -25,9 +23,9 @@ export async function generateMetadata({
   return createSiteMetadata(safeLocale);
 }
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
+// export function generateStaticParams() {
+//   return locales.map((locale) => ({ locale }));
+// }
 
 export default async function RootLayout({
   children,
@@ -69,16 +67,8 @@ export default async function RootLayout({
       <body suppressHydrationWarning>
         <I18nProvider locale={locale} messages={dictionary}>
           <AuthSessionProvider>
-            <div className="pageContainer">
-              <Header />
-
-              <main className="pageMain">
-                {children}
-                {modal}
-              </main>
-
-              <Footer />
-            </div>
+            {children}
+            {modal}
           </AuthSessionProvider>
         </I18nProvider>
       </body>

@@ -1,16 +1,18 @@
 .footer {
   width: 100%;
-  min-height: 657px;
-  padding: 16px 104px;
+  padding: 16px 260px;
   box-sizing: border-box;
   background: var(--color-brand, #226078);
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 657px;
 }
 
 .container {
-  width: min(1232px, 100%);
+  width: 1400px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -19,76 +21,50 @@
 
 .contacts {
   width: 100%;
-  min-height: 117px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   border-bottom: 1px solid var(--color-surface-accent, #c9e4e7);
+  padding: 0 0 8px 0;
+  min-height: 125px;
 }
 
-.contactItem {
-  width: auto;
-  min-width: 0;
-  min-height: 117px;
-  padding: 20px;
-  box-sizing: border-box;
+.contactColumn {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: flex-start;
+  padding: 20px;
   gap: 24px;
   background: transparent;
 }
 
-.timeItem {
-  order: 0;
+.contactItem {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
 }
 
-.addressItem {
-  order: 1;
-}
-
-.phoneItem {
-  order: 2;
-}
-
-.socialItem {
-  order: 3;
-}
-
-.contactIconCol {
-  /* width: 24px; */
+.iconWrapper {
   min-width: 24px;
   display: flex;
-  /* flex-direction: column; */
-  /* justify-content: center; */
+  justify-content: center;
   align-items: flex-start;
-  gap: 10px;
 }
 
-.contactIcon {
-  width: 24px;
-  height: 24px;
-  display: block;
-  flex: none;
-}
-
-.contactTextCol {
+.textColumn {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-}
-
-.socialTextCol {
-  width: auto;
-  min-height: 47px;
+  gap: 10px;
 }
 
 .contactText,
 .contactLink,
-.contactTextMuted {
+.contactTextMuted,
+.offerText {
   font-family: var(--font-roboto), sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -97,6 +73,18 @@
   color: var(--color-white, #fcfefe);
   text-decoration: none;
   overflow-wrap: anywhere;
+  margin: 0;
+  padding: 0;
+}
+
+.offerText {
+  text-decoration: underline;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.offerText:hover {
+  opacity: 0.84;
 }
 
 .contactTextMuted {
@@ -105,6 +93,7 @@
 
 .contactLink {
   transition: opacity 0.2s ease;
+  display: block;
 }
 
 .contactLink:hover {
@@ -118,29 +107,9 @@
   border-radius: 6px;
 }
 
-.footer .socialItem{
-  padding: 20px;
-}
-
-
-.socialIcon {
-  flex: none;
-}
-.socialLink {
-  display: flex;
-  gap: 24px;
-  text-decoration: underline;
-  margin-bottom: 9px;
-}
-
-.socialLinkSecondary {
-  font-size: 14px;
-  text-decoration: underline;
-}
-
 .mapWrap {
   width: 100%;
-  height: 450px;
+  height: 442px;
   overflow: hidden;
   border-radius: 12px;
 }
@@ -155,7 +124,7 @@
 .footerBottom {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -189,7 +158,7 @@
   }
 
   .container {
-    width: min(1400px, 100%);
+    width: 1400px;
   }
 }
 
@@ -200,34 +169,17 @@
   }
 
   .container {
-    width: min(960px, 100%);
+    width: 100%;
     min-height: 614px;
   }
 
   .contacts {
-    min-height: 234px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0;
   }
 
-  .contactItem {
+  .contactColumn {
     width: 100%;
-  }
-
-  .timeItem {
-    order: 0;
-  }
-
-  .phoneItem {
-    order: 1;
-  }
-
-  .addressItem {
-    order: 2;
-  }
-
-  .socialItem {
-    order: 3;
   }
 
   .mapWrap {
@@ -243,7 +195,7 @@
   }
 
   .container {
-    width: min(344px, 100%);
+    width: 100%;
     height: auto;
     min-height: 582px;
     gap: 24px;
@@ -251,24 +203,17 @@
 
   .contacts {
     width: 100%;
-    min-height: 361px;
     grid-template-columns: 1fr;
     gap: 0;
     padding: 0;
   }
 
-  .contactItem {
+  .contactColumn {
     width: 100%;
     justify-content: flex-start;
     align-items: flex-start;
     padding: 20px;
     gap: 24px;
-    min-height: 0;
-  }
-
-  .socialTextCol {
-    width: auto;
-    min-height: 47px;
   }
 
   .mapWrap {
