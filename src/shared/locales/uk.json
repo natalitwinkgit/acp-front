@@ -475,16 +475,16 @@
       "roleDispatcher": "Диспетчер",
       "roleAdmin": "Адміністратор",
       "fallbackName": "Кіріченко Світлана",
-        "logout": "Вихід",
-        "menu": {
-          "dashboard": "Dashboard",
-          "bookings": "Квитки та бронювання",
-          "routes": "Рейси",
-          "analytics": "Аналітика",
-          "notifications": "Сповіщення",
-          "settings": "Налаштування"
-        }
-      },
+      "logout": "Вихід",
+      "menu": {
+        "tickets": "Квитки",
+        "routes": "Логістика маршрутів",
+        "data": "Керування даними",
+        "analytics": "Аналітика та звіти",
+        "statistics": "Статистика",
+        "settings": "Налаштування"
+      }
+    },
     "actions": {
       "profile": "Кабінет користувача",
       "home": "На головну"

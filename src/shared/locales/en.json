@@ -476,16 +476,16 @@
       "roleDispatcher": "Dispatcher",
       "roleAdmin": "Administrator",
       "fallbackName": "Svitlana Kirichenko",
-        "logout": "Sign out",
-        "menu": {
-          "dashboard": "Dashboard",
-          "bookings": "Tickets and reservations",
-          "routes": "Routes",
-          "analytics": "Analytics",
-          "notifications": "Notifications",
-          "settings": "Settings"
-        }
-      },
+      "logout": "Sign out",
+      "menu": {
+        "tickets": "Tickets",
+        "routes": "Route logistics",
+        "data": "Data management",
+        "analytics": "Analytics and reporting",
+        "statistics": "Statistics",
+        "settings": "Settings"
+      }
+    },
     "actions": {
       "profile": "User account",
       "home": "Go home"
