@@ -1,3 +1,5 @@
+import { DEV_PROFILE_KEY, DEV_ROLE_KEY } from "./dev-auth";
+
 const ACCESS_TOKEN_KEY = "access_token";
 const LEGACY_TOKEN_KEY = "token";
 const AUTH_CHANGE_EVENT = "auth-change";
@@ -16,7 +18,13 @@ export function subscribeToAuthChange(onChange: () => void) {
   if (!isBrowser()) return () => {};
 
   const onStorage = (event: StorageEvent) => {
-    if (event.key === ACCESS_TOKEN_KEY || event.key === LEGACY_TOKEN_KEY || event.key === null) {
+    if (
+      event.key === ACCESS_TOKEN_KEY
+      || event.key === LEGACY_TOKEN_KEY
+      || event.key === DEV_ROLE_KEY
+      || event.key === DEV_PROFILE_KEY
+      || event.key === null
+    ) {
       onChange();
     }
   };

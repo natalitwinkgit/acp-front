@@ -1,4 +1,5 @@
 import { apiFetch } from "@/src/shared/api/http";
+import { changeDevPassword, getDevProfile, updateDevProfile } from "@/src/shared/api/dev-auth";
 
 export const USER_ROLES = ["USER", "ADMIN", "DISPETCHER"] as const;
 
@@ -37,11 +38,31 @@ type MessageResponse = {
   message: string;
 };
 
+function toResponseUser(profile: UserProfile): Omit<UserProfile, "createdAt"> {
+  const { createdAt: _createdAt, ...user } = profile;
+  return user;
+}
+
 export function getProfile() {
+  const devProfile = getDevProfile() as UserProfile | null;
+
+  if (devProfile) {
+    return Promise.resolve(devProfile);
+  }
+
   return apiFetch<UserProfile>("/users/profile");
 }
 
 export function updateProfile(payload: UpdateProfilePayload) {
+  const devProfile = updateDevProfile(payload) as UserProfile | null;
+
+  if (devProfile) {
+    return Promise.resolve<UpdateProfileResponse>({
+      message: "Profile updated locally.",
+      user: toResponseUser(devProfile),
+    });
+  }
+
   return apiFetch<UpdateProfileResponse>("/users/profile", {
     method: "PATCH",
     body: JSON.stringify(payload),
@@ -49,6 +70,14 @@ export function updateProfile(payload: UpdateProfilePayload) {
 }
 
 export function changePassword(payload: ChangePasswordPayload) {
+  const devMessage = changeDevPassword(payload.newPassword);
+
+  if (devMessage) {
+    return Promise.resolve<MessageResponse>({
+      message: devMessage,
+    });
+  }
+
   return apiFetch<MessageResponse>("/users/change-password", {
     method: "PATCH",
     body: JSON.stringify(payload),

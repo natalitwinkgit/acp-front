@@ -1,6 +1,7 @@
 "use client";
 
 import { getProfile, type UserProfile, type UserRole } from "@/src/entities/user";
+import { getDevProfile, getDevRole, installDevAuthHelpers } from "@/src/shared/api/dev-auth";
 import { hasAccessToken, subscribeToAuthChange } from "@/src/shared/api/session";
 import {
   createContext,
@@ -21,40 +22,6 @@ type AuthSessionContextValue = {
 };
 
 const AuthSessionContext = createContext<AuthSessionContextValue | null>(null);
-const DEV_ROLE_KEY = "dev-role";
-const DEV_AUTH_ENABLED = process.env.NEXT_PUBLIC_ENABLE_DEV_AUTH === "true";
-
-function getDevRole(): UserRole | null {
-  if (!DEV_AUTH_ENABLED) {
-    return null;
-  }
-
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  // DEV ONLY: temporary local role override for UI testing in development.
-  const value = window.localStorage.getItem(DEV_ROLE_KEY);
-
-  if (value === "USER" || value === "ADMIN" || value === "DISPETCHER") {
-    return value;
-  }
-
-  return null;
-}
-
-function createDevProfile(role: UserRole): UserProfile {
-  return {
-    id: 1,
-    email: "dev@example.com",
-    name: role === "ADMIN" ? "Admin Test" : role === "DISPETCHER" ? "Dispatcher Test" : "User Test",
-    phone: null,
-    role,
-    specialCategory: null,
-    documentPhoto: null,
-    createdAt: new Date().toISOString(),
-  };
-}
 
 export function AuthSessionProvider({ children }: { children: React.ReactNode }) {
   const requestIdRef = useRef(0);
@@ -66,14 +33,14 @@ export function AuthSessionProvider({ children }: { children: React.ReactNode })
   const refreshSession = useCallback(async () => {
     const requestId = ++requestIdRef.current;
     const authenticated = hasAccessToken();
-    const devRole = getDevRole();
+    const devRole = getDevRole() as UserRole | null;
 
     setIsAuthenticated(authenticated || devRole != null);
 
     if (devRole != null) {
-      const nextProfile = createDevProfile(devRole);
+      const nextProfile = getDevProfile() as UserProfile | null;
 
-      if (requestId === requestIdRef.current) {
+      if (requestId === requestIdRef.current && nextProfile) {
         setProfile(nextProfile);
         setIsLoading(false);
       }
@@ -108,6 +75,10 @@ export function AuthSessionProvider({ children }: { children: React.ReactNode })
         setIsLoading(false);
       }
     }
+  }, []);
+
+  useEffect(() => {
+    return installDevAuthHelpers();
   }, []);
 
   useEffect(() => {

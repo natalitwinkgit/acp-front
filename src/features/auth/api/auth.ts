@@ -1,4 +1,5 @@
 import { apiFetch } from "@/src/shared/api/http";
+import { clearDevAuth, getDevRole } from "@/src/shared/api/dev-auth";
 import { clearAccessToken } from "@/src/shared/api/session";
 
 export type RegisterPayload = {
@@ -68,11 +69,21 @@ export function resetPassword(payload: ResetPasswordPayload) {
 }
 
 export async function logout() {
+  if (getDevRole()) {
+    clearAccessToken();
+    clearDevAuth();
+
+    return {
+      message: "Logged out locally.",
+    };
+  }
+
   try {
     return await apiFetch<MessageResponse>("/auth/logout", {
       method: "PATCH",
     });
   } finally {
     clearAccessToken();
+    clearDevAuth();
   }
 }
