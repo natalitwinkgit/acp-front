@@ -486,6 +486,40 @@
         "settings": "Settings"
       }
     },
+    "routes": {
+      "subtitle": "Route logistics management.",
+      "addRoute": "Add route",
+      "calendarAria": "Open calendar",
+      "stats": {
+        "total": "Total trips",
+        "boarding": "Boarding",
+        "departed": "Departed",
+        "cancelled": "Cancelled"
+      },
+      "table": {
+        "title": "Routes",
+        "sort": "Sort",
+        "columns": {
+          "number": "#",
+          "direction": "Direction",
+          "time": "Time",
+          "bus": "Bus",
+          "seats": "Seats",
+          "status": "Status"
+        },
+        "statuses": {
+          "DEPARTED": "Departed",
+          "BOARDING": "Boarding",
+          "SCHEDULED": "Scheduled",
+          "CANCELLED": "Cancelled",
+          "edit": "Edit"
+        },
+        "pagination": {
+          "prev": "Previous page",
+          "next": "Next page"
+        }
+      }
+    },
     "actions": {
       "profile": "User account",
       "home": "Go home"
