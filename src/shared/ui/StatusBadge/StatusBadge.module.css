@@ -1,0 +1,54 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Variants */
+
+.success {
+  background: #52c41a;
+  color: #fff;
+}
+.success .dot {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.warning {
+  background: #ffc72c;
+  color: #11313d;
+}
+.warning .dot {
+  background: #c98300;
+}
+
+.danger {
+  background: #ff4d4f;
+  color: #fff;
+}
+.danger .dot {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.neutral {
+  background: #edf1f3;
+  color: #4a6270;
+}
+.neutral .dot {
+  background: #a0b4bc;
+}

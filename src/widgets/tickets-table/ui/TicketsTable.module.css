@@ -1,0 +1,149 @@
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(17, 49, 61, 0.09);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+}
+
+/* Header */
+
+.th {
+  padding: 14px 16px;
+  background: #253b4a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.th:first-child {
+  border-radius: 12px 0 0 0;
+}
+
+.th:last-child {
+  border-radius: 0 12px 0 0;
+}
+
+/* Rows */
+
+.tr {
+  background: #fff;
+  border-bottom: 1px solid #e2ecef;
+  transition: background 0.12s;
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.tr:last-child .td:first-child {
+  border-radius: 0 0 0 12px;
+}
+
+.tr:last-child .td:last-child {
+  border-radius: 0 0 12px 0;
+}
+
+.tr:hover {
+  background: #f5f9fa;
+}
+
+.td {
+  padding: 14px 16px;
+  color: #11313d;
+  vertical-align: middle;
+}
+
+/* Passenger cell */
+
+.passengerName {
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.passengerPhone {
+  font-size: 13px;
+  color: #5a7a88;
+}
+
+/* Route cell */
+
+.route {
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.routeStop {
+  font-size: 13px;
+  color: #5a7a88;
+}
+
+/* Date / time cell */
+
+.time {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.date {
+  font-size: 13px;
+  color: #5a7a88;
+}
+
+/* Tickets cell */
+
+.ticketCount {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.price {
+  font-size: 13px;
+  color: #5a7a88;
+}
+
+/* Row number */
+
+.rowNumber {
+  font-weight: 500;
+  color: #7a9baa;
+}
+
+/* Details button */
+
+.detailsButton {
+  padding: 7px 18px;
+  border: 1.5px solid #d0dde3;
+  border-radius: 8px;
+  background: #fff;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #11313d;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.detailsButton:hover {
+  border-color: #226078;
+  background: #f0f6f8;
+}
+
+/* Empty state */
+
+.empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: #7a9baa;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+}

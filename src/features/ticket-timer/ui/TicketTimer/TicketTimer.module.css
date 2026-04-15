@@ -1,0 +1,31 @@
+.timer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 62px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-family: Roboto Mono, Roboto, monospace, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+  line-height: 1;
+}
+
+.normal {
+  background: #52c41a;
+}
+
+.urgent {
+  background: #ff4d4f;
+}
+
+.none {
+  display: inline-block;
+  color: #a0b4bc;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+  min-width: 62px;
+}

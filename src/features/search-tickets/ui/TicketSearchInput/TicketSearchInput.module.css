@@ -1,0 +1,59 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.icon {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  color: #7a9baa;
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding: 0 40px 0 44px;
+  border: 1.5px solid #d0dde3;
+  border-radius: 10px;
+  background: #fff;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  color: #11313d;
+  outline: none;
+  transition: border-color 0.18s;
+}
+
+.input::placeholder {
+  color: #98b4be;
+}
+
+.input:focus {
+  border-color: #226078;
+}
+
+.clear {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: #98b4be;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+  transition: color 0.15s;
+}
+
+.clear:hover {
+  color: #11313d;
+}
