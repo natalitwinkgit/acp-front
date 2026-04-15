@@ -1,0 +1,169 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.title {
+  font-family:
+    Roboto,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.44;
+  color: #226078;
+}
+
+.subtitle {
+  font-family:
+    Roboto,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.44;
+  letter-spacing: 0;
+  color: #226078;
+}
+
+.buttonWrapper {
+  flex-shrink: 0;
+  width: fit-content;
+}
+
+.buttonWrapper > * {
+  width: auto !important;
+  min-width: 0;
+
+  width: 200;
+  height: 40;
+
+  gap: 10px;
+  border-width: 2px;
+  padding-top: 10px;
+  padding-right: 24px;
+  padding-bottom: 10px;
+  padding-left: 24px;
+  /* margin-inline: 10px; */
+}
+
+.dateContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.dateText {
+  font-family:
+    Roboto,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.44;
+  color: #226078;
+  white-space: nowrap;
+}
+
+.calendarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.calendarIcon {
+  width: 22px;
+  height: 22px;
+  background-color: #226078;
+  -webkit-mask-image: url(/icons/calendar.svg);
+  mask-image: url(/icons/calendar.svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* stats */
+.statsRow {
+  display: flex;
+  gap: 12px;
+  width: 1015;
+  height: 56;
+  border-radius: 12px;
+  opacity: 1;
+  padding: 8px;
+  background-color: #f4f7f7;
+  box-shadow: 0px 4px 4px 0px #7b98a3b2;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: default;
+}
+
+.badgeIcon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.badgeText {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+/* варіанти кольорів */
+.dark {
+  background: #226078cc;
+
+  color: #ffffff;
+}
+.yellow {
+  background: #eebb3acc;
+  color: #11313d;
+}
+.green {
+  background: #169f2ccc;
+  color: #ffffff;
+}
+.red {
+  background: #d51216cc;
+  color: #ffffff;
+}

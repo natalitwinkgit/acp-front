@@ -1,0 +1,265 @@
+.main {
+  border-radius: 12px;
+  padding: 8px 16px 12px 8px;
+  box-shadow: 0px 4px 4px 0px #7b98a3b2;
+  background-color: #f4f7f7;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 8px;
+}
+
+.title {
+  font-family:
+    Roboto,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #226078;
+  line-height: 1.32;
+}
+
+.sortBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fcfefe;
+  border: none;
+  cursor: pointer;
+  font-family:
+    Roboto,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+  line-height: 144%;
+
+  color: #226078;
+  width: 172;
+  height: 36;
+  min-width: 145px;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.sortChevron {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #226078;
+  border-bottom: 2px solid #226078;
+  transform: rotate(45deg) translateY(-3px);
+  flex-shrink: 0;
+}
+
+/* table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fcfefe;
+  border-radius: 8px;
+}
+
+.theadRow th {
+  padding: 8px 12px;
+  text-align: left;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #226078;
+  border-bottom: solid #226078;
+  width: 991;
+  height: 39px;
+  opacity: 1;
+  gap: 12px;
+  border-bottom-width: 0.5px;
+}
+
+.thNum {
+  width: 40px;
+}
+
+.thStatus {
+  width: 140px;
+}
+
+.thAction {
+  width: 40px;
+}
+
+.th {
+  white-space: nowrap;
+}
+
+/* rows */
+.row {
+  transition: background-color 150ms ease;
+}
+
+.row:hover {
+  background-color: #f4f7f7;
+}
+
+.row td {
+  padding: 10px 12px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  color: #11313d;
+  border-bottom: 0.5px solid var(--LightSlateGray, #7b98a3);
+}
+
+.tdNum {
+  color: #226078;
+  font-weight: 500;
+}
+
+.tdStatus {
+  white-space: nowrap;
+}
+
+.tdAction {
+  position: relative;
+}
+
+/* status chips */
+.statusChip {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 16px;
+  line-height: 144%;
+  letter-spacing: 0%;
+}
+
+.statusDeparted {
+  /* --chip-bg: #169f2c; */
+  color: var(--Dark, #11313d);
+  background: #169f2c4d;
+}
+.statusBoarding {
+  --chip-bg: #eebb3a66;
+  --chip-color: #11313d;
+}
+.statusScheduled {
+  --chip-bg: #22607866;
+  --chip-color: var(--Dark, #11313d);
+}
+.statusCancelled {
+  --chip-bg: #d512156a;
+  --chip-color: #11313d;
+}
+
+/* dropdown */
+.dropdownWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chevronBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chevron {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #226078;
+  border-bottom: 2px solid #226078;
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform 150ms ease;
+}
+
+.chevronUp {
+  transform: rotate(-135deg) translateY(-3px);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 10;
+  width: 172px;
+  background: #fff;
+  border: 1px solid #226078;
+  border-radius: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0px 0;
+  overflow: hidden;
+}
+
+.dropdownItem {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 0.5px solid #7b98a3;
+  cursor: pointer;
+  text-align: left;
+  padding: 8px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #11313d;
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background-color: #e6f0f3;
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 4px 8px;
+}
+
+.pageBtn {
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid #c9e4e7;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  color: #226078;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pageBtnActive {
+  background: #226078;
+  color: #fff;
+  border-color: #226078;
+}

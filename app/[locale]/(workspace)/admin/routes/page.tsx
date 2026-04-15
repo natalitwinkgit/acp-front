@@ -1,5 +1,5 @@
-import RoleWorkspaceSectionPage from "@/src/pages-layer/role-workspace/ui/RoleWorkspaceSectionPage";
+import AdminRoutesPage from "@/src/pages-layer/admin/ui/routes/AdminRoutesPage";
 
 export default function AdminRoutesRoutePage() {
-  return <RoleWorkspaceSectionPage sectionKey="routes" />;
+  return <AdminRoutesPage />;
 }
