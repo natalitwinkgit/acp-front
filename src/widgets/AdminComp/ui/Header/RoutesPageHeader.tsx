@@ -27,7 +27,7 @@ export default function RoutesPageHeader() {
         />
       </div>
 
-      <div className={styles.dateContainer}>
+      {/* <div className={styles.dateContainer}>
         <span className={styles.dateText}>7 березня 2026</span>
         <button
           className={styles.calendarButton}
@@ -36,7 +36,7 @@ export default function RoutesPageHeader() {
         >
           <span className={styles.calendarIcon} aria-hidden="true" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

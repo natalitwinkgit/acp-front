@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import type { RoutesStatBadgeProps, RoutesStatsProps } from "../model/types";
+import type { RoutesStatBadgeProps, RoutesStatsProps } from "../../model/types";
 import styles from "./admin-routes-page.module.css";
 
 function RoutesStatBadge({
