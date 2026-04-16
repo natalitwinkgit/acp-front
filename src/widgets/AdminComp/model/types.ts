@@ -1,4 +1,6 @@
-export type TripStatus = "DEPARTED" | "BOARDING" | "SCHEDULED" | "CANCELLED";
+export type { TripStatus } from "@/src/entities/trip";
+
+import type { TripStatus } from "@/src/entities/trip";
 
 export type RouteRow = {
   id: string;
