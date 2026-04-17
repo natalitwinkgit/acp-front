@@ -6,6 +6,7 @@ import { getStatusClass, MOCK_ROWS } from "../lib/routesTable.utils";
 import { useRoutesTable } from "../model/useRoutesTable";
 import type { RouteRow } from "../model/types";
 import { StatusDropdown } from "@/src/features/change-trip-status";
+import { AdminCard } from "@/src/shared";
 import styles from "./admin-routes-table.module.css";
 
 type RoutesTableProps = {
@@ -29,7 +30,7 @@ export default function RoutesTable({
   } = useRoutesTable({ rows });
 
   return (
-    <div className={styles.main}>
+    <AdminCard>
       <div className={styles.header}>
         <span className={styles.title}>
           {t("dispatcherArea.routes.table.title")}
@@ -134,6 +135,6 @@ export default function RoutesTable({
           {">"}
         </button>
       </div>
-    </div>
+    </AdminCard>
   );
 }
