@@ -13,6 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import styles from "./FinanceCard.module.css";
+import { formatCurrency, formatYAxis } from "@/src/shared/lib/formatters";
 
 type FinanceEntry = {
   key: "reserved" | "purchased" | "noShows";
@@ -54,14 +55,6 @@ function getNiceAxisConfig(maxValue: number, tickCount = 6) {
   return { domain: [0, maxTick] as [number, number], ticks };
 }
 
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat("uk-UA").format(value) + "\u00A0₴";
-}
-
-function formatYAxis(value: number): string {
-  if (value === 0) return "0";
-  return `${value / 1000}\u00A0000`;
-}
 
 export default function FinanceCard() {
   const { t } = useI18n();
