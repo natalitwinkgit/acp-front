@@ -24,9 +24,27 @@
 }
 
 .tableWrapper {
-  composes: scrollbar from '../../../features/scrollable-table/ui/scrollable-table.module.css';
+  overflow-y: auto;
+  padding-right: 6px;
   max-height: 300px;
   border-radius: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: var(--LightSlateGray, #7b98a3);
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #226078;
 }
 
 .table {
