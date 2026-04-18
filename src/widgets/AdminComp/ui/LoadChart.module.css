@@ -1,0 +1,29 @@
+.card {
+  padding: 12px 16px 16px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #226078;
+}
+
+.subtitle {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #226078;
+  opacity: 0.75;
+}
+
+.chartWrapper {
+  flex: 1;
+  min-height: 0;
+}
