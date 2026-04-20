@@ -328,8 +328,15 @@
       "submitLoading": "Завантаження...",
       "existingAccount": "У мене вже є акаунт",
       "errors": {
+        "emailRequired": "Введіть email",
+        "emailInvalid": "Вкажіть коректний email.",
+        "emailExists": "Користувач з таким email уже зареєстрований.",
         "passwordMismatch": "Паролі не співпадають",
+        "passwordRequired": "Введіть пароль",
+        "passwordFormat": "Пароль має містити щонайменше 8 символів, одну велику літеру та одну цифру.",
+        "confirmPasswordRequired": "Підтвердіть пароль",
         "phoneRequired": "Введіть номер телефону",
+        "phoneExists": "Користувач з таким номером телефону уже зареєстрований.",
         "phoneFormat": "Телефон має бути у форматі +380XXXXXXXXX",
         "generic": "Сталася помилка. Спробуйте ще раз."
       }

@@ -329,8 +329,15 @@
       "submitLoading": "Loading...",
       "existingAccount": "I already have an account",
       "errors": {
+        "emailRequired": "Enter an email address",
+        "emailInvalid": "Enter a valid email address.",
+        "emailExists": "An account with this email already exists.",
         "passwordMismatch": "Passwords do not match",
+        "passwordRequired": "Enter a password",
+        "passwordFormat": "Password must contain at least 8 characters, one uppercase letter, and one digit.",
+        "confirmPasswordRequired": "Confirm your password",
         "phoneRequired": "Enter a phone number",
+        "phoneExists": "An account with this phone number already exists.",
         "phoneFormat": "Phone must be in the format +380XXXXXXXXX",
         "generic": "Something went wrong. Please try again."
       }

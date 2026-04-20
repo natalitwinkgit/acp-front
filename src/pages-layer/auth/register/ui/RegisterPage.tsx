@@ -14,13 +14,14 @@ import AuthPromoList from "@/src/widgets/auth-promo-list/ui/AuthPromoList";
 import GoogleAuthButton from "@/src/features/auth/google/ui/GoogleAuthButton";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
 import Notification from "@/src/shared/ui/Notification/Notification";
-
-type RegisterFormData = {
-  phone: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import {
+  mapRegisterServerError,
+  type RegisterField,
+  type RegisterFieldErrors,
+  type RegisterFormData,
+  validateRegisterField,
+  validateRegisterForm,
+} from "../model/validation";
 
 type RegisterPageProps = {
   onClose?: () => void;
@@ -37,7 +38,8 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     password: "",
     confirmPassword: "",
   });
-
+  const [fieldErrors, setFieldErrors] = useState<RegisterFieldErrors>({});
+  const [touchedFields, setTouchedFields] = useState<Partial<Record<RegisterField, boolean>>>({});
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -53,8 +55,86 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (error) setError("");
+
+    if (!["phone", "email", "password", "confirmPassword"].includes(name)) {
+      return;
+    }
+
+    const field = name as RegisterField;
+
+    setFormData((prev) => {
+      const nextFormData = { ...prev, [field]: value };
+
+      setFieldErrors((currentErrors) => {
+        const nextErrors = { ...currentErrors };
+
+        if (touchedFields[field]) {
+          const nextFieldError = validateRegisterField(field, nextFormData, t);
+
+          if (nextFieldError) {
+            nextErrors[field] = nextFieldError;
+          } else {
+            delete nextErrors[field];
+          }
+        } else if (currentErrors[field]) {
+          delete nextErrors[field];
+        }
+
+        if (field === "password" || field === "confirmPassword") {
+          const confirmPasswordError = touchedFields.confirmPassword
+            ? validateRegisterField("confirmPassword", nextFormData, t)
+            : "";
+
+          if (confirmPasswordError) {
+            nextErrors.confirmPassword = confirmPasswordError;
+          } else {
+            delete nextErrors.confirmPassword;
+          }
+        }
+
+        return nextErrors;
+      });
+
+      return nextFormData;
+    });
+
+    if (error) {
+      setError("");
+    }
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const field = event.target.name as RegisterField;
+
+    if (!["phone", "email", "password", "confirmPassword"].includes(field)) {
+      return;
+    }
+
+    setTouchedFields((prev) => ({ ...prev, [field]: true }));
+    setFieldErrors((prev) => {
+      const nextErrors = { ...prev };
+      const nextError = validateRegisterField(field, formData, t);
+
+      if (nextError) {
+        nextErrors[field] = nextError;
+      } else {
+        delete nextErrors[field];
+      }
+
+      if (field === "password" || field === "confirmPassword") {
+        const confirmPasswordError = validateRegisterField("confirmPassword", formData, t);
+
+        if (formData.confirmPassword.trim() || touchedFields.confirmPassword || field === "confirmPassword") {
+          if (confirmPasswordError) {
+            nextErrors.confirmPassword = confirmPasswordError;
+          } else {
+            delete nextErrors.confirmPassword;
+          }
+        }
+      }
+
+      return nextErrors;
+    });
   };
 
   const handlePostAuthSuccess = usePostAuthNavigation(handleCloseAuthFlow);
@@ -66,19 +146,21 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
 
     const email = formData.email.trim();
     const phone = formData.phone.trim();
+    const normalizedFormData: RegisterFormData = {
+      ...formData,
+      email,
+      phone,
+    };
+    const validationErrors = validateRegisterForm(normalizedFormData, t);
 
-    if (formData.password !== formData.confirmPassword) {
-      setError(t("auth.register.errors.passwordMismatch"));
-      return;
-    }
-
-    if (!phone) {
-      setError(t("auth.register.errors.phoneRequired"));
-      return;
-    }
-
-    if (!/^\+380\d{9}$/.test(phone)) {
-      setError(t("auth.register.errors.phoneFormat"));
+    if (Object.keys(validationErrors).length > 0) {
+      setTouchedFields({
+        phone: true,
+        email: true,
+        password: true,
+        confirmPassword: true,
+      });
+      setFieldErrors(validationErrors);
       return;
     }
 
@@ -94,7 +176,17 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
 
       router.replace(resolveHref("/login"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : t("auth.register.errors.generic"));
+      const message = err instanceof Error ? err.message : "";
+      const { fieldErrors: nextFieldErrors, formError } = mapRegisterServerError(message, t);
+
+      setFieldErrors(nextFieldErrors);
+      setTouchedFields({
+        phone: true,
+        email: true,
+        password: true,
+        confirmPassword: true,
+      });
+      setError(formError);
     } finally {
       setIsLoading(false);
     }
@@ -151,7 +243,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             />
           ) : null}
 
-          <form className={styles.registerBlock} onSubmit={handleSubmit}>
+          <form className={styles.registerBlock} onSubmit={handleSubmit} noValidate>
 
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.phoneLabel")}</span>
@@ -165,7 +257,16 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 inputMode="tel"
                 pattern="^\+380\d{9}$"
                 required
+                onBlur={handleBlur}
+                aria-invalid={fieldErrors.phone ? "true" : "false"}
+                aria-describedby={fieldErrors.phone ? "register-phone-error" : undefined}
+                className={fieldErrors.phone ? styles.fieldControlInvalid : undefined}
               />
+              {fieldErrors.phone ? (
+                <span id="register-phone-error" className={styles.fieldErrorText} role="alert">
+                  {fieldErrors.phone}
+                </span>
+              ) : null}
             </label>
 
             <label className={styles.field}>
@@ -177,7 +278,16 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 onChange={handleChange}
                 autoComplete="email"
                 required
+                onBlur={handleBlur}
+                aria-invalid={fieldErrors.email ? "true" : "false"}
+                aria-describedby={fieldErrors.email ? "register-email-error" : undefined}
+                className={fieldErrors.email ? styles.fieldControlInvalid : undefined}
               />
+              {fieldErrors.email ? (
+                <span id="register-email-error" className={styles.fieldErrorText} role="alert">
+                  {fieldErrors.email}
+                </span>
+              ) : null}
             </label>
 
             <div className={styles.field}>
@@ -192,7 +302,16 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 passwordToggle
                 showPasswordLabel={t("common.password.show")}
                 hidePasswordLabel={t("common.password.hide")}
+                onBlur={handleBlur}
+                aria-invalid={fieldErrors.password ? "true" : "false"}
+                aria-describedby={fieldErrors.password ? "register-password-error" : undefined}
+                className={fieldErrors.password ? styles.fieldControlInvalid : undefined}
               />
+              {fieldErrors.password ? (
+                <span id="register-password-error" className={styles.fieldErrorText} role="alert">
+                  {fieldErrors.password}
+                </span>
+              ) : null}
             </div>
 
             <div className={styles.passwordBlock}>
@@ -208,7 +327,20 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                   passwordToggle
                   showPasswordLabel={t("common.password.show")}
                   hidePasswordLabel={t("common.password.hide")}
+                  onBlur={handleBlur}
+                  aria-invalid={fieldErrors.confirmPassword ? "true" : "false"}
+                  aria-describedby={fieldErrors.confirmPassword ? "register-confirm-password-error" : undefined}
+                  className={fieldErrors.confirmPassword ? styles.fieldControlInvalid : undefined}
                 />
+                {fieldErrors.confirmPassword ? (
+                  <span
+                    id="register-confirm-password-error"
+                    className={styles.fieldErrorText}
+                    role="alert"
+                  >
+                    {fieldErrors.confirmPassword}
+                  </span>
+                ) : null}
               </div>
 
               <div className={styles.hint}>

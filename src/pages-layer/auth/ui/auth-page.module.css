@@ -480,6 +480,15 @@
   height: auto;
 }
 
+.fieldErrorText {
+  width: 100%;
+  min-height: 18px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: #b42318;
+}
+
 .registerBlock .label {
   height: auto;
   color: #4e7685;
@@ -922,6 +931,10 @@
   flex-grow: 0;
   transform: none;
   margin-left: auto;
+}
+
+.fieldControlInvalid {
+  border-color: #b42318;
 }
 
 .buttonRegister {

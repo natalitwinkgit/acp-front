@@ -33,6 +33,15 @@
   box-shadow: 0 0 0 3px rgba(34, 96, 120, 0.12);
 }
 
+.control[aria-invalid="true"] {
+  border-color: #b42318;
+}
+
+.control[aria-invalid="true"]:focus {
+  border-color: #b42318;
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.14);
+}
+
 .control:disabled {
   cursor: not-allowed;
   background: #eff4f5;
