@@ -644,6 +644,15 @@
   }
 }
 
+@media (max-width: 768px) {
+  .mobileLang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+}
+
 @media (max-width: 430px) {
   .header {
     height: 56px;
