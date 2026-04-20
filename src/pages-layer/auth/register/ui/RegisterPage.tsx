@@ -278,7 +278,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.emailLabel")}</span>
               <TextField
-                type="email"
+                type="text"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
