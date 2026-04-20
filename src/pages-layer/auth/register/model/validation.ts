@@ -140,6 +140,13 @@ type FieldMatch = {
   message: string;
 };
 
+function splitServerValidationMessage(message: string) {
+  return message
+    .split(/(?:,\s*|;\s*|\n+|\.\s+(?=[A-ZА-ЯІЇЄ]))/u)
+    .map((segment) => segment.trim())
+    .filter(Boolean);
+}
+
 function mapSingleServerError(message: string, t: Translate): FieldMatch | null {
   const normalized = message.trim().toLowerCase();
 
@@ -179,7 +186,7 @@ function mapSingleServerError(message: string, t: Translate): FieldMatch | null 
 
   if (
     mentionsEmail
-    && includesAny(normalized, ["invalid", "must be an email", "некор", "невер", "валид", "format"])
+    && includesAny(normalized, ["invalid", "must be an email", "некор", "невер", "валид", "format", "email"])
   ) {
     return { field: "email", message: t("auth.register.errors.emailInvalid") };
   }
@@ -193,7 +200,21 @@ function mapSingleServerError(message: string, t: Translate): FieldMatch | null 
 
   if (
     mentionsPassword
-    && includesAny(normalized, ["at least 8", "uppercase", "digit", "number", "циф", "велик", "букв", "мінімум", "minimum"])
+    && includesAny(normalized, [
+      "at least 8",
+      "uppercase",
+      "digit",
+      "number",
+      "циф",
+      "велик",
+      "букв",
+      "мінімум",
+      "minimum",
+      "как минимум",
+      "должен содержать",
+      "повинен містити",
+      "strong enough",
+    ])
   ) {
     return { field: "password", message: t("auth.register.errors.passwordFormat") };
   }
@@ -215,10 +236,7 @@ export function mapRegisterServerError(
   fieldErrors: RegisterFieldErrors;
   formError: string;
 } {
-  const segments = message
-    .split(",")
-    .map((segment) => segment.trim())
-    .filter(Boolean);
+  const segments = splitServerValidationMessage(message);
 
   const fieldErrors = segments.reduce<RegisterFieldErrors>((errors, segment) => {
     const mapped = mapSingleServerError(segment, t);
