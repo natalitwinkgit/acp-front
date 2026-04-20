@@ -1,0 +1,133 @@
+.card {
+  padding: 12px 16px 16px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #226078;
+}
+
+.subtitle {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: #226078;
+  opacity: 0.75;
+}
+
+.tableWrapper {
+  overflow-y: auto;
+  padding-right: 6px;
+  max-height: 300px;
+  border-radius: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: var(--LightSlateGray, #7b98a3);
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: #226078;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fcfefe;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.theadRow th {
+  padding: 8px 12px;
+  text-align: center;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #226078;
+  border-bottom: 0.5px solid #226078;
+  white-space: nowrap;
+}
+
+.thNum {
+  width: 36px;
+}
+.thRatio {
+  width: 90px;
+}
+.thAction {
+  width: 130px;
+}
+.th {
+}
+
+.row td {
+  font-family: Roboto, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.44;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  color: #11313d;
+  border-bottom: 0.5px solid #7b98a3;
+  height: 40px;
+}
+
+.row:last-child td {
+  border-bottom: none;
+}
+
+.tdNum {
+  color: var(--Dark, #11313d);
+  font-weight: 500;
+  width: 25;
+  height: 39;
+  padding: 4px;
+  gap: 10px;
+}
+
+.tdAction {
+  text-align: right;
+}
+
+.blockBtn {
+  background: transparent;
+  border: 1px solid var(--herry, #d51216);
+  color: var(--DarkSlateGray, #226078);
+  border-radius: 12px;
+  padding: 4px 14px;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 150ms ease;
+}
+
+.blockBtn:hover {
+  background: rgba(213, 18, 22, 0.06);
+}
+
+.blockedLabel {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 13px;
+  color: #7b98a3;
+}

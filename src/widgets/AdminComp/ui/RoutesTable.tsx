@@ -1,110 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Chip from "@/src/shared/ui/Chip/Chip";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import type { RouteRow, TripStatus } from "../model/types";
+import { getStatusClass, MOCK_ROWS } from "../lib/routesTable.utils";
+import { useRoutesTable } from "../model/useRoutesTable";
+import type { RouteRow } from "../model/types";
+import { StatusDropdown } from "@/src/features/change-trip-status";
+import { AdminCard } from "@/src/shared";
 import styles from "./admin-routes-table.module.css";
-
-const MOCK_ROWS: RouteRow[] = Array.from({ length: 10 }, (_, i) => ({
-  id: String(i + 1),
-  direction: "м.Черкаси - м.Київ (ст.м.Харківська)",
-  departureTime: "05:30",
-  arrivalTime: "08:30",
-  busNumber: "СА 5374 СО",
-  availableSeats: 12,
-  totalSeats: 18,
-  status: (["DEPARTED", "BOARDING", "SCHEDULED", "CANCELLED"] as TripStatus[])[
-    i % 4
-  ],
-}));
-
-const STATUS_ITEMS: TripStatus[] = [
-  "DEPARTED",
-  "BOARDING",
-  "SCHEDULED",
-  "CANCELLED",
-];
-
-type StatusDropdownProps = {
-  rowId: string;
-  openId: string | null;
-  onToggle: (id: string | null) => void;
-  onStatusChange: (id: string, status: TripStatus) => void;
-  onEdit: (id: string) => void;
-};
-
-function StatusDropdown({
-  rowId,
-  openId,
-  onToggle,
-  onStatusChange,
-  onEdit,
-}: StatusDropdownProps) {
-  const { t } = useI18n();
-  const isOpen = openId === rowId;
-
-  return (
-    <div className={styles.dropdownWrapper}>
-      <button
-        type="button"
-        className={styles.chevronBtn}
-        onClick={() => onToggle(isOpen ? null : rowId)}
-        // aria-label="Змінити статус"
-      >
-        <span
-          className={`${styles.chevron} ${isOpen ? styles.chevronUp : ""}`}
-        />
-      </button>
-
-      {isOpen && (
-        <ul className={styles.dropdown}>
-          {STATUS_ITEMS.map((s) => (
-            <li key={s}>
-              <button
-                type="button"
-                className={styles.dropdownItem}
-                onClick={() => {
-                  onStatusChange(rowId, s);
-                  onToggle(null);
-                }}
-              >
-                {t(`dispatcherArea.routes.table.statuses.${s}`)}
-              </button>
-            </li>
-          ))}
-          <li>
-            <button
-              type="button"
-              className={styles.dropdownItem}
-              onClick={() => {
-                onEdit(rowId);
-                onToggle(null);
-              }}
-            >
-              {t("dispatcherArea.routes.table.statuses.edit")}
-            </button>
-          </li>
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function getStatusClass(status: TripStatus | null) {
-  switch (status) {
-    case "DEPARTED":
-      return styles.statusDeparted;
-    case "BOARDING":
-      return styles.statusBoarding;
-    case "SCHEDULED":
-      return styles.statusScheduled;
-    case "CANCELLED":
-      return styles.statusCancelled;
-    default:
-      return "";
-  }
-}
 
 type RoutesTableProps = {
   rows?: RouteRow[];
@@ -116,19 +19,18 @@ export default function RoutesTable({
   onEditRoute,
 }: RoutesTableProps) {
   const { t } = useI18n();
-  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
-  const [rowStatuses, setRowStatuses] = useState<Record<string, TripStatus>>(
-    () => Object.fromEntries(rows.map((r) => [r.id, r.status ?? "SCHEDULED"])),
-  );
-  const [page, setPage] = useState(1);
-  const totalPages = 2;
-
-  function handleStatusChange(id: string, status: TripStatus) {
-    setRowStatuses((prev) => ({ ...prev, [id]: status }));
-  }
+  const {
+    openDropdownId,
+    setOpenDropdownId,
+    rowStatuses,
+    handleStatusChange,
+    page,
+    setPage,
+    totalPages,
+  } = useRoutesTable({ rows });
 
   return (
-    <div className={styles.main}>
+    <AdminCard>
       <div className={styles.header}>
         <span className={styles.title}>
           {t("dispatcherArea.routes.table.title")}
@@ -206,7 +108,7 @@ export default function RoutesTable({
       <div className={styles.pagination}>
         <button
           type="button"
-          className={styles.pageBtn}
+          className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
           disabled={page === 1}
           onClick={() => setPage((p) => p - 1)}
           aria-label={t("dispatcherArea.routes.table.pagination.prev")}
@@ -225,7 +127,7 @@ export default function RoutesTable({
         ))}
         <button
           type="button"
-          className={styles.pageBtn}
+          className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
           disabled={page === totalPages}
           onClick={() => setPage((p) => p + 1)}
           aria-label={t("dispatcherArea.routes.table.pagination.next")}
@@ -233,6 +135,6 @@ export default function RoutesTable({
           {">"}
         </button>
       </div>
-    </div>
+    </AdminCard>
   );
 }

@@ -62,8 +62,21 @@
       "loading": "Checking..."
     },
     "calendar": {
-      "months": ["January","February","March","April","May","June","July","August","September","October","November","December"],
-      "weekdays": ["Mo","Tu","We","Th","Fr","Sa","Su"]
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+      "weekdays": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
     },
     "status": {
       "loading": "Loading trips...",
@@ -75,9 +88,8 @@
       "seatsUnavailable": "There are not enough free seats on this trip.",
       "availabilityError": "Failed to check seat availability."
     }
-    
   },
-    "benefits": {
+  "benefits": {
     "aria": "Service benefits",
     "items": {
       "search": "Choose a convenient time and route",
@@ -90,7 +102,7 @@
       "payAlt": "Payment"
     }
   },
-   "popularRoutes": {
+  "popularRoutes": {
     "aria": "Popular routes",
     "title": "Popular routes",
     "openRoute": "Open route page"
@@ -524,6 +536,44 @@
         "pagination": {
           "prev": "Previous page",
           "next": "Next page"
+        }
+      }
+    },
+    "analytics": {
+      "subtitle": "Overview of key bus station performance indicators.",
+      "allRoutes": "All routes",
+      "calendarAria": "Open calendar",
+      "noShowReport": {
+        "title": "No-show report 5+ unpaid",
+        "subtitle": "Users who frequently book but do not purchase tickets — 5 or more no-shows.",
+        "columns": {
+          "number": "#",
+          "passenger": "Passenger",
+          "phone": "Phone",
+          "ratio": "Booked/unpaid"
+        },
+        "blockBtn": "Block",
+        "blocked": "Blocked"
+      },
+      "finance": {
+        "title": "Finances",
+        "subtitle": "Total reserved/purchased seats in monetary equivalent.",
+        "reserved": "Reserved",
+        "purchased": "Purchased",
+        "noShows": "No-shows",
+        "totalIncome": "Total income"
+      },
+      "load": {
+        "title": "Load",
+        "subtitle": "Peak hours chart."
+      },
+      "popularRoutes": {
+        "title": "Popular routes",
+        "subtitle": "Top 7 routes by number of tickets sold.",
+        "columns": {
+          "number": "#",
+          "route": "Route",
+          "tickets": "Tickets"
         }
       }
     },

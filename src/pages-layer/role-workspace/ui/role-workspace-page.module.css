@@ -181,6 +181,7 @@
   min-height: 100vh;
   padding: 16px;
   /* gap: 16px; */
+  background-color: var(--bg, #fcfefe);
 }
 
 .section {

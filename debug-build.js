@@ -1,6 +1,6 @@
-const { build } = require('next/dist/build');
+import { build } from "next/dist/build";
 
-build(process.cwd()).catch(e => {
+build(process.cwd()).catch((e) => {
   console.error(e.stack);
   process.exit(1);
 });

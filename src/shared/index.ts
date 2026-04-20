@@ -14,3 +14,4 @@ export type { Locale, MessageValue, Messages } from './i18n';
 export { default as Button } from './ui/Button/Button';
 export { default as Notification } from './ui/Notification/Notification';
 export type { NotificationSize, NotificationVariant } from './ui/Notification/Notification';
+export { default as AdminCard } from './ui/AdminCard/AdminCard';

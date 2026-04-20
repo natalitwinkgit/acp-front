@@ -1,0 +1,15 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: calc(100vh - 120px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: auto minmax(300px, 30vh);
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
