@@ -11,6 +11,10 @@ export type RegisterFieldErrors = Partial<Record<RegisterField, string>>;
 
 type Translate = (key: string) => string;
 
+export const PHONE_MAX_LENGTH = 13;
+export const EMAIL_MAX_LENGTH = 254;
+export const PASSWORD_MAX_LENGTH = 64;
+
 const PHONE_REGEX = /^\+380\d{9}$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -23,6 +27,44 @@ function includesAny(value: string, variants: readonly string[]) {
 
 function normalizeValue(value: string) {
   return value.trim();
+}
+
+export function sanitizeRegisterFieldInput(field: RegisterField, value: string) {
+  switch (field) {
+    case "phone": {
+      const hasLeadingPlus = value.startsWith("+");
+      const digitsOnly = value.replace(/\D/g, "");
+      return `${hasLeadingPlus ? "+" : ""}${digitsOnly}`.slice(0, PHONE_MAX_LENGTH);
+    }
+    case "email": {
+      let hasAtSymbol = false;
+
+      return Array.from(value)
+        .filter((char) => {
+          if (/[A-Za-z0-9._%+-]/.test(char)) {
+            return true;
+          }
+
+          if (char === "@") {
+            if (hasAtSymbol) {
+              return false;
+            }
+
+            hasAtSymbol = true;
+            return true;
+          }
+
+          return false;
+        })
+        .join("")
+        .slice(0, EMAIL_MAX_LENGTH);
+    }
+    case "password":
+    case "confirmPassword":
+      return value.slice(0, PASSWORD_MAX_LENGTH);
+    default:
+      return value;
+  }
 }
 
 export function validateRegisterField(

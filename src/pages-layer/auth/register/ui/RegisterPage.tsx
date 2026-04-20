@@ -15,7 +15,11 @@ import GoogleAuthButton from "@/src/features/auth/google/ui/GoogleAuthButton";
 import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
 import Notification from "@/src/shared/ui/Notification/Notification";
 import {
+  EMAIL_MAX_LENGTH,
   mapRegisterServerError,
+  PASSWORD_MAX_LENGTH,
+  PHONE_MAX_LENGTH,
+  sanitizeRegisterFieldInput,
   type RegisterField,
   type RegisterFieldErrors,
   type RegisterFormData,
@@ -61,9 +65,10 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
     }
 
     const field = name as RegisterField;
+    const sanitizedValue = sanitizeRegisterFieldInput(field, value);
 
     setFormData((prev) => {
-      const nextFormData = { ...prev, [field]: value };
+      const nextFormData = { ...prev, [field]: sanitizedValue };
 
       setFieldErrors((currentErrors) => {
         const nextErrors = { ...currentErrors };
@@ -255,6 +260,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 placeholder="+380991234567"
                 autoComplete="tel"
                 inputMode="tel"
+                maxLength={PHONE_MAX_LENGTH}
                 pattern="^\+380\d{9}$"
                 required
                 onBlur={handleBlur}
@@ -277,6 +283,11 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 value={formData.email}
                 onChange={handleChange}
                 autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                inputMode="email"
+                maxLength={EMAIL_MAX_LENGTH}
+                spellCheck={false}
                 required
                 onBlur={handleBlur}
                 aria-invalid={fieldErrors.email ? "true" : "false"}
@@ -298,6 +309,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 value={formData.password}
                 onChange={handleChange}
                 autoComplete="new-password"
+                maxLength={PASSWORD_MAX_LENGTH}
                 required
                 passwordToggle
                 showPasswordLabel={t("common.password.show")}
@@ -323,6 +335,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   autoComplete="new-password"
+                  maxLength={PASSWORD_MAX_LENGTH}
                   required
                   passwordToggle
                   showPasswordLabel={t("common.password.show")}
