@@ -18,6 +18,24 @@ export const PASSWORD_MAX_LENGTH = 64;
 const PHONE_REGEX = /^\+380\d{9}$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+const COMMON_EMAIL_DOMAIN_TYPOS = new Set([
+  "gmail.co",
+  "gmail.con",
+  "gmail.comm",
+  "gmai.com",
+  "gmial.com",
+  "hotmial.com",
+  "hotmail.co",
+  "hotmail.con",
+  "outlok.com",
+  "outlook.co",
+  "outlook.con",
+  "yahoo.co",
+  "yahoo.con",
+  "iclod.com",
+  "icloud.co",
+  "icloud.con",
+]);
 
 const REGISTER_FIELDS: RegisterField[] = ["phone", "email", "password", "confirmPassword"];
 
@@ -27,6 +45,11 @@ function includesAny(value: string, variants: readonly string[]) {
 
 function normalizeValue(value: string) {
   return value.trim();
+}
+
+function hasKnownEmailDomainTypo(email: string) {
+  const domain = email.split("@")[1]?.toLowerCase() ?? "";
+  return COMMON_EMAIL_DOMAIN_TYPOS.has(domain);
 }
 
 export function sanitizeRegisterFieldInput(field: RegisterField, value: string) {
@@ -93,7 +116,7 @@ export function validateRegisterField(
         return t("auth.register.errors.emailRequired");
       }
 
-      if (!EMAIL_REGEX.test(email)) {
+      if (!EMAIL_REGEX.test(email) || hasKnownEmailDomainTypo(email)) {
         return t("auth.register.errors.emailInvalid");
       }
 
