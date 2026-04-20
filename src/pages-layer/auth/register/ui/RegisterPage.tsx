@@ -253,7 +253,7 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
             <label className={styles.field}>
               <span className={styles.label}>{t("auth.register.phoneLabel")}</span>
               <TextField
-                type="tel"
+                type="text"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -261,7 +261,6 @@ export default function RegisterPage({ onClose }: RegisterPageProps) {
                 autoComplete="tel"
                 inputMode="tel"
                 maxLength={PHONE_MAX_LENGTH}
-                pattern="^\+380\d{9}$"
                 required
                 onBlur={handleBlur}
                 aria-invalid={fieldErrors.phone ? "true" : "false"}
