@@ -14,12 +14,11 @@ export function useRoutesTable({
   rows = MOCK_ROWS,
   totalPages = 2,
 }: UseRoutesTableParams = {}) {
-  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [rowStatuses, setRowStatuses] = useState<Record<string, TripStatus>>(
     () => Object.fromEntries(rows.map((r) => [r.id, r.status ?? "SCHEDULED"])),
   );
   const [page, setPage] = useState(1);
-
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   function handleStatusChange(id: string, status: TripStatus) {
     setRowStatuses((prev) => ({ ...prev, [id]: status }));
   }

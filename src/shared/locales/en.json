@@ -533,6 +533,9 @@
           "CANCELLED": "Cancelled",
           "edit": "Edit"
         },
+        "filters": {
+          "all": "All"
+        },
         "pagination": {
           "prev": "Previous page",
           "next": "Next page"

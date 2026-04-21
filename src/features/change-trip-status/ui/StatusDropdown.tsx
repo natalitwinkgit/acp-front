@@ -2,7 +2,7 @@
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import type { TripStatus } from "@/src/entities/trip";
-import styles from "./status-dropdown.module.css";
+import { Dropdown } from "@/src/shared/ui/Dropdown/Dropdown";
 
 const STATUS_ITEMS: TripStatus[] = [
   "DEPARTED",
@@ -27,50 +27,19 @@ export function StatusDropdown({
   onEdit,
 }: StatusDropdownProps) {
   const { t } = useI18n();
-  const isOpen = openId === rowId;
+
+  const items = [
+    ...STATUS_ITEMS.map((s) => ({
+      label: t(`dispatcherArea.routes.table.statuses.${s}`),
+      onClick: () => onStatusChange(rowId, s),
+    })),
+    {
+      label: t("dispatcherArea.routes.table.statuses.edit"),
+      onClick: () => onEdit(rowId),
+    },
+  ];
 
   return (
-    <div className={styles.dropdownWrapper}>
-      <button
-        type="button"
-        className={styles.chevronBtn}
-        onClick={() => onToggle(isOpen ? null : rowId)}
-      >
-        <span
-          className={`${styles.chevron} ${isOpen ? styles.chevronUp : ""}`}
-        />
-      </button>
-
-      {isOpen && (
-        <ul className={styles.dropdown}>
-          {STATUS_ITEMS.map((s) => (
-            <li key={s}>
-              <button
-                type="button"
-                className={styles.dropdownItem}
-                onClick={() => {
-                  onStatusChange(rowId, s);
-                  onToggle(null);
-                }}
-              >
-                {t(`dispatcherArea.routes.table.statuses.${s}`)}
-              </button>
-            </li>
-          ))}
-          <li>
-            <button
-              type="button"
-              className={styles.dropdownItem}
-              onClick={() => {
-                onEdit(rowId);
-                onToggle(null);
-              }}
-            >
-              {t("dispatcherArea.routes.table.statuses.edit")}
-            </button>
-          </li>
-        </ul>
-      )}
-    </div>
+    <Dropdown id={rowId} openId={openId} onToggle={onToggle} items={items} />
   );
 }

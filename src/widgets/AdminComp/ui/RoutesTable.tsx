@@ -8,6 +8,8 @@ import type { RouteRow } from "../model/types";
 import { StatusDropdown } from "@/src/features/change-trip-status";
 import { AdminCard } from "@/src/shared";
 import styles from "./admin-routes-table.module.css";
+import { useState } from "react";
+import { FilterDropdown } from "@/src/features/filter-routes";
 
 type RoutesTableProps = {
   rows?: RouteRow[];
@@ -28,6 +30,9 @@ export default function RoutesTable({
     setPage,
     totalPages,
   } = useRoutesTable({ rows });
+  const [openFilterId, setOpenFilterId] = useState<string | null>(null);
+
+  const [filteredRows, setFilteredRows] = useState(rows);
 
   return (
     <AdminCard>
@@ -35,10 +40,32 @@ export default function RoutesTable({
         <span className={styles.title}>
           {t("dispatcherArea.routes.table.title")}
         </span>
-        <button type="button" className={styles.sortBtn}>
-          {t("dispatcherArea.routes.table.sort")}
-          <span className={styles.sortChevron} />
-        </button>
+        <div style={{ position: "relative" }}>
+          <button
+            type="button"
+            className={styles.sortBtn}
+            onClick={() =>
+              setOpenFilterId((prev) =>
+                prev === "sort-filter" ? null : "sort-filter",
+              )
+            }
+          >
+            {t("dispatcherArea.routes.table.sort")}
+            <span className={styles.sortChevron} />
+          </button>
+          <FilterDropdown
+            id="sort-filter"
+            openId={openFilterId}
+            onFilterChange={(status) => {
+              if (!status) {
+                setFilteredRows(rows);
+                return;
+              }
+              setFilteredRows(rows.filter((i) => i.status === status));
+            }}
+            onToggle={setOpenFilterId}
+          />
+        </div>
       </div>
 
       <table className={styles.table}>
@@ -66,7 +93,7 @@ export default function RoutesTable({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => {
+          {filteredRows.map((row, index) => {
             const status = rowStatuses[row.id] ?? "SCHEDULED";
             return (
               <tr key={row.id} className={styles.row}>
