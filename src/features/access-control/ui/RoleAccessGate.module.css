@@ -21,7 +21,6 @@
 
 .title {
   margin: 0;
-  font-family: var(--font-roboto);
   font-size: 28px;
   line-height: 1.2;
   font-weight: 700;
@@ -30,7 +29,6 @@
 
 .description {
   margin: 0;
-  font-family: var(--font-roboto);
   font-size: 16px;
   line-height: 1.5;
   color: var(--color-brand);
@@ -50,7 +48,6 @@
   justify-content: center;
   border-radius: 12px;
   text-decoration: none;
-  font-family: var(--font-roboto);
   font-size: 15px;
   line-height: 1.4;
   font-weight: 500;

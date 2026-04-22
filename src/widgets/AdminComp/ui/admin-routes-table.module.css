@@ -7,11 +7,6 @@
 }
 
 .title {
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: var(--color-brand);
@@ -24,11 +19,7 @@
   justify-content: space-between;
   background: var(--color-page-bg);
   cursor: pointer;
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-style: Medium;
   font-size: 16px;
@@ -73,7 +64,6 @@
 .theadRow th {
   padding: 8px 12px;
   text-align: left;
-  font-family: var(--font-roboto);
   font-size: 14px;
   font-weight: 500;
   color: var(--color-brand);
@@ -112,7 +102,6 @@
 
 .row td {
   padding: 9px 12px;
-  font-family: var(--font-roboto);
   font-size: 14px;
   color: var(--color-text-strong);
   border-bottom: 0.5px solid var(--LightSlateGray, var(--color-border-muted));
@@ -133,7 +122,6 @@
 
 /* status chips */
 .statusChip {
-  font-family: var(--font-roboto);
   font-weight: 500;
   font-style: Medium;
   font-size: 16px;

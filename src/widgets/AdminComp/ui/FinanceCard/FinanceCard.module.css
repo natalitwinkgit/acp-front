@@ -9,14 +9,12 @@
 }
 
 .title {
-  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
   color: var(--color-brand);
 }
 
 .subtitle {
-  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 12px;
   color: var(--color-brand);
@@ -57,7 +55,6 @@
 }
 
 .badgeLabel {
-  font-family: var(--font-roboto);
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
@@ -65,7 +62,6 @@
 }
 
 .badgeValue {
-  font-family: var(--font-roboto);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
@@ -85,8 +81,6 @@
 }
 
 .chartTitle {
-  font-family: var(--font-roboto);
-
   color: var(--LightSlateGray, var(--color-border-muted));
   font-weight: 500;
   font-style: Medium;

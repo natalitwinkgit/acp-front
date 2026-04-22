@@ -9,14 +9,12 @@
 }
 
 .title {
-  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
   color: var(--color-brand);
 }
 
 .subtitle {
-  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 12px;
   color: var(--color-brand);
@@ -59,7 +57,6 @@
 .theadRow th {
   padding: 8px 12px;
   text-align: left;
-  font-family: var(--font-roboto);
   font-size: 14px;
   font-weight: 500;
   color: var(--color-brand);
@@ -77,7 +74,6 @@
 
 .row td {
   padding: 9px 12px;
-  font-family: var(--font-roboto);
   font-size: 14px;
   color: var(--color-text-strong);
   border-bottom: 0.5px solid var(--color-border-muted);

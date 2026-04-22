@@ -84,7 +84,6 @@
   box-sizing: border-box;
   border-bottom: 2px solid transparent;
 
-  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
@@ -161,7 +160,6 @@
 }
 
 .phone {
-  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 14px;
   line-height: 144%;
@@ -184,7 +182,6 @@
 }
 
 .phoneMenuItem {
-  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 14px;
   line-height: 144%;
@@ -574,7 +571,6 @@
     justify-content: flex-start;
     align-self: stretch;
 
-    font-family: var(--font-roboto);
     font-weight: 500;
     font-size: 16px;
     line-height: 144%;

@@ -65,7 +65,6 @@
 .contactLink,
 .contactTextMuted,
 .offerText {
-  font-family: var(--font-roboto), sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -130,7 +129,6 @@
 
 .copy {
   width: 302px;
-  font-family: var(--font-roboto), sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;

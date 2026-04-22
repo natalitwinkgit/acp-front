@@ -77,13 +77,6 @@
 }
 
 .roleLabel {
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Arial,
-    sans-serif;
   font-size: 16px;
   line-height: 1.3;
   font-weight: 500;
@@ -91,13 +84,6 @@
 }
 
 .userName {
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Arial,
-    sans-serif;
   font-size: 32px;
   line-height: 1.15;
   font-weight: 500;
@@ -123,13 +109,7 @@
   background: transparent;
   color: var(--color-page-bg);
   text-decoration: none;
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Arial,
-    sans-serif;
+  font-family: var(--font-roboto);
   font-size: 18px;
   line-height: 1.2;
   font-weight: 400;
@@ -200,13 +180,6 @@
 
 .sectionTitle {
   margin: 0;
-  font-family:
-    Roboto,
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Arial,
-    sans-serif;
   font-size: clamp(32px, 3.6vw, 56px);
   line-height: 1.04;
   font-weight: 700;
