@@ -13,6 +13,7 @@ import {
   AdminThead,
   AdminTr,
   adminTableStyles,
+  DEFAULT_TABLE_PAGE_SIZE,
   countPages,
   paginateItems,
   TablePagination,
@@ -114,7 +115,7 @@ export default function RoutesTable({
             return (
               <AdminTr key={row.id}>
                 <td className={adminTableStyles.tdNum}>
-                  {(page - 1) * 10 + index + 1}
+                  {(page - 1) * DEFAULT_TABLE_PAGE_SIZE + index + 1}
                 </td>
                 <td
                   className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}

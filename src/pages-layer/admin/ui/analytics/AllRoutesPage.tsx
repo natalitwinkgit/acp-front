@@ -7,6 +7,7 @@ import {
   AdminThead,
   AdminTr,
   adminTableStyles,
+  DEFAULT_TABLE_PAGE_SIZE,
   countPages,
   paginateItems,
   TablePagination,
@@ -94,8 +95,12 @@ const mockAllRoutes: AllRouteRow[] = [
 export default function AllRoutesPage() {
   const { t } = useI18n();
   const [page, setPage] = useState(1);
-  const totalPages = countPages(mockAllRoutes.length, 15);
-  const paginatedRows = paginateItems(mockAllRoutes, page);
+  const totalPages = countPages(mockAllRoutes.length, DEFAULT_TABLE_PAGE_SIZE);
+  const paginatedRows = paginateItems(
+    mockAllRoutes,
+    page,
+    DEFAULT_TABLE_PAGE_SIZE,
+  );
 
   return (
     <div className={styles.mainContainer}>
@@ -137,7 +142,7 @@ export default function AllRoutesPage() {
               return (
                 <AdminTr key={row.id} className={styles.clickableRow}>
                   <td className={adminTableStyles.tdNum}>
-                    {(page - 1) * 10 + index + 1}
+                    {(page - 1) * DEFAULT_TABLE_PAGE_SIZE + index + 1}
                   </td>
                   <td
                     className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
