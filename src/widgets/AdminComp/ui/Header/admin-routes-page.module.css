@@ -75,6 +75,10 @@
   gap: 8px;
 }
 
+.iconContainer:hover {
+  opacity: 0.78;
+  transition: opacity 120ms ease;
+}
 .icon {
   width: 24px;
   height: 24px;

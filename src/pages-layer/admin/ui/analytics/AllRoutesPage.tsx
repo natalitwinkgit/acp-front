@@ -129,7 +129,11 @@ export default function AllRoutesPage() {
               return (
                 <AdminTr key={row.id}>
                   <td className={adminTableStyles.tdNum}>{index + 1}</td>
-                  <td className={adminTableStyles.td}>{row.direction}</td>
+                  <td
+                    className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
+                  >
+                    {row.direction}
+                  </td>
                   <td className={adminTableStyles.td}>{row.tripsPerDay}</td>
                   <td className={adminTableStyles.td}>{row.ticketsSold}</td>
                   <td className={adminTableStyles.td}>{row.load}</td>

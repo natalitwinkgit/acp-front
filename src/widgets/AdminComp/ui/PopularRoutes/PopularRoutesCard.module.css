@@ -58,8 +58,17 @@
   z-index: 1;
 }
 
+.theadRow .thNum,
+.theadRow .th {
+  text-align: left;
+}
+
+.theadRow .thTickets {
+  text-align: right;
+}
+
 .thNum { width: 36px; }
-.thTickets { width: 110px; text-align: right; }
+.thTickets { width: 110px; }
 .th {}
 
 .row td {
@@ -67,12 +76,16 @@
   font-size: 14px;
 }
 
+.row td.tdLeft {
+  text-align: left;
+}
+
 .tdNum {
   color: var(--color-brand);
   font-weight: 500;
 }
 
-.tdTickets {
+.row td.tdTickets {
   text-align: right;
   font-weight: 500;
   color: var(--color-brand);

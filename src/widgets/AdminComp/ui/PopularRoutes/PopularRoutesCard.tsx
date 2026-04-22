@@ -53,7 +53,9 @@ export default function PopularRoutesCard({ routes = MOCK_ROUTES }: Props) {
             {routes.map((entry, index) => (
               <AdminTr key={entry.id} className={styles.row}>
                 <td className={styles.tdNum}>{index + 1}</td>
-                <td className={styles.td}>{entry.route}</td>
+                <td className={`${styles.td} ${styles.tdLeft}`}>
+                  {entry.route}
+                </td>
                 <td className={styles.tdTickets}>{entry.tickets}</td>
               </AdminTr>
             ))}

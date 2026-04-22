@@ -96,7 +96,11 @@ export default function RoutesTable({
             return (
               <AdminTr key={row.id}>
                 <td className={adminTableStyles.tdNum}>{index + 1}</td>
-                <td className={adminTableStyles.td}>{row.direction}</td>
+                <td
+                  className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
+                >
+                  {row.direction}
+                </td>
                 <td className={adminTableStyles.td}>
                   {row.departureTime && row.arrivalTime
                     ? `${row.departureTime} - ${row.arrivalTime}`

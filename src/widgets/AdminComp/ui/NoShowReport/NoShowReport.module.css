@@ -51,6 +51,14 @@
 
 .theadRow th {
   white-space: nowrap;
+}
+
+.theadRow .thNum,
+.theadRow .th {
+  text-align: left;
+}
+
+.theadRow .thRatio {
   text-align: center;
 }
 
@@ -64,15 +72,19 @@
   width: 130px;
 }
 .th {
+  white-space: nowrap;
 }
 
 .row td {
   font-size: 16px;
   line-height: 1.44;
   letter-spacing: 0;
-  text-align: center;
   vertical-align: middle;
   height: 40px;
+}
+
+.row td.tdLeft {
+  text-align: left;
 }
 
 .tdNum {

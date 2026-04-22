@@ -1,8 +1,4 @@
-import type {
-  HTMLAttributes,
-  ReactNode,
-  TableHTMLAttributes,
-} from "react";
+import type { HTMLAttributes, ReactNode, TableHTMLAttributes } from "react";
 import styles from "./adminTable.module.css";
 
 export const adminTableStyles = styles;
