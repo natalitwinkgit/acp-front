@@ -1,11 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import {
   AdminCard,
   AdminTable,
   AdminThead,
   AdminTr,
   adminTableStyles,
+  countPages,
+  paginateItems,
+  TablePagination,
   useI18n,
 } from "@/src/shared";
 import AllRoutesAnalyticsHeader from "@/src/widgets/AdminComp/ui/Header/AllRoutesAnalyticsHeader";
@@ -89,6 +93,10 @@ const mockAllRoutes: AllRouteRow[] = [
 
 export default function AllRoutesPage() {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
+  const totalPages = countPages(mockAllRoutes.length, 15);
+  const paginatedRows = paginateItems(mockAllRoutes, page);
+
   return (
     <div className={styles.mainContainer}>
       <AllRoutesAnalyticsHeader />
@@ -125,10 +133,12 @@ export default function AllRoutesPage() {
             </th>
           </AdminThead>
           <tbody>
-            {mockAllRoutes.map((row, index) => {
+            {paginatedRows.map((row, index) => {
               return (
-                <AdminTr key={row.id}>
-                  <td className={adminTableStyles.tdNum}>{index + 1}</td>
+                <AdminTr key={row.id} className={styles.clickableRow}>
+                  <td className={adminTableStyles.tdNum}>
+                    {(page - 1) * 10 + index + 1}
+                  </td>
                   <td
                     className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
                   >
@@ -144,6 +154,13 @@ export default function AllRoutesPage() {
             })}
           </tbody>
         </AdminTable>
+        <TablePagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          prevAriaLabel={t("dispatcherArea.routes.table.pagination.prev")}
+          nextAriaLabel={t("dispatcherArea.routes.table.pagination.next")}
+        />
       </AdminCard>
     </div>
   );

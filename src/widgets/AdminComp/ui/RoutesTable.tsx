@@ -1,14 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Chip from "@/src/shared/ui/Chip/Chip";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import { getStatusClass, MOCK_ROWS } from "../lib/routesTable.utils";
 import { useRoutesTable } from "../model/useRoutesTable";
 import type { RouteRow } from "../model/types";
 import { StatusDropdown } from "@/src/features/change-trip-status";
-import { AdminCard, AdminTable, AdminThead, AdminTr, adminTableStyles } from "@/src/shared";
+import {
+  AdminCard,
+  AdminTable,
+  AdminThead,
+  AdminTr,
+  adminTableStyles,
+  countPages,
+  paginateItems,
+  TablePagination,
+} from "@/src/shared";
 import styles from "./admin-routes-table.module.css";
-import { useState } from "react";
 import { FilterDropdown } from "@/src/features/filter-routes";
 
 type RoutesTableProps = {
@@ -28,11 +37,19 @@ export default function RoutesTable({
     handleStatusChange,
     page,
     setPage,
-    totalPages,
   } = useRoutesTable({ rows });
   const [openFilterId, setOpenFilterId] = useState<string | null>(null);
 
   const [filteredRows, setFilteredRows] = useState(rows);
+  const totalPages = countPages(filteredRows.length);
+  const paginatedRows = paginateItems(filteredRows, page);
+
+  useEffect(() => {
+    const nextTotalPages = countPages(filteredRows.length);
+    if (nextTotalPages > 0 && page > nextTotalPages) {
+      setPage(nextTotalPages);
+    }
+  }, [filteredRows, page, setPage]);
 
   return (
     <AdminCard>
@@ -57,6 +74,7 @@ export default function RoutesTable({
             id="sort-filter"
             openId={openFilterId}
             onFilterChange={(status) => {
+              setPage(1);
               if (!status) {
                 setFilteredRows(rows);
                 return;
@@ -91,11 +109,13 @@ export default function RoutesTable({
             <th className={adminTableStyles.thAction} />
           </AdminThead>
         <tbody>
-          {filteredRows.map((row, index) => {
+          {paginatedRows.map((row, index) => {
             const status = rowStatuses[row.id] ?? "SCHEDULED";
             return (
               <AdminTr key={row.id}>
-                <td className={adminTableStyles.tdNum}>{index + 1}</td>
+                <td className={adminTableStyles.tdNum}>
+                  {(page - 1) * 10 + index + 1}
+                </td>
                 <td
                   className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
                 >
@@ -134,40 +154,13 @@ export default function RoutesTable({
         </tbody>
       </AdminTable>
 
-      {totalPages > 1 && (
-        <div className={styles.pagination}>
-          <button
-            type="button"
-            className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
-            disabled={page === 1}
-            onClick={() => {
-              setPage((p) => p - 1);
-            }}
-            aria-label={t("dispatcherArea.routes.table.pagination.prev")}
-          >
-            {"<"}
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-            <button
-              key={p}
-              type="button"
-              className={`${styles.pageBtn} ${p === page ? styles.pageBtnActive : ""}`}
-              onClick={() => setPage(p)}
-            >
-              {p}
-            </button>
-          ))}
-          <button
-            type="button"
-            className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
-            disabled={page === totalPages}
-            onClick={() => setPage((p) => p + 1)}
-            aria-label={t("dispatcherArea.routes.table.pagination.next")}
-          >
-            {">"}
-          </button>
-        </div>
-      )}
+      <TablePagination
+        page={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
+        prevAriaLabel={t("dispatcherArea.routes.table.pagination.prev")}
+        nextAriaLabel={t("dispatcherArea.routes.table.pagination.next")}
+      />
     </AdminCard>
   );
 }

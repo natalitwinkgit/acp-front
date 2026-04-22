@@ -27,3 +27,7 @@
   color: var(--color-brand);
   line-height: 1.32;
 }
+
+.clickableRow {
+  cursor: pointer;
+}
