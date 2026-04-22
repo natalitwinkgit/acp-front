@@ -11,13 +11,67 @@
   font-weight: 500;
   color: var(--color-brand);
   border-bottom: 0.5px solid var(--color-brand);
+  text-align: center;
+}
+
+.th {
+  white-space: nowrap;
+}
+
+.thLeft {
+  white-space: nowrap;
+  text-align: left;
+}
+
+.thNum {
+  width: 40px;
+  text-align: left;
+}
+
+.thStatus {
+  width: 140px;
+}
+
+.thAction {
+  width: 40px;
+}
+
+.row {
+  transition: background-color 150ms ease;
+}
+
+.row:hover {
+  background-color: var(--color-surface-soft);
 }
 
 .row td {
   color: var(--color-text-strong);
   border-bottom: 0.5px solid var(--color-border-muted);
+  padding: 9px 12px;
+  font-size: 16px;
+  font-weight: 400;
+
+  font-style: Regular;
+  line-height: 144%;
+  vertical-align: middle;
 }
 
 .row:last-child td {
   border-bottom: none;
+}
+
+.td {
+}
+
+.tdNum {
+  color: var(--color-brand);
+  font-weight: 500;
+}
+
+.tdStatus {
+  white-space: nowrap;
+}
+
+.tdAction {
+  position: relative;
 }

@@ -5,6 +5,8 @@ import type {
 } from "react";
 import styles from "./adminTable.module.css";
 
+export const adminTableStyles = styles;
+
 function cx(...parts: (string | undefined)[]) {
   return parts.filter(Boolean).join(" ");
 }

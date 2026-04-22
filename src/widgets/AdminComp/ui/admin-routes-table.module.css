@@ -54,48 +54,6 @@
 }
 
 
-.thNum {
-  width: 40px;
-}
-
-.thStatus {
-  width: 140px;
-}
-
-.thAction {
-  width: 40px;
-}
-
-.th {
-  white-space: nowrap;
-}
-
-/* rows */
-.row {
-  transition: background-color 150ms ease;
-}
-
-.row:hover {
-  background-color: var(--color-surface-soft);
-}
-
-.row td {
-  padding: 9px 12px;
-  font-size: 14px;
-}
-
-.tdNum {
-  color: var(--color-brand);
-  font-weight: 500;
-}
-
-.tdStatus {
-  white-space: nowrap;
-}
-
-.tdAction {
-  position: relative;
-}
 
 /* status chips */
 .statusChip {

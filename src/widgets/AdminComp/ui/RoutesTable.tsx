@@ -6,7 +6,7 @@ import { getStatusClass, MOCK_ROWS } from "../lib/routesTable.utils";
 import { useRoutesTable } from "../model/useRoutesTable";
 import type { RouteRow } from "../model/types";
 import { StatusDropdown } from "@/src/features/change-trip-status";
-import { AdminCard, AdminTable, AdminThead, AdminTr } from "@/src/shared";
+import { AdminCard, AdminTable, AdminThead, AdminTr, adminTableStyles } from "@/src/shared";
 import styles from "./admin-routes-table.module.css";
 import { useState } from "react";
 import { FilterDropdown } from "@/src/features/filter-routes";
@@ -70,52 +70,52 @@ export default function RoutesTable({
 
       <AdminTable>
         <AdminThead>
-            <th className={styles.thNum}>
+            <th className={adminTableStyles.thNum}>
               {t("dispatcherArea.routes.table.columns.number")}
             </th>
-            <th className={styles.th}>
+            <th className={adminTableStyles.thLeft}>
               {t("dispatcherArea.routes.table.columns.direction")}
             </th>
-            <th className={styles.th}>
+            <th className={adminTableStyles.th}>
               {t("dispatcherArea.routes.table.columns.time")}
             </th>
-            <th className={styles.th}>
+            <th className={adminTableStyles.th}>
               {t("dispatcherArea.routes.table.columns.bus")}
             </th>
-            <th className={styles.th}>
+            <th className={adminTableStyles.th}>
               {t("dispatcherArea.routes.table.columns.seats")}
             </th>
-            <th className={styles.thStatus}>
+            <th className={adminTableStyles.thStatus}>
               {t("dispatcherArea.routes.table.columns.status")}
             </th>
-            <th className={styles.thAction} />
+            <th className={adminTableStyles.thAction} />
           </AdminThead>
         <tbody>
           {filteredRows.map((row, index) => {
             const status = rowStatuses[row.id] ?? "SCHEDULED";
             return (
-              <AdminTr key={row.id} className={styles.row}>
-                <td className={styles.tdNum}>{index + 1}</td>
-                <td className={styles.td}>{row.direction}</td>
-                <td className={styles.td}>
+              <AdminTr key={row.id}>
+                <td className={adminTableStyles.tdNum}>{index + 1}</td>
+                <td className={adminTableStyles.td}>{row.direction}</td>
+                <td className={adminTableStyles.td}>
                   {row.departureTime && row.arrivalTime
                     ? `${row.departureTime} - ${row.arrivalTime}`
                     : "—"}
                 </td>
-                <td className={styles.td}>{row.busNumber ?? "—"}</td>
-                <td className={styles.td}>
+                <td className={adminTableStyles.td}>{row.busNumber ?? "—"}</td>
+                <td className={adminTableStyles.td}>
                   {row.availableSeats != null && row.totalSeats != null
                     ? `${row.availableSeats}/${row.totalSeats}`
                     : "—"}
                 </td>
-                <td className={styles.tdStatus}>
+                <td className={adminTableStyles.tdStatus}>
                   <Chip
                     className={`${styles.statusChip} ${getStatusClass(status)}`}
                   >
                     {t(`dispatcherArea.routes.table.statuses.${status}`)}
                   </Chip>
                 </td>
-                <td className={styles.tdAction}>
+                <td className={adminTableStyles.tdAction}>
                   <StatusDropdown
                     rowId={row.id}
                     openId={openDropdownId}
