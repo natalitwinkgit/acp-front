@@ -545,7 +545,20 @@
     "analytics": {
       "subtitle": "Overview of key bus station performance indicators.",
       "allRoutes": "All routes",
+      "goBackAria": "Go back",
       "calendarAria": "Open calendar",
+      "allRoutesPage": {
+        "title": "Routes",
+        "columns": {
+          "number": "#",
+          "direction": "Direction",
+          "tripsPerDay": "Trips / day",
+          "ticketsSold": "Tickets sold",
+          "load": "Load",
+          "income": "Income",
+          "redemptionRate": "% redeemed"
+        }
+      },
       "noShowReport": {
         "title": "No-show report 5+ unpaid",
         "subtitle": "Users who frequently book but do not purchase tickets — 5 or more no-shows.",

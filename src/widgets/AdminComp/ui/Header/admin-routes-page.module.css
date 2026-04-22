@@ -74,13 +74,20 @@
   color: #226078;
   white-space: nowrap;
 }
-
-.calendarIcon {
-  width: 22px;
-  height: 22px;
+.iconContainer {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.icon {
+  width: 24px;
+  height: 24px;
   background-color: #226078;
-  -webkit-mask-image: url(/icons/calendar.svg);
-  mask-image: url(/icons/calendar.svg);
+  -webkit-mask-image: url(/icons/arrow-reply.svg);
+  mask-image: url(/icons/arrow-reply.svg);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
