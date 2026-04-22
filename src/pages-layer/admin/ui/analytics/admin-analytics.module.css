@@ -13,3 +13,17 @@
   flex: 1;
   min-height: 0;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 8px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-brand);
+  line-height: 1.32;
+}
