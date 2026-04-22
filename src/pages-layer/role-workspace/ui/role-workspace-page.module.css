@@ -135,11 +135,14 @@
   opacity: 0;
 }
 
-.navItem:hover,
-.logoutButton:hover {
+.navItem:hover {
   background: var(--sidebar-hover-fill);
   border-top-left-radius: 18px;
   border-bottom-left-radius: 18px;
+}
+.logoutButton:hover {
+  background: var(--sidebar-hover-fill);
+  border-radius: 18px;
 }
 
 .navItemActive {
@@ -194,11 +197,48 @@
 }
 
 .content {
+  position: relative;
   min-width: 0;
   min-height: 100vh;
   padding: 16px;
   /* gap: 16px; */
   background-color: var(--bg, var(--color-page-bg));
+  isolation: isolate;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  background-color: var(--bg, var(--color-page-bg));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.content > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1440px) {
+  .navItem::before,
+  .navItem::after,
+  .logoutButton::before,
+  .logoutButton::after,
+  .navItemActive::before,
+  .navItemActive::after,
+  .content::before {
+    display: none;
+  }
+
+  .navItem:hover,
+  .logoutButton:hover,
+  .navItemActive {
+    border-radius: 18px 0 0 18px;
+  }
 }
 
 .section {
