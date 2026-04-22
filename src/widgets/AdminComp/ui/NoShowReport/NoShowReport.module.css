@@ -46,21 +46,12 @@
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--color-page-bg);
-  border-radius: 8px;
   overflow: hidden;
 }
 
 .theadRow th {
-  padding: 8px 12px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-brand);
-  border-bottom: 0.5px solid var(--color-brand);
   white-space: nowrap;
+  text-align: center;
 }
 
 .thNum {
@@ -76,19 +67,12 @@
 }
 
 .row td {
-  font-weight: 400;
   font-size: 16px;
   line-height: 1.44;
   letter-spacing: 0;
   text-align: center;
   vertical-align: middle;
-  color: var(--color-text-strong);
-  border-bottom: 0.5px solid var(--color-border-muted);
   height: 40px;
-}
-
-.row:last-child td {
-  border-bottom: none;
 }
 
 .tdNum {

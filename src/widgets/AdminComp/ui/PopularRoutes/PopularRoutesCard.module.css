@@ -47,20 +47,10 @@
 }
 
 .table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--color-page-bg);
-  border-radius: 8px;
   overflow: hidden;
 }
 
 .theadRow th {
-  padding: 8px 12px;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-brand);
-  border-bottom: 0.5px solid var(--color-brand);
   white-space: nowrap;
   position: sticky;
   top: 0;
@@ -75,12 +65,6 @@
 .row td {
   padding: 9px 12px;
   font-size: 14px;
-  color: var(--color-text-strong);
-  border-bottom: 0.5px solid var(--color-border-muted);
-}
-
-.row:last-child td {
-  border-bottom: none;
 }
 
 .tdNum {

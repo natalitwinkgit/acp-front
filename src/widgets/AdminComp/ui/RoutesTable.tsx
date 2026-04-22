@@ -6,7 +6,7 @@ import { getStatusClass, MOCK_ROWS } from "../lib/routesTable.utils";
 import { useRoutesTable } from "../model/useRoutesTable";
 import type { RouteRow } from "../model/types";
 import { StatusDropdown } from "@/src/features/change-trip-status";
-import { AdminCard } from "@/src/shared";
+import { AdminCard, AdminTable, AdminThead, AdminTr } from "@/src/shared";
 import styles from "./admin-routes-table.module.css";
 import { useState } from "react";
 import { FilterDropdown } from "@/src/features/filter-routes";
@@ -68,9 +68,8 @@ export default function RoutesTable({
         </div>
       </div>
 
-      <table className={styles.table}>
-        <thead>
-          <tr className={styles.theadRow}>
+      <AdminTable>
+        <AdminThead>
             <th className={styles.thNum}>
               {t("dispatcherArea.routes.table.columns.number")}
             </th>
@@ -90,13 +89,12 @@ export default function RoutesTable({
               {t("dispatcherArea.routes.table.columns.status")}
             </th>
             <th className={styles.thAction} />
-          </tr>
-        </thead>
+          </AdminThead>
         <tbody>
           {filteredRows.map((row, index) => {
             const status = rowStatuses[row.id] ?? "SCHEDULED";
             return (
-              <tr key={row.id} className={styles.row}>
+              <AdminTr key={row.id} className={styles.row}>
                 <td className={styles.tdNum}>{index + 1}</td>
                 <td className={styles.td}>{row.direction}</td>
                 <td className={styles.td}>
@@ -126,11 +124,11 @@ export default function RoutesTable({
                     onEdit={onEditRoute ?? (() => {})}
                   />
                 </td>
-              </tr>
+              </AdminTr>
             );
           })}
         </tbody>
-      </table>
+      </AdminTable>
 
       {totalPages > 1 && (
         <div className={styles.pagination}>

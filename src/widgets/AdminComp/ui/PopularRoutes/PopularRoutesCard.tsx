@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { AdminCard } from "@/src/shared";
+import { AdminCard, AdminTable, AdminThead, AdminTr } from "@/src/shared";
 import styles from "./PopularRoutesCard.module.css";
 
 type RouteEntry = {
@@ -37,9 +37,8 @@ export default function PopularRoutesCard({ routes = MOCK_ROUTES }: Props) {
       </div>
 
       <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr className={styles.theadRow}>
+        <AdminTable className={styles.table}>
+          <AdminThead className={styles.theadRow}>
               <th className={styles.thNum}>
                 {t("dispatcherArea.analytics.popularRoutes.columns.number")}
               </th>
@@ -49,18 +48,17 @@ export default function PopularRoutesCard({ routes = MOCK_ROUTES }: Props) {
               <th className={styles.thTickets}>
                 {t("dispatcherArea.analytics.popularRoutes.columns.tickets")}
               </th>
-            </tr>
-          </thead>
+            </AdminThead>
           <tbody>
             {routes.map((entry, index) => (
-              <tr key={entry.id} className={styles.row}>
+              <AdminTr key={entry.id} className={styles.row}>
                 <td className={styles.tdNum}>{index + 1}</td>
                 <td className={styles.td}>{entry.route}</td>
                 <td className={styles.tdTickets}>{entry.tickets}</td>
-              </tr>
+              </AdminTr>
             ))}
           </tbody>
-        </table>
+        </AdminTable>
       </div>
     </AdminCard>
   );

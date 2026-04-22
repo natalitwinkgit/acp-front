@@ -15,3 +15,4 @@ export { default as Button } from './ui/Button/Button';
 export { default as Notification } from './ui/Notification/Notification';
 export type { NotificationSize, NotificationVariant } from './ui/Notification/Notification';
 export { default as AdminCard } from './ui/AdminCard/AdminCard';
+export { AdminTable, AdminThead, AdminTr } from './ui/AdminTable/AdminTable';

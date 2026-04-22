@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { AdminCard } from "@/src/shared";
+import { AdminCard, AdminTable, AdminThead, AdminTr } from "@/src/shared";
 import styles from "./NoShowReport.module.css";
 
 type NoShowRow = {
@@ -45,9 +45,8 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
       </div>
 
       <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr className={styles.theadRow}>
+        <AdminTable className={styles.table}>
+          <AdminThead className={styles.theadRow}>
               <th className={styles.thNum}>
                 {t("dispatcherArea.analytics.noShowReport.columns.number")}
               </th>
@@ -61,13 +60,12 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
                 {t("dispatcherArea.analytics.noShowReport.columns.ratio")}
               </th>
               <th className={styles.thAction} />
-            </tr>
-          </thead>
+            </AdminThead>
           <tbody>
             {rows.map(
               (row, index) =>
                 !blocked.has(row.id) && (
-                  <tr key={row.id} className={styles.row}>
+                  <AdminTr key={row.id} className={styles.row}>
                     <td className={styles.tdNum}>{index + 1}</td>
                     <td className={styles.td}>{row.name}</td>
                     <td className={styles.td}>{row.phone}</td>
@@ -83,11 +81,11 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
                         </button>
                       }
                     </td>
-                  </tr>
+                  </AdminTr>
                 ),
             )}
           </tbody>
-        </table>
+        </AdminTable>
       </div>
     </AdminCard>
   );
