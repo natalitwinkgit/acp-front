@@ -29,3 +29,7 @@ export function getStatusClass(status: TripStatus | null): string {
       return "";
   }
 }
+
+export function countPages(rowsLength: number): number {
+  return Math.ceil(rowsLength / 10);
+}

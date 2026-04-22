@@ -132,36 +132,40 @@ export default function RoutesTable({
         </tbody>
       </table>
 
-      <div className={styles.pagination}>
-        <button
-          type="button"
-          className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
-          disabled={page === 1}
-          onClick={() => setPage((p) => p - 1)}
-          aria-label={t("dispatcherArea.routes.table.pagination.prev")}
-        >
-          {"<"}
-        </button>
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
           <button
-            key={p}
             type="button"
-            className={`${styles.pageBtn} ${p === page ? styles.pageBtnActive : ""}`}
-            onClick={() => setPage(p)}
+            className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
+            disabled={page === 1}
+            onClick={() => {
+              setPage((p) => p - 1);
+            }}
+            aria-label={t("dispatcherArea.routes.table.pagination.prev")}
           >
-            {p}
+            {"<"}
           </button>
-        ))}
-        <button
-          type="button"
-          className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
-          disabled={page === totalPages}
-          onClick={() => setPage((p) => p + 1)}
-          aria-label={t("dispatcherArea.routes.table.pagination.next")}
-        >
-          {">"}
-        </button>
-      </div>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            <button
+              key={p}
+              type="button"
+              className={`${styles.pageBtn} ${p === page ? styles.pageBtnActive : ""}`}
+              onClick={() => setPage(p)}
+            >
+              {p}
+            </button>
+          ))}
+          <button
+            type="button"
+            className={`${styles.pageBtn} ${styles.pageBtnArrow}`}
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => p + 1)}
+            aria-label={t("dispatcherArea.routes.table.pagination.next")}
+          >
+            {">"}
+          </button>
+        </div>
+      )}
     </AdminCard>
   );
 }
