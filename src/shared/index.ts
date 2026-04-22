@@ -17,3 +17,7 @@ export type { NotificationSize, NotificationVariant } from './ui/Notification/No
 export { default as AdminCard } from './ui/AdminCard/AdminCard';
 export { AdminTable, AdminThead, AdminTr, adminTableStyles } from './ui/AdminTable/AdminTable';
 export { AdminDateText } from './ui/AdminDateText/AdminDateText';
+export { TablePagination } from './ui/TablePagination/TablePagination';
+
+// Shared utilities
+export { DEFAULT_TABLE_PAGE_SIZE, countPages, paginateItems } from './lib/pagination';
