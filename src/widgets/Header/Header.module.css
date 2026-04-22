@@ -4,9 +4,9 @@
   width: 100%;
   height: 100px;
 
-  background: var(--bg, #FCFEFE);
-  border-bottom: 1px solid var(--LightSlateGray, #7B98A3);
-  box-shadow: 0px 2px 4px 0px var(--LightSlateGray, #7B98A3);
+  background: var(--bg, var(--color-page-bg));
+  border-bottom: 1px solid var(--LightSlateGray, var(--color-border-muted));
+  box-shadow: 0px 2px 4px 0px var(--LightSlateGray, var(--color-border-muted));
 
   position: sticky;
   top: 0;
@@ -84,12 +84,12 @@
   box-sizing: border-box;
   border-bottom: 2px solid transparent;
 
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
 
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
   text-decoration: none;
   white-space: nowrap;
   transition: none;
@@ -97,12 +97,12 @@
 
 .menuItem:hover,
 .menuItem:focus-visible {
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .menuItemActive {
-  color: var(--color-brand, #226078);
-  border-bottom: 2px solid var(--DarkSlateGray, #226078);
+  color: var(--color-brand, var(--color-brand));
+  border-bottom: 2px solid var(--DarkSlateGray, var(--color-brand));
 }
 
 .right {
@@ -161,18 +161,18 @@
 }
 
 .phone {
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 14px;
   line-height: 144%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
   text-decoration: none;
   white-space: nowrap;
 }
 
 .phone:hover,
 .phone:focus-visible {
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .phoneMenuPanel {
@@ -184,18 +184,18 @@
 }
 
 .phoneMenuItem {
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 14px;
   line-height: 144%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
   text-decoration: none;
   white-space: nowrap;
 }
 
 .phoneMenuItem:hover,
 .phoneMenuItem:focus-visible {
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .mobileMenuBtn { display: none; }
@@ -227,7 +227,7 @@
   right: 3px;
   top: 11px;
   height: 2px;
-  background: var(--color-brand, #226078);
+  background: var(--color-brand, var(--color-brand));
   border-radius: 2px;
 }
 
@@ -292,9 +292,9 @@
     left: 0;
     right: 0;
     top: 0;
-    background: var(--bg, #FCFEFE);
-    border-bottom: 1px solid var(--LightSlateGray, #7B98A3);
-    box-shadow: 0px 2px 4px 0px var(--LightSlateGray, #7B98A3);
+    background: var(--bg, var(--color-page-bg));
+    border-bottom: 1px solid var(--LightSlateGray, var(--color-border-muted));
+    box-shadow: 0px 2px 4px 0px var(--LightSlateGray, var(--color-border-muted));
   }
 
   .container {
@@ -415,7 +415,7 @@
   .menu { display: none; }
 
   .headerNoShadow {
-    box-shadow: 0px 2px 4px 0px var(--LightSlateGray, #7B98A3);
+    box-shadow: 0px 2px 4px 0px var(--LightSlateGray, var(--color-border-muted));
   }
 
   .header {
@@ -489,7 +489,7 @@
   }
 
   .phoneToggle:focus-visible {
-    outline: 2px solid var(--color-brand, #226078);
+    outline: 2px solid var(--color-brand, var(--color-brand));
     outline-offset: 2px;
   }
 
@@ -507,7 +507,7 @@
     justify-content: center;
     align-items: center;
     gap: 2px;
-    background: var(--bg, #FCFEFE);
+    background: var(--bg, var(--color-page-bg));
     border: 1px solid #697c95;
     box-shadow:
       -2px 0px 4px #6581a9,
@@ -551,13 +551,13 @@
     align-items: flex-start;
     gap: 16px;
 
-    background: var(--bg, #FCFEFE);
+    background: var(--bg, var(--color-page-bg));
     border-width: 0 0 1px 1px;
     border-style: solid;
-    border-color: var(--LightSlateGray, #7B98A3);
+    border-color: var(--LightSlateGray, var(--color-border-muted));
     box-shadow:
-      0px 2px 4px 0px var(--LightSlateGray, #7B98A3),
-      -2px 0px 4px 0px var(--LightSlateGray, #7B98A3);
+      0px 2px 4px 0px var(--LightSlateGray, var(--color-border-muted)),
+      -2px 0px 4px 0px var(--LightSlateGray, var(--color-border-muted));
     border-radius: 0 0 0 12px;
   }
 
@@ -574,18 +574,18 @@
     justify-content: flex-start;
     align-self: stretch;
 
-    font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+    font-family: var(--font-roboto);
     font-weight: 500;
     font-size: 16px;
     line-height: 144%;
 
-    color: var(--color-brand, #226078);
+    color: var(--color-brand, var(--color-brand));
     text-decoration: none;
     transition: none;
   }
 
   .mobileMenuItemActive {
-    color: var(--color-brand, #226078);
+    color: var(--color-brand, var(--color-brand));
   }
 }
 

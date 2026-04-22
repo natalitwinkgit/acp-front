@@ -13,6 +13,6 @@
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: var(--LightSlateGray, #7b98a3);
+  background: var(--LightSlateGray, var(--color-border-muted));
   border-radius: 3px;
 }

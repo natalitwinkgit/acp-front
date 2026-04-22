@@ -19,7 +19,7 @@
   background-color: transparent;
   border: none;
   margin-inline: auto;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .googleIcon {

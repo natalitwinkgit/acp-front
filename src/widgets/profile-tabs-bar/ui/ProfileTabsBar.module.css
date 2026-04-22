@@ -1,7 +1,7 @@
 .tabsBar {
   width: 100%;
   min-height: 62px;
-  background: #226078;
+  background: var(--color-brand);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -66,12 +66,12 @@
 
 .tabChipMuted {
   background: transparent;
-  color: #fcfefe;
+  color: var(--color-page-bg);
 }
 
 .tabChipActive {
-  background: #c9e4e7;
-  color: #11313d;
+  background: var(--color-surface-accent);
+  color: var(--color-text-strong);
   position: relative;
   z-index: 1;
 }
@@ -86,7 +86,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: #c9e4e7;
+  color: var(--color-surface-accent);
   cursor: pointer;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .exitButton:focus-visible {
-  outline: 2px solid #c9e4e7;
+  outline: 2px solid var(--color-surface-accent);
   outline-offset: 4px;
 }
 

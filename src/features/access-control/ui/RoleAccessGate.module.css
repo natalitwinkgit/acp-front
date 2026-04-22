@@ -21,19 +21,19 @@
 
 .title {
   margin: 0;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 28px;
   line-height: 1.2;
   font-weight: 700;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .description {
   margin: 0;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 16px;
   line-height: 1.5;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .actions {
@@ -50,20 +50,20 @@
   justify-content: center;
   border-radius: 12px;
   text-decoration: none;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 15px;
   line-height: 1.4;
   font-weight: 500;
 }
 
 .actionPrimary {
-  color: #11313d;
-  background: #eebb3a;
+  color: var(--color-text-strong);
+  background: var(--color-accent);
 }
 
 .actionSecondary {
-  color: #226078;
-  border: 1px solid #7b98a3;
+  color: var(--color-brand);
+  border: 1px solid var(--color-border-muted);
   background: rgba(252, 254, 254, 0.96);
 }
 

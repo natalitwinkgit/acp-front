@@ -9,17 +9,17 @@
 }
 
 .title {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .subtitle {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 12px;
-  color: #226078;
+  color: var(--color-brand);
   opacity: 0.75;
 }
 

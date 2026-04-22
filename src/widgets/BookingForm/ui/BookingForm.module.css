@@ -14,8 +14,8 @@
   padding: 40px 80px;
   gap: 24px;
 
-  background: var(--color-surface-soft, #F4F7F7);
-  border: 1px solid var(--color-brand, #226078);
+  background: var(--color-surface-soft, var(--color-surface-soft));
+  border: 1px solid var(--color-brand, var(--color-brand));
   border-radius: 12px;
   flex: 1 1 0;
 }
@@ -23,13 +23,13 @@
 .cardTitle {
   width: min(488px, 100%);
   height: 30px;
-  font-family: Roboto, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 24px;
   line-height: 124%;
   letter-spacing: 0;
   text-align: center;
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .form {
@@ -66,15 +66,15 @@
   align-items: center;
   padding: 8px 12px;
   gap: 10px;
-  background: #FCFEFE;
-  border: 1px solid #7B98A3;
+  background: var(--color-page-bg);
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #11313D;
+  color: var(--color-text-strong);
   text-align: left;
   cursor: pointer;
   outline: none;
@@ -82,7 +82,7 @@
 }
 
 .routeDropdownTrigger:focus-visible {
-  border-color: var(--color-brand, #226078);
+  border-color: var(--color-brand, var(--color-brand));
   box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
 }
 
@@ -130,8 +130,8 @@
   width: 100%;
   max-height: 360px;
   overflow-y: auto;
-  background: #C9E4E7;
-  border: 1px solid #7B98A3;
+  background: var(--color-surface-accent);
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
 }
 
@@ -144,37 +144,37 @@
   padding: 8px 12px;
   gap: 10px;
   border: 0;
-  background: #FCFEFE;
+  background: var(--color-page-bg);
   text-align: left;
   cursor: pointer;
 }
 
 .routeDropdownOption:hover,
 .routeDropdownOption:focus-visible {
-  background: #F4F7F7;
+  background: var(--color-surface-soft);
   outline: none;
 }
 
 .routeDropdownOptionSelected {
-  background: #F4F7F7;
+  background: var(--color-surface-soft);
 }
 
 .routeDropdownOptionLabel {
   min-width: 0;
   flex: 1 1 auto;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #226078;
+  color: var(--color-brand);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .routeDropdownOptionSelected .routeDropdownOptionLabel {
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .timeDropdown {
@@ -192,15 +192,15 @@
   align-items: center;
   padding: 8px 12px;
   gap: 10px;
-  background: #FCFEFE;
-  border: 1px solid #7B98A3;
+  background: var(--color-page-bg);
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #11313D;
+  color: var(--color-text-strong);
   text-align: left;
   cursor: pointer;
   outline: none;
@@ -208,7 +208,7 @@
 }
 
 .timeDropdownTrigger:focus-visible {
-  border-color: var(--color-brand, #226078);
+  border-color: var(--color-brand, var(--color-brand));
   box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
 }
 
@@ -246,8 +246,8 @@
   box-sizing: border-box;
   width: 100%;
   padding: 0;
-  background: #C9E4E7;
-  border: 1px solid #7B98A3;
+  background: var(--color-surface-accent);
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
   overflow: hidden auto;
 }
@@ -275,19 +275,19 @@
   padding: 8px 12px;
   gap: 10px;
   border: 0;
-  background: #FCFEFE;
+  background: var(--color-page-bg);
   cursor: pointer;
   text-align: center;
 }
 
 .timeDropdownOption:hover,
 .timeDropdownOption:focus-visible {
-  background: #F4F7F7;
+  background: var(--color-surface-soft);
   outline: none;
 }
 
 .timeDropdownOptionSelected {
-  background: #F4F7F7;
+  background: var(--color-surface-soft);
 }
 
 .timeDropdownOptionGrid {
@@ -301,17 +301,17 @@
 .timeDropdownOptionLabel {
   min-width: 0;
   flex: 1 1 auto;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #226078;
+  color: var(--color-brand);
   text-align: center;
 }
 
 .timeDropdownOptionSelected .timeDropdownOptionLabel {
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .seatsDropdown {
@@ -330,15 +330,15 @@
   align-items: center;
   padding: 8px 12px;
   gap: 10px;
-  background: #FCFEFE;
-  border: 1px solid #7B98A3;
+  background: var(--color-page-bg);
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #11313D;
+  color: var(--color-text-strong);
   text-align: left;
   cursor: pointer;
   outline: none;
@@ -346,7 +346,7 @@
 }
 
 .seatsDropdownTrigger:focus-visible {
-  border-color: var(--color-brand, #226078);
+  border-color: var(--color-brand, var(--color-brand));
   box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
 }
 
@@ -384,7 +384,7 @@
   gap: 1px;
   padding: 0;
   background: #DCE2E8;
-  border: 1px solid #7B98A3;
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -399,19 +399,19 @@
   padding: 8px 12px;
   gap: 10px;
   border: 0;
-  background: #FCFEFE;
+  background: var(--color-page-bg);
   cursor: pointer;
   text-align: center;
 }
 
 .seatsDropdownOption:hover,
 .seatsDropdownOption:focus-visible {
-  background: #F4F7F7;
+  background: var(--color-surface-soft);
   outline: none;
 }
 
 .seatsDropdownOptionSelected {
-  background: #F4F7F7;
+  background: var(--color-surface-soft);
 }
 
 .seatsDropdownOptionIconCell {
@@ -421,17 +421,17 @@
 .seatsDropdownOptionLabel {
   min-width: 0;
   flex: 1 1 auto;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: #226078;
+  color: var(--color-brand);
   text-align: center;
 }
 
 .seatsDropdownOptionSelected .seatsDropdownOptionLabel {
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .seatsDropdownOptionIcon {
@@ -469,15 +469,15 @@
   align-items: center;
   padding: 8px 12px;
   gap: 10px;
-  background: var(--bg, #FCFEFE);
-  border: 1px solid var(--color-border-muted, #7B98A3);
+  background: var(--bg, var(--color-page-bg));
+  border: 1px solid var(--color-border-muted, var(--color-border-muted));
   border-radius: 12px;
   
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
   outline: none;
 }
 
@@ -491,15 +491,15 @@
   align-items: center;
   padding: 8px 12px;
   gap: 10px;
-  background: var(--bg, #FCFEFE);
-  border: 1px solid var(--color-border-muted, #7B98A3);
+  background: var(--bg, var(--color-page-bg));
+  border: 1px solid var(--color-border-muted, var(--color-border-muted));
   border-radius: 12px;
 
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
   outline: none;
 }
 
@@ -529,8 +529,8 @@
   padding: 10px 16px;
   gap: 10px;
 
-  background: var(--bg, #FCFEFE);
-  border: 1px solid var(--color-border-muted, #7B98A3);
+  background: var(--bg, var(--color-page-bg));
+  border: 1px solid var(--color-border-muted, var(--color-border-muted));
   border-radius: 12px;
 
   cursor: pointer;
@@ -540,11 +540,11 @@
   margin: 0;
   min-width: 37px;
   height: 23px;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .calendarPopover {
@@ -590,8 +590,8 @@
   align-items: center;
   padding: 10px 16px;
   gap: 10px;
-  background: var(--bg, #FCFEFE);
-  border: 1px solid var(--color-border-muted, #7B98A3);
+  background: var(--bg, var(--color-page-bg));
+  border: 1px solid var(--color-border-muted, var(--color-border-muted));
   border-radius: 12px;
 }
 
@@ -605,8 +605,8 @@
   align-items: center;
   padding: 10px 16px;
   gap: 10px;
-  background: var(--bg, #FCFEFE);
-  border: 1px solid var(--color-border-muted, #7B98A3);
+  background: var(--bg, var(--color-page-bg));
+  border: 1px solid var(--color-border-muted, var(--color-border-muted));
   border-radius: 12px;
 }
 
@@ -618,11 +618,11 @@
   outline: none;
   background: transparent;
   
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 
@@ -677,13 +677,13 @@
 .status {
   width: 100%;
   min-height: 20px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 14px;
   line-height: 140%;
 }
 
 .statusInfo {
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .statusError {
@@ -696,8 +696,8 @@
   padding: 12px 24px;
   gap: 10px;
   border-radius: 12px;
-  background: var(--color-accent, #EEBB3A);
-  color: var(--color-text-strong, #11313D);
+  background: var(--color-accent, var(--color-accent));
+  color: var(--color-text-strong, var(--color-text-strong));
   box-shadow: none;
 }
 
@@ -708,7 +708,7 @@
 .select:focus,
 .controlWithIcon:focus-within,
 .controlWithIconHalf:focus-within {
-  border-color: var(--color-brand, #226078);
+  border-color: var(--color-brand, var(--color-brand));
   box-shadow: 0 0 0 2px rgba(34, 96, 120, 0.18);
 }
 
@@ -737,7 +737,7 @@
 
   .cardTitle {
     width: 488px;
-    color: var(--color-text-strong, #11313D);
+    color: var(--color-text-strong, var(--color-text-strong));
   }
 
   .form {
@@ -782,7 +782,7 @@
     font-size: 12px;
     line-height: 132%;
     text-align: left;
-    color: var(--color-brand, #226078);
+    color: var(--color-brand, var(--color-brand));
   }
 
   .form {

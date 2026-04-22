@@ -9,17 +9,17 @@
 }
 
 .title {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .subtitle {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 12px;
-  color: #226078;
+  color: var(--color-brand);
   opacity: 0.75;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .badgeLabel {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
@@ -65,7 +65,7 @@
 }
 
 .badgeValue {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
@@ -81,13 +81,13 @@
   gap: 10px;
   padding-right: 12px;
   padding-left: 12px;
-  background: var(--bg, #fcfefe);
+  background: var(--bg, var(--color-page-bg));
 }
 
 .chartTitle {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
 
-  color: var(--LightSlateGray, #7b98a3);
+  color: var(--LightSlateGray, var(--color-border-muted));
   font-weight: 500;
   font-style: Medium;
   font-size: 18px;

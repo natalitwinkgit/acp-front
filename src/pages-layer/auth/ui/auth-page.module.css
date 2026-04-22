@@ -36,7 +36,7 @@
   border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
-  background-color: #fcfefe;
+  background-color: var(--color-page-bg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -62,7 +62,7 @@
   border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
-  background-color: #fcfefe;
+  background-color: var(--color-page-bg);
   background-repeat: no-repeat;
   background-position: right center;
   background-size: cover;
@@ -176,7 +176,7 @@
   height: 456px;
   padding: 20px;
   border-radius: 12px;
-  background: #f4f7f7;
+  background: var(--color-surface-soft);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -193,7 +193,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 132%;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .loginBlock {
@@ -230,7 +230,7 @@
   line-height: 144%;
   letter-spacing: 0;
   text-transform: none;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .loginBlock .rowBetween {
@@ -239,7 +239,7 @@
 }
 
 .loginBlock .loginInput {
-  background: #f4f7f7;
+  background: var(--color-surface-soft);
   font-size: 14px;
   line-height: 144%;
   color: #283343;
@@ -263,17 +263,17 @@
   padding: 10px;
   gap: 12px;
   border-radius: 12px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
   text-align: center;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .loginBlock .socialBtn {
-  border-color: #7b98a3;
+  border-color: var(--color-border-muted);
 }
 
 .loginAside {
@@ -342,7 +342,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 132%;
-  color: #ffffff;
+  color: var(--color-white);
 }
 
 .registerBrandDesc {
@@ -354,7 +354,7 @@
   font-weight: 500;
   font-size: 17px;
   line-height: 150%;
-  color: #ffffff;
+  color: var(--color-white);
   text-shadow: 0 4px 18px rgba(17, 49, 61, 0.28);
 }
 
@@ -402,11 +402,11 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 150%;
-  color: #fcfefe;
+  color: var(--color-page-bg);
 }
 
 .loginTextLine::marker {
-  color: #eebb3a;
+  color: var(--color-accent);
 }
 
 .registerTextLine {
@@ -415,11 +415,11 @@
   font-weight: 500;
   font-size: 15px;
   line-height: 150%;
-  color: #fcfefe;
+  color: var(--color-page-bg);
 }
 
 .registerTextLine::marker {
-  color: #eebb3a;
+  color: var(--color-accent);
 }
 
 .registerCard {
@@ -462,7 +462,7 @@
   font-size: 24px;
   line-height: 120%;
   letter-spacing: -0.02em;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .registerBlock {
@@ -499,7 +499,7 @@
 }
 
 .registerBlock .hint {
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .registerBlock .socialRowRegister {
@@ -658,9 +658,9 @@
 .checkboxUi {
   width: 24px;
   height: 24px;
-  border: 1px solid #7b98a3;
+  border: 1px solid var(--color-border-muted);
   border-radius: 6px;
-  background: #fcfefe;
+  background: var(--color-page-bg);
   display: grid;
   place-items: center;
   box-sizing: border-box;
@@ -691,7 +691,7 @@
   line-height: 150%;
   text-decoration: underline;
   text-underline-offset: 2px;
-  color: #226078;
+  color: var(--color-brand);
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
@@ -1046,7 +1046,7 @@
   font-weight: 800;
   font-size: 34px;
   line-height: 1.05;
-  color: #ffffff;
+  color: var(--color-white);
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -1055,7 +1055,7 @@
 .brandSub {
   font-weight: 800;
   font-size: 18px;
-  color: #ffffff;
+  color: var(--color-white);
   flex: none;
   order: 1;
   align-self: stretch;
@@ -1072,7 +1072,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 132%;
-  color: #ffffff;
+  color: var(--color-white);
   flex: none;
   order: 1;
   align-self: stretch;
@@ -1450,7 +1450,7 @@
     width: 100%;
     font-size: 16px;
     text-align: center;
-    color: #226078;
+    color: var(--color-brand);
     text-shadow: none;
   }
 
@@ -1472,7 +1472,7 @@
     width: 100%;
     font-size: 16px;
     text-align: center;
-    color: #226078;
+    color: var(--color-brand);
     text-shadow: none;
   }
 

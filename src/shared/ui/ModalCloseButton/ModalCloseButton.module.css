@@ -7,7 +7,7 @@
   border: 0;
   border-radius: 6px;
   background: transparent;
-  color: #226078;
+  color: var(--color-brand);
   cursor: pointer;
   appearance: none;
   -webkit-tap-highlight-color: transparent;

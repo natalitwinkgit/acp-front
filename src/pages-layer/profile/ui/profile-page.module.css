@@ -2,7 +2,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 8px 0 64px;
-  background: var(--color-page-bg, #FCFEFE);
+  background: var(--color-page-bg, var(--color-page-bg));
 }
 
 .container {
@@ -18,7 +18,7 @@
   width: min(100%, 1224px);
   padding: 40px;
   border-radius: 12px;
-  background: var(--color-surface-soft, #F4F7F7);
+  background: var(--color-surface-soft, var(--color-surface-soft));
   box-shadow: 0 4px 4px rgba(123, 152, 163, 0.7);
 }
 
@@ -27,7 +27,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 124%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .notice {
@@ -70,14 +70,14 @@
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(123, 152, 163, 0.45);
-  background: #FFFFFF;
+  background: var(--color-white);
 }
 
 .loginStateText {
   margin: 0;
   font-size: 16px;
   line-height: 144%;
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .loginStateButton {
@@ -89,8 +89,8 @@
   height: 44px;
   padding: 0 24px;
   border-radius: 12px;
-  background: #EEBB3A;
-  color: #11313D;
+  background: var(--color-accent);
+  color: var(--color-text-strong);
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
@@ -116,7 +116,7 @@
 .label {
   font-size: 14px;
   line-height: 144%;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .inputWrap {
@@ -129,21 +129,21 @@
   height: 44px;
   padding: 10px 12px;
   box-sizing: border-box;
-  border: 1px solid #7B98A3;
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
-  background: #FCFEFE;
+  background: var(--color-page-bg);
   font-size: 16px;
   line-height: 144%;
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .input::placeholder {
-  color: #7B98A3;
+  color: var(--color-border-muted);
 }
 
 .input:focus {
   outline: none;
-  border-color: #226078;
+  border-color: var(--color-brand);
   box-shadow: 0 0 0 3px rgba(34, 96, 120, 0.12);
 }
 
@@ -186,8 +186,8 @@
   padding: 12px 24px;
   border: none;
   border-radius: 12px;
-  background: #EEBB3A;
-  color: #11313D;
+  background: var(--color-accent);
+  color: var(--color-text-strong);
   font-size: 16px;
   font-weight: 500;
   line-height: 144%;

@@ -14,7 +14,7 @@
   top: 0;
 
   border-radius: 50%;
-  border: 1px solid var(--color-brand, #226078);
+  border: 1px solid var(--color-brand, var(--color-brand));
 
   pointer-events: none;
   transition: transform 220ms ease;
@@ -70,7 +70,7 @@
   object-position: center;
 
   border-radius: 50px;
-  background: var(--bg, #FCFEFE);
+  background: var(--bg, var(--color-page-bg));
 }
 
 

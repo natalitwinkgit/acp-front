@@ -9,17 +9,17 @@
 }
 
 .title {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 16px;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .subtitle {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 12px;
-  color: #226078;
+  color: var(--color-brand);
   opacity: 0.75;
 }
 
@@ -39,18 +39,18 @@
 }
 
 .tableWrapper::-webkit-scrollbar-thumb {
-  background: var(--LightSlateGray, #7b98a3);
+  background: var(--LightSlateGray, var(--color-border-muted));
   border-radius: 3px;
 }
 
 .tableWrapper::-webkit-scrollbar-thumb:hover {
-  background: #226078;
+  background: var(--color-brand);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
-  background: #fcfefe;
+  background: var(--color-page-bg);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -58,11 +58,11 @@
 .theadRow th {
   padding: 8px 12px;
   text-align: center;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 14px;
   font-weight: 500;
-  color: #226078;
-  border-bottom: 0.5px solid #226078;
+  color: var(--color-brand);
+  border-bottom: 0.5px solid var(--color-brand);
   white-space: nowrap;
 }
 
@@ -79,15 +79,15 @@
 }
 
 .row td {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.44;
   letter-spacing: 0;
   text-align: center;
   vertical-align: middle;
-  color: #11313d;
-  border-bottom: 0.5px solid #7b98a3;
+  color: var(--color-text-strong);
+  border-bottom: 0.5px solid var(--color-border-muted);
   height: 40px;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .tdNum {
-  color: var(--Dark, #11313d);
+  color: var(--Dark, var(--color-text-strong));
   font-weight: 500;
   width: 25;
   height: 39;
@@ -111,10 +111,10 @@
 .blockBtn {
   background: transparent;
   border: 1px solid var(--herry, #d51216);
-  color: var(--DarkSlateGray, #226078);
+  color: var(--DarkSlateGray, var(--color-brand));
   border-radius: 12px;
   padding: 4px 14px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -127,7 +127,7 @@
 }
 
 .blockedLabel {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 13px;
-  color: #7b98a3;
+  color: var(--color-border-muted);
 }

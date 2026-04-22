@@ -1,7 +1,7 @@
 .page {
   width: 100%;
   padding: 0 260px;
-  background: var(--color-page-bg, #fcfefe);
+  background: var(--color-page-bg, var(--color-page-bg));
 }
 
 .container {
@@ -55,7 +55,7 @@
 }
 
 .cardFrame {
-  --decorative-border-bg: var(--color-white, #ffffff);
+  --decorative-border-bg: var(--color-white, var(--color-white));
   --decorative-border-radius: 12px;
   --decorative-border-max-width: 100%;
   --decorative-border-min-height: 427px;
@@ -208,14 +208,14 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 124%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .groupNote {
   margin: 0;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313d);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .menuList {
@@ -241,7 +241,7 @@
   display: block;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313d);
+  color: var(--color-text-strong, var(--color-text-strong));
 }
 
 .menuName {
@@ -288,7 +288,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 132%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 @media (max-width: 1919px) {

@@ -4,13 +4,13 @@
   margin: 0;
   text-align: center;
 
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 28px;
   line-height: 124%;
   letter-spacing: 0;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 @media (max-width: 768px) {

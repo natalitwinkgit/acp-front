@@ -6,10 +6,10 @@
   min-height: var(--chip-min-height, 31px);
   max-width: 100%;
   border-radius: var(--chip-radius, 8px);
-  background: var(--chip-bg, var(--color-brand-overlay, #22607899));
+  background: var(--chip-bg, var(--color-brand-overlay, var(--color-brand-overlay)));
   backdrop-filter: var(--chip-backdrop-filter, blur(1px));
-  color: var(--chip-color, var(--color-white, #FFFFFF));
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  color: var(--chip-color, var(--color-white, var(--color-white)));
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 500;
   font-size: var(--chip-font-size, 14px);

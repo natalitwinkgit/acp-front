@@ -3,7 +3,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 8px 0 64px;
-  background: var(--color-page-bg, #fcfefe);
+  background: var(--color-page-bg, var(--color-page-bg));
 }
 
 .container {
@@ -33,7 +33,7 @@
 
 /* Container */
 .emptyCard {
-  --surface-panel-bg: #F4F7F7;
+  --surface-panel-bg: var(--color-surface-soft);
   --surface-panel-radius: 24px;
   --surface-panel-padding: 0;
   width: min(100%, 1030px);
@@ -122,7 +122,7 @@
   width: 300px;
   min-width: 145px;
   height: 46px;
-  background: #EEBB3A;
+  background: var(--color-accent);
   border-radius: 12px;
   border: none;
   font-family: 'Roboto', sans-serif;
@@ -132,7 +132,7 @@
   line-height: 144%;
   letter-spacing: 0;
   text-align: center;
-  color: #11313D;
+  color: var(--color-text-strong);
   text-decoration: none;
   cursor: pointer;
   transition: opacity 0.2s ease;

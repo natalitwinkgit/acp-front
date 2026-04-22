@@ -9,14 +9,14 @@
   height: 44px;
   padding: 10px 12px;
   box-sizing: border-box;
-  border: 1px solid #7b98a3;
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
-  background: #fcfefe;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  background: var(--color-page-bg);
+  font-family: var(--font-roboto);
   font-size: 16px;
   line-height: 1;
-  color: #11313d;
-  caret-color: #226078;
+  color: var(--color-text-strong);
+  caret-color: var(--color-brand);
   transition:
     border-color 160ms ease,
     box-shadow 160ms ease,
@@ -24,12 +24,12 @@
 }
 
 .control::placeholder {
-  color: #7b98a3;
+  color: var(--color-border-muted);
 }
 
 .control:focus {
   outline: none;
-  border-color: #226078;
+  border-color: var(--color-brand);
   box-shadow: 0 0 0 3px rgba(34, 96, 120, 0.12);
 }
 
@@ -66,7 +66,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #7b98a3;
+  color: var(--color-border-muted);
   pointer-events: none;
 }
 

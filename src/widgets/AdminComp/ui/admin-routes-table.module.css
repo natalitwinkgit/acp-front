@@ -14,7 +14,7 @@
     sans-serif;
   font-weight: 500;
   font-size: 18px;
-  color: #226078;
+  color: var(--color-brand);
   line-height: 1.32;
 }
 
@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fcfefe;
+  background: var(--color-page-bg);
   cursor: pointer;
   font-family:
     Roboto,
@@ -34,7 +34,7 @@
   font-size: 16px;
   line-height: 144%;
 
-  color: #226078;
+  color: var(--color-brand);
 
   min-width: 145px;
   border-radius: 12px;
@@ -49,15 +49,15 @@
   padding-right: 24px;
   padding-bottom: 8px;
   padding-left: 24px;
-  border: 1px solid var(--DarkSlateGray, #226078);
+  border: 1px solid var(--DarkSlateGray, var(--color-brand));
 }
 
 .sortChevron {
   display: inline-block;
   width: 10px;
   height: 10px;
-  border-right: 2px solid #226078;
-  border-bottom: 2px solid #226078;
+  border-right: 2px solid var(--color-brand);
+  border-bottom: 2px solid var(--color-brand);
   transform: rotate(45deg) translateY(-3px);
   flex-shrink: 0;
 }
@@ -66,18 +66,18 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fcfefe;
+  background-color: var(--color-page-bg);
   border-radius: 8px;
 }
 
 .theadRow th {
   padding: 8px 12px;
   text-align: left;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 14px;
   font-weight: 500;
-  color: #226078;
-  border-bottom: solid #226078;
+  color: var(--color-brand);
+  border-bottom: solid var(--color-brand);
   width: 991;
   height: 39px;
   opacity: 1;
@@ -107,19 +107,19 @@
 }
 
 .row:hover {
-  background-color: #f4f7f7;
+  background-color: var(--color-surface-soft);
 }
 
 .row td {
   padding: 9px 12px;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 14px;
-  color: #11313d;
-  border-bottom: 0.5px solid var(--LightSlateGray, #7b98a3);
+  color: var(--color-text-strong);
+  border-bottom: 0.5px solid var(--LightSlateGray, var(--color-border-muted));
 }
 
 .tdNum {
-  color: #226078;
+  color: var(--color-brand);
   font-weight: 500;
 }
 
@@ -133,7 +133,7 @@
 
 /* status chips */
 .statusChip {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-style: Medium;
   font-size: 16px;
@@ -143,20 +143,20 @@
 
 .statusDeparted {
   /* --chip-bg: #169f2c; */
-  color: var(--Dark, #11313d);
+  color: var(--Dark, var(--color-text-strong));
   background: #169f2c4d;
 }
 .statusBoarding {
   --chip-bg: #eebb3a66;
-  --chip-color: #11313d;
+  --chip-color: var(--color-text-strong);
 }
 .statusScheduled {
   --chip-bg: #22607866;
-  --chip-color: var(--Dark, #11313d);
+  --chip-color: var(--Dark, var(--color-text-strong));
 }
 .statusCancelled {
   --chip-bg: #d512156a;
-  --chip-color: #11313d;
+  --chip-color: var(--color-text-strong);
 }
 
 /* pagination */
@@ -172,14 +172,14 @@
   width: 36px;
   height: 36px;
   padding: 0;
-  border: 1px solid #c9e4e7;
+  border: 1px solid var(--color-surface-accent);
   border-radius: 8px;
   background-color: transparent;
   cursor: pointer;
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-size: 14px;
   font-weight: 500;
-  color: #226078;
+  color: var(--color-brand);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,7 +187,7 @@
 }
 
 .pageBtnArrow {
-  background-color: #c9e4e7;
+  background-color: var(--color-surface-accent);
 }
 
 .pageBtnArrow:disabled {
@@ -201,6 +201,6 @@
 
 .pageBtnActive {
   background: transparent;
-  border: 2px solid #226078;
-  color: #226078;
+  border: 2px solid var(--color-brand);
+  color: var(--color-brand);
 }

@@ -5,7 +5,7 @@
   align-items: center;
   gap: 24px;
   padding: 0 0 64px;
-  background: var(--color-page-bg, #fcfefe);
+  background: var(--color-page-bg, var(--color-page-bg));
 }
 
 .breadcrumbsBlock {
@@ -29,7 +29,7 @@
   font-size: 24px;
   line-height: 124%;
   text-align: center;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .intro,
@@ -46,7 +46,7 @@
   font-size: 18px;
   line-height: 132%;
   text-align: center;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .sectionText {
@@ -61,7 +61,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313d);
+  color: var(--color-text-strong, var(--color-text-strong));
   white-space: pre-line;
 }
 

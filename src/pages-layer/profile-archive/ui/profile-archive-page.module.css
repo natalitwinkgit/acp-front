@@ -2,7 +2,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 8px 0 64px;
-  background: var(--color-page-bg, #fcfefe);
+  background: var(--color-page-bg, var(--color-page-bg));
 }
 
 .container {
@@ -60,7 +60,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 132%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .ticketRow {
@@ -77,8 +77,8 @@
   box-sizing: border-box;
   min-height: 262px;
   padding: 20px 40px;
-  border: 1px dashed #7b98a3;
-  background: var(--light-bg, #F4F7F7);
+  border: 1px dashed var(--color-border-muted);
+  background: var(--light-bg, var(--color-surface-soft));
   border-radius: 12px;
 }
 
@@ -108,7 +108,7 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 1.32;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .ticketBadge {
@@ -119,7 +119,7 @@
   padding: 4px 8px;
   border-radius: 12px;
   background: rgba(123, 152, 163, 0.1);
-  color: #226078;
+  color: var(--color-brand);
   font-size: 14px;
 }
 
@@ -130,12 +130,12 @@
 
 .ticketBadgeMuted {
   background: rgba(123, 152, 163, 0.1);
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .ticketMetaDate {
   font-size: 14px;
-  color: #7b98a3;
+  color: var(--color-border-muted);
 }
 
 .routeBody {
@@ -156,7 +156,7 @@
   min-height: 170px;
   font-size: 16px;
   font-weight: 500;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .routeLine {
@@ -174,13 +174,13 @@
   width: 18px;
   height: 18px;
   border-radius: 999px;
-  border: 1.5px solid #eebb3a;
-  background: #f4f7f7;
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-surface-soft);
   flex: 0 0 auto;
 }
 
 .routeCircleFilled {
-  background: #eebb3a;
+  background: var(--color-accent);
 }
 
 .routeDots {
@@ -188,7 +188,7 @@
   flex: 1 1 auto;
   min-height: 120px;
   background:
-    radial-gradient(circle, #c9e4e7 0 4px, transparent 4px 100%);
+    radial-gradient(circle, var(--color-surface-accent) 0 4px, transparent 4px 100%);
   background-size: 8px 14px;
   background-repeat: repeat-y;
   background-position: center;
@@ -210,13 +210,13 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 1.32;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .stationName {
   font-size: 16px;
   line-height: 1.44;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .passengerRow {
@@ -243,26 +243,26 @@
 .passengerName {
   font-size: 16px;
   line-height: 1.44;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .passengerPhone {
   font-size: 16px;
   line-height: 1.44;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .passengerSeat {
   font-size: 16px;
   line-height: 1.44;
-  color: #226078;
+  color: var(--color-brand);
 }
 
 .priceValue {
   font-size: 24px;
   font-weight: 500;
   line-height: 1.24;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .actions {
@@ -287,14 +287,14 @@
 
 .primaryButton {
   border: 0;
-  background: #eebb3a;
-  color: #11313d;
+  background: var(--color-accent);
+  color: var(--color-text-strong);
 }
 
 .secondaryButton {
   background: transparent;
-  border: 2px solid #eebb3a;
-  color: #11313d;
+  border: 2px solid var(--color-accent);
+  color: var(--color-text-strong);
 }
 
 @media (max-width: 1024px) {

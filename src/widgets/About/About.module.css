@@ -18,12 +18,12 @@
   height: 35px;
   margin: 0;
 
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 400;
   font-size: 28px;
   line-height: 124%;
   text-align: center;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
 }
 
 .grid {
@@ -66,14 +66,14 @@
   gap: 16px;
   box-sizing: border-box;
 
-  background: var(--color-surface-soft, #F4F7F7);
+  background: var(--color-surface-soft, var(--color-surface-soft));
   box-shadow: 0px 4px 4px rgba(123, 152, 163, 0.7);
   border-radius: 12px; /* Radius/Radius */
 }
 
 .card:hover,
 .card:focus-visible {
-  background: var(--light-bg, #F4F7F7);
+  background: var(--light-bg, var(--color-surface-soft));
   box-shadow:
     4px 0px 4px 0px rgba(123, 152, 163, 0.7),
     0px 4px 4px 0px rgba(123, 152, 163, 0.7);
@@ -83,7 +83,7 @@
   width: 60px;
   height: 60px;
   border-radius: 999px;
-  background: var(--color-surface-accent, #C9E4E7);
+  background: var(--color-surface-accent, var(--color-surface-accent));
 
   display: flex;
   align-items: center;
@@ -120,7 +120,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-brand, #226078);
+  color: var(--color-brand, var(--color-brand));
   text-align: left;
 }
 
@@ -133,7 +133,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 144%;
-  color: var(--color-text-strong, #11313D);
+  color: var(--color-text-strong, var(--color-text-strong));
   text-align: left;
 }
 

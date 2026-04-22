@@ -22,14 +22,14 @@
   align-items: flex-start;
   position: relative;
   isolation: isolate;
-  background: var(--color-page-bg, #fcfefe);
+  background: var(--color-page-bg, var(--color-page-bg));
   padding:
     var(--not-found-page-padding-top)
     var(--layout-padding-x)
     var(--not-found-page-padding-bottom);
 }
 .card {
-  --surface-panel-bg: var(--light-bg, #f4f7f7);
+  --surface-panel-bg: var(--light-bg, var(--color-surface-soft));
   --surface-panel-radius: 24px;
   --surface-panel-padding: 40px 20px;
 
@@ -90,8 +90,8 @@
   align-items: center;
   padding: 12px 24px;
   border-radius: 12px;
-  background: var(--color-accent, #EEBB3A);
-  color: var(--color-text-strong, #11313D);
+  background: var(--color-accent, var(--color-accent));
+  color: var(--color-text-strong, var(--color-text-strong));
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
@@ -106,7 +106,7 @@
 }
 
 .button:hover {
-  background: var(--color-accent-strong, #F0B523);
+  background: var(--color-accent-strong, var(--color-accent-strong));
 }
 
 .button:focus-visible {

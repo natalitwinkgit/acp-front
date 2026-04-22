@@ -5,8 +5,8 @@
   align-items: flex-start;
   gap: 8px;
   padding: 16px;
-  background: #fcfefe;
-  border: 1px solid #7b98a3;
+  background: var(--color-page-bg);
+  border: 1px solid var(--color-border-muted);
   border-radius: 8px;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .variantInfo {
-  border-color: #7b98a3;
+  border-color: var(--color-border-muted);
 }
 
 .variantError {
@@ -40,7 +40,7 @@
 }
 
 .variantInfo .iconWrap {
-  color: #7b98a3;
+  color: var(--color-border-muted);
 }
 
 .variantError .iconWrap {
@@ -68,25 +68,25 @@
 }
 
 .title {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 144%;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .message {
-  font-family: Roboto, system-ui, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 144%;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .closeButton {
-  color: #11313d;
+  color: var(--color-text-strong);
   flex: none;
 }
 

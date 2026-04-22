@@ -1,5 +1,5 @@
 .panel {
-  background: var(--surface-panel-bg, #f4f7f7);
+  background: var(--surface-panel-bg, var(--color-surface-soft));
   border-radius: var(--surface-panel-radius, 24px);
   box-sizing: border-box;
   width: 100%;

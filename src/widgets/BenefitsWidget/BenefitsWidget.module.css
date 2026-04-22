@@ -1,6 +1,6 @@
 .bar {
   width: 100%;
-  background: var(--color-brand, #226078);
+  background: var(--color-brand, var(--color-brand));
 }
 
 .inner {
@@ -50,12 +50,12 @@
   align-items: center;
   justify-content: center;
 
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-weight: 500;
   font-size: 18px;
   line-height: 132%;
   text-align: center;
-  color: var(--color-white, #ffffff);
+  color: var(--color-white, var(--color-white));
   text-wrap: balance;
 }
 

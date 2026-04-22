@@ -26,7 +26,7 @@
 .current {
   display: inline-flex;
   align-items: center;
-  font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  font-family: var(--font-roboto);
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -37,15 +37,15 @@
 }
 
 .link {
-  color: #7B98A3;
+  color: var(--color-border-muted);
 }
 
 .link:hover {
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .current {
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .arrow {
@@ -68,11 +68,11 @@
 }
 
 .arrowMuted {
-  color: #7B98A3;
+  color: var(--color-border-muted);
 }
 
 .arrowCurrent {
-  color: #11313D;
+  color: var(--color-text-strong);
 }
 
 .row::-webkit-scrollbar {
