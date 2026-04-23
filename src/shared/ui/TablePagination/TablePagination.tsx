@@ -1,4 +1,5 @@
-import type { HTMLAttributes } from "react";
+import { useEffect, useState, type HTMLAttributes } from "react";
+import { getVisiblePages } from "@/src/shared/lib/pagination";
 import styles from "./TablePagination.module.css";
 
 type TablePaginationProps = HTMLAttributes<HTMLDivElement> & {
@@ -19,6 +20,10 @@ export function TablePagination({
   ...props
 }: TablePaginationProps) {
   const safeTotalPages = Math.max(totalPages, 1);
+  const [visibleValues, setVisibleValues] = useState<number[]>([]);
+  useEffect(() => {
+    setVisibleValues(getVisiblePages(page, safeTotalPages));
+  }, [page, safeTotalPages]);
 
   return (
     <div className={`${styles.pagination} ${className ?? ""}`} {...props}>
@@ -31,18 +36,31 @@ export function TablePagination({
       >
         {"<"}
       </button>
-      {Array.from({ length: safeTotalPages }, (_, index) => index + 1).map(
-        (value) => (
-          <button
-            key={value}
-            type="button"
-            className={`${styles.pageBtn} ${value === page ? styles.pageBtnActive : ""}`}
-            onClick={() => onPageChange(value)}
-          >
-            {value}
-          </button>
-        ),
-      )}
+      {visibleValues.map((value, index) => {
+        const nextIndex = index + 1;
+        return (
+          <>
+            <button
+              key={value}
+              type="button"
+              className={`${styles.pageBtn} ${value === page ? styles.pageBtnActive : ""}`}
+              onClick={() => onPageChange(value)}
+            >
+              {value}
+            </button>
+            {visibleValues[nextIndex] - value > 1 && (
+              <button
+                key={"..."}
+                type="button"
+                className={`${styles.pageBtn}`}
+                onClick={() => onPageChange(value)}
+              >
+                {"..."}
+              </button>
+            )}
+          </>
+        );
+      })}
       <button
         type="button"
         className={`${styles.pageBtn} ${styles.pageBtnArrow}`}

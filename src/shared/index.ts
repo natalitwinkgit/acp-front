@@ -20,4 +20,9 @@ export { AdminDateText } from './ui/AdminDateText/AdminDateText';
 export { TablePagination } from './ui/TablePagination/TablePagination';
 
 // Shared utilities
-export { DEFAULT_TABLE_PAGE_SIZE, countPages, paginateItems } from './lib/pagination';
+export {
+  DEFAULT_TABLE_PAGE_SIZE,
+  countPages,
+  getVisiblePages,
+  paginateItems,
+} from './lib/pagination';
