@@ -557,6 +557,25 @@
           "load": "Load",
           "income": "Income",
           "redemptionRate": "% redeemed"
+        },
+        "details": {
+          "dynamicsTitle": "Route dynamics {{route}}",
+          "statisticsTitle": "Ticket statistics",
+          "totalIncome": "Total income",
+          "stats": {
+            "reserved": "Reserved",
+            "purchased": "Purchased",
+            "cancelled": "Cancelled"
+          },
+          "days": {
+            "monday": "Mon",
+            "tuesday": "Tue",
+            "wednesday": "Wed",
+            "thursday": "Thu",
+            "friday": "Fri",
+            "saturday": "Sat",
+            "sunday": "Sun"
+          }
         }
       },
       "noShowReport": {

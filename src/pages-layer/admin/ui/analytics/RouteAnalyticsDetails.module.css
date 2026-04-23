@@ -1,0 +1,84 @@
+.detailCard {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.statisticsCard {
+  overflow: visible;
+}
+
+.chartWrapper {
+  flex: 1;
+  min-height: 220px;
+  width: 100%;
+}
+
+.statisticsContent {
+  display: grid;
+  grid-template-rows: auto minmax(132px, 1fr) auto;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+  overflow: visible;
+}
+
+.statisticsLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-border-muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  color: var(--color-border-muted);
+}
+
+.donutWrapper {
+  min-height: 188px;
+  width: 100%;
+  overflow: visible;
+}
+
+.chartTooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-muted);
+  border-radius: 8px;
+  background: var(--color-page-bg);
+  box-shadow: 0 4px 12px rgb(17 49 61 / 12%);
+}
+
+.chartTooltipLabel {
+  color: var(--color-border-muted);
+  font-size: 12px;
+}
+
+.chartTooltipValue {
+  color: var(--color-brand);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pieValueLabel {
+  fill: var(--color-border-muted);
+  font-size: 14px;
+  font-weight: 500;
+}

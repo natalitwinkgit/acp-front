@@ -8,11 +8,12 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  grid-template-rows: auto minmax(300px, 30vh);
+  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-rows: minmax(300px, 1fr);
   gap: 16px;
   flex: 1;
   min-height: 0;
+  align-items: stretch;
 }
 
 .header {
@@ -32,6 +33,11 @@
 .routesCard {
   flex: 1;
   min-height: 0;
+  transition: flex-basis 160ms ease;
+}
+
+.routesCardCompact {
+  flex: 0 0 50%;
 }
 
 .routesCardInner {
@@ -56,4 +62,23 @@
 
 .clickableRow {
   cursor: pointer;
+}
+
+.clickableRow:hover {
+  background: var(--color-surface-soft);
+}
+
+.selectedRow {
+  background: var(--color-surface-accent);
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(260px, auto));
+  }
+
+  .routesCardCompact {
+    flex-basis: 52%;
+  }
 }

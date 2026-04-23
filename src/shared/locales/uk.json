@@ -557,6 +557,25 @@
           "load": "Завантаженість",
           "income": "Дохід",
           "redemptionRate": "% викупу"
+        },
+        "details": {
+          "dynamicsTitle": "Динаміка маршруту {{route}}",
+          "statisticsTitle": "Статистика квитків",
+          "totalIncome": "Загальний дохід",
+          "stats": {
+            "reserved": "Заброньовано",
+            "purchased": "Викуплено",
+            "cancelled": "Скасовано"
+          },
+          "days": {
+            "monday": "Пн",
+            "tuesday": "Вт",
+            "wednesday": "Ср",
+            "thursday": "Чт",
+            "friday": "Пт",
+            "saturday": "Сб",
+            "sunday": "Нд"
+          }
         }
       },
       "noShowReport": {
