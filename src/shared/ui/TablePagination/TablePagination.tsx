@@ -1,6 +1,7 @@
+import type { HTMLAttributes } from "react";
 import styles from "./TablePagination.module.css";
 
-type TablePaginationProps = {
+type TablePaginationProps = HTMLAttributes<HTMLDivElement> & {
   page: number;
   totalPages: number;
   onPageChange: (page: number) => void;
@@ -9,16 +10,18 @@ type TablePaginationProps = {
 };
 
 export function TablePagination({
+  className,
   page,
   totalPages,
   onPageChange,
   prevAriaLabel,
   nextAriaLabel,
+  ...props
 }: TablePaginationProps) {
   const safeTotalPages = Math.max(totalPages, 1);
 
   return (
-    <div className={styles.pagination}>
+    <div className={`${styles.pagination} ${className ?? ""}`} {...props}>
       <button
         type="button"
         className={`${styles.pageBtn} ${styles.pageBtnArrow}`}

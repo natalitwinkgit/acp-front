@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 16px;
   height: calc(100vh - 120px);
+  min-height: 0;
 }
 
 .grid {
@@ -26,6 +27,31 @@
   font-size: 18px;
   color: var(--color-brand);
   line-height: 1.32;
+}
+
+.routesCard {
+  flex: 1;
+  min-height: 0;
+}
+
+.routesCardInner {
+  height: 100%;
+}
+
+.tableArea {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tableScroll {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.pagination {
+  margin-top: auto;
 }
 
 .clickableRow {
