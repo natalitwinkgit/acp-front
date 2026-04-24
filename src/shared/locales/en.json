@@ -580,6 +580,11 @@
       },
       "noShowReport": {
         "title": "No-show report 5+ unpaid",
+        "empty": {
+          "title": "No data",
+          "description": "The no-show list is empty.",
+          "note": "All passengers redeem their tickets on time."
+        },
         "subtitle": "Users who frequently book but do not purchase tickets — 5 or more no-shows.",
         "columns": {
           "number": "#",
