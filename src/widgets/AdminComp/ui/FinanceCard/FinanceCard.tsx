@@ -79,29 +79,29 @@ export default function FinanceCard() {
             className={styles.badge}
             style={{ background: `${color}cc` }}
           >
-            <span
-              className={styles.badgeIcon}
-              aria-hidden="true"
-              style={{
-                WebkitMaskImage: `url(${icon})`,
-                maskImage: `url(${icon})`,
-                backgroundColor: key === "reserved" ? "#11313d" : "#ffffff",
-              }}
-            />
-            <div className={styles.badgeContent}>
+            <div className={styles.badgeTop}>
+              <span
+                className={styles.badgeIcon}
+                aria-hidden="true"
+                style={{
+                  WebkitMaskImage: `url(${icon})`,
+                  maskImage: `url(${icon})`,
+                  backgroundColor: key === "reserved" ? "#11313d" : "#ffffff",
+                }}
+              />
               <span
                 className={styles.badgeLabel}
                 style={{ color: key === "reserved" ? "#11313d" : "#ffffff" }}
               >
                 {t(`dispatcherArea.analytics.finance.${key}`)}
               </span>
-              <span
-                className={styles.badgeValue}
-                style={{ color: key === "reserved" ? "#11313d" : "#ffffff" }}
-              >
-                {formatCurrency(value)}
-              </span>
             </div>
+            <span
+              className={styles.badgeValue}
+              style={{ color: key === "reserved" ? "#11313d" : "#ffffff" }}
+            >
+              {formatCurrency(value)}
+            </span>
           </div>
         ))}
       </div>
@@ -110,7 +110,8 @@ export default function FinanceCard() {
         <span className={styles.chartTitle}>
           {t("dispatcherArea.analytics.finance.totalIncome")}
         </span>
-        <ResponsiveContainer width="100%" height={200}>
+        <div className={styles.chartArea}>
+        <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={FINANCE_DATA}
             margin={{ top: 24, right: 8, left: 0, bottom: 0 }}
@@ -140,6 +141,7 @@ export default function FinanceCard() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </div>
     </AdminCard>
   );

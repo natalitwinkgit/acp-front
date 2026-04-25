@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls C:/Users/afnes/busStation/acp-front/app/[locale]/)",
+      "Bash(ls C:/Users/afnes/busStation/acp-front/app/[locale]/\\\\\\(site\\\\\\)/)",
+      "Bash(ls C:/Users/afnes/busStation/acp-front/app/[locale]/\\\\\\(workspace\\\\\\)/)",
+      "Bash(ls *)",
+      "Bash(xargs grep *)"
+    ]
+  }
+}
