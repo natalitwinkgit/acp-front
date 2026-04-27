@@ -1,16 +1,20 @@
 "use client";
 
 import { mockTickets } from "@/src/entities/ticket";
+import { NewOrderModal } from "@/src/features/add-order";
+import { OrderDetailsModal } from "@/src/features/ticket-details";
 import { useTicketSearch } from "@/src/features/search-tickets";
 import { useTicketSort } from "@/src/features/sort-tickets";
 import { TicketsTable } from "@/src/widgets/tickets-table";
 import { TicketsToolbar } from "@/src/widgets/tickets-toolbar";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import styles from "./dispatcher-page.module.css";
 
 export default function DispatcherPage() {
   const { query, setQuery, filterTickets } = useTicketSearch();
   const { sortOption, setSortOption, sortTickets } = useTicketSort();
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
 
   const displayedTickets = useMemo(
     () => sortTickets(filterTickets(mockTickets)),
@@ -18,14 +22,9 @@ export default function DispatcherPage() {
     [query, sortOption]
   );
 
-  function handleAddOrder() {
-    // TODO: open add-order modal / navigate to booking flow
-  }
-
-  function handleDetails(ticketId: string) {
-    // TODO: navigate to ticket detail page
-    console.log("Open details for ticket:", ticketId);
-  }
+  const selectedTicket = selectedTicketId
+    ? mockTickets.find((t) => t.id === selectedTicketId) ?? null
+    : null;
 
   return (
     <div className={styles.page}>
@@ -34,9 +33,21 @@ export default function DispatcherPage() {
         onSearchChange={setQuery}
         sortOption={sortOption}
         onSortChange={setSortOption}
-        onAddOrder={handleAddOrder}
+        onAddOrder={() => setIsOrderModalOpen(true)}
       />
-      <TicketsTable tickets={displayedTickets} onDetails={handleDetails} />
+      <TicketsTable tickets={displayedTickets} onDetails={setSelectedTicketId} />
+      {isOrderModalOpen && (
+        <NewOrderModal
+          nextBookingNumber={mockTickets.length + 1}
+          onClose={() => setIsOrderModalOpen(false)}
+        />
+      )}
+      {selectedTicket && (
+        <OrderDetailsModal
+          ticket={selectedTicket}
+          onClose={() => setSelectedTicketId(null)}
+        />
+      )}
     </div>
   );
 }
