@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   AdminCard,
   AdminTable,
+  adminTableStyles,
   AdminThead,
   AdminTr,
-  adminTableStyles,
-  countPages,
-  paginateItems,
   TablePagination,
   useI18n,
 } from "@/src/shared";
+import { useResizeTableHook } from "@/src/shared/lib/resizeTableHook";
 import AllRoutesAnalyticsHeader from "@/src/widgets/AdminComp/ui/Header/AllRoutesAnalyticsHeader";
+import { useState } from "react";
 import RouteAnalyticsDetails from "./RouteAnalyticsDetails";
 import styles from "./admin-analytics.module.css";
 
@@ -200,85 +199,27 @@ const ROUTE_ANALYTICS_DETAILS: Record<number, RouteAnalyticsDetail> = {
 
 export default function AllRoutesPage() {
   const { t } = useI18n();
-  const [page, setPage] = useState(1);
   const [selectedRouteId, setSelectedRouteId] = useState<number | null>(null);
-  const cardRef = useRef<HTMLDivElement | null>(null);
-  const headerRef = useRef<HTMLDivElement | null>(null);
-  const tableAreaRef = useRef<HTMLDivElement | null>(null);
-  const tableScrollRef = useRef<HTMLDivElement | null>(null);
-  const theadRef = useRef<HTMLTableRowElement | null>(null);
-  const firstRowRef = useRef<HTMLTableRowElement | null>(null);
-  const paginationRef = useRef<HTMLDivElement | null>(null);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  // const [availableRowsHeight, setAvailableRowsHeight] = useState()
-  const [measurements, setMeasurements] = useState({
-    cardHeight: 0,
-    headerHeight: 0,
-    tableAreaHeight: 0,
-    tableScrollHeight: 0,
-    theadHeight: 0,
-    rowHeight: 0,
-    paginationHeight: 0,
+  const {
+    page,
+    setPage,
+    rowsPerPage,
+    totalPages,
+    paginatedRows,
+    availableRowsHeight,
+    measurements,
+    refs: {
+      cardRef,
+      headerRef,
+      tableAreaRef,
+      tableScrollRef,
+      theadRef,
+      firstRowRef,
+      paginationRef,
+    },
+  } = useResizeTableHook({
+    items: mockAllRoutes,
   });
-
-  useLayoutEffect(() => {
-    const measureTableLayout = () => {
-      const tableAreaHeight =
-        tableAreaRef.current?.getBoundingClientRect().height ?? 0;
-      const theadHeight = theadRef.current?.getBoundingClientRect().height ?? 0;
-      const rowHeight =
-        firstRowRef.current?.getBoundingClientRect().height ?? 0;
-
-      const availableRowsHeight = Math.max(tableAreaHeight - theadHeight, 0);
-
-      if (rowHeight > 0) {
-        const nextRowsPerPage = Math.max(
-          1,
-          Math.floor(availableRowsHeight / rowHeight),
-        );
-
-        setRowsPerPage((prev) =>
-          prev === nextRowsPerPage ? prev : nextRowsPerPage,
-        );
-      }
-
-      setMeasurements({
-        cardHeight: cardRef.current?.clientHeight ?? 0,
-        headerHeight: headerRef.current?.getBoundingClientRect().height ?? 0,
-        tableAreaHeight:
-          tableAreaRef.current?.getBoundingClientRect().height ?? 0,
-        tableScrollHeight:
-          tableScrollRef.current?.getBoundingClientRect().height ?? 0,
-        theadHeight: theadRef.current?.getBoundingClientRect().height ?? 0,
-        rowHeight: firstRowRef.current?.getBoundingClientRect().height ?? 0,
-        paginationHeight:
-          paginationRef.current?.getBoundingClientRect().height ?? 0,
-      });
-    };
-
-    measureTableLayout();
-
-    const observer = new ResizeObserver(() => {
-      measureTableLayout();
-    });
-
-    if (cardRef.current) observer.observe(cardRef.current);
-    if (tableAreaRef.current) observer.observe(tableAreaRef.current);
-
-    return () => observer.disconnect();
-    // const totalPages = countPages(mockAllRoutes.length, rowsPerPage);
-  }, []);
-
-  useEffect(() => {
-    const newTotalPages = Math.max(
-      1,
-      countPages(mockAllRoutes.length, rowsPerPage),
-    );
-    const set = () => {
-      setPage((prevPage) => Math.min(prevPage, newTotalPages));
-    };
-    set();
-  }, [rowsPerPage]);
 
   const {
     cardHeight,
@@ -290,9 +231,6 @@ export default function AllRoutesPage() {
     paginationHeight,
   } = measurements;
 
-  const availableRowsHeight = Math.max(tableAreaHeight - theadHeight, 0);
-  const totalPages = countPages(mockAllRoutes.length, rowsPerPage);
-  const paginatedRows = paginateItems(mockAllRoutes, page, rowsPerPage);
   const selectedRoute =
     mockAllRoutes.find((route) => route.id === selectedRouteId) ?? null;
   const selectedRouteDetails = selectedRoute

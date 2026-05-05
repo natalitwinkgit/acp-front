@@ -26,3 +26,4 @@ export {
   getVisiblePages,
   paginateItems,
 } from './lib/pagination';
+export { useResizeTableHook } from './lib/resizeTableHook';
