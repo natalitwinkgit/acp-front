@@ -1,10 +1,53 @@
 "use client";
 
-import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import RoleWorkspacePageContent from "@/src/pages-layer/role-workspace/ui/RoleWorkspacePageContent";
+import { mockTickets } from "@/src/entities/ticket";
+import { NewOrderModal } from "@/src/features/add-order";
+import { OrderDetailsModal } from "@/src/features/ticket-details";
+import { useTicketSearch } from "@/src/features/search-tickets";
+import { useTicketSort } from "@/src/features/sort-tickets";
+import { TicketsTable } from "@/src/widgets/tickets-table";
+import { TicketsToolbar } from "@/src/widgets/tickets-toolbar";
+import { useMemo, useState } from "react";
+import styles from "./dispatcher-page.module.css";
 
 export default function DispatcherPage() {
-  const { t } = useI18n();
+  const { query, setQuery, filterTickets } = useTicketSearch();
+  const { sortOption, setSortOption, sortTickets } = useTicketSort();
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
 
-  return <RoleWorkspacePageContent title={t("dispatcherArea.sidebar.menu.tickets")} />;
+  const displayedTickets = useMemo(
+    () => sortTickets(filterTickets(mockTickets)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [query, sortOption]
+  );
+
+  const selectedTicket = selectedTicketId
+    ? mockTickets.find((t) => t.id === selectedTicketId) ?? null
+    : null;
+
+  return (
+    <div className={styles.page}>
+      <TicketsToolbar
+        searchQuery={query}
+        onSearchChange={setQuery}
+        sortOption={sortOption}
+        onSortChange={setSortOption}
+        onAddOrder={() => setIsOrderModalOpen(true)}
+      />
+      <TicketsTable tickets={displayedTickets} onDetails={setSelectedTicketId} />
+      {isOrderModalOpen && (
+        <NewOrderModal
+          nextBookingNumber={mockTickets.length + 1}
+          onClose={() => setIsOrderModalOpen(false)}
+        />
+      )}
+      {selectedTicket && (
+        <OrderDetailsModal
+          ticket={selectedTicket}
+          onClose={() => setSelectedTicketId(null)}
+        />
+      )}
+    </div>
+  );
 }

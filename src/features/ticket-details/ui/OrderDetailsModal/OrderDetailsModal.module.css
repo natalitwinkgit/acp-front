@@ -1,0 +1,136 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(17, 49, 61, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 8px 32px rgba(17, 49, 61, 0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 12px;
+}
+
+.title {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #11313d;
+  margin: 0;
+}
+
+.body {
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0eaed;
+}
+
+.rowIcon {
+  color: #7b98a3;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.rowValue {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  color: #11313d;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0eaed;
+}
+
+.metaLabel {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 14px;
+  color: #7b98a3;
+}
+
+.metaValue {
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  color: #11313d;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e0eaed;
+  margin: 16px 0 12px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn {
+  height: 46px;
+  border-radius: 10px;
+  border: none;
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.1s;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:hover {
+  filter: brightness(0.94);
+}
+
+.btnBuy {
+  background: #32a352;
+  color: #fff;
+}
+
+.btnBook {
+  background: #eebb3a;
+  color: #11313d;
+}
+
+.btnEdit {
+  background: #fff;
+  border: 2px solid #b0c8d0;
+  color: #226078;
+}
+
+.btnCancel {
+  background: #d93a3a;
+  color: #fff;
+}
