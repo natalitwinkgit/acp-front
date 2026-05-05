@@ -1,15 +1,22 @@
 import StatusBadge from "@/src/shared/ui/StatusBadge/StatusBadge";
 import type { StatusBadgeVariant } from "@/src/shared/ui/StatusBadge/StatusBadge";
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import type { TicketStatus } from "../../model/types";
 
 type StatusConfig = {
-  label: string;
+  labelKey: string;
   variant: StatusBadgeVariant;
 };
 
 const STATUS_CONFIG: Record<TicketStatus, StatusConfig> = {
-  booked: { label: "Бронь", variant: "warning" },
-  paid: { label: "Оплачено", variant: "success" },
+  booked: {
+    labelKey: "dispatcherArea.tickets.statuses.bookedShort",
+    variant: "warning",
+  },
+  paid: {
+    labelKey: "dispatcherArea.tickets.statuses.paid",
+    variant: "success",
+  },
 };
 
 type Props = {
@@ -17,6 +24,8 @@ type Props = {
 };
 
 export default function TicketStatusBadge({ status }: Props) {
-  const { label, variant } = STATUS_CONFIG[status];
-  return <StatusBadge label={label} variant={variant} />;
+  const { t } = useI18n();
+  const { labelKey, variant } = STATUS_CONFIG[status];
+
+  return <StatusBadge label={t(labelKey)} variant={variant} />;
 }

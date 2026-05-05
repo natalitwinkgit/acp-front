@@ -1,5 +1,6 @@
 "use client";
 
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import styles from "./AddOrderButton.module.css";
 
 type Props = {
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export default function AddOrderButton({ onClick }: Props) {
+  const { t } = useI18n();
+
   return (
     <button type="button" className={styles.button} onClick={onClick}>
       <svg
@@ -23,7 +26,7 @@ export default function AddOrderButton({ onClick }: Props) {
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
-      Додати замовлення
+      {t("dispatcherArea.tickets.actions.addOrder")}
     </button>
   );
 }

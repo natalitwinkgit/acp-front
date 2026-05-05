@@ -3,6 +3,7 @@
 import { TicketStatusBadge } from "@/src/entities/ticket";
 import type { Ticket } from "@/src/entities/ticket";
 import { TicketTimer } from "@/src/features/ticket-timer";
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import styles from "./TicketsTable.module.css";
 
 type Props = {
@@ -11,10 +12,12 @@ type Props = {
 };
 
 export default function TicketsTable({ tickets, onDetails }: Props) {
+  const { locale, t } = useI18n();
+
   if (tickets.length === 0) {
     return (
       <div className={styles.empty}>
-        <p>Квитків не знайдено</p>
+        <p>{t("dispatcherArea.tickets.table.empty")}</p>
       </div>
     );
   }
@@ -24,14 +27,24 @@ export default function TicketsTable({ tickets, onDetails }: Props) {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.th} style={{ width: 48 }}>№</th>
-            <th className={styles.th}>Дані</th>
-            <th className={styles.th}>Маршрут</th>
-            <th className={styles.th}>Дата</th>
-            <th className={styles.th}>Квитки</th>
-            <th className={styles.th}>Статус</th>
-            <th className={styles.th}>Таймер</th>
-            <th className={styles.th}>Редагувати</th>
+            <th className={styles.th} style={{ width: 48 }}>
+              {t("dispatcherArea.routes.table.columns.number")}
+            </th>
+            <th className={styles.th}>
+              {t("dispatcherArea.tickets.table.columns.data")}
+            </th>
+            <th className={styles.th}>
+              {t("dispatcherArea.analytics.popularRoutes.columns.route")}
+            </th>
+            <th className={styles.th}>{t("bookingForm.date.placeholder")}</th>
+            <th className={styles.th}>{t("dispatcherArea.sidebar.menu.tickets")}</th>
+            <th className={styles.th}>{t("dispatcherArea.routes.table.columns.status")}</th>
+            <th className={styles.th}>
+              {t("dispatcherArea.tickets.table.columns.timer")}
+            </th>
+            <th className={styles.th}>
+              {t("dispatcherArea.tickets.table.columns.actions")}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +53,7 @@ export default function TicketsTable({ tickets, onDetails }: Props) {
               key={ticket.id}
               ticket={ticket}
               rowNumber={index + 1}
+              locale={locale}
               onDetails={onDetails}
             />
           ))}
@@ -52,10 +66,12 @@ export default function TicketsTable({ tickets, onDetails }: Props) {
 type TicketRowProps = {
   ticket: Ticket;
   rowNumber: number;
+  locale: string;
   onDetails: (ticketId: string) => void;
 };
 
-function TicketRow({ ticket, rowNumber, onDetails }: TicketRowProps) {
+function TicketRow({ ticket, rowNumber, locale, onDetails }: TicketRowProps) {
+  const { t } = useI18n();
   const routeLine = ticket.routeStop
     ? `${ticket.routeFrom}-${ticket.routeTo}`
     : `${ticket.routeFrom} - ${ticket.routeTo}`;
@@ -85,7 +101,7 @@ function TicketRow({ ticket, rowNumber, onDetails }: TicketRowProps) {
 
       <td className={styles.td}>
         <div className={styles.ticketCount}>{ticket.ticketCount}</div>
-        <div className={styles.price}>{ticket.totalPrice.toLocaleString("uk-UA")} ₴</div>
+        <div className={styles.price}>{ticket.totalPrice.toLocaleString(locale)} ₴</div>
       </td>
 
       <td className={styles.td}>
@@ -102,7 +118,7 @@ function TicketRow({ ticket, rowNumber, onDetails }: TicketRowProps) {
           className={styles.detailsButton}
           onClick={() => onDetails(ticket.id)}
         >
-          Деталі
+          {t("dispatcherArea.tickets.actions.details")}
         </button>
       </td>
     </tr>

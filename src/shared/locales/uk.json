@@ -505,6 +505,58 @@
         "settings": "Налаштування"
       }
     },
+    "tickets": {
+      "toolbar": {
+        "aria": "Панель управління квитками"
+      },
+      "search": {
+        "placeholder": "Пошук: № броні / прізвище / телефон +380",
+        "clearAria": "Очистити пошук"
+      },
+      "sort": {
+        "aria": "Параметри сортування",
+        "options": {
+          "dateAsc": "Дата (спочатку старіші)",
+          "dateDesc": "Дата (спочатку новіші)",
+          "nameAsc": "Прізвище А-Я",
+          "nameDesc": "Прізвище Я-А",
+          "status": "За статусом"
+        }
+      },
+      "table": {
+        "empty": "Квитків не знайдено",
+        "columns": {
+          "data": "Дані",
+          "timer": "Таймер",
+          "actions": "Дії"
+        }
+      },
+      "statuses": {
+        "booked": "Заброньовано",
+        "bookedShort": "Бронь",
+        "paid": "Оплачено"
+      },
+      "timer": {
+        "noneAria": "Таймер відсутній",
+        "untilBookingEnd": "До кінця бронювання",
+        "minutes": "хв."
+      },
+      "actions": {
+        "addOrder": "Додати замовлення",
+        "details": "Деталі",
+        "saveChanges": "Зберегти зміни",
+        "buy": "Викупити",
+        "cancel": "Скасувати"
+      },
+      "modal": {
+        "newOrderTitle": "Нове замовлення",
+        "orderDetailsTitle": "Дані замовлення",
+        "routePlaceholder": "м.Кременчук - м.Черкаси",
+        "datePlaceholder": "дд.мм.рррр",
+        "departureTime": "Час відправлення",
+        "ticketCount": "К-сть квитків"
+      }
+    },
     "routes": {
       "subtitle": "Керування логістикою маршрутів.",
       "addRoute": "Додати маршрут",

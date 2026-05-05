@@ -4,10 +4,11 @@ import { AddOrderButton } from "@/src/features/add-order";
 import { TicketSearchInput } from "@/src/features/search-tickets";
 import { TicketSortDropdown } from "@/src/features/sort-tickets";
 import type { SortOption } from "@/src/features/sort-tickets";
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import styles from "./TicketsToolbar.module.css";
 
-function formatUkrainianDate(date: Date): string {
-  return date.toLocaleDateString("uk-UA", {
+function formatLocalizedDate(date: Date, locale: string): string {
+  return date.toLocaleDateString(locale, {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -29,10 +30,15 @@ export default function TicketsToolbar({
   onSortChange,
   onAddOrder,
 }: Props) {
-  const today = formatUkrainianDate(new Date());
+  const { locale, t } = useI18n();
+  const today = formatLocalizedDate(new Date(), locale);
 
   return (
-    <div className={styles.toolbar} role="toolbar" aria-label="Панель управління квитками">
+    <div
+      className={styles.toolbar}
+      role="toolbar"
+      aria-label={t("dispatcherArea.tickets.toolbar.aria")}
+    >
       <TicketSearchInput value={searchQuery} onChange={onSearchChange} />
       <TicketSortDropdown value={sortOption} onChange={onSortChange} />
       <AddOrderButton onClick={onAddOrder} />

@@ -1,10 +1,12 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect } from "react";
-import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
-import Portal from "@/src/shared/ui/Portal/Portal";
 import type { Ticket } from "@/src/entities/ticket";
 import { useCountdown } from "@/src/features/ticket-timer";
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
+import ModalCloseButton from "@/src/shared/ui/ModalCloseButton/ModalCloseButton";
+import Portal from "@/src/shared/ui/Portal/Portal";
 import styles from "./OrderDetailsModal.module.css";
 
 type Props = {
@@ -12,18 +14,13 @@ type Props = {
   onClose: () => void;
 };
 
-const STATUS_LABEL: Record<Ticket["status"], string> = {
-  booked: "Заброньовано",
-  paid: "Оплачено",
-};
-
 function formatSeconds(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  const minutes = Math.floor(seconds / 60);
+  const remainder = seconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
 }
 
-function Row({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
+function Row({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
     <div className={styles.row}>
       <span className={styles.rowIcon}>{icon}</span>
@@ -95,11 +92,18 @@ function HryvniaIcon() {
 }
 
 export default function OrderDetailsModal({ ticket, onClose }: Props) {
+  const { t } = useI18n();
   const remainingSeconds = useCountdown(ticket.timerSeconds);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
@@ -109,64 +113,70 @@ export default function OrderDetailsModal({ ticket, onClose }: Props) {
 
   const bookingNumberStr = ticket.bookingNumber.replace("BR-", "").padStart(6, "0");
   const route = `${ticket.routeFrom} - ${ticket.routeTo}`;
+  const statusLabel =
+    ticket.status === "booked"
+      ? t("dispatcherArea.tickets.statuses.booked")
+      : t("dispatcherArea.tickets.statuses.paid");
 
   return (
     <Portal>
-    <div className={styles.overlay} onClick={onClose}>
-      <div
-        className={styles.modal}
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="order-details-title"
-      >
-        <div className={styles.header}>
-          <h2 className={styles.title} id="order-details-title">
-            Дані замовлення №{bookingNumberStr}
-          </h2>
-          <ModalCloseButton onClose={onClose} ariaLabel="Закрити" />
-        </div>
-
-        <div className={styles.body}>
-          <Row icon={<UserIcon />}>{ticket.passengerName}</Row>
-          <Row icon={<PhoneIcon />}>{ticket.passengerPhone}</Row>
-          <Row icon={<LocationIcon />}>{route}</Row>
-          <Row icon={<CalendarIcon />}>{ticket.departureDate}</Row>
-          <Row icon={<ClockIcon />}>{ticket.departureTime}</Row>
-          <Row icon={<TicketIcon />}>{ticket.ticketCount}</Row>
-          <Row icon={<HryvniaIcon />}>{ticket.totalPrice}</Row>
-
-          <div className={styles.metaRow}>
-            <span className={styles.metaLabel}>Статус:</span>
-            <span className={styles.metaValue}>{STATUS_LABEL[ticket.status]}</span>
+      <div className={styles.overlay} onClick={onClose}>
+        <div
+          className={styles.modal}
+          onClick={(event) => event.stopPropagation()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="order-details-title"
+        >
+          <div className={styles.header}>
+            <h2 className={styles.title} id="order-details-title">
+              {t("dispatcherArea.tickets.modal.orderDetailsTitle")} №{bookingNumberStr}
+            </h2>
+            <ModalCloseButton onClose={onClose} ariaLabel={t("common.close")} />
           </div>
 
-          <div className={styles.metaRow}>
-            <span className={styles.metaLabel}>До кінця бронювання:</span>
-            <span className={styles.metaValue}>
-              {remainingSeconds !== null ? `${formatSeconds(remainingSeconds)} хв.` : "—"}
-            </span>
-          </div>
+          <div className={styles.body}>
+            <Row icon={<UserIcon />}>{ticket.passengerName}</Row>
+            <Row icon={<PhoneIcon />}>{ticket.passengerPhone}</Row>
+            <Row icon={<LocationIcon />}>{route}</Row>
+            <Row icon={<CalendarIcon />}>{ticket.departureDate}</Row>
+            <Row icon={<ClockIcon />}>{ticket.departureTime}</Row>
+            <Row icon={<TicketIcon />}>{ticket.ticketCount}</Row>
+            <Row icon={<HryvniaIcon />}>{ticket.totalPrice}</Row>
 
-          <hr className={styles.divider} />
+            <div className={styles.metaRow}>
+              <span className={styles.metaLabel}>{t("dispatcherArea.routes.table.columns.status")}:</span>
+              <span className={styles.metaValue}>{statusLabel}</span>
+            </div>
 
-          <div className={styles.actions}>
-            <button type="button" className={`${styles.btn} ${styles.btnBuy}`}>
-              Викупити
-            </button>
-            <button type="button" className={`${styles.btn} ${styles.btnBook}`}>
-              Бронювати
-            </button>
-            <button type="button" className={`${styles.btn} ${styles.btnEdit}`}>
-              Редагувати
-            </button>
-            <button type="button" className={`${styles.btn} ${styles.btnCancel}`} onClick={onClose}>
-              Скасувати
-            </button>
+            <div className={styles.metaRow}>
+              <span className={styles.metaLabel}>{t("dispatcherArea.tickets.timer.untilBookingEnd")}:</span>
+              <span className={styles.metaValue}>
+                {remainingSeconds !== null
+                  ? `${formatSeconds(remainingSeconds)} ${t("dispatcherArea.tickets.timer.minutes")}`
+                  : "—"}
+              </span>
+            </div>
+
+            <hr className={styles.divider} />
+
+            <div className={styles.actions}>
+              <button type="button" className={`${styles.btn} ${styles.btnBuy}`}>
+                {t("dispatcherArea.tickets.actions.buy")}
+              </button>
+              <button type="button" className={`${styles.btn} ${styles.btnBook}`}>
+                {t("ticketBooking.form.reserve")}
+              </button>
+              <button type="button" className={`${styles.btn} ${styles.btnEdit}`}>
+                {t("dispatcherArea.routes.table.statuses.edit")}
+              </button>
+              <button type="button" className={`${styles.btn} ${styles.btnCancel}`} onClick={onClose}>
+                {t("dispatcherArea.tickets.actions.cancel")}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </Portal>
   );
 }

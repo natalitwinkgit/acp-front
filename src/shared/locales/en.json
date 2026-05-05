@@ -505,6 +505,58 @@
         "settings": "Settings"
       }
     },
+    "tickets": {
+      "toolbar": {
+        "aria": "Ticket management toolbar"
+      },
+      "search": {
+        "placeholder": "Search: booking no. / surname / phone +380",
+        "clearAria": "Clear search"
+      },
+      "sort": {
+        "aria": "Sorting options",
+        "options": {
+          "dateAsc": "Date (oldest first)",
+          "dateDesc": "Date (newest first)",
+          "nameAsc": "Surname A-Z",
+          "nameDesc": "Surname Z-A",
+          "status": "By status"
+        }
+      },
+      "table": {
+        "empty": "No tickets found",
+        "columns": {
+          "data": "Details",
+          "timer": "Timer",
+          "actions": "Actions"
+        }
+      },
+      "statuses": {
+        "booked": "Booked",
+        "bookedShort": "Booked",
+        "paid": "Paid"
+      },
+      "timer": {
+        "noneAria": "Timer is unavailable",
+        "untilBookingEnd": "Until booking expires",
+        "minutes": "min."
+      },
+      "actions": {
+        "addOrder": "Add order",
+        "details": "Details",
+        "saveChanges": "Save changes",
+        "buy": "Buy",
+        "cancel": "Cancel"
+      },
+      "modal": {
+        "newOrderTitle": "New order",
+        "orderDetailsTitle": "Order details",
+        "routePlaceholder": "Kremenchuk - Cherkasy",
+        "datePlaceholder": "dd.mm.yyyy",
+        "departureTime": "Departure time",
+        "ticketCount": "Ticket count"
+      }
+    },
     "routes": {
       "subtitle": "Route logistics management.",
       "addRoute": "Add route",

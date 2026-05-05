@@ -1,26 +1,31 @@
 "use client";
 
+import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import { useCountdown } from "../../model/useCountdown";
 import styles from "./TicketTimer.module.css";
 
-/** Timers at or below this threshold are shown in red */
-const URGENT_THRESHOLD_SECONDS = 360; // 6 minutes
+const URGENT_THRESHOLD_SECONDS = 360;
 
 type Props = {
   initialSeconds: number | null;
 };
 
 function formatTime(totalSeconds: number): string {
-  const m = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
-  const s = (totalSeconds % 60).toString().padStart(2, "0");
-  return `${m}:${s}`;
+  const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+  const seconds = (totalSeconds % 60).toString().padStart(2, "0");
+  return `${minutes}:${seconds}`;
 }
 
 export default function TicketTimer({ initialSeconds }: Props) {
+  const { t } = useI18n();
   const seconds = useCountdown(initialSeconds);
 
   if (seconds === null) {
-    return <span className={styles.none} aria-label="Таймер відсутній">—</span>;
+    return (
+      <span className={styles.none} aria-label={t("dispatcherArea.tickets.timer.noneAria")}>
+        —
+      </span>
+    );
   }
 
   const isUrgent = seconds <= URGENT_THRESHOLD_SECONDS;
