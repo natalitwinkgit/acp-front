@@ -2,7 +2,7 @@
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import type { RoutesStatBadgeProps, RoutesStatsProps } from "../../model/types";
-import { AdminCard } from "@/src/shared";
+import { DashboardCard } from "@/src/shared";
 import styles from "./admin-routes-page.module.css";
 
 function RoutesStatBadge({
@@ -34,7 +34,7 @@ export default function RoutesStats({
   const { t } = useI18n();
 
   return (
-    <AdminCard className={styles.statsRow} style={{ flexDirection: "row" }}>
+    <DashboardCard className={styles.statsRow} style={{ flexDirection: "row" }}>
       <RoutesStatBadge
         icon="/icons/workspace/sidebar/routes.svg"
         label={t("dispatcherArea.routes.stats.total")}
@@ -59,6 +59,6 @@ export default function RoutesStats({
         count={cancelled}
         variant="red"
       />
-    </AdminCard>
+    </DashboardCard>
   );
 }

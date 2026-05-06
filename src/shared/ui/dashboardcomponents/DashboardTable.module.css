@@ -58,9 +58,11 @@
   line-height: 144%;
   vertical-align: middle;
 }
+
 .row td.tdLeft {
   text-align: left;
 }
+
 .row:last-child td {
   border-bottom: none;
 }

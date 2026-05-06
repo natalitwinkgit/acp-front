@@ -1,5 +1,5 @@
-import AdminRoutesPage from "@/src/pages-layer/admin/ui/routes/AdminRoutesPage";
+import DashboardRoutesPage from "@/src/pages-layer/admin/ui/routes/DashboardRoutesPage";
 
 export default function AdminRoutesRoutePage() {
-  return <AdminRoutesPage />;
+  return <DashboardRoutesPage />;
 }

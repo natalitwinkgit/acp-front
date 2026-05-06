@@ -4,11 +4,11 @@ import { useState } from "react";
 import { FilterDropdown } from "@/src/features/filter-routes";
 import { StatusDropdown } from "@/src/features/change-trip-status";
 import {
-  AdminCard,
-  AdminTable,
-  AdminThead,
-  AdminTr,
-  adminTableStyles,
+  DashboardCard,
+  DashboardTable,
+  DashboardThead,
+  DashboardTr,
+  dashboardTableStyles,
   TablePagination,
   useResizeTableHook,
 } from "@/src/shared";
@@ -58,7 +58,7 @@ export default function RoutesTable({
 
   return (
     <div ref={cardRef} className={styles.cardRoot}>
-      <AdminCard className={styles.card}>
+      <DashboardCard className={styles.card}>
         <div ref={headerRef} className={styles.header}>
           <span className={styles.title}>
             {t("dispatcherArea.routes.table.title")}
@@ -95,66 +95,66 @@ export default function RoutesTable({
 
         <div ref={tableAreaRef} className={styles.tableArea}>
           <div ref={tableScrollRef} className={styles.tableScroll}>
-            <AdminTable>
-              <AdminThead ref={theadRef}>
-                <th className={adminTableStyles.thNum}>
+            <DashboardTable>
+              <DashboardThead ref={theadRef}>
+                <th className={dashboardTableStyles.thNum}>
                   {t("dispatcherArea.routes.table.columns.number")}
                 </th>
-                <th className={adminTableStyles.thLeft}>
+                <th className={dashboardTableStyles.thLeft}>
                   {t("dispatcherArea.routes.table.columns.direction")}
                 </th>
-                <th className={adminTableStyles.th}>
+                <th className={dashboardTableStyles.th}>
                   {t("dispatcherArea.routes.table.columns.time")}
                 </th>
-                <th className={adminTableStyles.th}>
+                <th className={dashboardTableStyles.th}>
                   {t("dispatcherArea.routes.table.columns.bus")}
                 </th>
-                <th className={adminTableStyles.th}>
+                <th className={dashboardTableStyles.th}>
                   {t("dispatcherArea.routes.table.columns.seats")}
                 </th>
-                <th className={adminTableStyles.thStatus}>
+                <th className={dashboardTableStyles.thStatus}>
                   {t("dispatcherArea.routes.table.columns.status")}
                 </th>
-                <th className={adminTableStyles.thAction} />
-              </AdminThead>
+                <th className={dashboardTableStyles.thAction} />
+              </DashboardThead>
               <tbody>
                 {paginatedRows.map((row, index) => {
                   const status = rowStatuses[row.id] ?? "SCHEDULED";
 
                   return (
-                    <AdminTr
+                    <DashboardTr
                       key={row.id}
                       ref={index === 0 ? firstRowRef : undefined}
                     >
-                      <td className={adminTableStyles.tdNum}>
+                      <td className={dashboardTableStyles.tdNum}>
                         {(page - 1) * rowsPerPage + index + 1}
                       </td>
                       <td
-                        className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
+                        className={`${dashboardTableStyles.td} ${dashboardTableStyles.tdLeft}`}
                       >
                         {row.direction}
                       </td>
-                      <td className={adminTableStyles.td}>
+                      <td className={dashboardTableStyles.td}>
                         {row.departureTime && row.arrivalTime
                           ? `${row.departureTime} - ${row.arrivalTime}`
-                          : "â€”"}
+                          : "Ã¢â‚¬â€"}
                       </td>
-                      <td className={adminTableStyles.td}>
-                        {row.busNumber ?? "â€”"}
+                      <td className={dashboardTableStyles.td}>
+                        {row.busNumber ?? "Ã¢â‚¬â€"}
                       </td>
-                      <td className={adminTableStyles.td}>
+                      <td className={dashboardTableStyles.td}>
                         {row.availableSeats != null && row.totalSeats != null
                           ? `${row.availableSeats}/${row.totalSeats}`
-                          : "â€”"}
+                          : "Ã¢â‚¬â€"}
                       </td>
-                      <td className={adminTableStyles.tdStatus}>
+                      <td className={dashboardTableStyles.tdStatus}>
                         <Chip
                           className={`${styles.statusChip} ${getStatusClass(status)}`}
                         >
                           {t(`dispatcherArea.routes.table.statuses.${status}`)}
                         </Chip>
                       </td>
-                      <td className={adminTableStyles.tdAction}>
+                      <td className={dashboardTableStyles.tdAction}>
                         <StatusDropdown
                           rowId={row.id}
                           openId={openDropdownId}
@@ -163,11 +163,11 @@ export default function RoutesTable({
                           onEdit={onEditRoute ?? (() => {})}
                         />
                       </td>
-                    </AdminTr>
+                    </DashboardTr>
                   );
                 })}
               </tbody>
-            </AdminTable>
+            </DashboardTable>
           </div>
         </div>
 
@@ -181,7 +181,7 @@ export default function RoutesTable({
             nextAriaLabel={t("dispatcherArea.routes.table.pagination.next")}
           />
         </div>
-      </AdminCard>
+      </DashboardCard>
     </div>
   );
 }

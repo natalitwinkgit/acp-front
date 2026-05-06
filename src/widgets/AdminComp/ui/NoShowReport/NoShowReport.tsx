@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { AdminCard, AdminTable, AdminThead, AdminTr } from "@/src/shared";
+import {
+  DashboardCard,
+  DashboardTable,
+  DashboardThead,
+  DashboardTr,
+} from "@/src/shared";
 import styles from "./NoShowReport.module.css";
 
 type NoShowRow = {
@@ -26,7 +31,7 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
   }
 
   return (
-    <AdminCard className={styles.card}>
+    <DashboardCard className={styles.card}>
       <div className={styles.header}>
         <span className={styles.title}>
           {t("dispatcherArea.analytics.noShowReport.title")}
@@ -53,8 +58,8 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
         </div>
       ) : (
         <div className={styles.tableWrapper}>
-          <AdminTable className={styles.table}>
-            <AdminThead className={styles.theadRow}>
+          <DashboardTable className={styles.table}>
+            <DashboardThead className={styles.theadRow}>
               <th className={styles.thNum}>
                 {t("dispatcherArea.analytics.noShowReport.columns.number")}
               </th>
@@ -68,10 +73,10 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
                 {t("dispatcherArea.analytics.noShowReport.columns.ratio")}
               </th>
               <th className={styles.thAction} />
-            </AdminThead>
+            </DashboardThead>
             <tbody>
               {visibleRows.map((row, index) => (
-                <AdminTr key={row.id} className={styles.row}>
+                <DashboardTr key={row.id} className={styles.row}>
                   <td className={styles.tdNum}>{index + 1}</td>
                   <td className={`${styles.td} ${styles.tdLeft}`}>
                     {row.name}
@@ -89,12 +94,12 @@ export default function NoShowReport({ rows = MOCK_ROWS }: Props) {
                       {t("dispatcherArea.analytics.noShowReport.blockBtn")}
                     </button>
                   </td>
-                </AdminTr>
+                </DashboardTr>
               ))}
             </tbody>
-          </AdminTable>
+          </DashboardTable>
         </div>
       )}
-    </AdminCard>
+    </DashboardCard>
   );
 }

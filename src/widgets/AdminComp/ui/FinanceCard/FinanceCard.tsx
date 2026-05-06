@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { AdminCard } from "@/src/shared";
+import { DashboardCard } from "@/src/shared";
 import {
   BarChart,
   Bar,
@@ -62,7 +62,7 @@ export default function FinanceCard() {
   const { domain, ticks } = getNiceAxisConfig(maxValue);
 
   return (
-    <AdminCard className={styles.card}>
+    <DashboardCard className={styles.card}>
       <div className={styles.header}>
         <span className={styles.title}>
           {t("dispatcherArea.analytics.finance.title")}
@@ -143,6 +143,6 @@ export default function FinanceCard() {
         </ResponsiveContainer>
         </div>
       </div>
-    </AdminCard>
+    </DashboardCard>
   );
 }

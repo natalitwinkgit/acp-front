@@ -1,9 +1,9 @@
 "use client";
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import styles from "./adminDateText.module.css";
+import styles from "./DashboardDateText.module.css";
 
-export function AdminDateText() {
+export function DashboardDateText() {
   const { locale } = useI18n();
 
   const formatted = new Intl.DateTimeFormat(locale, {

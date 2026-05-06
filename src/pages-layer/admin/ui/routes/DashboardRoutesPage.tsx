@@ -3,7 +3,7 @@ import RoutesStats from "@/src/widgets/AdminComp/ui/Header/RoutesStats";
 import styles from "./admin-routes.module.css";
 import RoutesTable from "@/src/widgets/AdminComp/ui/RoutesTable";
 
-export default function AdminRoutesPage() {
+export default function DashboardRoutesPage() {
   return (
     <div className={styles.mainContainer}>
       <RoutesPageHeader />

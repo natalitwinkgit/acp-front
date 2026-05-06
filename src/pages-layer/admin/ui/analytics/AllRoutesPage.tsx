@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  AdminCard,
-  AdminTable,
-  adminTableStyles,
-  AdminThead,
-  AdminTr,
+  DashboardCard,
+  DashboardTable,
+  dashboardTableStyles,
+  DashboardThead,
+  DashboardTr,
   TablePagination,
   useI18n,
 } from "@/src/shared";
@@ -47,65 +47,65 @@ type RouteAnalyticsDetail = {
 const mockAllRoutes: AllRouteRow[] = [
   {
     id: 1,
-    direction: "м.Черкаси - м.Київ (ст.м.Харківська)",
+    direction: "Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸ - Ð¼.ÐšÐ¸Ñ—Ð² (ÑÑ‚.Ð¼.Ð¥Ð°Ñ€ÐºÑ–Ð²ÑÑŒÐºÐ°)",
     tripsPerDay: 16,
     ticketsSold: 240,
     load: "82%",
-    income: "120 000 ₴",
+    income: "120 000 â‚´",
     redemptionRate: "92%",
   },
   {
     id: 2,
-    direction: "м.Черкаси - м.Київ (ст.м.Чернігівська)",
+    direction: "Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸ - Ð¼.ÐšÐ¸Ñ—Ð² (ÑÑ‚.Ð¼.Ð§ÐµÑ€Ð½Ñ–Ð³Ñ–Ð²ÑÑŒÐºÐ°)",
     tripsPerDay: 16,
     ticketsSold: 180,
     load: "70%",
-    income: "90 000 ₴",
+    income: "90 000 â‚´",
     redemptionRate: "76%",
   },
   {
     id: 3,
-    direction: "м.Золотоноша - м.Київ",
+    direction: "Ð¼.Ð—Ð¾Ð»Ð¾Ñ‚Ð¾Ð½Ð¾ÑˆÐ° - Ð¼.ÐšÐ¸Ñ—Ð²",
     tripsPerDay: 16,
     ticketsSold: 80,
     load: "52%",
-    income: "32 000 ₴",
+    income: "32 000 â‚´",
     redemptionRate: "42%",
   },
   {
     id: 4,
-    direction: "м.Кременчук - м.Черкаси",
+    direction: "Ð¼.ÐšÑ€ÐµÐ¼ÐµÐ½Ñ‡ÑƒÐº - Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸",
     tripsPerDay: 2,
     ticketsSold: 18,
     load: "68%",
-    income: "17 100 ₴",
+    income: "17 100 â‚´",
     redemptionRate: "96%",
   },
   {
     id: 5,
-    direction: "м.Черкаси - м.Харків",
+    direction: "Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸ - Ð¼.Ð¥Ð°Ñ€ÐºÑ–Ð²",
     tripsPerDay: 2,
     ticketsSold: 12,
     load: "40%",
-    income: "11 400 ₴",
+    income: "11 400 â‚´",
     redemptionRate: "81%",
   },
   {
     id: 6,
-    direction: "м.Градизьк - м.Черкаси",
+    direction: "Ð¼.Ð“Ñ€Ð°Ð´Ð¸Ð·ÑŒÐº - Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸",
     tripsPerDay: 2,
     ticketsSold: 8,
     load: "12%",
-    income: "1 600 ₴",
+    income: "1 600 â‚´",
     redemptionRate: "76%",
   },
   {
     id: 7,
-    direction: "м.Черкаси - с.Софіївка",
+    direction: "Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸ - Ñ.Ð¡Ð¾Ñ„Ñ–Ñ—Ð²ÐºÐ°",
     tripsPerDay: 2,
     ticketsSold: 4,
     load: "8%",
-    income: "11 400 ₴",
+    income: "11 400 â‚´",
     redemptionRate: "65%",
   },
 ];
@@ -263,7 +263,7 @@ export default function AllRoutesPage() {
         ref={cardRef}
         className={`${styles.routesCard} ${selectedRoute ? styles.routesCardCompact : ""}`}
       >
-        <AdminCard className={styles.routesCardInner}>
+        <DashboardCard className={styles.routesCardInner}>
           <div ref={headerRef} className={styles.header}>
             <span className={styles.title}>
               {t("dispatcherArea.routes.table.title")}
@@ -271,42 +271,42 @@ export default function AllRoutesPage() {
           </div>
           <div ref={tableAreaRef} className={styles.tableArea}>
             <div ref={tableScrollRef} className={styles.tableScroll}>
-              <AdminTable>
-                <AdminThead ref={theadRef}>
-                  <th className={adminTableStyles.thNum}>
+              <DashboardTable>
+                <DashboardThead ref={theadRef}>
+                  <th className={dashboardTableStyles.thNum}>
                     {t("dispatcherArea.analytics.allRoutesPage.columns.number")}
                   </th>
-                  <th className={adminTableStyles.thLeft}>
+                  <th className={dashboardTableStyles.thLeft}>
                     {t(
                       "dispatcherArea.analytics.allRoutesPage.columns.direction",
                     )}
                   </th>
-                  <th className={adminTableStyles.th}>
+                  <th className={dashboardTableStyles.th}>
                     {t(
                       "dispatcherArea.analytics.allRoutesPage.columns.tripsPerDay",
                     )}
                   </th>
-                  <th className={adminTableStyles.th}>
+                  <th className={dashboardTableStyles.th}>
                     {t(
                       "dispatcherArea.analytics.allRoutesPage.columns.ticketsSold",
                     )}
                   </th>
-                  <th className={adminTableStyles.th}>
+                  <th className={dashboardTableStyles.th}>
                     {t("dispatcherArea.analytics.allRoutesPage.columns.load")}
                   </th>
-                  <th className={adminTableStyles.th}>
+                  <th className={dashboardTableStyles.th}>
                     {t("dispatcherArea.analytics.allRoutesPage.columns.income")}
                   </th>
-                  <th className={adminTableStyles.th}>
+                  <th className={dashboardTableStyles.th}>
                     {t(
                       "dispatcherArea.analytics.allRoutesPage.columns.redemptionRate",
                     )}
                   </th>
-                </AdminThead>
+                </DashboardThead>
                 <tbody>
                   {paginatedRows.map((row, index) => {
                     return (
-                      <AdminTr
+                      <DashboardTr
                         ref={index === 0 ? firstRowRef : undefined}
                         key={row.id}
                         className={`${styles.clickableRow} ${
@@ -314,30 +314,30 @@ export default function AllRoutesPage() {
                         }`}
                         onClick={() => setSelectedRouteId(row.id)}
                       >
-                        <td className={adminTableStyles.tdNum}>
+                        <td className={dashboardTableStyles.tdNum}>
                           {(page - 1) * rowsPerPage + index + 1}
                         </td>
                         <td
-                          className={`${adminTableStyles.td} ${adminTableStyles.tdLeft}`}
+                          className={`${dashboardTableStyles.td} ${dashboardTableStyles.tdLeft}`}
                         >
                           {row.direction}
                         </td>
-                        <td className={adminTableStyles.td}>
+                        <td className={dashboardTableStyles.td}>
                           {row.tripsPerDay}
                         </td>
-                        <td className={adminTableStyles.td}>
+                        <td className={dashboardTableStyles.td}>
                           {row.ticketsSold}
                         </td>
-                        <td className={adminTableStyles.td}>{row.load}</td>
-                        <td className={adminTableStyles.td}>{row.income}</td>
-                        <td className={adminTableStyles.td}>
+                        <td className={dashboardTableStyles.td}>{row.load}</td>
+                        <td className={dashboardTableStyles.td}>{row.income}</td>
+                        <td className={dashboardTableStyles.td}>
                           {row.redemptionRate}
                         </td>
-                      </AdminTr>
+                      </DashboardTr>
                     );
                   })}
                 </tbody>
-              </AdminTable>
+              </DashboardTable>
             </div>
           </div>
           <div ref={paginationRef}>
@@ -358,7 +358,7 @@ export default function AllRoutesPage() {
               nextAriaLabel={t("dispatcherArea.routes.table.pagination.next")}
             />
           </div>
-        </AdminCard>
+        </DashboardCard>
       </div>
       {selectedRoute && selectedRouteDetails && (
         <div className={styles.grid}>

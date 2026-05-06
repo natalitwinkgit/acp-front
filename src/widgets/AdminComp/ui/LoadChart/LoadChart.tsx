@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { AdminCard } from "@/src/shared";
+import { DashboardCard } from "@/src/shared";
 import {
   AreaChart,
   Area,
@@ -30,7 +30,7 @@ export default function LoadChart() {
   const { t } = useI18n();
 
   return (
-    <AdminCard className={styles.card}>
+    <DashboardCard className={styles.card}>
       <div className={styles.header}>
         <span className={styles.title}>
           {t("dispatcherArea.analytics.load.title")}
@@ -85,6 +85,6 @@ export default function LoadChart() {
         </AreaChart>
       </ResponsiveContainer>
       </div>
-    </AdminCard>
+    </DashboardCard>
   );
 }

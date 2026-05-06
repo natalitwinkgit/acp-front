@@ -14,7 +14,7 @@ import {
   YAxis,
 } from "recharts";
 import type { PieLabelRenderProps } from "recharts";
-import { AdminCard } from "@/src/shared";
+import { DashboardCard } from "@/src/shared";
 import pageStyles from "./admin-analytics.module.css";
 import styles from "./RouteAnalyticsDetails.module.css";
 
@@ -108,7 +108,7 @@ export default function RouteAnalyticsDetails({
 }: RouteAnalyticsDetailsProps) {
   return (
     <>
-      <AdminCard className={styles.detailCard}>
+      <DashboardCard className={styles.detailCard}>
         <div className={pageStyles.header}>
           <span className={pageStyles.title}>
             {trendTitle.replace("{{route}}", routeTitle)}
@@ -181,8 +181,8 @@ export default function RouteAnalyticsDetails({
             </AreaChart>
           </ResponsiveContainer>
         </div>
-      </AdminCard>
-      <AdminCard className={`${styles.detailCard} ${styles.statisticsCard}`}>
+      </DashboardCard>
+      <DashboardCard className={`${styles.detailCard} ${styles.statisticsCard}`}>
         <div className={pageStyles.header}>
           <span className={pageStyles.title}>{statisticsTitle}</span>
         </div>
@@ -228,7 +228,7 @@ export default function RouteAnalyticsDetails({
             </ResponsiveContainer>
           </div>
         </div>
-      </AdminCard>
+      </DashboardCard>
     </>
   );
 }

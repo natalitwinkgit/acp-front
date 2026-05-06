@@ -3,7 +3,7 @@
 import { TicketSearchInput } from "@/src/features/search-tickets";
 import { TicketSortDropdown } from "@/src/features/sort-tickets";
 import type { SortOption } from "@/src/features/sort-tickets";
-import { AdminDateText, Button } from "@/src/shared";
+import { Button, DashboardDateText } from "@/src/shared";
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import styles from "./TicketsToolbar.module.css";
 
@@ -41,7 +41,7 @@ export default function TicketsToolbar({
         />
       </div>
       <div className={styles.date}>
-        <AdminDateText />
+        <DashboardDateText />
       </div>
     </div>
   );

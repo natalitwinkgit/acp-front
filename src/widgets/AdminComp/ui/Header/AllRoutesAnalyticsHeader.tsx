@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/src/shared/i18n/I18nProvider";
-import { AdminDateText } from "@/src/shared";
+import { DashboardDateText } from "@/src/shared";
 import styles from "./admin-routes-page.module.css";
 import { useRouter } from "next/navigation";
 export default function AllRoutesAnalyticsHeader() {
@@ -24,7 +24,7 @@ export default function AllRoutesAnalyticsHeader() {
         </div>
       </div>
       <div className={styles.dateContainer}>
-        <AdminDateText />
+        <DashboardDateText />
       </div>
     </div>
   );
