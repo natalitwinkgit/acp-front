@@ -8,8 +8,11 @@ export function useCountdown(initialSeconds: number | null): number | null {
   const [seconds, setSeconds] = useState<number | null>(initialSeconds);
 
   useEffect(() => {
-    setSeconds(initialSeconds);
+    const set = () => {
+      setSeconds(initialSeconds);
+    };
 
+    set();
     if (initialSeconds === null || initialSeconds <= 0) return;
 
     const interval = setInterval(() => {

@@ -31,12 +31,14 @@ export default function TicketTimer({ initialSeconds }: Props) {
   const isUrgent = seconds <= URGENT_THRESHOLD_SECONDS;
 
   return (
-    <span
-      className={[styles.timer, isUrgent ? styles.urgent : styles.normal].join(" ")}
-      role="timer"
-      aria-live="off"
-    >
-      {formatTime(seconds)}
-    </span>
+    <div className={[styles.cell, isUrgent ? styles.urgentCell : styles.normalCell].join(" ")}>
+      <span
+        className={[styles.timer, isUrgent ? styles.urgent : styles.normal].join(" ")}
+        role="timer"
+        aria-live="off"
+      >
+        {formatTime(seconds)}
+      </span>
+    </div>
   );
 }

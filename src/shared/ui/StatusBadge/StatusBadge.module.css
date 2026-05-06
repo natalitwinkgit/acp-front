@@ -1,48 +1,71 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-family: Roboto, system-ui, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.3;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 144%;
+  width: 105px;
   white-space: nowrap;
   user-select: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  box-shadow:
+    inset 0 2px 3px rgba(255, 255, 255, 0.65),
+    0 1px 4px rgba(17, 49, 61, 0.22);
+}
+
+.dot::before {
+  content: "";
 }
 
 /* Variants */
 
 .success {
-  background: #52c41a;
+  background: var(--Rich-green, #169f2c);
   color: #fff;
 }
 .success .dot {
-  background: rgba(255, 255, 255, 0.55);
+  background: linear-gradient(180deg, #79ea78 0%, #2bbc41 100%);
+}
+.success .dot::before {
+  content: "\2713";
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
 }
 
 .warning {
-  background: #ffc72c;
+  background: linear-gradient(180deg, #ffc21f 0%, #ffb300 100%);
   color: #11313d;
 }
 .warning .dot {
-  background: #c98300;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #fff7a8 0%,
+    #ffe352 45%,
+    #f6c014 100%
+  );
 }
 
 .danger {
-  background: #ff4d4f;
+  background: linear-gradient(180deg, #ff6769 0%, #ef4447 100%);
   color: #fff;
 }
 .danger .dot {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .neutral {
