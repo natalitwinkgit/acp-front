@@ -79,13 +79,31 @@ export default function OrderDetailsModal({ ticket, onClose }: Props) {
           </div>
 
           <div className={styles.body}>
-            <Row icon={<Icon src="/icons/account/archive/clarity_avatar-line.svg" />}>{ticket.passengerName}</Row>
-            <Row icon={<Icon src="/icons/account/archive/phone.svg" />}>{ticket.passengerPhone}</Row>
+            <Row
+              icon={
+                <Icon src="/icons/account/archive/clarity_avatar-line.svg" />
+              }
+            >
+              {ticket.passengerName}
+            </Row>
+            <Row icon={<Icon src="/icons/account/archive/phone.svg" />}>
+              {ticket.passengerPhone}
+            </Row>
             <Row icon={<Icon src="/icons/Footer/map-point.svg" />}>{route}</Row>
-            <Row icon={<Icon src="/icons/calendar.svg" />}>{ticket.departureDate}</Row>
-            <Row icon={<Icon src="/icons/Footer/clock.svg" />}>{ticket.departureTime}</Row>
-            <Row icon={<Icon src="/icons/account/archive/ticket-outline.svg" />}>{ticket.ticketCount}</Row>
-            <Row icon={<Icon src="/icons/currency-hryvnia.svg" />}>{ticket.totalPrice}</Row>
+            <Row icon={<Icon src="/icons/calendar.svg" />}>
+              {ticket.departureDate}
+            </Row>
+            <Row icon={<Icon src="/icons/Footer/clock.svg" />}>
+              {ticket.departureTime}
+            </Row>
+            <Row
+              icon={<Icon src="/icons/account/archive/ticket-outline.svg" />}
+            >
+              {ticket.ticketCount}
+            </Row>
+            <Row icon={<Icon src="/icons/currency-hryvnia.svg" />}>
+              {ticket.totalPrice}
+            </Row>
 
             <div className={styles.metaRow}>
               <span className={styles.metaLabel}>
@@ -104,8 +122,6 @@ export default function OrderDetailsModal({ ticket, onClose }: Props) {
                   : "—"}
               </span>
             </div>
-
-            <hr className={styles.divider} />
 
             <div className={styles.actions}>
               <Button
