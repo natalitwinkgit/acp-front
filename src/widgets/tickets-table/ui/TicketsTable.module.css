@@ -31,12 +31,7 @@
 
 .tr {
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-surface-accent);
   transition: background 0.12s;
-}
-
-.tr:last-child {
-  border-bottom: none;
 }
 
 .tr:last-child .td:first-child {
@@ -55,6 +50,11 @@
   padding: 14px 16px;
   color: var(--color-text-strong);
   vertical-align: middle;
+  border-bottom: 1px solid var(--color-surface-accent);
+}
+
+.tr:last-child .td {
+  border-bottom: none;
 }
 
 /* Passenger cell */
