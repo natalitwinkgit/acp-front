@@ -13,6 +13,7 @@ import styles from "./NewOrderModal.module.css";
 type Props = {
   onClose: () => void;
   nextBookingNumber: number;
+  routeInfo?: FormState;
 };
 
 type FormState = {
@@ -35,7 +36,11 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-export default function NewOrderModal({ onClose, nextBookingNumber }: Props) {
+export default function NewOrderModal({
+  onClose,
+  nextBookingNumber,
+  routeInfo,
+}: Props) {
   const { t } = useI18n();
 
   useEffect(() => {
@@ -55,14 +60,14 @@ export default function NewOrderModal({ onClose, nextBookingNumber }: Props) {
   }, [onClose]);
 
   const [form, setForm] = useState<FormState>({
-    passengerName: "",
-    passengerPhone: "",
-    route: "",
-    date: "",
-    departureTime: "",
-    ticketCount: "0",
-    totalPrice: "0",
-    status: "booked",
+    passengerName: routeInfo?.passengerName ?? "",
+    passengerPhone: routeInfo?.passengerPhone ?? "",
+    route: routeInfo?.route ?? "",
+    date: routeInfo?.date ?? "",
+    departureTime: routeInfo?.departureTime ?? "",
+    ticketCount: routeInfo?.ticketCount ?? "0",
+    totalPrice: routeInfo?.totalPrice ?? "0",
+    status: routeInfo?.status ?? "booked",
   });
 
   const bookingNumberStr = String(nextBookingNumber).padStart(6, "0");

@@ -15,6 +15,7 @@ export default function TicketsPage() {
   const { sortOption, setSortOption, sortTickets } = useTicketSort();
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedTicketId, setSelectedTicketId] = useState<string | null>(null);
+  const [ticketToEdit, setTicketToEdit] = useState<(typeof mockTickets)[0] | null>(null);
 
   const displayedTickets = useMemo(
     () => sortTickets(filterTickets(mockTickets)),
@@ -42,13 +43,28 @@ export default function TicketsPage() {
       {isOrderModalOpen && (
         <NewOrderModal
           nextBookingNumber={mockTickets.length + 1}
-          onClose={() => setIsOrderModalOpen(false)}
+          onClose={() => { setIsOrderModalOpen(false); setTicketToEdit(null); }}
+          routeInfo={
+            ticketToEdit
+              ? {
+                  passengerName: ticketToEdit.passengerName,
+                  passengerPhone: ticketToEdit.passengerPhone,
+                  route: `${ticketToEdit.routeFrom} - ${ticketToEdit.routeTo}`,
+                  date: ticketToEdit.departureDate,
+                  departureTime: ticketToEdit.departureTime,
+                  ticketCount: String(ticketToEdit.ticketCount),
+                  totalPrice: String(ticketToEdit.totalPrice),
+                  status: ticketToEdit.status,
+                }
+              : undefined
+          }
         />
       )}
       {selectedTicket && (
         <OrderDetailsModal
           ticket={selectedTicket}
           onClose={() => setSelectedTicketId(null)}
+          onEdit={() => { setTicketToEdit(selectedTicket); setIsOrderModalOpen(true); setSelectedTicketId(null); }}
         />
       )}
     </div>

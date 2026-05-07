@@ -14,6 +14,7 @@ import styles from "./OrderDetailsModal.module.css";
 type Props = {
   ticket: Ticket;
   onClose: () => void;
+  onEdit?: () => void;
 };
 
 function formatSeconds(seconds: number): string {
@@ -31,7 +32,7 @@ function Row({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   );
 }
 
-export default function OrderDetailsModal({ ticket, onClose }: Props) {
+export default function OrderDetailsModal({ ticket, onClose, onEdit }: Props) {
   const { t } = useI18n();
   const remainingSeconds = useCountdown(ticket.timerSeconds);
 
@@ -137,7 +138,10 @@ export default function OrderDetailsModal({ ticket, onClose }: Props) {
               <Button
                 text={t("dispatcherArea.routes.table.statuses.edit")}
                 variant="outlined"
-                onClick={() => {}}
+                onClick={() => {
+                  onEdit?.();
+                  onClose();
+                }}
               />
               <Button
                 text={t("dispatcherArea.tickets.actions.cancel")}
