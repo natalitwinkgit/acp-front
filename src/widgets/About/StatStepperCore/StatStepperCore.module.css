@@ -329,8 +329,8 @@
   font-weight: 800;
   font-size: 40px;
   line-height: 47px;
-  color: var(--color-accent-strong, var(--color-accent-strong));
-} 
+  color: var(--color-accent);
+}
 
 @media (max-width: 767px) {
   .stepperViewportYears {

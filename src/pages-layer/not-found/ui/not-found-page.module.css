@@ -23,9 +23,7 @@
   position: relative;
   isolation: isolate;
   background: var(--color-page-bg, var(--color-page-bg));
-  padding:
-    var(--not-found-page-padding-top)
-    var(--layout-padding-x)
+  padding: var(--not-found-page-padding-top) var(--layout-padding-x)
     var(--not-found-page-padding-bottom);
 }
 .card {
@@ -77,7 +75,7 @@
   font-weight: 400;
   font-size: var(--not-found-description-size);
   line-height: var(--not-found-description-line-height);
-  color: #4C6381;
+  color: #4c6381;
   white-space: pre-line;
 }
 
@@ -106,7 +104,7 @@
 }
 
 .button:hover {
-  background: var(--color-accent-strong, var(--color-accent-strong));
+  background: var(--color-accent);
 }
 
 .button:focus-visible {
