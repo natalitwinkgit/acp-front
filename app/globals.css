@@ -19,6 +19,9 @@
   --color-navy: #012169;
   --color-ua-yellow: #FFD500;
   --color-white: #FFFFFF;
+  --color-success: #32A352;
+  --color-divider: #E0EAED;
+  --color-shadow-modal: rgba(17, 49, 61, 0.35);
   --font-roboto: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
 
   /* Compatibility aliases for existing CSS */
