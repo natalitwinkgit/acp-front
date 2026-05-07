@@ -10,7 +10,7 @@
   min-width: 170px;
   gap: 10px;
   border-radius: 12px;
-  border: 1px solid var(--color-brand, #226078);
+  border: 2px solid var(--color-brand);
   padding: 8px 24px;
   background: var(--color-page-bg, #fcfefe);
   font-family: var(--font-roboto);
@@ -32,46 +32,16 @@
 }
 
 .chevron {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
   flex-shrink: 0;
-  color: var(--color-brand, #226078);
-  transition: transform 0.2s ease;
+  border-right: 2px solid var(--color-brand);
+  border-bottom: 2px solid var(--color-brand);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform 150ms ease;
 }
 
 .chevronOpen {
-  transform: rotate(180deg);
-}
-
-.list {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  z-index: 100;
-  min-width: 100%;
-  margin: 0;
-  padding: 6px 0;
-  list-style: none;
-  background: #fff;
-  border: 1.5px solid #d0dde3;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(17, 49, 61, 0.12);
-}
-
-.option {
-  padding: 10px 16px;
-  font-family: Roboto, system-ui, sans-serif;
-  font-size: 14px;
-  color: #11313d;
-  cursor: pointer;
-  transition: background 0.12s;
-  white-space: nowrap;
-}
-
-.option:hover {
-  background: #f0f6f8;
-}
-
-.optionSelected {
-  background: #e8f2f5;
-  color: #226078;
-  font-weight: 500;
+  transform: rotate(-135deg) translateY(-3px);
 }

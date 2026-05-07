@@ -4,6 +4,7 @@ import { useI18n } from "@/src/shared/i18n/I18nProvider";
 import { useEffect, useRef, useState } from "react";
 import type { SortOption } from "../../model/types";
 import styles from "./TicketSortDropdown.module.css";
+import { Dropdown } from "@/src/shared/ui/Dropdown/Dropdown";
 
 export type TicketSortDropdownOption<T extends string> = {
   value: T;
@@ -17,17 +18,17 @@ type Props<T extends string = SortOption> = {
   value: T | "";
   onChange: (value: T) => void;
 };
-
+const dropdownId = "routes-sort";
 export default function TicketSortDropdown<T extends string = SortOption>({
   options,
   defaultLabel,
-  ariaLabel,
   value,
   onChange,
 }: Props<T>) {
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const ignoreNextCloseRef = useRef(false);
   const defaultOptions: TicketSortDropdownOption<SortOption>[] = [
     {
       value: "date-asc",
@@ -50,13 +51,14 @@ export default function TicketSortDropdown<T extends string = SortOption>({
       label: t("dispatcherArea.tickets.sort.options.status"),
     },
   ];
-  const sortOptions = (options ?? defaultOptions) as TicketSortDropdownOption<T>[];
+  const sortOptions = (options ??
+    defaultOptions) as TicketSortDropdownOption<T>[];
 
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
       if (
-        containerRef.current
-        && !containerRef.current.contains(e.target as Node)
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
       ) {
         setIsOpen(false);
       }
@@ -67,63 +69,52 @@ export default function TicketSortDropdown<T extends string = SortOption>({
   }, []);
 
   const selectedLabel =
-    sortOptions.find((option) => option.value === value)?.label
-    ?? defaultLabel
-    ?? t("dispatcherArea.routes.table.sort");
+    sortOptions.find((option) => option.value === value)?.label ??
+    defaultLabel ??
+    t("dispatcherArea.routes.table.sort");
+
+  const items = sortOptions.map((option) => ({
+    label: option.label,
+    onClick: () => onChange(option.value),
+  }));
 
   return (
     <div className={styles.wrapper} ref={containerRef}>
       <button
         type="button"
         className={styles.trigger}
+        onMouseDown={() => {
+          ignoreNextCloseRef.current = isOpen;
+        }}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
         <span className={styles.label}>{selectedLabel}</span>
-        <svg
+        <span
           className={[styles.chevron, isOpen && styles.chevronOpen]
             .filter(Boolean)
             .join(" ")}
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
+          aria-hidden="true"
+        />
       </button>
 
       {isOpen && (
-        <ul
-          className={styles.list}
-          role="listbox"
-          aria-label={ariaLabel ?? t("dispatcherArea.tickets.sort.aria")}
-        >
-          {sortOptions.map((option) => (
-            <li
-              key={option.value}
-              role="option"
-              aria-selected={value === option.value}
-              className={[
-                styles.option,
-                value === option.value && styles.optionSelected,
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              onClick={() => {
-                onChange(option.value);
-                setIsOpen(false);
-              }}
-            >
-              {option.label}
-            </li>
-          ))}
-        </ul>
+        <Dropdown
+          id={dropdownId}
+          openId={isOpen ? dropdownId : null}
+          onToggle={(id) => {
+            if (id === null && ignoreNextCloseRef.current) {
+              ignoreNextCloseRef.current = false;
+              return;
+            }
+
+            ignoreNextCloseRef.current = false;
+            setIsOpen(id === dropdownId);
+          }}
+          items={items}
+          hideTrigger
+        />
       )}
     </div>
   );
