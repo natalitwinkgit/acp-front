@@ -8,9 +8,9 @@ import { useTicketSort } from "@/src/features/sort-tickets";
 import { TicketsTable } from "@/src/widgets/tickets-table";
 import { TicketsToolbar } from "@/src/widgets/tickets-toolbar";
 import { useMemo, useState } from "react";
-import styles from "./dispatcher-page.module.css";
+import styles from "./tickets.module.css";
 
-export default function DispatcherPage() {
+export default function TicketsPage() {
   const { query, setQuery, filterTickets } = useTicketSearch();
   const { sortOption, setSortOption, sortTickets } = useTicketSort();
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -19,11 +19,11 @@ export default function DispatcherPage() {
   const displayedTickets = useMemo(
     () => sortTickets(filterTickets(mockTickets)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [query, sortOption]
+    [query, sortOption],
   );
 
   const selectedTicket = selectedTicketId
-    ? mockTickets.find((t) => t.id === selectedTicketId) ?? null
+    ? (mockTickets.find((t) => t.id === selectedTicketId) ?? null)
     : null;
 
   return (
@@ -35,7 +35,10 @@ export default function DispatcherPage() {
         onSortChange={setSortOption}
         onAddOrder={() => setIsOrderModalOpen(true)}
       />
-      <TicketsTable tickets={displayedTickets} onDetails={setSelectedTicketId} />
+      <TicketsTable
+        tickets={displayedTickets}
+        onDetails={setSelectedTicketId}
+      />
       {isOrderModalOpen && (
         <NewOrderModal
           nextBookingNumber={mockTickets.length + 1}

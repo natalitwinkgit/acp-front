@@ -13,7 +13,7 @@ import { useResizeTableHook } from "@/src/shared/lib/resizeTableHook";
 import AllRoutesAnalyticsHeader from "@/src/widgets/AdminComp/ui/Header/AllRoutesAnalyticsHeader";
 import { useState } from "react";
 import RouteAnalyticsDetails from "./RouteAnalyticsDetails";
-import styles from "./admin-analytics.module.css";
+import styles from "../analytics.module.css";
 
 type AllRouteRow = {
   id: number;
@@ -56,7 +56,8 @@ const mockAllRoutes: AllRouteRow[] = [
   },
   {
     id: 2,
-    direction: "Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸ - Ð¼.ÐšÐ¸Ñ—Ð² (ÑÑ‚.Ð¼.Ð§ÐµÑ€Ð½Ñ–Ð³Ñ–Ð²ÑÑŒÐºÐ°)",
+    direction:
+      "Ð¼.Ð§ÐµÑ€ÐºÐ°ÑÐ¸ - Ð¼.ÐšÐ¸Ñ—Ð² (ÑÑ‚.Ð¼.Ð§ÐµÑ€Ð½Ñ–Ð³Ñ–Ð²ÑÑŒÐºÐ°)",
     tripsPerDay: 16,
     ticketsSold: 180,
     load: "70%",
@@ -329,7 +330,9 @@ export default function AllRoutesPage() {
                           {row.ticketsSold}
                         </td>
                         <td className={dashboardTableStyles.td}>{row.load}</td>
-                        <td className={dashboardTableStyles.td}>{row.income}</td>
+                        <td className={dashboardTableStyles.td}>
+                          {row.income}
+                        </td>
                         <td className={dashboardTableStyles.td}>
                           {row.redemptionRate}
                         </td>

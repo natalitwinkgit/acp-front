@@ -3,13 +3,14 @@
   overflow-x: auto;
   border-radius: 12px;
   box-shadow: 0 2px 16px rgba(17, 49, 61, 0.09);
-  border: 1px solid var(--DarkSlateGray, #226078);
+  border: 1px solid var(--color-brand);
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
-  font-family: Roboto, system-ui, sans-serif;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--font-roboto), sans-serif;
   font-size: 15px;
 }
 
@@ -18,27 +19,19 @@
 .th {
   padding: 14px 16px;
   background: var(--color-brand);
-  color: #fff;
+  color: var(--color-white);
   font-size: 14px;
   font-weight: 500;
   text-align: left;
   white-space: nowrap;
-  border: var(--color-brand);
-}
-
-.th:first-child {
-  border-radius: 12px 0 0 0;
-}
-
-.th:last-child {
-  border-radius: 0 12px 0 0;
+  border: 1px solid var(--color-brand);
 }
 
 /* Rows */
 
 .tr {
-  background: #fff;
-  border-bottom: 1px solid #e2ecef;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-surface-accent);
   transition: background 0.12s;
 }
 
@@ -55,12 +48,12 @@
 }
 
 .tr:hover {
-  background: #f5f9fa;
+  background: var(--color-surface-soft);
 }
 
 .td {
   padding: 14px 16px;
-  color: #11313d;
+  color: var(--color-text-strong);
   vertical-align: middle;
 }
 
@@ -72,8 +65,8 @@
 }
 
 .passengerPhone {
-  font-size: 13px;
-  color: #5a7a88;
+  font-size: 14px;
+  color: var(--color-border-muted);
 }
 
 /* Route cell */
@@ -84,51 +77,51 @@
 }
 
 .routeStop {
-  font-size: 13px;
-  color: #5a7a88;
+  font-size: 14px;
+  color: var(--color-border-muted);
 }
 
 /* Date / time cell */
 
 .time {
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 2px;
 }
 
 .date {
-  font-size: 13px;
-  color: #5a7a88;
+  font-size: 14px;
+  color: var(--color-border-muted);
 }
 
 /* Tickets cell */
 
 .ticketCount {
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 2px;
 }
 
 .price {
-  font-size: 13px;
-  color: #5a7a88;
+  font-size: 14px;
+  color: var(--color-border-muted);
 }
 
 /* Row number */
 
 .rowNumber {
-  font-weight: 500;
-  color: #7a9baa;
+  font-weight: 400;
+  color: var(--color-border-muted);
 }
 
 /* Details button */
 
 .detailsButton {
   padding: 5px 18px;
-  border: 1px solid var(--DarkSlateGray, #226078);
+  border: 1px solid var(--color-brand);
   border-radius: 8px;
-  background: #fff;
+  background: var(--color-white);
   font-size: 16px;
   font-weight: 500;
-  color: #226078;
+  color: var(--color-brand);
   cursor: pointer;
   white-space: nowrap;
   transition:
@@ -137,8 +130,8 @@
 }
 
 .detailsButton:hover {
-  border-color: #226078;
-  background: #f0f6f8;
+  border-color: var(--color-brand);
+  background: var(--color-surface-soft);
 }
 
 /* Empty state */
@@ -146,7 +139,7 @@
 .empty {
   padding: 48px 24px;
   text-align: center;
-  color: #7a9baa;
-  font-family: Roboto, system-ui, sans-serif;
+  color: var(--color-border-muted);
+  font-family: var(--font-roboto), sans-serif;
   font-size: 15px;
 }

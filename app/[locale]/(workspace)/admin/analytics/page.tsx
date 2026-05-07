@@ -1,5 +1,5 @@
-import AdminAnalyticsPage from "@/src/pages-layer/admin/ui/analytics/AdminAnalyticsPage";
+import AnalyticsPage from "@/src/pages-layer/dashboard/ui/DashboardAnalyticsPage/AnalyticsPage";
 
 export default function AdminAnalyticsRoutePage() {
-  return <AdminAnalyticsPage />;
+  return <AnalyticsPage />;
 }

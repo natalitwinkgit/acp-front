@@ -15,7 +15,7 @@ import {
 } from "recharts";
 import type { PieLabelRenderProps } from "recharts";
 import { DashboardCard } from "@/src/shared";
-import pageStyles from "./admin-analytics.module.css";
+import pageStyles from "../analytics.module.css";
 import styles from "./RouteAnalyticsDetails.module.css";
 
 type TicketStatKey = "reserved" | "purchased" | "cancelled";

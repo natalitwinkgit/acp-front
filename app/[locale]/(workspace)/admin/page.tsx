@@ -1,5 +1,5 @@
-import AdminPage from "@/src/pages-layer/admin/ui/AdminPage";
+import TicketsPage from "@/src/pages-layer/dashboard/ui/DashboardTicketsPage/TicketsPage";
 
 export default function AdminRoutePage() {
-  return <AdminPage />;
+  return <TicketsPage />;
 }

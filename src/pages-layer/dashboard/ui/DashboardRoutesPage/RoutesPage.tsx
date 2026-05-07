@@ -1,6 +1,6 @@
 import RoutesPageHeader from "@/src/widgets/AdminComp/ui/Header/RoutesPageHeader";
 import RoutesStats from "@/src/widgets/AdminComp/ui/Header/RoutesStats";
-import styles from "./admin-routes.module.css";
+import styles from "./routes.module.css";
 import RoutesTable from "@/src/widgets/AdminComp/ui/RoutesTable";
 
 export default function DashboardRoutesPage() {
