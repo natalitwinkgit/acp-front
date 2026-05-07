@@ -17,6 +17,10 @@ const STATUS_CONFIG: Record<TicketStatus, StatusConfig> = {
     labelKey: "dispatcherArea.tickets.statuses.paid",
     variant: "success",
   },
+  cancelled: {
+    labelKey: "dispatcherArea.tickets.statuses.cancelled",
+    variant: "danger",
+  },
 };
 
 type Props = {

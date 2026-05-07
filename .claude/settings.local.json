@@ -5,7 +5,11 @@
       "Bash(ls C:/Users/afnes/busStation/acp-front/app/[locale]/\\\\\\(site\\\\\\)/)",
       "Bash(ls C:/Users/afnes/busStation/acp-front/app/[locale]/\\\\\\(workspace\\\\\\)/)",
       "Bash(ls *)",
-      "Bash(xargs grep *)"
+      "Bash(xargs grep *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\afnes\\\\busStation\\\\acp-front\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\afnes\\\\busStation\\\\acp-front\" -Recurse -Filter \"*TicketSortDropdown*\")",
+      "Bash(Select-Object -ExpandProperty FullName)"
     ]
   }
 }

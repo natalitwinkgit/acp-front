@@ -15,28 +15,28 @@ export function useTicketSort() {
     (tickets: Ticket[]): Ticket[] => {
       if (!sortOption) return tickets;
 
-      return [...tickets].sort((a, b) => {
-        switch (sortOption) {
-          case "date-asc":
-            return (
+      switch (sortOption) {
+        case "date-asc":
+          return [...tickets].sort(
+            (a, b) =>
               parseDatetime(a.departureDate, a.departureTime) -
-              parseDatetime(b.departureDate, b.departureTime)
-            );
-          case "date-desc":
-            return (
+              parseDatetime(b.departureDate, b.departureTime),
+          );
+        case "date-desc":
+          return [...tickets].sort(
+            (a, b) =>
               parseDatetime(b.departureDate, b.departureTime) -
-              parseDatetime(a.departureDate, a.departureTime)
-            );
-          case "name-asc":
-            return a.passengerName.localeCompare(b.passengerName, "uk");
-          case "name-desc":
-            return b.passengerName.localeCompare(a.passengerName, "uk");
-          case "status":
-            return a.status.localeCompare(b.status);
-          default:
-            return 0;
-        }
-      });
+              parseDatetime(a.departureDate, a.departureTime),
+          );
+        case "filter-booked":
+          return tickets.filter((t) => t.status === "booked");
+        case "filter-paid":
+          return tickets.filter((t) => t.status === "paid");
+        case "filter-cancelled":
+          return tickets.filter((t) => t.status === "cancelled");
+        default:
+          return tickets;
+      }
     },
     [sortOption]
   );

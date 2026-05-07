@@ -516,11 +516,11 @@
       "sort": {
         "aria": "Параметри сортування",
         "options": {
-          "dateAsc": "Дата (спочатку старіші)",
-          "dateDesc": "Дата (спочатку новіші)",
-          "nameAsc": "Прізвище А-Я",
-          "nameDesc": "Прізвище Я-А",
-          "status": "За статусом"
+          "dateAsc": "Дата ↑",
+          "dateDesc": "Дата ↓",
+          "filterBooked": "Бронь",
+          "filterPaid": "Оплачені",
+          "filterCancelled": "Скасовані"
         }
       },
       "table": {
@@ -534,7 +534,8 @@
       "statuses": {
         "booked": "Заброньовано",
         "bookedShort": "Бронь",
-        "paid": "Оплачено"
+        "paid": "Оплачено",
+        "cancelled": "Скасовано"
       },
       "timer": {
         "noneAria": "Таймер відсутній",

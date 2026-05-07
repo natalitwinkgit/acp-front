@@ -516,11 +516,11 @@
       "sort": {
         "aria": "Sorting options",
         "options": {
-          "dateAsc": "Date (oldest first)",
-          "dateDesc": "Date (newest first)",
-          "nameAsc": "Surname A-Z",
-          "nameDesc": "Surname Z-A",
-          "status": "By status"
+          "dateAsc": "Date ↑",
+          "dateDesc": "Date ↓",
+          "filterBooked": "Booked",
+          "filterPaid": "Paid",
+          "filterCancelled": "Cancelled"
         }
       },
       "table": {
@@ -534,7 +534,8 @@
       "statuses": {
         "booked": "Booked",
         "bookedShort": "Booked",
-        "paid": "Paid"
+        "paid": "Paid",
+        "cancelled": "Cancelled"
       },
       "timer": {
         "noneAria": "Timer is unavailable",

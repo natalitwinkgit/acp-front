@@ -1,4 +1,4 @@
-export type TicketStatus = "booked" | "paid";
+export type TicketStatus = "booked" | "paid" | "cancelled";
 
 export type Ticket = {
   id: string;

@@ -39,16 +39,16 @@ export default function TicketSortDropdown<T extends string = SortOption>({
       label: t("dispatcherArea.tickets.sort.options.dateDesc"),
     },
     {
-      value: "name-asc",
-      label: t("dispatcherArea.tickets.sort.options.nameAsc"),
+      value: "filter-booked",
+      label: t("dispatcherArea.tickets.sort.options.filterBooked"),
     },
     {
-      value: "name-desc",
-      label: t("dispatcherArea.tickets.sort.options.nameDesc"),
+      value: "filter-paid",
+      label: t("dispatcherArea.tickets.sort.options.filterPaid"),
     },
     {
-      value: "status",
-      label: t("dispatcherArea.tickets.sort.options.status"),
+      value: "filter-cancelled",
+      label: t("dispatcherArea.tickets.sort.options.filterCancelled"),
     },
   ];
   const sortOptions = (options ??
