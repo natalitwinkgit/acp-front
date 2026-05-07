@@ -137,19 +137,19 @@
 
 .navItem:hover {
   background: var(--sidebar-hover-fill);
-  border-top-left-radius: 18px;
-  border-bottom-left-radius: 18px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 .logoutButton:hover {
   background: var(--sidebar-hover-fill);
-  border-radius: 18px;
+  border-radius: 15px;
 }
 
 .navItemActive {
   position: relative;
   background: var(--color-page-bg);
   color: var(--color-brand);
-  border-radius: 18px 0 0 18px;
+  border-radius: 15px 0 0 15px;
   box-shadow: 0 10px 24px rgba(17, 49, 61, 0.14);
 }
 .navItemActive::before,
@@ -159,13 +159,13 @@
 
 .navItemActive::before {
   top: -18px;
-  border-bottom-right-radius: 18px;
+  border-bottom-right-radius: 15px;
   box-shadow: 12px 12px 0 12px var(--color-page-bg);
 }
 
 .navItemActive::after {
   bottom: -18px;
-  border-top-right-radius: 18px;
+  border-top-right-radius: 15px;
   box-shadow: 12px -12px 0 12px var(--color-page-bg);
 }
 
@@ -223,7 +223,7 @@
   z-index: 1;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 950px) {
   .navItem::before,
   .navItem::after,
   .logoutButton::before,
