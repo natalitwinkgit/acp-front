@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(17, 49, 61, 0.35);
+  background: var(--color-shadow-modal);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,11 +10,11 @@
 }
 
 .modal {
-  background: #fff;
+  background: var(--color-white);
   border-radius: 16px;
   width: 100%;
   max-width: 460px;
-  box-shadow: 0 8px 32px rgba(17, 49, 61, 0.18);
+  box-shadow: 0 8px 32px var(--color-shadow-modal);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -31,7 +31,7 @@
   font-family: Roboto, system-ui, sans-serif;
   font-size: 17px;
   font-weight: 700;
-  color: #11313d;
+  color: var(--color-text-strong);
   margin: 0;
 }
 
@@ -46,11 +46,11 @@
   align-items: center;
   gap: 12px;
   padding: 10px 0;
-  border-bottom: 1px solid #e0eaed;
+  border-bottom: 1px solid var(--color-divider);
 }
 
 .rowIcon {
-  color: #7b98a3;
+  color: var(--color-border-muted);
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
@@ -60,7 +60,7 @@
 .rowValue {
   font-family: Roboto, system-ui, sans-serif;
   font-size: 15px;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .metaRow {
@@ -68,24 +68,24 @@
   align-items: center;
   gap: 6px;
   padding: 10px 0;
-  border-bottom: 1px solid #e0eaed;
+  border-bottom: 1px solid var(--color-divider);
 }
 
 .metaLabel {
   font-family: Roboto, system-ui, sans-serif;
   font-size: 14px;
-  color: #7b98a3;
+  color: var(--color-border-muted);
 }
 
 .metaValue {
   font-family: Roboto, system-ui, sans-serif;
   font-size: 15px;
-  color: #11313d;
+  color: var(--color-text-strong);
 }
 
 .divider {
   border: none;
-  border-top: 1px solid #e0eaed;
+  border-top: 1px solid var(--color-divider);
   margin: 16px 0 12px;
 }
 
@@ -93,44 +93,4 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-}
-
-.btn {
-  height: 46px;
-  border-radius: 10px;
-  border: none;
-  font-family: Roboto, system-ui, sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: filter 0.15s, transform 0.1s;
-}
-
-.btn:active {
-  transform: translateY(1px);
-}
-
-.btn:hover {
-  filter: brightness(0.94);
-}
-
-.btnBuy {
-  background: #32a352;
-  color: #fff;
-}
-
-.btnBook {
-  background: #eebb3a;
-  color: #11313d;
-}
-
-.btnEdit {
-  background: #fff;
-  border: 2px solid #b0c8d0;
-  color: #226078;
-}
-
-.btnCancel {
-  background: #d93a3a;
-  color: #fff;
 }

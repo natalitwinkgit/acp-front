@@ -12,9 +12,17 @@ export default function Button({
   fullWidth = true,
   disabled = false,
 }) {
+  const variantMap = {
+    primary: styles.primary,
+    secondary: styles.secondary,
+    success: styles.success,
+    danger: styles.danger,
+    outlined: styles.outlined,
+  };
+
   const cls = [
     styles.button,
-    variant === "secondary" ? styles.secondary : styles.primary,
+    variantMap[variant] ?? styles.primary,
     fullWidth ? styles.fullWidth : "",
     disabled ? styles.disabled : "",
   ]

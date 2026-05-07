@@ -1,19 +1,33 @@
 "use client";
 
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import Image from "next/image";
+import type { ComponentPropsWithoutRef, CSSProperties } from "react";
 import { useState } from "react";
 
 import styles from "./TextField.module.css";
 
 type TextFieldProps = ComponentPropsWithoutRef<"input"> & {
-  leadingAdornment?: ReactNode;
-  trailingAdornment?: ReactNode;
+  leadingAdornment?: string;
+  trailingAdornment?: string;
   className?: string;
   passwordToggle?: boolean;
   showPasswordLabel?: string;
   hidePasswordLabel?: string;
 };
+
+function renderAdornment(adornment: string) {
+  return (
+    <span
+      className={styles.adornmentImage}
+      style={
+        {
+          "--adornment-icon": `url("${adornment}")`,
+        } as CSSProperties
+      }
+      aria-hidden="true"
+    />
+  );
+}
 
 export default function TextField({
   type,
@@ -39,27 +53,36 @@ export default function TextField({
     >
       <Image
         className={styles.icon}
-        src={isPasswordVisible ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"}
+        src={
+          isPasswordVisible ? "/icons/eye-open.svg" : "/icons/eye-off-light.svg"
+        }
         alt=""
         aria-hidden="true"
         width={24}
         height={24}
       />
     </button>
-  ) : (
-    trailingAdornment
-  );
+  ) : trailingAdornment ? (
+    renderAdornment(trailingAdornment)
+  ) : undefined;
+  const resolvedLeadingAdornment = leadingAdornment
+    ? renderAdornment(leadingAdornment)
+    : undefined;
 
   return (
     <div className={styles.field}>
-      {leadingAdornment ? <span className={styles.leadingAdornment}>{leadingAdornment}</span> : null}
+      {resolvedLeadingAdornment ? (
+        <span className={styles.leadingAdornment}>
+          {resolvedLeadingAdornment}
+        </span>
+      ) : null}
       <input
         {...props}
         type={resolvedType}
         disabled={disabled}
         className={[
           styles.control,
-          leadingAdornment ? styles.withLeading : "",
+          resolvedLeadingAdornment ? styles.withLeading : "",
           resolvedTrailingAdornment ? styles.withTrailing : "",
           className,
         ]
@@ -67,7 +90,9 @@ export default function TextField({
           .join(" ")}
       />
       {resolvedTrailingAdornment ? (
-        <span className={styles.trailingAdornment}>{resolvedTrailingAdornment}</span>
+        <span className={styles.trailingAdornment}>
+          {resolvedTrailingAdornment}
+        </span>
       ) : null}
     </div>
   );
