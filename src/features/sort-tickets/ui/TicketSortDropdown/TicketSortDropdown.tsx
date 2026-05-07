@@ -5,21 +5,30 @@ import { useEffect, useRef, useState } from "react";
 import type { SortOption } from "../../model/types";
 import styles from "./TicketSortDropdown.module.css";
 
-type SortOptionItem = {
-  value: SortOption;
+export type TicketSortDropdownOption<T extends string> = {
+  value: T;
   label: string;
 };
 
-type Props = {
-  value: SortOption | "";
-  onChange: (value: SortOption) => void;
+type Props<T extends string = SortOption> = {
+  options?: TicketSortDropdownOption<T>[];
+  defaultLabel?: string;
+  ariaLabel?: string;
+  value: T | "";
+  onChange: (value: T) => void;
 };
 
-export default function TicketSortDropdown({ value, onChange }: Props) {
+export default function TicketSortDropdown<T extends string = SortOption>({
+  options,
+  defaultLabel,
+  ariaLabel,
+  value,
+  onChange,
+}: Props<T>) {
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const sortOptions: SortOptionItem[] = [
+  const defaultOptions: TicketSortDropdownOption<SortOption>[] = [
     {
       value: "date-asc",
       label: t("dispatcherArea.tickets.sort.options.dateAsc"),
@@ -41,6 +50,7 @@ export default function TicketSortDropdown({ value, onChange }: Props) {
       label: t("dispatcherArea.tickets.sort.options.status"),
     },
   ];
+  const sortOptions = (options ?? defaultOptions) as TicketSortDropdownOption<T>[];
 
   useEffect(() => {
     function handleOutsideClick(e: MouseEvent) {
@@ -58,6 +68,7 @@ export default function TicketSortDropdown({ value, onChange }: Props) {
 
   const selectedLabel =
     sortOptions.find((option) => option.value === value)?.label
+    ?? defaultLabel
     ?? t("dispatcherArea.routes.table.sort");
 
   return (
@@ -91,7 +102,7 @@ export default function TicketSortDropdown({ value, onChange }: Props) {
         <ul
           className={styles.list}
           role="listbox"
-          aria-label={t("dispatcherArea.tickets.sort.aria")}
+          aria-label={ariaLabel ?? t("dispatcherArea.tickets.sort.aria")}
         >
           {sortOptions.map((option) => (
             <li

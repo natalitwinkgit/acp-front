@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { FilterDropdown } from "@/src/features/filter-routes";
 import { StatusDropdown } from "@/src/features/change-trip-status";
+import type { TripStatus } from "@/src/entities/trip";
+import {
+  TicketSortDropdown,
+  type TicketSortDropdownOption,
+} from "@/src/features/sort-tickets";
 import {
   DashboardCard,
   DashboardTable,
@@ -18,6 +22,8 @@ import { getStatusClass, MOCK_ROWS } from "../lib/routesTable.utils";
 import { useRoutesTable } from "../model/useRoutesTable";
 import type { RouteRow } from "../model/types";
 import styles from "./admin-routes-table.module.css";
+
+type RouteFilterOption = TripStatus | "__all__";
 
 type RoutesTableProps = {
   rows?: RouteRow[];
@@ -35,8 +41,9 @@ export default function RoutesTable({
     rowStatuses,
     handleStatusChange,
   } = useRoutesTable({ rows });
-  const [openFilterId, setOpenFilterId] = useState<string | null>(null);
   const [filteredRows, setFilteredRows] = useState(rows);
+  const [selectedFilter, setSelectedFilter] =
+    useState<RouteFilterOption>("__all__");
   const {
     page,
     setPage,
@@ -55,6 +62,28 @@ export default function RoutesTable({
   } = useResizeTableHook({
     items: filteredRows,
   });
+  const filterOptions: TicketSortDropdownOption<RouteFilterOption>[] = [
+    {
+      value: "__all__",
+      label: t("dispatcherArea.routes.table.filters.all"),
+    },
+    {
+      value: "DEPARTED",
+      label: t("dispatcherArea.routes.table.statuses.DEPARTED"),
+    },
+    {
+      value: "BOARDING",
+      label: t("dispatcherArea.routes.table.statuses.BOARDING"),
+    },
+    {
+      value: "SCHEDULED",
+      label: t("dispatcherArea.routes.table.statuses.SCHEDULED"),
+    },
+    {
+      value: "CANCELLED",
+      label: t("dispatcherArea.routes.table.statuses.CANCELLED"),
+    },
+  ];
 
   return (
     <div ref={cardRef} className={styles.cardRoot}>
@@ -63,34 +92,21 @@ export default function RoutesTable({
           <span className={styles.title}>
             {t("dispatcherArea.routes.table.title")}
           </span>
-          <div style={{ position: "relative" }}>
-            <button
-              type="button"
-              className={styles.sortBtn}
-              onClick={() =>
-                setOpenFilterId((prev) =>
-                  prev === "sort-filter" ? null : "sort-filter",
-                )
-              }
-            >
-              {t("dispatcherArea.routes.table.sort")}
-              <span className={styles.sortChevron} />
-            </button>
-            <FilterDropdown
-              id="sort-filter"
-              openId={openFilterId}
-              onFilterChange={(status) => {
-                setPage(1);
-                if (!status) {
-                  setFilteredRows(rows);
-                  return;
-                }
-
-                setFilteredRows(rows.filter((row) => row.status === status));
-              }}
-              onToggle={setOpenFilterId}
-            />
-          </div>
+          <TicketSortDropdown
+            ariaLabel={t("dispatcherArea.routes.table.sort")}
+            defaultLabel={t("dispatcherArea.routes.table.filters.all")}
+            options={filterOptions}
+            value={selectedFilter}
+            onChange={(value) => {
+              setPage(1);
+              setSelectedFilter(value);
+              setFilteredRows(
+                value === "__all__"
+                  ? rows
+                  : rows.filter((row) => row.status === value),
+              );
+            }}
+          />
         </div>
 
         <div ref={tableAreaRef} className={styles.tableArea}>

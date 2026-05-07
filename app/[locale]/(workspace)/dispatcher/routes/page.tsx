@@ -1,5 +1,5 @@
-import RoleWorkspaceSectionPage from "@/src/pages-layer/role-workspace/ui/RoleWorkspaceSectionPage";
+import DashboardRoutesPage from "@/src/pages-layer/dashboard/ui/DashboardRoutesPage/RoutesPage";
 
 export default function DispatcherRoutesRoutePage() {
-  return <RoleWorkspaceSectionPage sectionKey="routes" />;
+  return <DashboardRoutesPage />;
 }

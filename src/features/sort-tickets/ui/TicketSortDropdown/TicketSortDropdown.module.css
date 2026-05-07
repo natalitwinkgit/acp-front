@@ -17,7 +17,8 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 144%;
-  color: var(--Dark, #11313d);
+  color: var(--color-brand);
+  cursor: pointer;
 }
 
 .trigger:hover,
